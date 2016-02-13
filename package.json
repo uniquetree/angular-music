@@ -1,0 +1,31 @@
+{
+    "name": "angular-music",
+    "version": "0.0.0",
+    "private": true,
+    "description": "A music website which programmed by using AngularJS in fore-end and Express in back-end.",
+    "main": "app.js",
+    "scripts": {
+        "start": "node ./bin/www"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git@git.oschina.net:zhengsc/angular-music.git"
+    },
+    "keywords": [
+        "music",
+        "angular",
+        "node",
+        "express"
+    ],
+    "author": "郑树聪",
+    "license": "ISC",
+    "dependencies": {
+        "body-parser": "~1.13.2",
+        "cookie-parser": "~1.3.5",
+        "debug": "~2.2.0",
+        "ejs": "~2.3.3",
+        "express": "~4.13.1",
+        "morgan": "~1.6.1",
+        "serve-favicon": "~2.3.0"
+    }
+}

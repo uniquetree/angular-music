@@ -1,0 +1,24 @@
+{
+  "name": "angular-music",
+  "description": "A music website which programmed by using AngularJS in fore-end and Express in back-end.",
+  "main": "app.js",
+  "authors": [
+    "郑树聪"
+  ],
+  "license": "ISC",
+  "keywords": [
+    "music",
+    "angular",
+    "node",
+    "express"
+  ],
+  "moduleType": [],
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
