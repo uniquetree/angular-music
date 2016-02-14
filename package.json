@@ -1,31 +1,48 @@
 {
-    "name": "angular-music",
-    "version": "0.0.0",
-    "private": true,
-    "description": "A music website which programmed by using AngularJS in fore-end and Express in back-end.",
-    "main": "app.js",
-    "scripts": {
-        "start": "node ./bin/www"
-    },
-    "repository": {
-        "type": "git",
-        "url": "git@git.oschina.net:zhengsc/angular-music.git"
-    },
-    "keywords": [
-        "music",
-        "angular",
-        "node",
-        "express"
-    ],
-    "author": "郑树聪",
-    "license": "ISC",
-    "dependencies": {
-        "body-parser": "~1.13.2",
-        "cookie-parser": "~1.3.5",
-        "debug": "~2.2.0",
-        "ejs": "~2.3.3",
-        "express": "~4.13.1",
-        "morgan": "~1.6.1",
-        "serve-favicon": "~2.3.0"
-    }
+  "name": "angular-music",
+  "version": "0.0.0",
+  "private": true,
+  "description": "A music website which programmed by using AngularJS in fore-end and Express in back-end.",
+  "main": "app.js",
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@git.oschina.net:zhengsc/angular-music.git"
+  },
+  "keywords": [
+    "music",
+    "angular",
+    "node",
+    "express"
+  ],
+  "author": "郑树聪",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "~1.13.2",
+    "cookie-parser": "~1.3.5",
+    "debug": "~2.2.0",
+    "ejs": "~2.3.3",
+    "express": "~4.13.1",
+    "morgan": "~1.6.1",
+    "serve-favicon": "~2.3.0"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^3.1.0",
+    "gulp-cache": "^0.4.2",
+    "gulp-clean": "^0.3.1",
+    "gulp-imagemin": "^2.4.0",
+    "gulp-jshint": "^2.0.0",
+    "gulp-livereload": "^3.8.1",
+    "gulp-minify-css": "^1.2.3",
+    "gulp-notify": "^2.2.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-sass": "^2.2.0",
+    "gulp-uglify": "^1.5.2",
+    "jshint": "^2.9.1",
+    "webpack": "^1.12.13",
+    "webpack-stream": "^3.1.0"
+  }
 }
