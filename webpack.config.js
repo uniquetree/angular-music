@@ -6,15 +6,12 @@ var webpack = require('webpack');
 
 module.exports = {
     //页面入口文件配置
-    entry: {
-        app: './src/scripts/app.js',
-        admin: './src/scripts/admin.js'
-    },
+    entry: './src/components/app.js',
     //入口文件输出配置
     output: {
         path: path.join(__dirname, 'app/scripts/'),
         publicPath: 'app/scripts/',
-        filename: '[name].bundle.js',
+        filename: 'bundle.js',
         chunkFilename: '[chunkhash].bundle.js'
     },
     //其它解决方案配置
@@ -30,13 +27,14 @@ module.exports = {
     module: {
         //加载器配置
         loaders: [
-            //{test: /\.css$/, loader: "style!css"},
+            {test: /\.css$/, loader: "style!css"},
             //{test: /\.scss$/, loader: 'style!css!sass?sourceMap'},
             {test: /\.(png|jpg)$/, loader: 'url-loader?limit=8192'}
         ]
     },
     //插件项
     plugins: [
+        // webpack配合bower
         new webpack.ResolverPlugin(
             new webpack.ResolverPlugin.DirectoryDescriptionFilePlugin('.bower.json', ['main'])
         ),
@@ -46,6 +44,6 @@ module.exports = {
         //    angular: 'angular'
         //}),
         // 提出入口模块中的公用代码,生产公用代码文件,主要是Angular、jquery等插件框架的引用
-        new webpack.optimize.CommonsChunkPlugin('common.js')
+        //new webpack.optimize.CommonsChunkPlugin('common.js')
     ]
 };

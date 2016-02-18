@@ -14,7 +14,7 @@ var concat = require('gulp-concat');
 var rename = require('gulp-rename');
 var notify = require('gulp-notify');
 var livereload = require('gulp-livereload');
-
+// 在gulp中配合webpack
 var webpack = require('webpack-stream');
 
 // 清理任务
@@ -25,11 +25,10 @@ gulp.task('clean', function(){
         .pipe(notify({ message: 'Clean task complete' }));
 });
 
+// 复制插件框架
 gulp.task('copy', function(){
     gulp.src('./bower_components/angular/angular.min.js')
         .pipe('./app/libs/');
-    //gulp.src('./bower_components/angular/angular.min.js')
-    //    .pipe('./app/libs/');
 });
 
 // 图片处理任务
@@ -45,29 +44,20 @@ gulp.task('image', function(){
 gulp.task('sass', function () {
 
     // app页面的样式文件
-    gulp.src('./src/styles/app/**/*.scss')
+    return gulp.src('./src/components/**/*.scss')
         .pipe(sass({ style: 'expanded' }))
         .pipe(autoprefixer('last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4'))
         .pipe(concat('app.css'))
         .pipe(rename({ suffix: '.min' }))
         .pipe(minifycss())
         .pipe(gulp.dest('./app/styles/'))
-        .pipe(notify({ message: 'App-Styles task complete' }));
-    // admin页面的样式文件
-    gulp.src('./src/styles/admin/**/*.scss')
-        .pipe(sass({ style: 'expanded' }))
-        .pipe(autoprefixer('last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4'))
-        .pipe(concat('admin.css'))
-        .pipe(rename({ suffix: '.min' }))
-        .pipe(minifycss())
-        .pipe(gulp.dest('./app/styles/'))
-        .pipe(notify({ message: 'Admin-Styles task complete' }));
+        .pipe(notify({ message: 'Styles task complete' }));
 });
 
 // js脚本处理任务,这里进行webpack处理
-gulp.task('script', ['image', 'sass'], function(){
+gulp.task('script', ['image'], function(){
 
-    return gulp.src('./src/scripts/**/*.js')
+    return gulp.src('./src/components/**/*.js')
         .pipe(jshint())
         .pipe(jshint.reporter('default'))
         .pipe(webpack(require('./webpack.config.js')))
@@ -82,9 +72,9 @@ gulp.task('default', ['clean', 'image', 'sass', 'script'], function(){
 
     gulp.watch('./src/images/**/*', ['image']);
 
-    gulp.watch('./src/styles/**/*.scss', ['sass']);
+    gulp.watch('./src/components/**/*.scss', ['sass']);
 
-    gulp.watch('./src/scripts/**/*.js', ['script']);
+    gulp.watch(['./src/components/**/*.js'], ['script']);
 
     livereload.listen();
     gulp.watch(['./app/**/*']).on('change', livereload.changed);
