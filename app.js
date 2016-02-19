@@ -4,8 +4,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-
-var ejs = require('ejs');
+var session = require('express-session');
 
 var routes = require('./routes/index');
 var user = require('./routes/user');
@@ -13,9 +12,9 @@ var api = require('./routes/api');
 
 var app = express();
 
-// view engine setup
-app.set('views', path.join(__dirname, 'app'));
-app.engine('.html', ejs.__express);
+// 设置模板渲染引擎及路径
+app.set('views', path.join(__dirname, 'app/views'));
+app.engine('html', require("ejs").__express);
 app.set('view engine', 'html');
 
 // uncomment after placing your favicon in /public
@@ -24,8 +23,27 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'app')));
-app.use(express.static(path.join(__dirname, 'bower_components')));
+// 设置静态资源访问路径
+app.use('/app', express.static(path.join(__dirname, 'app')));
+app.use('/bower_components', express.static(path.join(__dirname, 'bower_components')));
+
+// session
+//app.use(session({
+//    secret: 'secret',
+//    cookie:{
+//        maxAge: 1000*60*30
+//    }
+//}));
+//app.use(function(req,res,next){
+//    res.locals.user = req.session.user;   // 从session 获取 user对象
+//    var err = req.session.error;   //获取错误信息
+//    delete req.session.error;
+//    res.locals.message = "";   // 展示的信息 message
+//    if(err){
+//        res.locals.message = '<div class="alert alert-danger" style="margin-bottom:20px;color:red;">'+err+'</div>';
+//    }
+//    next();  //中间件传递
+//});
 
 //设置当站内路径(req.path)不包括 /api 时，都转发到 AngularJS的ng-app(index.html)
 //app.use(function (req, res) {
@@ -44,7 +62,6 @@ app.use('/', routes);
 app.use('/user', user);
 app.use('/api', api);
 
-
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
     var err = new Error('Not Found');
@@ -59,7 +76,7 @@ app.use(function(req, res, next) {
 if (app.get('env') === 'development') {
     app.use(function(err, req, res, next) {
         res.status(err.status || 500);
-        res.render('views/error', {
+        res.render('error', {
             message: err.message,
             error: err
         });
@@ -70,7 +87,7 @@ if (app.get('env') === 'development') {
 // no stacktraces leaked to user
 app.use(function(err, req, res, next) {
     res.status(err.status || 500);
-    res.render('views/error', {
+    res.render('error', {
         message: err.message,
         error: {}
     });

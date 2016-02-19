@@ -4,31 +4,28 @@
 
 //'use strict';
 
-require('angular');
-require('angular-route');
-
 // 定义musicApp应用
-var musicApp = angular.module('musicApp', ['ngRoute']);
+var musicApp = angular.module('musicApp', ['ngRoute', 'ui.bootstrap']);
 
 musicApp.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
     $routeProvider
         // 首页
         .when('/', {
-            templateUrl: 'views/home.html',
+            templateUrl: 'app/views/home.html',
             controller: 'LoginController'
         })
         // 后台管理首页
         .when('/admin', {
-            templateUrl: 'views/admin.html',
+            templateUrl: 'app/views/admin.html',
             controller: 'adminCtrl'
         })
         // 登录页
         .when("/login", {
-            templateUrl: 'views/login.html',
+            templateUrl: 'app/views/login.html',
             controller: 'LoginController'
         })
         .when('/user/register', {
-            templateUrl: 'views/register.html',
+            templateUrl: 'app/views/register.html',
             controller: 'signupCtrl'
         })
         .otherwise({
