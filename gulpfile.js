@@ -66,7 +66,7 @@ gulp.task('sass', function () {
         .pipe(autoprefixer('last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4'))
         .pipe(concat('app.css'))
         .pipe(rename({ suffix: '.min' }))
-        //.pipe(minifycss())
+        .pipe(minifycss())
         .pipe(gulp.dest('./app/styles/'))
         .pipe(notify({ message: 'Styles task complete' }));
 });
@@ -76,6 +76,7 @@ gulp.task('script', ['image'], function(){
 
     var jsFilter = gulpFilter('**/*.js', {restore: true});
     var fontFilter = gulpFilter('fonts/*', {restore: true});
+    var cssFilter = gulpFilter('**/*.css', {restore: true});
 
     return gulp.src('./src/components/**/*.js')
         .pipe(jshint())
@@ -86,6 +87,11 @@ gulp.task('script', ['image'], function(){
         .pipe(rename({ suffix: '.min' }))
         .pipe(gulp.dest('./app/scripts/'))
         .pipe(jsFilter.restore)
+        .pipe(cssFilter)
+        .pipe(rename({ suffix: '.min' }))
+        .pipe(minifycss())
+        .pipe(gulp.dest('./app/styles/'))
+        .pipe(cssFilter.restore)
         .pipe(fontFilter)
         .pipe(gulp.dest('./app/'))
         .pipe(notify({ message: 'Scripts task complete' }));

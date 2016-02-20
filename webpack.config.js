@@ -3,6 +3,7 @@
  */
 var path = require('path');
 var webpack = require('webpack');
+var ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 module.exports = {
     //页面入口文件配置
@@ -13,7 +14,7 @@ module.exports = {
     //入口文件输出配置
     output: {
         path: path.join(__dirname, 'app/'),
-        publicPath: './app/',
+        publicPath: '/../app/',
         filename: '[name].bundle.js',
         chunkFilename: '[chunkhash].bundle.js'
     },
@@ -21,8 +22,6 @@ module.exports = {
     resolve: {
         extensions: ['', '.js', '.css', 'scss', '.json'],
         alias: {
-            //js: path.join(__dirname, "src/scripts"),
-            //styles: path.join(__dirname, "src/styles"),
             img: path.join(__dirname, "src/images")
         },
         root: [path.join(__dirname, 'bower_components')]
@@ -30,7 +29,7 @@ module.exports = {
     module: {
         //加载器配置
         loaders: [
-            {test: /\.css$/, loader: "style!css"},
+            {test: /\.css$/, loader: ExtractTextPlugin.extract("style-loader", "css-loader")},
             {test: /\.scss$/, loader: 'style!css!sass?sourceMap'},
             {test: /\.less$/, loader: 'style!css!less?sourceMap'},
             {test: /\.(png|jpg)$/, loader: 'url-loader?limit=8192'},
@@ -54,6 +53,7 @@ module.exports = {
             //"window.jQuery": "jquery"
         }),
         // 提出入口模块中的公用代码,生产公用代码文件,主要是Angular、jquery等插件框架的引用
-        //new webpack.optimize.CommonsChunkPlugin('common.js')
+        //new webpack.optimize.CommonsChunkPlugin('common.js'),
+        new ExtractTextPlugin("vendor.css")
     ]
 };
