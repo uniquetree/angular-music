@@ -4,6 +4,7 @@
 var gulp = require('gulp');
 var cache = require('gulp-cache');
 var imagemin = require('gulp-imagemin');
+var minifyHtml = require("gulp-minify-html");
 var autoprefixer = require('gulp-autoprefixer');
 var sass = require('gulp-sass');
 var minifycss = require('gulp-minify-css');
@@ -24,7 +25,7 @@ var webpack = require('webpack-stream');
 // 清理任务
 gulp.task('clean', function(){
 
-    return gulp.src(['./app/libs/', './app/fonts/', './app/styles/', './app/scripts/', './app/images/'], {read: false})
+    return gulp.src(['./app/libs/', './app/views/', './app/fonts/', './app/styles/', './app/scripts/', './app/images/'], {read: false})
         .pipe(clean())
         .pipe(notify({ message: 'Clean task complete' }));
 });
@@ -49,7 +50,7 @@ gulp.task('bower:copy', function(){
 });
 
 // 图片处理任务
-gulp.task('image', function(){
+gulp.task('image', ['clean'], function(){
 
     return gulp.src('./src/images/**/*')
         .pipe(cache(imagemin({ optimizationLevel: 3, progressive: true, interlaced: true })))
@@ -57,8 +58,16 @@ gulp.task('image', function(){
         .pipe(notify({ message: 'Images task complete' }));
 });
 
+// html处理任务
+gulp.task('html', ['clean'], function(){
+
+    return gulp.src('./src/views/**/*.html')
+        //.pipe(minifyHtml())
+        .pipe(gulp.dest('./app/views/'));
+});
+
 // 样式处理任务,编译/压缩/合并
-gulp.task('sass', function () {
+gulp.task('sass', ['clean'], function () {
 
     // app页面的样式文件
     return gulp.src('./src/components/**/*.scss')
@@ -66,13 +75,13 @@ gulp.task('sass', function () {
         .pipe(autoprefixer('last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4'))
         .pipe(concat('app.css'))
         .pipe(rename({ suffix: '.min' }))
-        .pipe(minifycss())
+        //.pipe(minifycss())
         .pipe(gulp.dest('./app/styles/'))
         .pipe(notify({ message: 'Styles task complete' }));
 });
 
 // js脚本处理任务,这里进行webpack处理
-gulp.task('script', ['image'], function(){
+gulp.task('script', ['clean', 'image'], function(){
 
     var jsFilter = gulpFilter('**/*.js', {restore: true});
     var fontFilter = gulpFilter('fonts/*', {restore: true});
@@ -83,13 +92,13 @@ gulp.task('script', ['image'], function(){
         .pipe(jshint.reporter('default'))
         .pipe(webpack(require('./webpack.config.js')))
         .pipe(jsFilter)
-        .pipe(uglify())
+        //.pipe(uglify())
         .pipe(rename({ suffix: '.min' }))
         .pipe(gulp.dest('./app/scripts/'))
         .pipe(jsFilter.restore)
         .pipe(cssFilter)
         .pipe(rename({ suffix: '.min' }))
-        .pipe(minifycss())
+        //.pipe(minifycss())
         .pipe(gulp.dest('./app/styles/'))
         .pipe(cssFilter.restore)
         .pipe(fontFilter)
@@ -98,9 +107,11 @@ gulp.task('script', ['image'], function(){
 });
 
 // 默认任务,开发环境
-gulp.task('default', ['clean', 'image', 'sass', 'script'], function(){
+gulp.task('default', ['clean', 'image', 'html', 'sass', 'script'], function(){
 
     //gulp.watch('./bower.json', ['bower']);
+
+    gulp.watch('./src/components/**/*.html', ['html']);
 
     gulp.watch('./src/images/**/*', ['image']);
 
@@ -115,5 +126,5 @@ gulp.task('default', ['clean', 'image', 'sass', 'script'], function(){
 // 发布版本时执行此任务
 gulp.task('publish', function(){
 
-    return gulp.run(['clean', 'bower', 'image', 'sass', 'script']);
+    return gulp.run(['clean', 'image', 'html', 'sass', 'script']);
 });
