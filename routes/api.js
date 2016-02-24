@@ -5,7 +5,7 @@
 var express = require('express');
 var router = express.Router();
 
-var User = require('../models/UserDao');
+var User = require('../models/User');
 var music = require('../models/Music');
 
 router.post('/login', function(req, res, next) {
