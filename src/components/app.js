@@ -24,8 +24,8 @@ musicApp.config(['$routeProvider', '$locationProvider', function($routeProvider,
             templateUrl: 'app/views/login.html',
             controller: 'LoginController'
         })
-        .when('/user/register', {
-            templateUrl: 'app/views/register.html',
+        .when('/register', {
+            templateUrl: 'app/views/signup.html',
             controller: 'signupCtrl'
         })
         .otherwise({

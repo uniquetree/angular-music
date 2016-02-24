@@ -1,10 +1,11 @@
 <!-- home view -->
-<!--<script type="text/ng-template" id="homeView">-->
-    <div class="container">
-        <p>首页 : <input type="text" ng-model="name"></p>
-        <h1>Hello {{name}}</h1>
-    </div>
-<label class="btn btn-primary" ng-model="bigData.lunch" btn-checkbox>
-    Lunch
-</label>
-<!--</script>-->
+<div ng-include="'app/views/templates/header.html'"></div>
+
+<h1 style="margin-top: 80px;">基于AngularJS的在线音乐网站</h1>
+<p>Welcome to 基于AngularJS的在线音乐网站</p>
+
+<p><a href="#/login">登录</a><a href="#/register">注册</a></p>
+<!--<h1>Your name:   <%- user.name %></h1>-->
+<!--<p>Welcome to your home ~</p>-->
+<!--<p><a href="/logout">我要注销 </a>-->
+<!--</p>-->

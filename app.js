@@ -30,8 +30,10 @@ app.use('/bower_components', express.static(path.join(__dirname, 'bower_componen
 // session
 //app.use(session({
 //    secret: 'secret',
+//    resave:true,
+//    saveUninitialized:false,
 //    cookie:{
-//        maxAge: 1000*60*30
+//        maxAge: 1000*60*30  //过期时间设置(单位毫秒)
 //    }
 //}));
 //app.use(function(req,res,next){
@@ -50,9 +52,7 @@ app.use('/bower_components', express.static(path.join(__dirname, 'bower_componen
 //    console.log(req.path);
 //    if(req.path.indexOf('/api') >= 0){
 //        res.send("server text");
-//
 //    }else{ //angular启动页
-//        //res.sendfile('app/index.html');
 //        res.render('index');
 //    }
 //});

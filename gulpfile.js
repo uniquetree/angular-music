@@ -81,7 +81,7 @@ gulp.task('sass', ['clean'], function () {
 });
 
 // js脚本处理任务,这里进行webpack处理
-gulp.task('script', ['clean', 'image'], function(){
+gulp.task('script', ['clean'], function(){
 
     var jsFilter = gulpFilter('**/*.js', {restore: true});
     var fontFilter = gulpFilter('fonts/*', {restore: true});
@@ -111,7 +111,7 @@ gulp.task('default', ['clean', 'image', 'html', 'sass', 'script'], function(){
 
     //gulp.watch('./bower.json', ['bower']);
 
-    gulp.watch('./src/components/**/*.html', ['html']);
+    gulp.watch('./src/views/**/*.html', ['html']);
 
     gulp.watch('./src/images/**/*', ['image']);
 
