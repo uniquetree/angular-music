@@ -4,10 +4,9 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var session = require('express-session');
+//var session = require('express-session');
 
 var routes = require('./routes/index');
-var user = require('./routes/user');
 var api = require('./routes/api');
 
 var app = express();
@@ -17,7 +16,6 @@ app.set('views', path.join(__dirname, 'app/views'));
 app.engine('html', require("ejs").__express);
 app.set('view engine', 'html');
 
-// uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
@@ -25,9 +23,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 // 设置静态资源访问路径
 app.use('/app', express.static(path.join(__dirname, 'app')));
-app.use('/bower_components', express.static(path.join(__dirname, 'bower_components')));
+//app.use('/bower_components', express.static(path.join(__dirname, 'bower_components')));
 
-// session
+//session
 //app.use(session({
 //    secret: 'secret',
 //    resave:true,
@@ -59,7 +57,6 @@ app.use('/bower_components', express.static(path.join(__dirname, 'bower_componen
 
 // 路由配置
 app.use('/', routes);
-app.use('/user', user);
 app.use('/api', api);
 
 // catch 404 and forward to error handler

@@ -1,5 +1,5 @@
 /**
- * MySQL数据库联接配置
+ * 后台配置,MySQL数据库联接配置
  * Created by 郑树聪 on 2016/2/16.
  */
 module.exports = {
@@ -18,5 +18,6 @@ module.exports = {
         password: 'zsc19930817',
         database:'angular_music',
         port: 3306
-    }
+    },
+    secret: 'secret'
 };

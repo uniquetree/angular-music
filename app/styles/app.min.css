@@ -2,16 +2,71 @@
 /**
  * Created by 郑树聪 on 2016/2/18.
  */
-
-@charset "UTF-8";
-/**
- * Created by 郑树聪 on 2016/2/18.
- */
-
-@charset "UTF-8";
-/**
- * Created by 郑树聪 on 2016/2/18.
- */
-.login-form {
+html,
+body,
+.wrap {
   width: 100%;
-  margin-top: 60px; }
+  height: 100%; }
+
+@charset "UTF-8";
+/**
+ * Created by 郑树聪 on 2016/2/18.
+ */
+
+@charset "UTF-8";
+/**
+ * Created by 郑树聪 on 2016/2/18.
+ */
+.user-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: url("../images/bg.jpg") no-repeat center center;
+  background-size: cover; }
+  .user-container .user-row {
+    position: absolute;
+    top: 50px;
+    left: 0;
+    right: 0;
+    width: 100%; }
+
+.logo {
+  padding-bottom: 10px;
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center; }
+
+.login-form {
+  border-radius: 12px;
+  color: #fff;
+  background: #444;
+  background: rgba(0, 0, 0, 0.35); }
+
+.form-top {
+  padding: 0 25px 0 25px;
+  overflow: hidden;
+  text-align: left; }
+  .form-top .form-top-left {
+    float: left;
+    width: 75%;
+    padding-top: 25px; }
+  .form-top .form-top-right {
+    float: left;
+    width: 25%;
+    padding-top: 5px;
+    font-size: 66px;
+    color: #fff;
+    line-height: 100px;
+    text-align: right;
+    opacity: 0.3; }
+
+.form-body {
+  padding: 0 25px;
+  text-align: left; }
+  .form-body .form-group {
+    margin: 15px 0; }
+  .form-body .form-options {
+    margin: 10px 0; }
+
+.form-bottom {
+  text-align: center; }
