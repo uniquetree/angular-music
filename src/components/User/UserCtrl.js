@@ -4,7 +4,7 @@
  */
 var $config = require('../Config/config');
 
-$config.musicApp.factory('UserService', ['$http', function($http){
+$config.musicApp.factory('UserService', ['$http', '$window', function($http, $window){
     return {
         // 注册服务
         register: function(username, email, password){
@@ -27,7 +27,13 @@ $config.musicApp.factory('UserService', ['$http', function($http){
         },
         // 登出服务
         logout: function() {
-
+            var url = $config.base_url + $config.api.logout;
+            var email = JSON.parse($window.sessionStorage.userInfo).email;
+            var token = $window.sessionStorage.token;
+            return $http.post(url, {
+                email: email,
+                token: token
+            });
         }
     };
 }]).controller('UserCtrl', ['$scope', '$location', '$window', 'UserService', 'AuthenticationService',
@@ -75,6 +81,7 @@ $config.musicApp.factory('UserService', ['$http', function($http){
                             AuthenticationService.isAdmin = true;
                         }
                         $window.sessionStorage.token = data.token;
+                        $window.sessionStorage.userInfo = JSON.stringify(data.user);
                         $location.path('/');
                     } else {
                         $scope.message = data.msg;
@@ -95,11 +102,18 @@ $config.musicApp.factory('UserService', ['$http', function($http){
 
         // 登出事件
         $scope.logout = function logout() {
-            if (AuthenticationService.isAuthenticated) {
-                AuthenticationService.isAuthenticated = false;
-                delete $window.sessionStorage.token;
-                $location.path('/');
-            }
+
+            UserService.logout().success(function(data) {
+                if (AuthenticationService.isAuthenticated) {
+                    AuthenticationService.isAuthenticated = false;
+                    AuthenticationService.isAdmin = false;
+                    delete $window.sessionStorage.token;
+                    delete $window.sessionStorage.userInfo;
+                    $location.path('/');
+                }
+            }).error(function(status, data){
+
+            });
         };
     }
 ]);

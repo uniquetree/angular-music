@@ -64,6 +64,7 @@ router.post('/login', function(req, res, next) {
                 return res.json({
                     success: true,
                     user: {
+                        email: user.email,
                         username: user.username,
                         img: user.img,
                         type: user.type
@@ -77,10 +78,9 @@ router.post('/login', function(req, res, next) {
 
 // 登出
 router.get('/logout', expressJwt({secret: secretToken}), function(req, res, next){
-    if (req.user) {
-        tokenManager.expireToken(req.headers);
+    if (req.body.email) {
+        tokenManager.expireToken(req.body.token);
 
-        delete req.user;
         return res.send(200);
     }
     else {
@@ -89,8 +89,8 @@ router.get('/logout', expressJwt({secret: secretToken}), function(req, res, next
 });
 
 // 测试接口
-router.post('/test', expressJwt({secret: secretToken}), function(req, res, next){
-    var token = (req.body && req.body.access_token) || (req.query && req.query.access_token) || req.headers['x-access-token'];
+router.get('/test', expressJwt({secret: secretToken}), function(req, res, next){
+    var token = (req.body && req.body.access_token) || (req.query && req.query.access_token) || req.headers['access-token'];
     if(token) {
         try {
             var decoded = jwt.verify(token, secretToken);
