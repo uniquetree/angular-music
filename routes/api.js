@@ -11,7 +11,7 @@ var router = express.Router();
 var User = require('../models/User');
 var music = require('../models/Music');
 
-var secret = require('../config/config').secret;
+var secretToken = require('../config/config').secretToken;
 
 // 注册接口
 router.post('/register', function(req, res, next){
@@ -60,9 +60,14 @@ router.post('/login', function(req, res, next) {
             }else{  //信息匹配成功，则将此对象（匹配到的user)
 
                 var user = results[0];
-                var token = jwt.sign(user, secret, { expiresInMinutes: 60 });
+                var token = jwt.sign(user, secretToken, { expiresInMinutes: 60 });
                 return res.json({
                     success: true,
+                    user: {
+                        username: user.username,
+                        img: user.img,
+                        type: user.type
+                    },
                     token:token
                 });
             }
@@ -70,9 +75,32 @@ router.post('/login', function(req, res, next) {
     });
 });
 
-// 登出接口
-router.post('/logout', expressJwt({secret: 'secret'}), function(req, res, next){
+// 登出
+router.get('/logout', expressJwt({secret: secretToken}), function(req, res, next){
+    if (req.user) {
+        tokenManager.expireToken(req.headers);
 
+        delete req.user;
+        return res.send(200);
+    }
+    else {
+        return res.send(401);
+    }
+});
+
+// 测试接口
+router.post('/test', expressJwt({secret: secretToken}), function(req, res, next){
+    var token = (req.body && req.body.access_token) || (req.query && req.query.access_token) || req.headers['x-access-token'];
+    if(token) {
+        try {
+            var decoded = jwt.verify(token, secretToken);
+            console.log(decoded);
+        } catch(err) {
+            return next();
+        }
+    } else {
+        next();
+    }
 });
 
 module.exports = router;

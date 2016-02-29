@@ -12,7 +12,8 @@ var $config = require('./Config/config');
 $config.musicApp.factory('AuthenticationService', function(){
 
     var auth = {
-        isLogged: false
+        isAuthenticated: false,
+        isAdmin: false
     };
     return auth;
 });
@@ -23,16 +24,37 @@ $config.musicApp.factory('TokenInterceptor', function ($q, $window, Authenticati
             config.headers = config.headers || {};
             if ($window.sessionStorage.token) {
                 config.headers.Authorization = 'Bearer ' + $window.sessionStorage.token;
+                config.body.access_token = $window.sessionStorage.token;
             }
             return config;
         },
 
+        requestError: function(rejection) {
+            return $q.reject(rejection);
+        },
+
         response: function (response) {
+            if (response !== null && response.status === 200 &&
+                $window.sessionStorage.token && !AuthenticationService.isAuthenticated) {
+                AuthenticationService.isAuthenticated = true;
+            }
             return response || $q.when(response);
+        },
+
+        responseError: function(rejection) {
+            if (rejection !== null && rejection.status === 401 &&
+                ($window.sessionStorage.token || AuthenticationService.isAuthenticated)) {
+                delete $window.sessionStorage.token;
+                AuthenticationService.isAuthenticated = false;
+                $location.path("/");
+            }
+
+            return $q.reject(rejection);
         }
     };
 });
 
+// 配置拦截器
 $config.musicApp.config(function ($httpProvider) {
     $httpProvider.interceptors.push('TokenInterceptor');
 });
@@ -71,16 +93,16 @@ $config.musicApp.config(['$routeProvider', function($routeProvider) {
 
 $config.musicApp.run(function($rootScope, $location, $window, AuthenticationService) {
     $rootScope.$on("$routeChangeStart", function(event, nextRoute, currentRoute) {
-        //redirect only if both isLogged is false and no token is set
+
         if (nextRoute !== null && nextRoute.access !== null && nextRoute.access.requiredLogin &&
-            !AuthenticationService.isLogged && !$window.sessionStorage.token) {
+            !AuthenticationService.isAuthenticated && !$window.sessionStorage.token) {
 
             $location.path("/");
         }
     });
 });
 
-// 加载angular控制器
+// 加载angular页面组件
 require('./User/UserCtrl');
 
 module.exports = $config.musicApp;

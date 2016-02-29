@@ -9,7 +9,7 @@ var $config = require('../config/config');
 //    config = config[env];
 //}
 
-var pool = mysql.createPool($config.development);
+var pool = mysql.createPool($config.mysql_development);
 
 var Db = function(){
 };

@@ -4,7 +4,6 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-//var session = require('express-session');
 
 var routes = require('./routes/index');
 var api = require('./routes/api');
@@ -24,26 +23,6 @@ app.use(cookieParser());
 // 设置静态资源访问路径
 app.use('/app', express.static(path.join(__dirname, 'app')));
 //app.use('/bower_components', express.static(path.join(__dirname, 'bower_components')));
-
-//session
-//app.use(session({
-//    secret: 'secret',
-//    resave:true,
-//    saveUninitialized:false,
-//    cookie:{
-//        maxAge: 1000*60*30  //过期时间设置(单位毫秒)
-//    }
-//}));
-//app.use(function(req,res,next){
-//    res.locals.user = req.session.user;   // 从session 获取 user对象
-//    var err = req.session.error;   //获取错误信息
-//    delete req.session.error;
-//    res.locals.message = "";   // 展示的信息 message
-//    if(err){
-//        res.locals.message = '<div class="alert alert-danger" style="margin-bottom:20px;color:red;">'+err+'</div>';
-//    }
-//    next();  //中间件传递
-//});
 
 //设置当站内路径(req.path)不包括 /api 时，都转发到 AngularJS的ng-app(index.html)
 //app.use(function (req, res) {

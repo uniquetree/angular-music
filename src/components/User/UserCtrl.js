@@ -67,9 +67,19 @@ $config.musicApp.factory('UserService', ['$http', function($http){
             if (typeof email !== 'undefined' && typeof password !== 'undefined') {
 
                 UserService.login(email, password).success(function(data) {
-                    AuthenticationService.isLogged = true;
-                    $window.sessionStorage.token = data.token;
-                    $location.path('/');
+
+                    if(data.success) {
+                        // 登录成功
+                        AuthenticationService.isAuthenticated = true;
+                        if(data.type === 0 || data.type === 1) {
+                            AuthenticationService.isAdmin = true;
+                        }
+                        $window.sessionStorage.token = data.token;
+                        $location.path('/');
+                    } else {
+                        $scope.message = data.msg;
+                        delete $window.sessionStorage.token;
+                    }
                 }).error(function(status, data) {
                     console.log(status);
                     console.log(data);
@@ -79,14 +89,14 @@ $config.musicApp.factory('UserService', ['$http', function($http){
                 //$scope.emailTooltipIsOpen = !$scope.emailTooltipIsOpen;
                 //$scope.message = '邮箱不能为空';
             } else if(typeof password === 'undefined') {
-
+                //$scope.message = '密码不能为空';
             }
         };
 
         // 登出事件
         $scope.logout = function logout() {
-            if (AuthenticationService.isLogged) {
-                AuthenticationService.isLogged = false;
+            if (AuthenticationService.isAuthenticated) {
+                AuthenticationService.isAuthenticated = false;
                 delete $window.sessionStorage.token;
                 $location.path('/');
             }

@@ -4,7 +4,7 @@
  */
 module.exports = {
     // 开发环境
-    development: {
+    mysql_development: {
         host: '127.0.0.1',
         user: 'root',
         password: 'mysql',
@@ -12,12 +12,12 @@ module.exports = {
         port: 3306
     },
     // 线上环境
-    production: {
+    mysql_production: {
         host: '115.28.28.3',
         user: 'root',
         password: 'zsc19930817',
         database:'angular_music',
         port: 3306
     },
-    secret: 'secret'
+    secretToken: 'fas3456daj8lf6kjg3asldk2mvdsfasd23gert4ddg'
 };
