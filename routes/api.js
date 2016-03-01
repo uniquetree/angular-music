@@ -11,6 +11,8 @@ var router = express.Router();
 var User = require('../models/User');
 var music = require('../models/Music');
 
+var redisClient = require('../config/redis_db').redisClient;
+var tokenManager = require('../utils/TokenManager');
 var secretToken = require('../config/config').secretToken;
 
 // 注册接口
@@ -60,7 +62,7 @@ router.post('/login', function(req, res, next) {
             }else{  //信息匹配成功，则将此对象（匹配到的user)
 
                 var user = results[0];
-                var token = jwt.sign(user, secretToken, { expiresInMinutes: 60 });
+                var token = jwt.sign(user, secretToken, { expiresInMinutes: tokenManager.TOKEN_EXPIRATION });
                 return res.json({
                     success: true,
                     user: {
@@ -77,13 +79,12 @@ router.post('/login', function(req, res, next) {
 });
 
 // 登出
-router.get('/logout', expressJwt({secret: secretToken}), function(req, res, next){
+router.post('/logout', expressJwt({secret: secretToken}), tokenManager.verifyToken, function(req, res, next){
     if (req.body.email) {
-        tokenManager.expireToken(req.body.token);
+        tokenManager.expireToken(req.headers);
 
         return res.send(200);
-    }
-    else {
+    } else {
         return res.send(401);
     }
 });

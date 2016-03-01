@@ -1,12 +1,25 @@
 @charset "UTF-8";
 /**
- * Created by 郑树聪 on 2016/2/18.
+ * Created by 郑树聪 on 2016/3/1.
  */
 html,
 body,
 .wrap {
   width: 100%;
-  height: 100%; }
+  height: 100%;
+  background-color: #F5F5F5; }
+
+.g-container {
+  width: 980px;
+  margin: 0 auto; }
+
+.g-header {
+  height: 70px; }
+
+.g-body .g-container {
+  min-height: 700px;
+  _height: 700px;
+  background-color: #fff; }
 
 @charset "UTF-8";
 /**
@@ -70,3 +83,13 @@ body,
 
 .form-bottom {
   text-align: center; }
+
+@charset "UTF-8";
+/**
+ * Created by 郑树聪 on 2016/2/29.
+ */
+/* header */
+.g-header nav {
+  background-color: #2F3030; }
+
+/* header */

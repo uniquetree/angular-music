@@ -115,7 +115,7 @@ gulp.task('default', ['clean', 'image', 'html', 'sass', 'script'], function(){
 
     gulp.watch('./src/components/**/*.scss', ['sass']);
 
-    gulp.watch(['./src/components/**/*.js', './src/components/*.js'], ['script']);
+    gulp.watch('./src/components/**/*.js', ['script']);
 
     livereload.listen();
     gulp.watch(['./app/**/*']).on('change', livereload.changed);

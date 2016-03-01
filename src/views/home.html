@@ -1,10 +1,16 @@
 <!-- home view -->
-<div ng-include="'app/views/templates/header.html'"></div>
+<header ng-include="'app/views/templates/header.html'" class="g-header"></header>
 
-<h1 style="margin-top: 80px;">基于AngularJS的在线音乐网站</h1>
-<p>Welcome to 基于AngularJS的在线音乐网站</p>
+<div class="g-body">
+    <div class="g-container">
+        <div>基于AngularJS的在线音乐网站</div>
+        <p>Welcome to 基于AngularJS的在线音乐网站</p>
 
-<p><a href="#/login">登录</a><a href="#/register">注册</a></p>
-<h1>Your name:   <%- user.name %></h1>
-<p>Welcome to your home ~</p>
-<p ng-controller="UserCtrl"><button ng-click="logout()">我要注销</button></p>
+        <p><a href="#/login">登录</a><a href="#/register">注册</a></p>
+        <h1>Your name:   <%- user.name %></h1>
+        <p>Welcome to your home ~</p>
+        <p ng-controller="UserCtrl"><button ng-click="logout()">我要注销</button></p>
+    </div>
+</div>
+
+<footer ng-include="'app/views/templates/footer.html'" class="g-footer"></footer>

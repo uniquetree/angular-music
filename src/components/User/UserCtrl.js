@@ -2,7 +2,8 @@
  * 用户操作控制器,登录/登出
  * Created by 郑树聪 on 2016/2/17.
  */
-var $config = require('../Config/config');
+var $config = require('../Common/config');
+var $commonServiecs = require('../Common/services');
 
 $config.musicApp.factory('UserService', ['$http', '$window', function($http, $window){
     return {
@@ -52,7 +53,10 @@ $config.musicApp.factory('UserService', ['$http', '$window', function($http, $wi
             } else{
                 $scope.disabled = true;   //防止表单重复提交
                 $scope.message = false;
-                UserService.register(username, email, password1).success(function(data, status, headers, config){
+                var password = CryptoJS.SHA256(password1).toString();
+                //password = CryptoJS.HmacSHA256(password,'ustc').toString();
+                password = password1;
+                UserService.register(username, email, password).success(function(data, status, headers, config){
                     if(data.success) {
                         $scope.disabled = false;
                         $location.path('/login');

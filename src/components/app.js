@@ -4,7 +4,7 @@
 
 //'use strict';
 
-var $config = require('./Config/config');
+var $config = require('./Common/config');
 
 /**
  * 处理用户认证
@@ -18,7 +18,7 @@ $config.musicApp.factory('AuthenticationService', function(){
     return auth;
 });
 
-$config.musicApp.factory('TokenInterceptor', function ($q, $window, AuthenticationService) {
+$config.musicApp.factory('TokenInterceptor', function ($q, $window, $location, AuthenticationService) {
     return {
         request: function (config) {
             config.headers = config.headers || {};
@@ -45,7 +45,7 @@ $config.musicApp.factory('TokenInterceptor', function ($q, $window, Authenticati
                 ($window.sessionStorage.token || AuthenticationService.isAuthenticated)) {
                 delete $window.sessionStorage.token;
                 AuthenticationService.isAuthenticated = false;
-                $location.path("/");
+                $location.path("/login");
             }
 
             return $q.reject(rejection);
@@ -60,17 +60,11 @@ $config.musicApp.config(function ($httpProvider) {
 
 $config.musicApp.config(['$routeProvider', function($routeProvider) {
     $routeProvider
-        // 首页
+        // 首页,发现音乐
         .when('/', {
             templateUrl: 'app/views/home.html',
             controller: 'UserCtrl',
             access: { requiredLogin: false }
-        })
-        // 后台管理首页
-        .when('/admin', {
-            templateUrl: 'app/views/admin.html',
-            controller: 'adminCtrl',
-            access: { requiredLogin: true }
         })
         // 登录页
         .when("/login", {
@@ -78,10 +72,29 @@ $config.musicApp.config(['$routeProvider', function($routeProvider) {
             controller: 'UserCtrl',
             access: { requiredLogin: false }
         })
+        // 注册页
         .when('/register', {
             templateUrl: 'app/views/register.html',
             controller: 'UserCtrl',
             access: { requiredLogin: false }
+        })
+        // 未登录提示页
+        .when('/unLogin', {
+            templateUrl: 'app/views/unLogin.html',
+            controller: 'UserCtrl',
+            access: { requiredLogin: false }
+        })
+        // 我的音乐
+        .when('/myMusic', {
+            templateUrl: 'app/views/myMusic.html',
+            controller: 'MyMusicCtrl',
+            access: { requiredLogin: true }
+        })
+        // 管理中心
+        .when('/admin', {
+            templateUrl: 'app/views/admin.html',
+            controller: 'AdminCtrl',
+            access: { requiredLogin: true }
         })
         .otherwise({
             redirectTo: "/",
@@ -101,7 +114,10 @@ $config.musicApp.run(function($rootScope, $location, $window, AuthenticationServ
     });
 });
 
-// 加载angular页面组件
+// 加载页面angular控制器组件
+require('./Header/HeaderCtrl');
 require('./User/UserCtrl');
+require('./MyMusic/MyMusicCtrl');
+require('./Admin/AdminCtrl');
 
 module.exports = $config.musicApp;
