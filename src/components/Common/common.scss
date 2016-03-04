@@ -13,20 +13,33 @@ body,
 
 }
 
-.g-container {
-    width: 980px;
-    margin: 0 auto;
-}
-
 .g-header {
     height: 70px;
 }
 
 .g-body {
+    margin-top: 10px;
 
     .g-container {
         min-height: 700px;
         _height: 700px;
         background-color: #fff;
+    }
+}
+
+.g-footer {
+    width: 100%;
+    color: #777;
+    line-height: 1;
+    text-align: center;
+
+    .copyright {
+        padding: 20px 0;
+        //background-color: #eee;
+        background-color: #2F3030;
+
+        p{
+            margin: 0;
+        }
     }
 }

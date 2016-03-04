@@ -35,24 +35,7 @@
 .form-top {
     padding: 0 25px 0 25px;
     overflow: hidden;
-    text-align: left;
-
-    .form-top-left {
-        float: left;
-        width: 75%;
-        padding-top: 25px;
-    }
-
-    .form-top-right {
-        float: left;
-        width: 25%;
-        padding-top: 5px;
-        font-size: 66px;
-        color: #fff;
-        line-height: 100px;
-        text-align: right;
-        opacity: 0.3;
-    }
+    text-align: center;
 }
 
 .form-body {
@@ -60,7 +43,13 @@
     text-align: left;
 
     .form-group {
+        height: 42px;
         margin: 15px 0;
+
+        input,
+        button {
+            height: 42px;
+        }
     }
     .form-options {
         margin: 10px 0;
@@ -68,6 +57,19 @@
 }
 
 .form-bottom {
-    //padding: 25px 25px 30px 25px;
+    padding: 0 25px 15px;
     text-align: center;
+
+    .forgot {
+        padding-right: 10px;
+        border-right: 1px solid #fff;
+    }
+    .go-to-register {
+        padding-left: 10px;
+    }
+
+    .register,
+    .login {
+        margin: 0;
+    }
 }

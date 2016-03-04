@@ -113,7 +113,7 @@ gulp.task('default', ['clean', 'image', 'html', 'sass', 'script'], function(){
 
     gulp.watch('./src/images/**/*', ['image']);
 
-    gulp.watch('./src/components/**/*.scss', ['sass']);
+    //gulp.watch('./src/components/**/*.scss', ['sass']);
 
     gulp.watch('./src/components/**/*.js', ['script']);
 

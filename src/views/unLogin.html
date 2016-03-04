@@ -1,16 +1,10 @@
 <!-- unLogin view -->
-<div ng-include="'app/views/templates/header.html'"></div>
+<div ng-include="'app/views/templates/header.html'" class="g-header"></div>
 
-<div class="body">
-    <div class="container">
-        <h1 style="margin-top: 80px;">基于AngularJS的在线音乐网站</h1>
-        <p>Welcome to 基于AngularJS的在线音乐网站</p>
-
-        <p><a href="#/login">登录</a><a href="#/register">注册</a></p>
-        <h1>Your name:   <%- user.name %></h1>
-        <p>Welcome to your home ~</p>
-        <p ng-controller="UserCtrl"><button ng-click="logout()">我要注销</button></p>
+<div class="g-body">
+    <div class="container g-container">
+        <a href="/#/login">请先登录</a>
     </div>
 </div>
 
-<div ng-include="'app/view/templates/footer.html'"></div>
+<div ng-include="'app/views/templates/footer.html'" class="g-footer"></div>

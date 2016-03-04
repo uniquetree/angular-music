@@ -106,15 +106,17 @@ $config.musicApp.config(['$routeProvider', function($routeProvider) {
 $config.musicApp.run(function($rootScope, $location, $window, AuthenticationService) {
     $rootScope.$on("$routeChangeStart", function(event, nextRoute, currentRoute) {
 
+        // 未登录,跳转到登录页
         if (nextRoute !== null && nextRoute.access !== null && nextRoute.access.requiredLogin &&
             !AuthenticationService.isAuthenticated && !$window.sessionStorage.token) {
 
-            $location.path("/");
+            $location.path("/unLogin");
         }
     });
 });
 
 // 加载页面angular控制器组件
+require('./Common/MainCtrl');
 require('./Header/HeaderCtrl');
 require('./User/UserCtrl');
 require('./MyMusic/MyMusicCtrl');

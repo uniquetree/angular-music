@@ -1,5 +1,5 @@
-<nav class="navbar navbar-inverse navbar-fixed-top m-nav" ng-controller="HeaderCtrl">
-    <div class="g-container">
+<nav class="navbar-fixed-top m-nav" data-ng-init="load()">
+    <div class="container g-container">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
                 <span class="sr-only">Toggle navigation</span>
@@ -7,30 +7,31 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/#/">云音乐</a>
+            <a class="navbar-brand" href="/#/">
+                <span class="glyphicon glyphicon-music" aria-hidden="true"></span>
+                云音乐
+            </a>
         </div>
         <nav class="collapse navbar-collapse">
-            <ul class="nav navbar-nav">
-                <li><a href="/#/">发现音乐</a></li>
+            <ul id="m-sub-nav" class="nav navbar-nav m-sub-nav" on-finish-render-filters="Complete">
+                <li class="active"><a href="/#/">发现音乐</a></li>
                 <li><a href="/#/myMusic">我的音乐</a></li>
                 <li><a href="/#/admin">管理中心</a></li>
             </ul>
-            <div class="nav navbar-nav navbar-right" ng-controller="DropdownCtrl">
-                <div class="dropdown" uib-dropdown is-open="status.isopen">
-                    <!--<a id="single-button" type="button" href="#" class="dropdown-toggle" uib-dropdown-toggle ng-disabled="disabled">-->
-                        <!--登录<span class="caret"></span>-->
-                    <!--</a>-->
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                       aria-expanded="false" uib-dropdown-toggle ng-disabled="disabled">登录<span class="caret"></span></a>
-                    <ul uib-dropdown-menu role="menu" aria-labelledby="single-button">
-                        <li role="menuitem"><a href="/#/login">登录</a></li>
-                        <li role="menuitem"><a href="/#/register">注册</a></li>
-                    </ul>
-                </div>
+            <div class="user-bar pull-right">
+                <ul class="unLogin-nav clearfix">
+                    <li class="login">
+                        <a href="/#/login"><i class="fa fa-sign-in"></i> 登录</a>
+                    </li>
+                    <li class="register">
+                        <a href="/#/register"><i class="fa fa-plus-square"></i> 注册</a>
+                    </li>
+                </ul>
             </div>
-            <form class="navbar-form navbar-right" role="search">
+            <form class="navbar-form pull-right m-search" role="search">
                 <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Search">
+                    <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                    <input type="text" class="form-control" placeholder="单曲/歌手/专辑/歌单">
                 </div>
             </form>
         </nav>

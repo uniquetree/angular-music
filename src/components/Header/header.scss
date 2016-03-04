@@ -3,9 +3,87 @@
  */
 /* header */
 .g-header {
-    nav {
+    .m-nav {
         background-color: #2F3030;
-
+        box-shadow: 0 0 16px 0 rgba(50,50,50,.6);
     }
+
+    .navbar-header {
+
+        .navbar-brand {
+            color: #fff;
+
+            .glyphicon-music {
+                top: 0;
+                vertical-align: middle;
+            }
+        }
+    }
+
+    .m-sub-nav {
+
+        li {
+            &:hover,
+            &.active,
+            & > a:hover {
+                background-color: #000 !important;
+            }
+        }
+
+        a {
+            color: #fff;
+        }
+    }
+
+    .user-bar {
+
+        ul {
+            padding: 0;
+
+            li {
+                float: left;
+                width: 58px;
+                height: 30px;
+                margin-top: 10px;
+                border-radius: 6px;
+                line-height: 26px;
+                cursor: pointer;
+
+                a {
+                    padding: 0 5px;
+                    font-size: 14px;
+                    color: #fff;
+                    text-decoration:none;
+
+                    &:hover {
+                        color: #2980b9;
+                    }
+                }
+            }
+        }
+    }
+
+    .m-search {
+
+        .form-group {
+            border-radius: 17px;
+            overflow: hidden;
+            background-color: #EAEAEA;
+
+            .glyphicon-search {
+                top: 0;
+                margin-left: 14px;
+                vertical-align: middle;
+            }
+
+            input {
+                padding-left: 32px;
+                border: none;
+                margin-left: -32px;
+                background-color: #EAEAEA;
+            }
+        }
+    }
+
 }
-/* header */
+/* header ends */
