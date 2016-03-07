@@ -2,6 +2,8 @@
  * Created by 郑树聪 on 2016/2/29.
  */
 /* header */
+$userBarHeight: 120px;
+
 .g-header {
     .m-nav {
         background-color: #2F3030;
@@ -20,24 +22,30 @@
         }
     }
 
-    .m-sub-nav {
+    .m-sub-nav,
+    .user-info {
+
+        a {
+            color: #fff;
+            background-color: #2F3030;
+        }
 
         li {
             &:hover,
             &.active,
+            &.active > a,
+            & > a:focus,
             & > a:hover {
-                background-color: #000 !important;
+                color: #fff;
+                background-color: #000;
             }
-        }
-
-        a {
-            color: #fff;
         }
     }
 
     .user-bar {
+        width: $userBarHeight;
 
-        ul {
+        ul.login-box {
             padding: 0;
 
             li {
@@ -49,6 +57,10 @@
                 line-height: 26px;
                 cursor: pointer;
 
+                &.login {
+                    margin-right: 4px;
+                }
+
                 a {
                     padding: 0 5px;
                     font-size: 14px;
@@ -58,6 +70,29 @@
                     &:hover {
                         color: #2980b9;
                     }
+                }
+            }
+        }
+
+        ul.user-info {
+
+            .dropdown {
+
+                & > a {
+                    width: $userBarHeight;
+                    @include text-overflow;
+                }
+            }
+
+            .dropdown-menu {
+                width: $userBarHeight;
+                min-width: $userBarHeight;
+                border: none;
+                color: #fff;
+                background-color: #2F3030;
+
+                i.fa {
+                    padding-right: 6px;
                 }
             }
         }

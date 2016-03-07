@@ -1,6 +1,7 @@
 /**
  * Created by 郑树聪 on 2016/3/1.
  */
+@charset "utf-8";
 html,
 body,
 .wrap {
@@ -42,4 +43,10 @@ body,
             margin: 0;
         }
     }
+}
+
+@mixin text-overflow {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }

@@ -3,7 +3,7 @@
  * Created by 郑树聪 on 2016/2/17.
  */
 var $config = require('../Common/config');
-var $commonServiecs = require('../Common/services');
+var $commonServiecs = require('../Common/MainServices');
 
 $config.musicApp.factory('UserService', ['$http', '$window', function($http, $window){
     return {
@@ -113,7 +113,7 @@ $config.musicApp.factory('UserService', ['$http', '$window', function($http, $wi
                     AuthenticationService.isAdmin = false;
                     delete $window.sessionStorage.token;
                     delete $window.sessionStorage.userInfo;
-                    $location.path('/');
+                    $location.path('/#/');
                 }
             }).error(function(status, data){
 

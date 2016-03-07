@@ -14,19 +14,13 @@
         </div>
         <nav class="collapse navbar-collapse">
             <ul id="m-sub-nav" class="nav navbar-nav m-sub-nav" on-finish-render-filters="Complete">
-                <li class="active"><a href="/#/">发现音乐</a></li>
-                <li><a href="/#/myMusic">我的音乐</a></li>
-                <li><a href="/#/admin">管理中心</a></li>
+                <li ng-repeat="item in items" ng-class="{active: isActive(item.id, item.href)}" ng-click="changeUrl(item.id, item.href)">
+                    <a ng-href="{{item.href}}">{{item.name}}</a>
+                </li>
             </ul>
             <div class="user-bar pull-right">
-                <ul class="unLogin-nav clearfix">
-                    <li class="login">
-                        <a href="/#/login"><i class="fa fa-sign-in"></i> 登录</a>
-                    </li>
-                    <li class="register">
-                        <a href="/#/register"><i class="fa fa-plus-square"></i> 注册</a>
-                    </li>
-                </ul>
+                <login-box ng-if="!isLogin"></login-box>
+                <user-info-box ng-if="isLogin"></user-info-box>
             </div>
             <form class="navbar-form pull-right m-search" role="search">
                 <div class="form-group">

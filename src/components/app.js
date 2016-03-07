@@ -7,7 +7,7 @@
 var $config = require('./Common/config');
 
 /**
- * 处理用户认证
+ * 用户认证服务
  */
 $config.musicApp.factory('AuthenticationService', function(){
 
@@ -18,6 +18,9 @@ $config.musicApp.factory('AuthenticationService', function(){
     return auth;
 });
 
+/**
+ * http请求拦截器，在请求头增加验证
+ */
 $config.musicApp.factory('TokenInterceptor', function ($q, $window, $location, AuthenticationService) {
     return {
         request: function (config) {
@@ -104,13 +107,15 @@ $config.musicApp.config(['$routeProvider', function($routeProvider) {
 }]);
 
 $config.musicApp.run(function($rootScope, $location, $window, AuthenticationService) {
+
+    // 监听路由变化，进行相应处理
     $rootScope.$on("$routeChangeStart", function(event, nextRoute, currentRoute) {
 
         // 未登录,跳转到登录页
         if (nextRoute !== null && nextRoute.access !== null && nextRoute.access.requiredLogin &&
             !AuthenticationService.isAuthenticated && !$window.sessionStorage.token) {
 
-            $location.path("/unLogin");
+            $location.path("/login");
         }
     });
 });
@@ -121,5 +126,3 @@ require('./Header/HeaderCtrl');
 require('./User/UserCtrl');
 require('./MyMusic/MyMusicCtrl');
 require('./Admin/AdminCtrl');
-
-module.exports = $config.musicApp;

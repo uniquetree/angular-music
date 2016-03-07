@@ -1,39 +1,43 @@
 /**
+ * 顶部header导航栏控制器
  * Created by 郑树聪 on 2016/3/1.
  */
+require('./HeaderDirectives');
+
 var $config = require('../Common/config');
 
-$config.musicApp.controller('HeaderCtrl', ['$scope', '$location', '$window',
-    function($scope, $location, $window){
-        $scope.load = function() {
-            var url = $location.url();
-            var urlReg = /^[\/|\/myMusic|\/admin]/;
-            var subNav = angular.element(document.querySelector('#m-sub-nav'));
-            subNav.find('li').removeClass('active');
-            if(url.match(urlReg)[0] === '/'){
-                subNav.find('li:first-child').addClass('active');
-            } else if(url.match(urlReg)[0] === '/myMusic') {
-                subNav.find('li:nth-child(2)').addClass('active');
-            } else if(url.match(urlReg)[0] === '/admin') {
-                subNav.find('li:nth-child(3)').addClass('active');
-            }
+$config.musicApp.controller('HeaderCtrl', ['$scope', '$location', '$window', 'AuthenticationService',
+    function($scope, $location, $window, AuthenticationService){
+
+        // 导航栏选项
+        $scope.items = [
+            {id: '1', name: '发现音乐', href: '#/'},
+            {id: '2', name: '我的音乐', href: '#/myMusic'},
+            {id: '3', name: '管理中心', href: '#/admin'}
+        ];
+        $scope.selected = '1';
+        $scope.isActive = function(id, currUrl) {
+            var href = '#' + $location.url();
+            //return (id === $scope.selected || currUrl === href);
+            return currUrl === href;
         };
+        $scope.changeUrl = function(id, currUrl) {
+            //var prevUrl = $window.sessionStorage.getItem('prevUrl');
+            //var href = '#' + $location.url();
+            $window.sessionStorage.setItem('prevUrl', currUrl);
+            //if(currUrl === href || currUrl === prevUrl) {
+            //    $scope.selected = id;
+            //}
+            $scope.selected = id;
+        };
+
+        // 判断是否登录
+        $scope.isLogin = AuthenticationService.isAuthenticated;
+        // 判断是否是管理员
+        $scope.isAdmin = AuthenticationService.isAdmin;
+
+        if($scope.isLogin && $window.sessionStorage.getItem('userInfo')) {
+            $scope.userInfo = JSON.parse($window.sessionStorage.getItem('userInfo'));
+        }
     }
-]).controller('DropdownCtrl', function ($scope, $log) {
-
-    $scope.status = {
-        isopen: false
-    };
-
-    $scope.toggled = function(open) {
-        $log.log('Dropdown is now: ', open);
-    };
-
-    $scope.toggleDropdown = function($event) {
-        $event.preventDefault();
-        $event.stopPropagation();
-        $scope.status.isopen = !$scope.status.isopen;
-    };
-
-    $scope.appendToEl = angular.element(document.querySelector('#dropdown-long-content'));
-});
+]);

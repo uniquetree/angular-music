@@ -30,12 +30,9 @@ body,
     .g-footer .copyright p {
       margin: 0; }
 
-@charset "UTF-8";
 /**
  * Created by 郑树聪 on 2016/3/4.
  */
-
-@charset "UTF-8";
 /**
  * Created by 郑树聪 on 2016/2/29.
  */
@@ -50,30 +47,57 @@ body,
     top: 0;
     vertical-align: middle; }
 
+.g-header .m-sub-nav a,
+.g-header .user-info a {
+  color: #fff;
+  background-color: #2F3030; }
+
 .g-header .m-sub-nav li:hover, .g-header .m-sub-nav li.active,
-.g-header .m-sub-nav li > a:hover {
-  background-color: #000 !important; }
+.g-header .m-sub-nav li.active > a,
+.g-header .m-sub-nav li > a:focus,
+.g-header .m-sub-nav li > a:hover,
+.g-header .user-info li:hover,
+.g-header .user-info li.active,
+.g-header .user-info li.active > a,
+.g-header .user-info li > a:focus,
+.g-header .user-info li > a:hover {
+  color: #fff;
+  background-color: #000; }
 
-.g-header .m-sub-nav a {
-  color: #fff; }
-
-.g-header .user-bar ul {
-  padding: 0; }
-  .g-header .user-bar ul li {
-    float: left;
-    width: 58px;
-    height: 30px;
-    margin-top: 10px;
-    border-radius: 6px;
-    line-height: 26px;
-    cursor: pointer; }
-    .g-header .user-bar ul li a {
-      padding: 0 5px;
-      font-size: 14px;
-      color: #fff;
-      text-decoration: none; }
-      .g-header .user-bar ul li a:hover {
-        color: #2980b9; }
+.g-header .user-bar {
+  width: 120px; }
+  .g-header .user-bar ul.login-box {
+    padding: 0; }
+    .g-header .user-bar ul.login-box li {
+      float: left;
+      width: 58px;
+      height: 30px;
+      margin-top: 10px;
+      border-radius: 6px;
+      line-height: 26px;
+      cursor: pointer; }
+      .g-header .user-bar ul.login-box li.login {
+        margin-right: 4px; }
+      .g-header .user-bar ul.login-box li a {
+        padding: 0 5px;
+        font-size: 14px;
+        color: #fff;
+        text-decoration: none; }
+        .g-header .user-bar ul.login-box li a:hover {
+          color: #2980b9; }
+  .g-header .user-bar ul.user-info .dropdown > a {
+    width: 120px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap; }
+  .g-header .user-bar ul.user-info .dropdown-menu {
+    width: 120px;
+    min-width: 120px;
+    border: none;
+    color: #fff;
+    background-color: #2F3030; }
+    .g-header .user-bar ul.user-info .dropdown-menu i.fa {
+      padding-right: 6px; }
 
 .g-header .m-search .form-group {
   border-radius: 17px;
@@ -90,13 +114,9 @@ body,
     background-color: #EAEAEA; }
 
 /* header ends */
-
-@charset "UTF-8";
 /**
  * Created by 郑树聪 on 2016/2/18.
  */
-
-@charset "UTF-8";
 /**
  * Created by 郑树聪 on 2016/2/18.
  */

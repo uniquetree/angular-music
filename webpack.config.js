@@ -48,9 +48,9 @@ module.exports = {
         ),
         // 提供全局的变量，在模块中使用无需用require引入
         new webpack.ProvidePlugin({
-            //$: 'jquery',
-            //jQuery: 'jquery',
-            //"window.jQuery": "jquery"
+            $: 'jquery',
+            jQuery: 'jquery',
+            "window.jQuery": "jquery"
         }),
         // 提出入口模块中的公用代码,生产公用代码文件,主要是Angular、jquery等插件框架的引用
         //new webpack.optimize.CommonsChunkPlugin('common.js'),
