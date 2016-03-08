@@ -1,9 +1,9 @@
 /**
- * 用户操作控制器,登录/登出
+ * 用户操作服务、控制器,登录/登出
  * Created by 郑树聪 on 2016/2/17.
  */
 var $config = require('../Common/config');
-var $commonServiecs = require('../Common/MainServices');
+//var $commonServiecs = require('../Common/MainServices');
 
 $config.musicApp.factory('UserService', ['$http', '$window', function($http, $window){
     return {
@@ -37,8 +37,8 @@ $config.musicApp.factory('UserService', ['$http', '$window', function($http, $wi
             });
         }
     };
-}]).controller('UserCtrl', ['$scope', '$location', '$window', 'UserService', 'AuthenticationService',
-    function($scope, $location, $window, UserService, AuthenticationService){
+}]).controller('UserCtrl', ['$rootScope', '$scope', '$location', '$window', 'UserService', 'AuthenticationService',
+    function($rootScope, $scope, $location, $window, UserService, AuthenticationService){
 
         // 注册事件
         $scope.register = function(username, email, password1, password2) {
@@ -86,7 +86,13 @@ $config.musicApp.factory('UserService', ['$http', '$window', function($http, $wi
                         }
                         $window.sessionStorage.token = data.token;
                         $window.sessionStorage.userInfo = JSON.stringify(data.user);
-                        $location.path('/');
+                        //$location.path('/');
+                        var prevUrl = $rootScope.prevUrl;
+                        if(typeof prevUrl !== 'undefined') {
+                            $location.path(prevUrl);
+                        } else {
+                            $location.path('/#/');
+                        }
                     } else {
                         $scope.message = data.msg;
                         delete $window.sessionStorage.token;

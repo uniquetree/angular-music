@@ -9,6 +9,8 @@ module.exports = {
     api: {
         register: 'api/register',
         login: 'api/login',
-        logout: 'api/logout'
+        logout: 'api/logout',
+
+        getAdminMenu: 'apie/getAdminMenu'
     }
 };

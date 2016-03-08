@@ -18,17 +18,7 @@ $config.musicApp.controller('HeaderCtrl', ['$scope', '$location', '$window', 'Au
         $scope.selected = '1';
         $scope.isActive = function(id, currUrl) {
             var href = '#' + $location.url();
-            //return (id === $scope.selected || currUrl === href);
             return currUrl === href;
-        };
-        $scope.changeUrl = function(id, currUrl) {
-            //var prevUrl = $window.sessionStorage.getItem('prevUrl');
-            //var href = '#' + $location.url();
-            $window.sessionStorage.setItem('prevUrl', currUrl);
-            //if(currUrl === href || currUrl === prevUrl) {
-            //    $scope.selected = id;
-            //}
-            $scope.selected = id;
         };
 
         // 判断是否登录

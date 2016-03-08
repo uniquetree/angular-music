@@ -14,7 +14,7 @@
         </div>
         <nav class="collapse navbar-collapse">
             <ul id="m-sub-nav" class="nav navbar-nav m-sub-nav" on-finish-render-filters="Complete">
-                <li ng-repeat="item in items" ng-class="{active: isActive(item.id, item.href)}" ng-click="changeUrl(item.id, item.href)">
+                <li ng-repeat="item in items" ng-class="{active: isActive(item.id, item.href)}">
                     <a ng-href="{{item.href}}">{{item.name}}</a>
                 </li>
             </ul>

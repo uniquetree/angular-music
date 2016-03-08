@@ -23,12 +23,12 @@ musicApp.directive('userInfoBox', function(){
 
     return {
         replace: true,
-        template: '<ul class="nav navbar-nav user-info"><li class="dropdown">' +
+        template: '<ul class="nav navbar-nav user-info" ng-controller="UserCtrl"><li class="dropdown">' +
         '<a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown"' +
         ' title="{{userInfo.username}}">{{userInfo.username}}<b class="caret"></b></a>' +
         '<ul class="dropdown-menu">' +
-        '<li><a href="#/"><i class="fa fa-user"></i>我的主页</a></li>' +
-        '<li><a href="#/"><i class="fa fa-cog"></i>个人设置</a></li>' +
+        '<li><a href="#/admin?page=myAdmin"><i class="fa fa-user"></i>我的主页</a></li>' +
+        '<li><a href="#/admin?page=cog"><i class="fa fa-cog"></i>个人设置</a></li>' +
         '<li ng-click="logout()"><a href="javascript:void(0)"><i class="fa fa-sign-out"></i>退出</a></li>' +
         '</ul></li></ul>'
     };

@@ -115,6 +115,8 @@ $config.musicApp.run(function($rootScope, $location, $window, AuthenticationServ
         if (nextRoute !== null && nextRoute.access !== null && nextRoute.access.requiredLogin &&
             !AuthenticationService.isAuthenticated && !$window.sessionStorage.token) {
 
+            // 未登录时将原先要跳转到的url的存到全局变量prevUrl
+            $rootScope.prevUrl = nextRoute.originalPath;
             $location.path("/login");
         }
     });
