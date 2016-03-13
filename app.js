@@ -5,9 +5,6 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-var routes = require('./routes/index');
-var api = require('./routes/api');
-
 var app = express();
 
 // 设置模板渲染引擎及路径
@@ -24,19 +21,13 @@ app.use(cookieParser());
 app.use('/app', express.static(path.join(__dirname, 'app')));
 //app.use('/bower_components', express.static(path.join(__dirname, 'bower_components')));
 
-//设置当站内路径(req.path)不包括 /api 时，都转发到 AngularJS的ng-app(index.html)
-//app.use(function (req, res) {
-//    console.log(req.path);
-//    if(req.path.indexOf('/api') >= 0){
-//        res.send("server text");
-//    }else{ //angular启动页
-//        res.render('index');
-//    }
-//});
-
 // 路由配置
+var routes = require('./routes/index');
+var routesUser = require('./routes/user');
+var routesAdmin = require('./routes/admin');
 app.use('/', routes);
-app.use('/api', api);
+app.use('/api/user', routesUser);
+app.use('/api/admin', routesAdmin);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

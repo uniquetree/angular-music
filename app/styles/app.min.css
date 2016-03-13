@@ -1,5 +1,8 @@
 @charset "UTF-8";
 /**
+ * Created by 郑树聪 on 2016/3/10.
+ */
+/**
  * Created by 郑树聪 on 2016/3/1.
  */
 html,
@@ -10,14 +13,12 @@ body,
   background-color: #F5F5F5; }
 
 .g-header {
-  height: 70px; }
+  height: 50px; }
 
-.g-body {
-  margin-top: 10px; }
-  .g-body .g-container {
-    min-height: 700px;
-    _height: 700px;
-    background-color: #fff; }
+.g-body .g-container {
+  min-height: 700px;
+  _height: 700px;
+  background-color: #fff; }
 
 .g-footer {
   width: 100%;

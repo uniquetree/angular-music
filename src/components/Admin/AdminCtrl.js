@@ -11,10 +11,10 @@ musicApp.factory('AdminMenuService', ['$http', function($http) {
     return {
         getMenu: function(){
 
-            var url = $config.base_url + $config.api.getAdminMenu;
+            var url = $config.base_url + $config.api.getMenuByRole;
             $http.get(url, {});
         }
-    }
+    };
 }]);
 
 musicApp.controller('AdminCtrl', ['$scope', '$location', '$window', 'AdminMenuService',
@@ -28,13 +28,13 @@ musicApp.controller('AdminCtrl', ['$scope', '$location', '$window', 'AdminMenuSe
             AdminMenuService.getMenu().success(function(data, status, headers, config) {
 
                 if(data.success) {
-                    $scope.adminMenus = data.adminMenus;
+                    $scope.adminMenus = data.menus;
                 } else {
                     console.log(data.msg);
                 }
             }).error(function(data, status, headers, config){
 
-                console.log(data.msg)
+                console.log(data.msg);
             });
         };
 

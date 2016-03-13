@@ -7,10 +7,11 @@ module.exports = {
     musicApp: angular.module('musicApp', ['ngRoute', 'ui.bootstrap']),
     base_url: 'http://localhost:3000/',
     api: {
-        register: 'api/register',
-        login: 'api/login',
-        logout: 'api/logout',
-
-        getAdminMenu: 'apie/getAdminMenu'
+        // 用户操作
+        register: 'api/user/register',
+        login: 'api/user/login',
+        logout: 'api/user/logout',
+        // 管理中心
+        getMenuByRole: 'api/admin/getMenuByRole'
     }
 };

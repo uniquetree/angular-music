@@ -2,8 +2,19 @@
 <header ng-include="'app/views/templates/header.html'" class="g-header" ng-controller="HeaderCtrl"></header>
 
 <div class="g-body">
-    <div class="container g-container">
-        admin
+    <div id="g-admin" class="container g-container" ng-controller="AdminCtrl">
+        <!--<div class="g-menu" data-ng-init="loadMenus()">-->
+            <!--<showMenu></showMenu>-->
+        <!--</div>-->
+        <!--<div class="g-content" data-ng-init="loadContent()" ng-switch="{{page}}">-->
+            <!--<ANY ng-switch-when="matchValue1">...</ANY>-->
+            <!--<ANY ng-switch-when="matchValue2">...</ANY>-->
+            <!--<ANY ng-switch-default>...</ANY>-->
+        <!--</div>-->
+        <div class="g-menu">
+
+        </div>
+        <div class="g-content"></div>
     </div>
 </div>
 

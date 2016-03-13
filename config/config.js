@@ -21,3 +21,28 @@ module.exports = {
     },
     secretToken: 'fas3456daj8lf6kjg3asldk2mvdsfasd23gert4ddg'
 };
+
+// 管理中心菜单配置
+module.exports.adminMenus = [
+    {
+        name: '个人中心',
+        page: 'user',
+        role: 2,
+        subMenus: [
+            {name: '个人信息', page: 'userInfo'},
+            {name: '编辑资料', page: 'editInfo'}
+        ]
+    },
+    {
+        name: '管理员中心',
+        page: 'admin',
+        role: 1,
+        subMenus: []
+    },
+    {
+        name: '管理员账号管理',
+        page: 'supAdmin',
+        role: 0,
+        subMenus: []
+    }
+];

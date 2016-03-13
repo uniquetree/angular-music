@@ -1,19 +1,18 @@
 /**
- * 接口路由
+ * 用户操作接口
  * Created by 郑树聪 on 2016/2/18.
  */
 var express = require('express');
 var jwt = require('jsonwebtoken');
 var expressJwt = require('express-jwt');
 
-var router = express.Router();
-
-var User = require('../models/User');
-var music = require('../models/Music');
-
 var redisClient = require('../config/redis_db').redisClient;
 var tokenManager = require('../utils/TokenManager');
 var secretToken = require('../config/config').secretToken;
+
+var router = express.Router();
+
+var User = require('../models/User');
 
 // 注册接口
 router.post('/register', function(req, res, next){
