@@ -29,20 +29,29 @@ module.exports.adminMenus = [
         page: 'user',
         role: 2,
         subMenus: [
-            {name: '个人信息', page: 'userInfo'},
-            {name: '编辑资料', page: 'editInfo'}
+            {name: '个人信息', page: 'userInfo', role: 2},
+            {name: '编辑资料', page: 'editInfo', role: 2}
         ]
     },
     {
-        name: '管理员中心',
+        name: '音乐管理',
         page: 'admin',
         role: 1,
-        subMenus: []
+        subMenus: [
+            {name: '歌手列表', page: 'singers', role: 1},
+            {name: '专辑列表', page: 'Albums', role: 1},
+            {name: '音乐列表', page: 'songs', role: 1},
+            {name: '上传音乐', page: 'uploadMusic', role: 1}
+        ]
     },
     {
-        name: '管理员账号管理',
+        name: '账号管理',
         page: 'supAdmin',
-        role: 0,
-        subMenus: []
+        role: 1,
+        subMenus: [
+            {name: '普通用户列表', page: 'Albums', role: 1},
+            {name: '管理员列表', page: 'songs', role: 1},
+            {name: '超级管理员列表', page: 'uploadMusic', role: 0}
+        ]
     }
 ];

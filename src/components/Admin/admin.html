@@ -1,0 +1,13 @@
+<!-- MyMusic view -->
+<header ng-include="'app/views/Header/header.html'" class="g-header" ng-controller="HeaderCtrl"></header>
+
+<div class="g-body">
+    <div id="g-admin" class="container g-container" ng-controller="AdminCtrl">
+        <div class="g-menu">
+            <show-admin-menu></show-admin-menu>
+        </div>
+        <div class="g-content"></div>
+    </div>
+</div>
+
+<footer ng-include="'app/views/Templates/footer.html'" class="g-footer"></footer>

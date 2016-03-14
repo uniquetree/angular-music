@@ -59,7 +59,7 @@ gulp.task('image', function(){
 // html处理任务
 gulp.task('html', function(){
 
-    return gulp.src('./src/views/**/*.html')
+    return gulp.src('./src/components/**/*.html')
         //.pipe(minifyHtml())
         .pipe(gulp.dest('./app/views/'));
 });
@@ -110,7 +110,7 @@ gulp.task('default', ['clean', 'image', 'html', 'sass', 'script'], function(){
 
     //gulp.watch('./bower.json', ['bower']);
 
-    gulp.watch('./src/views/**/*.html', ['html']);
+    gulp.watch('./src/components/**/*.html', ['html']);
 
     gulp.watch('./src/images/**/*', ['image']);
 

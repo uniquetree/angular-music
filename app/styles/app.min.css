@@ -32,26 +32,21 @@ body,
       margin: 0; }
 
 /**
- * Created by 郑树聪 on 2016/3/4.
+ * Created by 郑树聪 on 2016/2/18.
  */
 /**
  * Created by 郑树聪 on 2016/2/29.
  */
-/* header */
 .g-header .m-nav {
-  background-color: #2F3030;
   box-shadow: 0 0 16px 0 rgba(50, 50, 50, 0.6); }
 
-.g-header .navbar-header .navbar-brand {
-  color: #fff; }
-  .g-header .navbar-header .navbar-brand .glyphicon-music {
-    top: 0;
-    vertical-align: middle; }
+.g-header .navbar-brand .glyphicon-music {
+  top: 0;
+  vertical-align: middle; }
 
 .g-header .m-sub-nav a,
 .g-header .user-info a {
-  color: #fff;
-  background-color: #2F3030; }
+  color: #fff; }
 
 .g-header .m-sub-nav li:hover, .g-header .m-sub-nav li.active,
 .g-header .m-sub-nav li.active > a,
@@ -114,9 +109,8 @@ body,
     margin-left: -32px;
     background-color: #EAEAEA; }
 
-/* header ends */
 /**
- * Created by 郑树聪 on 2016/2/18.
+ * Created by 郑树聪 on 2016/3/4.
  */
 /**
  * Created by 郑树聪 on 2016/2/18.

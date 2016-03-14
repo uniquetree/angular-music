@@ -7,7 +7,7 @@ var $config = require('../Common/config');
 var musicApp = $config.musicApp;
 
 // 菜单指令集
-musicApp.directive('showMenu', function(){
+musicApp.directive('showAdminMenu', function(){
 
     return {
         replace: true,

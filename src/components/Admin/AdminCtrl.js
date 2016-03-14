@@ -2,6 +2,8 @@
  * 用户管理模块服务、控制器
  * Created by 郑树聪 on 2016/2/29.
  */
+require('./AdminDirectives');
+
 var $config = require('../Common/config');
 
 var musicApp = $config.musicApp;

@@ -1,17 +1,15 @@
-<nav class="navbar-fixed-top m-nav" data-ng-init="load()">
+<nav class="navbar navbar-inverse navbar-fixed-top m-nav" data-ng-init="load()">
     <div class="container g-container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="/#/">
-                <span class="glyphicon glyphicon-music" aria-hidden="true"></span>
-                云音乐
-            </a>
-        </div>
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/#/">
+            <span class="glyphicon glyphicon-music" aria-hidden="true"></span>
+            云音乐
+        </a>
         <nav class="collapse navbar-collapse">
             <ul id="m-sub-nav" class="nav navbar-nav m-sub-nav" on-finish-render-filters="Complete">
                 <li ng-repeat="item in items" ng-class="{active: isActive(item.id, item.href)}">

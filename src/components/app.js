@@ -65,37 +65,31 @@ $config.musicApp.config(['$routeProvider', function($routeProvider) {
     $routeProvider
         // 首页,发现音乐
         .when('/', {
-            templateUrl: 'app/views/home.html',
+            templateUrl: 'app/views/Home/home.html',
             controller: 'UserCtrl',
             access: { requiredLogin: false }
         })
         // 登录页
         .when("/login", {
-            templateUrl: 'app/views/login.html',
+            templateUrl: 'app/views/User/login.html',
             controller: 'UserCtrl',
             access: { requiredLogin: false }
         })
         // 注册页
         .when('/register', {
-            templateUrl: 'app/views/register.html',
-            controller: 'UserCtrl',
-            access: { requiredLogin: false }
-        })
-        // 未登录提示页
-        .when('/unLogin', {
-            templateUrl: 'app/views/unLogin.html',
+            templateUrl: 'app/views/User/register.html',
             controller: 'UserCtrl',
             access: { requiredLogin: false }
         })
         // 我的音乐
         .when('/myMusic', {
-            templateUrl: 'app/views/myMusic.html',
+            templateUrl: 'app/views/MyMusic/myMusic.html',
             controller: 'MyMusicCtrl',
             access: { requiredLogin: true }
         })
         // 管理中心
         .when('/admin', {
-            templateUrl: 'app/views/admin.html',
+            templateUrl: 'app/views/Admin/admin.html',
             controller: 'AdminCtrl',
             access: { requiredLogin: true }
         })
