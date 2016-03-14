@@ -12,9 +12,9 @@ musicApp.directive('showAdminMenu', function(){
     return {
         replace: true,
         template: '<ul ng-repeat="menu in adminMenus">' +
-        '<li title="{{menu.name}}" role="{{menu.role}}">{{menu.name}}' +
-        '<ul ng-repeat="subMenu in menu.subMenus" ng-if="subMenu.length>0">' +
-        '<li title="{{subMenu.name}}"><a href="{{subMenu.page}}">{{subMenu.name}}</a></li></ul>' +
+        '<li title="{{menu.name}}">{{menu.name}}' +
+        '<ul ng-if="menu.subMenus.length>0">' +
+        '<li ng-repeat="subMenu in menu.subMenus" title="{{subMenu.name}}"><a href="#/admin?page={{subMenu.page}}">{{subMenu.name}}</a></li></ul>' +
         '</li></ul>'
     };
 });

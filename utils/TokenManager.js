@@ -52,6 +52,7 @@ var getToken = function(headers) {
         return null;
     }
 };
+exports.getToken = getToken;
 
 exports.TOKEN_EXPIRATION = TOKEN_EXPIRATION;
 exports.TOKEN_EXPIRATION_SEC = TOKEN_EXPIRATION_SEC;

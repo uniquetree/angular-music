@@ -16,14 +16,21 @@ var menu = require('../models/Menu');
 
 // 根据用户类型获取管理中心侧边栏菜单
 router.get('/getMenuByRole', expressJwt({secret: secretToken}), tokenManager.verifyToken, function(req, res, next) {
-    var token = (req.body && req.body.access_token) || (req.query && req.query.access_token) || req.headers['access-token'];
+    var token = tokenManager.getToken(req.headers);
     if(token) {
         try {
             var decoded = jwt.verify(token, secretToken);
             var role = decoded.role;
             var menus = [];
             adminMenus.forEach(function(menu) {
-                if(menu.role === role) {
+                if(menu.role >= role) {
+                    var subMenus = menu.subMenus;
+                    menu.subMenus = [];
+                    for(var i=0; i < subMenus.length; i++){
+                        if (subMenus[i].role >= role) {
+                            menu.subMenus.push(subMenus[i]);
+                        }
+                    }
                     menus.push(menu);
                 }
             });

@@ -14,7 +14,7 @@ musicApp.factory('AdminMenuService', ['$http', function($http) {
         getMenu: function(){
 
             var url = $config.base_url + $config.api.getMenuByRole;
-            $http.get(url, {});
+            return $http.get(url, {});
         }
     };
 }]);
