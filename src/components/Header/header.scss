@@ -38,7 +38,7 @@ $userBarHeight: 120px;
     .user-bar {
         width: $userBarHeight;
 
-        ul.login-box {
+        .login-box {
             padding: 0;
 
             li {
@@ -67,7 +67,7 @@ $userBarHeight: 120px;
             }
         }
 
-        ul.user-info {
+        .user-info {
 
             .dropdown {
 
@@ -75,19 +75,20 @@ $userBarHeight: 120px;
                     width: $userBarHeight;
                     @include text-overflow;
                 }
-            }
 
-            .dropdown-menu {
-                width: $userBarHeight;
-                min-width: $userBarHeight;
-                border: none;
-                color: #fff;
-                background-color: #2F3030;
+                .dropdown-menu {
+                    width: $userBarHeight;
+                    min-width: $userBarHeight;
+                    border: none;
+                    color: #fff;
+                    background-color: #2F3030;
 
-                i.fa {
-                    padding-right: 6px;
+                    i.fa {
+                        padding-right: 6px;
+                    }
                 }
             }
+
         }
     }
 

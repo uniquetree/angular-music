@@ -59,9 +59,9 @@ body,
 
 .g-header .user-bar {
   width: 120px; }
-  .g-header .user-bar ul.login-box {
+  .g-header .user-bar .login-box {
     padding: 0; }
-    .g-header .user-bar ul.login-box li {
+    .g-header .user-bar .login-box li {
       float: left;
       width: 58px;
       height: 30px;
@@ -69,27 +69,27 @@ body,
       border-radius: 6px;
       line-height: 26px;
       cursor: pointer; }
-      .g-header .user-bar ul.login-box li.login {
+      .g-header .user-bar .login-box li.login {
         margin-right: 4px; }
-      .g-header .user-bar ul.login-box li a {
+      .g-header .user-bar .login-box li a {
         padding: 0 5px;
         font-size: 14px;
         color: #fff;
         text-decoration: none; }
-        .g-header .user-bar ul.login-box li a:hover {
+        .g-header .user-bar .login-box li a:hover {
           color: #2980b9; }
-  .g-header .user-bar ul.user-info .dropdown > a {
+  .g-header .user-bar .user-info .dropdown > a {
     width: 120px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap; }
-  .g-header .user-bar ul.user-info .dropdown-menu {
+  .g-header .user-bar .user-info .dropdown .dropdown-menu {
     width: 120px;
     min-width: 120px;
     border: none;
     color: #fff;
     background-color: #2F3030; }
-    .g-header .user-bar ul.user-info .dropdown-menu i.fa {
+    .g-header .user-bar .user-info .dropdown .dropdown-menu i.fa {
       padding-right: 6px; }
 
 .g-header .m-search .form-group {
