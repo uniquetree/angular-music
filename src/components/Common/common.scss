@@ -1,7 +1,9 @@
 /**
  * Created by 郑树聪 on 2016/3/1.
  */
-@charset "utf-8";
+$g-container-width: 1170px;
+$g-menu-width: 240px;
+
 html,
 body,
 .wrap {
@@ -14,33 +16,24 @@ body,
 
 }
 
-.g-header {
-    height: 50px;
-}
-
 .g-body {
-    //margin-top: 10px;
 
     .g-container {
+        width: $g-container-width;
         min-height: 700px;
         _height: 700px;
-        background-color: #fff;
-    }
-}
+        padding: 0;
+        margin-top: 10px;
+        background-color: #F8F8F8;
 
-.g-footer {
-    width: 100%;
-    color: #777;
-    line-height: 1;
-    text-align: center;
+        .g-menu {
+            width: $g-menu-width;
+            padding: 0;
+            border-right: 1px solid #e7e7e7;
+        }
 
-    .copyright {
-        padding: 20px 0;
-        //background-color: #eee;
-        background-color: #2F3030;
-
-        p{
-            margin: 0;
+        .g-content {
+            width: ($g-container-width)-($g-menu-width);
         }
     }
 }

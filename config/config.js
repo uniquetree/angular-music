@@ -27,31 +27,34 @@ module.exports.adminMenus = [
     {
         name: '个人中心',
         page: 'user',
+        icon: 'users',
         role: 2,
         subMenus: [
-            {name: '个人信息', page: 'userInfo', role: 2},
-            {name: '编辑资料', page: 'editInfo', role: 2}
+            {name: '个人信息', page: 'userInfo', icon: 'user', role: 2},
+            {name: '编辑资料', page: 'editInfo', icon: 'edit', role: 2}
         ]
     },
     {
         name: '音乐管理',
         page: 'admin',
+        icon: 'music',
         role: 1,
         subMenus: [
-            {name: '歌手列表', page: 'singers', role: 1},
-            {name: '专辑列表', page: 'Albums', role: 1},
-            {name: '音乐列表', page: 'songs', role: 1},
-            {name: '上传音乐', page: 'uploadMusic', role: 1}
+            {name: '歌手列表', page: 'singers', icon: 'users', role: 1},
+            {name: '专辑列表', page: 'Albums', icon: 'tags', role: 1},
+            {name: '音乐列表', page: 'songs', icon: 'th-list', role: 1},
+            {name: '上传音乐', page: 'uploadMusic', icon: 'upload', role: 1}
         ]
     },
     {
         name: '账号管理',
         page: 'supAdmin',
+        icon: 'music',
         role: 1,
         subMenus: [
-            {name: '普通用户列表', page: 'Albums', role: 1},
-            {name: '管理员列表', page: 'songs', role: 1},
-            {name: '超级管理员列表', page: 'uploadMusic', role: 0}
+            {name: '普通用户列表', page: 'users', icon: 'user', role: 1},
+            {name: '管理员列表', page: 'admin', icon: 'user-plus', role: 1},
+            {name: '超级管理员列表', page: 'supAdmin', icon: 'user-secret', role: 0}
         ]
     }
 ];

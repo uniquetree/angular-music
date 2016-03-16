@@ -24,6 +24,7 @@ router.get('/getMenuByRole', expressJwt({secret: secretToken}), tokenManager.ver
             var menus = [];
             adminMenus.forEach(function(menu) {
                 if(menu.role >= role) {
+                    menu.isMenuOpen = false;
                     var subMenus = menu.subMenus;
                     menu.subMenus = [];
                     for(var i=0; i < subMenus.length; i++){

@@ -1,9 +1,12 @@
 /**
  * Created by 郑树聪 on 2016/2/29.
  */
+@import "../Common/common";
 $userBarHeight: 120px;
 
 .g-header {
+    height: 50px;
+
     .m-nav {
         box-shadow: 0 0 16px 0 rgba(50,50,50,.6);
     }
@@ -24,9 +27,6 @@ $userBarHeight: 120px;
         }
 
         li {
-            &:hover,
-            &.active,
-            &.active > a,
             & > a:focus,
             & > a:hover {
                 color: #fff;
@@ -49,7 +49,6 @@ $userBarHeight: 120px;
                 border-radius: 6px;
                 line-height: 26px;
                 cursor: pointer;
-
                 &.login {
                     margin-right: 4px;
                 }

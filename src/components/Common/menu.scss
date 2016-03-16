@@ -1,0 +1,28 @@
+/**
+ * 我的音乐和管理中心左侧菜单栏样式
+ * Created by 郑树聪 on 2016/3/15.
+ */
+.menu {
+
+    &>li {
+        border-bottom: 1px solid #e7e7e7;
+        margin-top: 0 !important;
+    }
+
+    i.fa {
+        height: 20px;
+        line-height: 20px;
+        font-size: 14px;
+
+        &:not(.fa-chevron-right):not(.fa-chevron-down) {
+            width: 20px;
+        }
+    }
+
+    .sub-menu {
+
+        a {
+            padding-left: 34px;
+        }
+    }
+}
