@@ -5,20 +5,13 @@ var $config = require('../Common/config');
 
 var musicApp = $config.musicApp;
 
-musicApp.controller('MenuCtrl', ['$scope', '$location', '$window', '$routeParams',
-    function($scope, $location, $window, $routeParams){
-
-        //if(typeof $routeParams.page !== 'undefined') {
-        //    $scope.page = $routeParams.page;
-        //} else {
-        //    $location.search('page', 'userInfo');
-        //    $scope.page = 'userInfo';
-        //}
+musicApp.controller('MenuCtrl', ['$scope', '$location',
+    function($scope, $location){
 
         // 初始化时默认展开当前链接对应的菜单
         for(var i = 0; i < $scope.menus.length; i++){
             for(var j = 0; j < $scope.menus[i].subMenus.length; j++){
-                if($scope.page === $scope.menus[i].subMenus[j].page) {
+                if($scope.pages.page === $scope.menus[i].subMenus[j].page) {
                     $scope.menus[i].isMenuOpen = true;
                     break;
                 }
@@ -34,7 +27,8 @@ musicApp.controller('MenuCtrl', ['$scope', '$location', '$window', '$routeParams
         // 点击菜单列表改变url
         $scope.changeUrl = function(subMenu) {
 
-            $scope.page = subMenu.page;
+            $scope.pages.page = subMenu.page;
+            $scope.pages.pageUrl = subMenu.page +'.html';
             $location.search('page', subMenu.page);
         };
     }

@@ -1,23 +1,56 @@
 <!-- MyMusic view -->
 <header ng-include="'app/views/Header/header.html'" class="g-header" ng-controller="HeaderCtrl"></header>
-
 <div class="g-body">
     <div id="g-admin" class="g-container container clearfix" ng-controller="AdminCtrl">
         <div class="g-menu sidebar-nav navbar-collapse collapse pull-left">
-            <show-admin-menu menus="adminMenus" page="page"></show-admin-menu>
+            <show-admin-menu menus="adminMenus" pages="pages"></show-admin-menu>
         </div>
-        <div class="g-content pull-left" ng-switch="page">
-            <user-info-show ng-switch-when="userInfo"></user-info-show>
-            <user-info-eidt ng-switch-when="editInfo"></user-info-eidt>
-            <singers ng-switch-when="singers"></singers>
-            <albums ng-switch-when="albums"></Albums>
-            <songs ng-switch-when="songs"></songs>
-            <upload-music ng-switch-when="uploadMusic"></upload-music>
-            <users ng-switch-when="users"></users>
-            <admins ng-switch-when="admins"></admins>
-            <sup-admins ng-switch-when="supAdmins"></sup-admins>
-        </div>
+        <div class="g-content pull-left {{pages.page}}" ng-include="pages.pageUrl" autoscroll></div>
     </div>
 </div>
-
 <footer ng-include="'app/views/Templates/footer.html'" class="g-footer"></footer>
+
+<!-- userInfo.html -->
+<script type="text/ng-template" id="userInfo.html">
+
+</script>
+
+<!-- editInfo.html -->
+<script type="text/ng-template" id="editInfo.html">
+    Content of editInfo.html
+</script>
+
+<!-- singers.html -->
+<script type="text/ng-template" id="singers.html">
+    Content of singers.html
+</script>
+
+<!-- albums.html -->
+<script type="text/ng-template" id="albums.html">
+    Content of albums.html
+</script>
+
+<!-- songs.html -->
+<script type="text/ng-template" id="songs.html">
+    Content of songs.html
+</script>
+
+<!-- uploadMusic.html -->
+<script type="text/ng-template" id="uploadMusic.html">
+    Content of uploadMusic.html
+</script>
+
+<!-- users.html -->
+<script type="text/ng-template" id="users.html">
+    Content of users.html
+</script>
+
+<!-- admins.html -->
+<script type="text/ng-template" id="admins.html">
+    Content of admins.html
+</script>
+
+<!-- supAdmins.html -->
+<script type="text/ng-template" id="supAdmins.html">
+    Content of supAdmins.html
+</script>

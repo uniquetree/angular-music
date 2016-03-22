@@ -15,7 +15,7 @@ musicApp.directive('showAdminMenu', function(){
         restrict:'EA',
         scope: {
             menus: '=',
-            page: '='
+            pages: '='
         },
         replace: true,
         templateUrl: 'app/views/Menu/menuTpl.html',
