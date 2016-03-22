@@ -2,11 +2,21 @@
 <header ng-include="'app/views/Header/header.html'" class="g-header" ng-controller="HeaderCtrl"></header>
 
 <div class="g-body">
-    <div id="g-admin" class="container g-container" ng-controller="AdminCtrl">
-        <div class="g-menu sidebar-nav navbar-collapse collapse" data-ng-init="loadMenus()">
-            <show-admin-menu></show-admin-menu>
+    <div id="g-admin" class="g-container container clearfix" ng-controller="AdminCtrl">
+        <div class="g-menu sidebar-nav navbar-collapse collapse pull-left">
+            <show-admin-menu menus="adminMenus" page="page"></show-admin-menu>
         </div>
-        <div class="g-content"></div>
+        <div class="g-content pull-left" ng-switch="page">
+            <user-info-show ng-switch-when="userInfo"></user-info-show>
+            <user-info-eidt ng-switch-when="editInfo"></user-info-eidt>
+            <singers ng-switch-when="singers"></singers>
+            <albums ng-switch-when="albums"></Albums>
+            <songs ng-switch-when="songs"></songs>
+            <upload-music ng-switch-when="uploadMusic"></upload-music>
+            <users ng-switch-when="users"></users>
+            <admins ng-switch-when="admins"></admins>
+            <sup-admins ng-switch-when="supAdmins"></sup-admins>
+        </div>
     </div>
 </div>
 

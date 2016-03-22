@@ -2,12 +2,7 @@
  * 我的音乐和管理中心左侧菜单栏样式
  * Created by 郑树聪 on 2016/3/15.
  */
-.menu {
-
-    &>li {
-        border-bottom: 1px solid #e7e7e7;
-        margin-top: 0 !important;
-    }
+.menus {
 
     i.fa {
         height: 20px;
@@ -19,7 +14,12 @@
         }
     }
 
-    .sub-menu {
+    .menu {
+        border-bottom: 1px solid #e7e7e7;
+        margin-top: 0 !important;
+    }
+
+    .sub-menus {
 
         a {
             padding-left: 34px;

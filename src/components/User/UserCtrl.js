@@ -86,7 +86,6 @@ $config.musicApp.factory('UserService', ['$http', '$window', function($http, $wi
                         }
                         $window.sessionStorage.token = data.token;
                         $window.sessionStorage.userInfo = JSON.stringify(data.user);
-                        //$location.path('/');
                         var prevUrl = $rootScope.prevUrl;
                         if(typeof prevUrl !== 'undefined') {
                             $location.path(prevUrl);
@@ -117,8 +116,7 @@ $config.musicApp.factory('UserService', ['$http', '$window', function($http, $wi
                 if (AuthenticationService.isAuthenticated) {
                     AuthenticationService.isAuthenticated = false;
                     AuthenticationService.isAdmin = false;
-                    delete $window.sessionStorage.token;
-                    delete $window.sessionStorage.userInfo;
+                    $window.sessionStorage.clear();
                     $location.path('/#/');
                 }
             }).error(function(status, data){

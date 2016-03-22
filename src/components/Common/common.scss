@@ -23,17 +23,20 @@ body,
         min-height: 700px;
         _height: 700px;
         padding: 0;
-        margin-top: 10px;
+        border: 1px solid #e7e7e7;
+        margin: 10px auto;
         background-color: #F8F8F8;
 
         .g-menu {
             width: $g-menu-width;
             padding: 0;
-            border-right: 1px solid #e7e7e7;
         }
 
         .g-content {
-            width: ($g-container-width)-($g-menu-width);
+            width: ($g-container-width)-($g-menu-width)-2;
+            min-height: 700px;
+            _height: 700px;
+            border-left: 1px solid #e7e7e7;
         }
     }
 }

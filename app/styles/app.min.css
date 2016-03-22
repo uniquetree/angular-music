@@ -19,33 +19,17 @@ body,
   min-height: 700px;
   _height: 700px;
   padding: 0;
-  margin-top: 10px;
+  border: 1px solid #e7e7e7;
+  margin: 10px auto;
   background-color: #F8F8F8; }
   .g-body .g-container .g-menu {
     width: 240px;
-    padding: 0;
-    border-right: 1px solid #e7e7e7; }
+    padding: 0; }
   .g-body .g-container .g-content {
-    width: 930px; }
-
-@charset "UTF-8";
-/**
- * 我的音乐和管理中心左侧菜单栏样式
- * Created by 郑树聪 on 2016/3/15.
- */
-.menu > li {
-  border-bottom: 1px solid #e7e7e7;
-  margin-top: 0 !important; }
-
-.menu i.fa {
-  height: 20px;
-  line-height: 20px;
-  font-size: 14px; }
-  .menu i.fa:not(.fa-chevron-right):not(.fa-chevron-down) {
-    width: 20px; }
-
-.menu .sub-menu a {
-  padding-left: 34px; }
+    width: 928px;
+    min-height: 700px;
+    _height: 700px;
+    border-left: 1px solid #e7e7e7; }
 
 @charset "UTF-8";
 /**
@@ -66,14 +50,17 @@ body,
   min-height: 700px;
   _height: 700px;
   padding: 0;
-  margin-top: 10px;
+  border: 1px solid #e7e7e7;
+  margin: 10px auto;
   background-color: #F8F8F8; }
   .g-body .g-container .g-menu {
     width: 240px;
-    padding: 0;
-    border-right: 1px solid #e7e7e7; }
+    padding: 0; }
   .g-body .g-container .g-content {
-    width: 930px; }
+    width: 928px;
+    min-height: 700px;
+    _height: 700px;
+    border-left: 1px solid #e7e7e7; }
 
 .g-header {
   height: 50px; }
@@ -138,6 +125,25 @@ body,
       border: none;
       margin-left: -32px;
       background-color: #EAEAEA; }
+
+@charset "UTF-8";
+/**
+ * 我的音乐和管理中心左侧菜单栏样式
+ * Created by 郑树聪 on 2016/3/15.
+ */
+.menus i.fa {
+  height: 20px;
+  line-height: 20px;
+  font-size: 14px; }
+  .menus i.fa:not(.fa-chevron-right):not(.fa-chevron-down) {
+    width: 20px; }
+
+.menus .menu {
+  border-bottom: 1px solid #e7e7e7;
+  margin-top: 0 !important; }
+
+.menus .sub-menus a {
+  padding-left: 34px; }
 
 @charset "UTF-8";
 /**
