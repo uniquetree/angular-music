@@ -12,6 +12,7 @@ module.exports = {
         login: 'api/user/login',
         logout: 'api/user/logout',
         // 管理中心
-        getMenuByRole: 'api/admin/getMenuByRole'
+        getMenuByRole: 'api/admin/getMenuByRole',
+        updateUserInfo: 'api/admin/updateUserInfo'
     }
 };

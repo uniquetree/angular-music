@@ -12,31 +12,31 @@ var user_tb = 'music_users';
 
 /**
  * 用户对象模型类
- * @param username [String] 用户名
- * @param email [String] 邮箱,[必须项]
- * @param password [String] 密码,[必须项]
- * @param img [String] 头像路径
- * @param area [String] 地区
- * @param brith [String] 出身日期
- * @param sex 性别,默认0
- * @param status 用户类型,默认2
- * @param info [String] 简介
+ * @param userInfo [Object] 用户信息
+ * userInfo.username [String] 用户名
+ * userInfo.email [String] 邮箱,[必须项]
+ * userInfo.password [String] 密码
+ * userInfo.area [String] 地区
+ * userInfo.brith [String] 出身日期
+ * userInfo.sex [Number] 性别,默认0
+ * userInfo.status [Number] 用户类型,默认2
+ * userInfo.info [String] 简介
+ * userInfo.img [String] 头像路径
  */
-var User = function(username, email, password, img, area, brith, sex, type, info) {
-    this.username = username || '';
-    this.email = email;
-    this.password = password;
-    this.img = img || null;
-    this.area = area || null;
-    this.brith = brith || null;
-    this.sex = sex || 0;
-    this.type = type || 2;
-    this.info = info || '';
+var User = function(userInfo) {
+    this.username = userInfo.username || '';
+    this.email = userInfo.email;
+    this.password = userInfo.password;
+    this.area = userInfo.area || null;
+    this.brith = userInfo.brith || null;
+    this.sex = userInfo.sex || 0;
+    this.role = userInfo.role || 2;
+    this.info = userInfo.info || '';
+    this.img = userInfo.img || null;
 };
 
 /**
  * 查找用户,用于登录验证
- * @param email {String} 用户邮箱
  * @param callback {Function} 回调函数
  */
 User.prototype.findOne = function(callback) {
@@ -47,7 +47,6 @@ User.prototype.findOne = function(callback) {
 
 /**
  * 注册用户
- * @param user {Object} 用户对象,需包含username, email, password, status
  * @param callback {Function} 回调函数
  */
 User.prototype.create = function(callback){
@@ -64,10 +63,10 @@ User.prototype.create = function(callback){
  */
 User.prototype.update = function(oldEmail, callback){
 
-    var sql = 'update ' + user_tb + 'set username=?, email=?, password=?, img=?, area=?, brith=?, sex=?' +
-        'type=? where email=?';
+    var sql = 'update ' + user_tb + ' set username=?, email=?, password=?, img=?, area=?, brith=?, sex=?, ' +
+        'role=?, info=? where email=?';
     db.query(sql, [this.username, this.email, this.password, this.img, this.area, this.birth,
-        this.sex, this.type, oldEmail], callback);
+        this.sex, this.role, this.info, oldEmail], callback);
 };
 
 // 删除用户

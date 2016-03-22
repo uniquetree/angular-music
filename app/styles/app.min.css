@@ -2,6 +2,36 @@
 /**
  * Created by 郑树聪 on 2016/3/10.
  */
+.userInfo .info .base-info {
+  height: 52px;
+  padding: 10px;
+  border-bottom: 1px solid #e7e7e7;
+  line-height: 42px; }
+
+.userInfo .info .other-info {
+  padding: 10px;
+  font-size: 13px;
+  color: #666; }
+  .userInfo .info .other-info .area {
+    padding-right: 48px; }
+
+.userInfo .info .username {
+  font-size: 18px;
+  font-weight: bold; }
+  .userInfo .info .username .fa {
+    padding-left: 10px; }
+  .userInfo .info .username .fa-male {
+    color: #25A5E3; }
+
+.editInfo .edit-info-title {
+  height: 32px;
+  border-bottom: 1px solid #e7e7e7;
+  margin-bottom: 10px;
+  line-height: 32px;
+  font-weight: 700; }
+
+.editInfo label {
+  font-weight: normal; }
 
 @charset "UTF-8";
 /**
@@ -29,6 +59,7 @@ body,
     width: 928px;
     min-height: 700px;
     _height: 700px;
+    padding: 20px 32px;
     border-left: 1px solid #e7e7e7; }
 
 @charset "UTF-8";
@@ -60,6 +91,7 @@ body,
     width: 928px;
     min-height: 700px;
     _height: 700px;
+    padding: 20px 32px;
     border-left: 1px solid #e7e7e7; }
 
 .g-header {

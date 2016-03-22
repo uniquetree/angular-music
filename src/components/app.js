@@ -21,7 +21,7 @@ $config.musicApp.factory('AuthenticationService', function(){
 /**
  * http请求拦截器，在请求头增加验证
  */
-$config.musicApp.factory('TokenInterceptor', function ($q, $window, $location, AuthenticationService) {
+$config.musicApp.factory('TokenInterceptor', function ($rootScope, $q, $window, $location, AuthenticationService) {
     return {
         request: function (config) {
             config.headers = config.headers || {};
@@ -46,8 +46,9 @@ $config.musicApp.factory('TokenInterceptor', function ($q, $window, $location, A
         responseError: function(rejection) {
             if (rejection !== null && rejection.status === 401 &&
                 ($window.sessionStorage.token || AuthenticationService.isAuthenticated)) {
-                delete $window.sessionStorage.token;
+                $window.sessionStorage.clear();
                 AuthenticationService.isAuthenticated = false;
+                $rootScope.prevUrl = $location.url();
                 $location.path("/login");
             }
 

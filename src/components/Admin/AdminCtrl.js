@@ -3,14 +3,14 @@
  * Created by 郑树聪 on 2016/2/29.
  */
 require('../Menu/MenuDirectives');
-require('./AdminDirectives');
+//require('./AdminDirectives');
 
 var $config = require('../Common/config');
 
 var musicApp = $config.musicApp;
 
 // 管理中心相关服务
-musicApp.factory('AdminMenuService', ['$http', function($http) {
+musicApp.factory('AdminService', ['$http', function($http) {
 
     return {
         // 获取左侧菜单数据
@@ -18,12 +18,18 @@ musicApp.factory('AdminMenuService', ['$http', function($http) {
 
             var url = $config.base_url + $config.api.getMenuByRole;
             return $http.get(url, {});
+        },
+        // 更新用户信息
+        updateUserInfo: function(userInfo){
+
+            var url = $config.base_url + $config.api.updateUserInfo;
+            return $http.post(url, userInfo);
         }
     };
 }]);
 
-musicApp.controller('AdminCtrl', ['$scope', '$location', '$window', '$routeParams', 'AdminMenuService',
-    function($scope, $location, $window, $routeParams, AdminMenuService){
+musicApp.controller('AdminCtrl', ['$scope', '$location', '$window', '$routeParams', 'AdminService',
+    function($scope, $location, $window, $routeParams, AdminService){
 
         $scope.pages = {};
         // 判断当前页的参数
@@ -36,26 +42,51 @@ musicApp.controller('AdminCtrl', ['$scope', '$location', '$window', '$routeParam
         $scope.pages.pageUrl = $scope.pages.page +'.html';
 
         // 初始化当前用户的管理中心菜单
-        $scope.adminMenus = (function(){
+        $scope.loadMenus = function(){
+
+            $scope.adminMenus = [];
             if($window.sessionStorage.adminMenus) {
-                return JSON.parse($window.sessionStorage.adminMenus);
+                $scope.adminMenus = JSON.parse($window.sessionStorage.adminMenus);
             } else {
-                AdminMenuService.getMenu().success(function(data, status, headers, config) {
+                AdminService.getMenu().success(function(data, status, headers, config) {
 
                     if(data.success) {
-                        //$scope.adminMenus = data.menus;
+                        $scope.adminMenus = data.menus;
                         $window.sessionStorage.adminMenus = JSON.stringify(data.menus);
-                        return data.menus;
                     } else {
                         console.log(data.msg);
-                        return [];
                     }
                 }).error(function(data, status, headers, config){
 
                     console.log(data.msg);
-                    return [];
                 });
             }
-        })();
+        };
+
+    }
+]);
+
+musicApp.controller('InfoCtrl', ['$scope', '$location', '$window', '$routeParams', 'AdminService',
+    function($scope, $location, $window, $routeParams, AdminService){
+
+        $scope.userInfo = JSON.parse($window.sessionStorage.userInfo);
+
+        // 更新用户信息
+        $scope.updateUserInfo = function(){
+
+            AdminService.updateUserInfo({userInfo: $scope.userInfo}).success(function(data) {
+
+                if(data.success) {
+                    $window.sessionStorage.userInfo = JSON.stringify($scope.userInfo);
+                    alert('更新成功！');
+                } else {
+                    alert('更新失败！');
+                    console.log(data.msg);
+                }
+            }).error(function(data) {
+                alert('更新失败！');
+                console.log(data.msg);
+            });
+        };
     }
 ]);

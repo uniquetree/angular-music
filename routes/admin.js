@@ -12,7 +12,7 @@ var adminMenus = require('../config/config').adminMenus;
 
 var router = express.Router();
 
-var menu = require('../models/Menu');
+var User = require('../models/User');
 
 // 根据用户类型获取管理中心侧边栏菜单
 router.get('/getMenuByRole', expressJwt({secret: secretToken}), tokenManager.verifyToken, function(req, res, next) {
@@ -45,6 +45,35 @@ router.get('/getMenuByRole', expressJwt({secret: secretToken}), tokenManager.ver
     } else {
         next();
     }
+});
+
+router.post('/updateUserInfo', expressJwt({secret: secretToken}), tokenManager.verifyToken, function(req, res, next){
+
+    var userInfo = req.body.userInfo;
+    if(typeof userInfo.password === 'undefined') {
+        var token = tokenManager.getToken(req.headers);
+        if(token) {
+            try {
+                var decoded = jwt.verify(token, secretToken);
+                userInfo.password = decoded.password;
+            } catch(err) {
+                return next();
+            }
+        } else {
+            next();
+        }
+    }
+    var user = new User(userInfo);
+    var oldEmail = userInfo.email;
+    user.update(userInfo.email, function(isError, results) {
+        if(isError){
+            res.send(500);
+        } else {
+            res.json({
+                success: true
+            });
+        }
+    });
 });
 
 module.exports = router;

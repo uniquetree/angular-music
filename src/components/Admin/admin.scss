@@ -4,3 +4,54 @@
 .g-menu {
 
 }
+
+// 个人中心样式
+.userInfo {
+
+    .info {
+
+        .base-info {
+            height: 52px;
+            padding: 10px;
+            border-bottom: 1px solid #e7e7e7;
+            line-height: 42px;
+        }
+        .other-info {
+            padding: 10px;
+            font-size: 13px;
+            color: #666;
+
+            .area {
+                padding-right: 48px;
+            }
+        }
+
+        .username {
+            font-size: 18px;
+            font-weight: bold;
+
+            .fa {
+                padding-left: 10px;
+            }
+            .fa-male {
+                color: #25A5E3;
+            }
+        }
+    }
+}
+
+// 编辑资料样式
+.editInfo {
+
+    .edit-info-title {
+        height: 32px;
+        border-bottom: 1px solid #e7e7e7;
+        margin-bottom: 10px;
+        line-height: 32px;
+        font-weight: 700;
+    }
+
+    label {
+        font-weight: normal;
+    }
+}

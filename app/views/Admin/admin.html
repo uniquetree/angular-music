@@ -2,7 +2,7 @@
 <header ng-include="'app/views/Header/header.html'" class="g-header" ng-controller="HeaderCtrl"></header>
 <div class="g-body">
     <div id="g-admin" class="g-container container clearfix" ng-controller="AdminCtrl">
-        <div class="g-menu sidebar-nav navbar-collapse collapse pull-left">
+        <div class="g-menu sidebar-nav navbar-collapse collapse pull-left" data-ng-init="loadMenus()">
             <show-admin-menu menus="adminMenus" pages="pages"></show-admin-menu>
         </div>
         <div class="g-content pull-left {{pages.page}}" ng-include="pages.pageUrl" autoscroll></div>
@@ -12,12 +12,36 @@
 
 <!-- userInfo.html -->
 <script type="text/ng-template" id="userInfo.html">
+    <div class="info" ng-controller="InfoCtrl">
+        <div class="base-info clearfix">
+            <span class="username">{{userInfo.username}}  <i class="fa" ng-class="{0: 'fa-male', 1: 'fa-women'}[userInfo.sex]"></i></span>
+            <!--<a href="/#/admin?page=editInfo" type="button" class="btn btn-info btn-sm pull-right">编辑个人资料</a>-->
+        </div>
+        <div class="other-info">
+            <p class="info">个人介绍：{{userInfo.info}}</p>
+            <p><span class="area">所在地区：{{userInfo.area}}</span><span class="birth">生日：{{userInfo.birth}}</span></p>
+        </div>
+    </div>
+    <div class="list">
 
+    </div>
 </script>
 
 <!-- editInfo.html -->
 <script type="text/ng-template" id="editInfo.html">
-    Content of editInfo.html
+    <nav class="edit-info-title">编辑个人资料</nav>
+    <form class="clearfix" ng-controller="InfoCtrl">
+        <div class="form-group">
+            <label for="username">昵称</label>
+            <input type="text" class="form-control" id="username" placeholder="昵称" ng-model="userInfo.username">
+        </div>
+        <div class="form-group">
+            <label for="info">个人简介</label>
+            <textarea id="info" class="form-control" rows="6" cols="40" name="info"
+                      placeholder="个人简介" ng-model="userInfo.info">{{userInfo.info}}</textarea>
+        </div>
+        <button class="btn btn-primary pull-right" ng-click="updateUserInfo()">更新</button>
+    </form>
 </script>
 
 <!-- singers.html -->

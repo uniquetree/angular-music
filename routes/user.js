@@ -17,7 +17,12 @@ var User = require('../models/User');
 // 注册接口
 router.post('/register', function(req, res, next){
 
-    var user = new User(req.body.username, req.body.email, req.body.password);
+    var userInfo = {
+        username: req.body.username,
+        email: req.body.email,
+        password: req.body.password
+    };
+    var user = new User(userInfo);
     user.findOne(function(isError, results){
         if(isError){
             res.send(500);
@@ -45,7 +50,10 @@ router.post('/register', function(req, res, next){
 // 登录接口
 router.post('/login', function(req, res, next) {
 
-    var user = new User(undefined, req.body.email);
+    var userInfo = {
+        email: req.body.email
+    };
+    var user = new User(userInfo);
 
     user.findOne(function(isError, results){   //通过此model以用户名的条件 查询数据库中的匹配信息
         if(isError){                                         //错误就返回给原post处（login.html) 状态码为500的错误
@@ -68,7 +76,11 @@ router.post('/login', function(req, res, next) {
                         email: user.email,
                         username: user.username,
                         img: user.img,
-                        type: user.type
+                        sex: user.sex,
+                        area: user.area,
+                        birth: user.birth,
+                        info: user.info,
+                        role: user.role
                     },
                     token:token
                 });
