@@ -30,7 +30,7 @@ var User = function(userInfo) {
     this.area = userInfo.area || null;
     this.brith = userInfo.brith || null;
     this.sex = userInfo.sex || 0;
-    this.role = userInfo.role || 2;
+    this.role = (typeof userInfo.role !== 'undefined')? userInfo.role : 2;
     this.info = userInfo.info || '';
     this.img = userInfo.img || null;
 };

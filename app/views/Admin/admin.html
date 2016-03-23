@@ -14,7 +14,10 @@
 <script type="text/ng-template" id="userInfo.html">
     <div class="info" ng-controller="InfoCtrl">
         <div class="base-info clearfix">
-            <span class="username">{{userInfo.username}}  <i class="fa" ng-class="{0: 'fa-male', 1: 'fa-women'}[userInfo.sex]"></i></span>
+            <span class="username">
+                {{userInfo.username}}
+                <i class="fa" ng-if="userInfo.sex != 0" ng-class="{1: 'fa-mars', 2: 'fa-venus'}[userInfo.sex]"></i>
+            </span>
             <!--<a href="/#/admin?page=editInfo" type="button" class="btn btn-info btn-sm pull-right">编辑个人资料</a>-->
         </div>
         <div class="other-info">
@@ -23,22 +26,53 @@
         </div>
     </div>
     <div class="list">
-
+        <nav class="edit-info-title">听歌排行</nav>
     </div>
 </script>
 
 <!-- editInfo.html -->
 <script type="text/ng-template" id="editInfo.html">
     <nav class="edit-info-title">编辑个人资料</nav>
-    <form class="clearfix" ng-controller="InfoCtrl">
+    <form class="form-horizontal clearfix" ng-controller="InfoCtrl">
         <div class="form-group">
             <label for="username">昵称</label>
-            <input type="text" class="form-control" id="username" placeholder="昵称" ng-model="userInfo.username">
+            <div class="input-group">
+                <div class="input-group-addon"><i class="fa fa-user"></i></div>
+                <input type="text" class="form-control" id="username" placeholder="昵称" ng-model="userInfo.username">
+            </div>
+        </div>
+        <div class="form-group">
+            <label>性别</label>
+            <span class="sex-radio">
+                <label class="radio-inline">
+                    <input type="radio" name="sexRadio" id="sex-mars" value="1"
+                           ng-model="userInfo.sex" ng-checked="userInfo.sex == 1"> 男
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="sexRadio" id="sex-venus" value="2"
+                           ng-model="userInfo.sex" ng-checked="userInfo.sex == 2"> 女
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="sexRadio" id="sex-secret" value="0"
+                           ng-model="userInfo.sex" ng-checked="userInfo.sex == 0"> 保密
+                </label>
+            </span>
+        </div>
+        <div class="form-group">
+            <label for="">生日</label>
+            <span class="input-group date">
+                <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="dt" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
+                <span class="input-group-btn">
+                    <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
+                </span>
+            </span>
         </div>
         <div class="form-group">
             <label for="info">个人简介</label>
-            <textarea id="info" class="form-control" rows="6" cols="40" name="info"
-                      placeholder="个人简介" ng-model="userInfo.info">{{userInfo.info}}</textarea>
+            <div>
+                <textarea id="info" class="form-control" rows="6" cols="40" name="info"
+                          placeholder="个人简介" ng-model="userInfo.info">{{userInfo.info}}</textarea>
+            </div>
         </div>
         <button class="btn btn-primary pull-right" ng-click="updateUserInfo()">更新</button>
     </form>

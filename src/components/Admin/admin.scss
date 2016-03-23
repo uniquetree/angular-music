@@ -32,9 +32,13 @@
 
             .fa {
                 padding-left: 10px;
+                font-weight: bold;
             }
-            .fa-male {
+            .fa-mars {
                 color: #25A5E3;
+            }
+            .fa-venus {
+                color: #FFB4D2;
             }
         }
     }
@@ -51,7 +55,19 @@
         font-weight: 700;
     }
 
+    .sex-radio {
+        padding-left: 20px;
+
+        .radio-inline {
+            padding-top: 0;
+        }
+    }
+
     label {
         font-weight: normal;
+    }
+    .form-group {
+        margin-right: 0;
+        margin-left: 0;
     }
 }

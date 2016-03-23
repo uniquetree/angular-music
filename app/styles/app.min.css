@@ -19,9 +19,12 @@
   font-size: 18px;
   font-weight: bold; }
   .userInfo .info .username .fa {
-    padding-left: 10px; }
-  .userInfo .info .username .fa-male {
+    padding-left: 10px;
+    font-weight: bold; }
+  .userInfo .info .username .fa-mars {
     color: #25A5E3; }
+  .userInfo .info .username .fa-venus {
+    color: #FFB4D2; }
 
 .editInfo .edit-info-title {
   height: 32px;
@@ -30,8 +33,17 @@
   line-height: 32px;
   font-weight: 700; }
 
+.editInfo .sex-radio {
+  padding-left: 20px; }
+  .editInfo .sex-radio .radio-inline {
+    padding-top: 0; }
+
 .editInfo label {
   font-weight: normal; }
+
+.editInfo .form-group {
+  margin-right: 0;
+  margin-left: 0; }
 
 @charset "UTF-8";
 /**
