@@ -2,44 +2,79 @@
 /**
  * Created by 郑树聪 on 2016/3/10.
  */
-.userInfo .info .base-info {
+.userInfo .user-info .base-info {
   height: 52px;
   padding: 10px;
   border-bottom: 1px solid #e7e7e7;
   line-height: 42px; }
 
-.userInfo .info .other-info {
+.userInfo .user-info .other-info {
   padding: 10px;
   font-size: 13px;
   color: #666; }
-  .userInfo .info .other-info .area {
+  .userInfo .user-info .other-info .area {
     padding-right: 48px; }
 
-.userInfo .info .username {
+.userInfo .user-info .username {
   font-size: 18px;
   font-weight: bold; }
-  .userInfo .info .username .fa {
+  .userInfo .user-info .username .fa {
     padding-left: 10px;
     font-weight: bold; }
-  .userInfo .info .username .fa-mars {
+  .userInfo .user-info .username .fa-mars {
     color: #25A5E3; }
-  .userInfo .info .username .fa-venus {
+  .userInfo .user-info .username .fa-venus {
     color: #FFB4D2; }
+
+.userInfo .list {
+  padding-left: 10px; }
+  .userInfo .list .list-title {
+    height: 32px;
+    border-bottom: 1px solid #e7e7e7;
+    margin-bottom: 10px;
+    line-height: 32px;
+    font-size: 18px;
+    font-weight: bold; }
 
 .editInfo .edit-info-title {
   height: 32px;
   border-bottom: 1px solid #e7e7e7;
   margin-bottom: 10px;
   line-height: 32px;
-  font-weight: 700; }
+  font-size: 18px;
+  font-weight: bold; }
 
 .editInfo .sex-radio {
-  padding-left: 20px; }
+  padding-left: 12px; }
   .editInfo .sex-radio .radio-inline {
     padding-top: 0; }
 
+.editInfo .username,
+.editInfo .birth,
+.editInfo .area {
+  height: 34px;
+  line-height: 34px; }
+
+.editInfo .username .input-group,
+.editInfo .birth .input-group {
+  width: 320px;
+  padding-left: 12px; }
+
+.editInfo .area .input-group {
+  padding-left: 12px; }
+
+.editInfo .area select.form-control {
+  width: 120px;
+  margin-right: 10px;
+  text-align: center; }
+
 .editInfo label {
   font-weight: normal; }
+
+.editInfo textarea[name="info"] {
+  overflow-x: hidden;
+  overflow-y: scroll;
+  resize: none; }
 
 .editInfo .form-group {
   margin-right: 0;
@@ -74,6 +109,11 @@ body,
     padding: 20px 32px;
     border-left: 1px solid #e7e7e7; }
 
+.uib-datepicker-popup {
+  padding: 0 16px; }
+  .uib-datepicker-popup button {
+    border: none; }
+
 @charset "UTF-8";
 /**
  * Created by 郑树聪 on 2016/2/29.
@@ -105,6 +145,11 @@ body,
     _height: 700px;
     padding: 20px 32px;
     border-left: 1px solid #e7e7e7; }
+
+.uib-datepicker-popup {
+  padding: 0 16px; }
+  .uib-datepicker-popup button {
+    border: none; }
 
 .g-header {
   height: 50px; }

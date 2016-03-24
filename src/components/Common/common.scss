@@ -42,6 +42,14 @@ body,
     }
 }
 
+.uib-datepicker-popup {
+    padding: 0 16px;
+
+    button {
+        border: none;
+    }
+}
+
 @mixin text-overflow {
     overflow: hidden;
     text-overflow: ellipsis;

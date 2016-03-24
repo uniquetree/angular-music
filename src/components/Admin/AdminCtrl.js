@@ -3,8 +3,9 @@
  * Created by 郑树聪 on 2016/2/29.
  */
 require('../Menu/MenuDirectives');
-//require('./AdminDirectives');
+require('./AdminDirectives');
 
+var $func = require('../Common/Functions');
 var $config = require('../Common/config');
 
 var musicApp = $config.musicApp;
@@ -17,6 +18,12 @@ musicApp.factory('AdminService', ['$http', function($http) {
         getMenu: function(){
 
             var url = $config.base_url + $config.api.getMenuByRole;
+            return $http.get(url, {});
+        },
+        // 获取省份、城市、地区数据
+        getAreas: function(){
+
+            var url = $config.base_url + $config.api.getAreas;
             return $http.get(url, {});
         },
         // 更新用户信息
@@ -69,10 +76,37 @@ musicApp.controller('AdminCtrl', ['$scope', '$location', '$window', '$routeParam
 musicApp.controller('InfoCtrl', ['$scope', '$location', '$window', '$routeParams', 'AdminService',
     function($scope, $location, $window, $routeParams, AdminService){
 
+        var areas = [];
         $scope.userInfo = JSON.parse($window.sessionStorage.userInfo);
+        if($scope.userInfo.area !== '') {
+
+            if(angular.isUndefined($window.localStorage.areas)) {
+                AdminService.getAreas().success(function(data, status, headers, config) {
+
+                    if(data.success) {
+                        $window.localStorage.areas = JSON.stringify({areas: data.areas});
+                        $scope.userInfo.areaName = $func.getAreaName($scope.userInfo.area, data.areas);
+                    } else {
+                        console.log(data.msg);
+                    }
+                }).error(function(data, status, headers, config){
+
+                    console.log(data.msg);
+                });
+            } else {
+                areas = JSON.parse($window.localStorage.areas).areas;
+                $scope.userInfo.areaName = $func.getAreaName($scope.userInfo.area, areas);
+            }
+        }
 
         // 更新用户信息
         $scope.updateUserInfo = function(){
+
+            // 格式化日期
+            var birth = $scope.userInfo.birth;
+            $scope.userInfo.birth = birth.getFullYear() + '-' +
+                (birth.getMonth()+1 < 10 ? '0'+(birth.getMonth()+1) : birth.getMonth()+1) + '-' +
+                (birth.getDate() < 10 ? '0'+birth.getDate() : birth.getDate());
 
             AdminService.updateUserInfo({userInfo: $scope.userInfo}).success(function(data) {
 

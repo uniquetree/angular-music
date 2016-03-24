@@ -8,7 +8,7 @@
 // 个人中心样式
 .userInfo {
 
-    .info {
+    .user-info {
 
         .base-info {
             height: 52px;
@@ -42,6 +42,19 @@
             }
         }
     }
+
+    .list {
+        padding-left: 10px;
+
+        .list-title {
+            height: 32px;
+            border-bottom: 1px solid #e7e7e7;
+            margin-bottom: 10px;
+            line-height: 32px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+    }
 }
 
 // 编辑资料样式
@@ -52,19 +65,53 @@
         border-bottom: 1px solid #e7e7e7;
         margin-bottom: 10px;
         line-height: 32px;
-        font-weight: 700;
+        font-size: 18px;
+        font-weight: bold;
     }
 
     .sex-radio {
-        padding-left: 20px;
+        padding-left: 12px;
 
         .radio-inline {
             padding-top: 0;
         }
     }
 
+    .username,
+    .birth,
+    .area {
+        height: 34px;
+        line-height: 34px;
+    }
+
+    .username,
+    .birth {
+        .input-group {
+            width: 320px;
+            padding-left: 12px;
+        }
+    }
+
+    .area {
+
+        .input-group {
+            padding-left: 12px;
+        }
+
+        select.form-control {
+            width: 120px;
+            margin-right: 10px;
+            text-align: center;
+        }
+    }
+
     label {
         font-weight: normal;
+    }
+    textarea[name="info"] {
+        overflow-x: hidden;
+        overflow-y: scroll;
+        resize: none;
     }
     .form-group {
         margin-right: 0;

@@ -28,7 +28,8 @@
     "angular-bootstrap": "^1.1.2",
     "bootstrap": "^3.3.6",
     "font-awesome": "^4.5.0",
-    "angular-animate": "^1.5.0"
+    "angular-animate": "^1.5.0",
+    "angular-strap": "^2.3.7"
   },
   "overrides": {
     "bootstrap": {

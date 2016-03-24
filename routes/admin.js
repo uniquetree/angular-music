@@ -14,6 +14,9 @@ var router = express.Router();
 
 var User = require('../models/User');
 
+var Db = require('../utils/Db');
+var db = new Db();
+
 // 根据用户类型获取管理中心侧边栏菜单
 router.get('/getMenuByRole', expressJwt({secret: secretToken}), tokenManager.verifyToken, function(req, res, next) {
     var token = tokenManager.getToken(req.headers);
@@ -47,6 +50,7 @@ router.get('/getMenuByRole', expressJwt({secret: secretToken}), tokenManager.ver
     }
 });
 
+// 更新用户接口
 router.post('/updateUserInfo', expressJwt({secret: secretToken}), tokenManager.verifyToken, function(req, res, next){
 
     var userInfo = req.body.userInfo;
@@ -71,6 +75,22 @@ router.post('/updateUserInfo', expressJwt({secret: secretToken}), tokenManager.v
         } else {
             res.json({
                 success: true
+            });
+        }
+    });
+});
+
+// 获取省份、城市、地区数据
+router.get('/getAreas', function(req, res, next) {
+
+    var sql = 'select * from nation';
+    db.query(sql, [], function(isError, results){
+        if(isError){
+            res.send(500);
+        } else {
+            res.json({
+                success: true,
+                areas: results
             });
         }
     });

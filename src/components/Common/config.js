@@ -13,6 +13,7 @@ module.exports = {
         logout: 'api/user/logout',
         // 管理中心
         getMenuByRole: 'api/admin/getMenuByRole',
-        updateUserInfo: 'api/admin/updateUserInfo'
+        updateUserInfo: 'api/admin/updateUserInfo',
+        getAreas: 'api/admin/getAreas'
     }
 };

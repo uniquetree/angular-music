@@ -5,3 +5,4 @@
 var $config = require('../Common/config');
 
 var musicApp = $config.musicApp;
+

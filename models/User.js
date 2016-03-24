@@ -28,7 +28,7 @@ var User = function(userInfo) {
     this.email = userInfo.email;
     this.password = userInfo.password;
     this.area = userInfo.area || null;
-    this.brith = userInfo.brith || null;
+    this.birth = userInfo.birth || null;
     this.sex = userInfo.sex || 0;
     this.role = (typeof userInfo.role !== 'undefined')? userInfo.role : 2;
     this.info = userInfo.info || '';
@@ -63,7 +63,7 @@ User.prototype.create = function(callback){
  */
 User.prototype.update = function(oldEmail, callback){
 
-    var sql = 'update ' + user_tb + ' set username=?, email=?, password=?, img=?, area=?, brith=?, sex=?, ' +
+    var sql = 'update ' + user_tb + ' set username=?, email=?, password=?, img=?, area=?, birth=?, sex=?, ' +
         'role=?, info=? where email=?';
     db.query(sql, [this.username, this.email, this.password, this.img, this.area, this.birth,
         this.sex, this.role, this.info, oldEmail], callback);
