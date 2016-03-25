@@ -110,11 +110,61 @@
     }
     textarea[name="info"] {
         overflow-x: hidden;
-        overflow-y: scroll;
+        overflow-y: auto;
         resize: none;
     }
     .form-group {
         margin-right: 0;
         margin-left: 0;
+    }
+}
+
+// 歌手列表样式
+.singers {
+
+    .breadcrumb {
+        margin-bottom: 10px;
+    }
+
+    .edit-btns {
+        margin-bottom: 10px;
+
+        button {
+            margin-left: 10px;
+        }
+    }
+
+    .table {
+
+        th,
+        td {
+            text-align: center;
+
+            &:first-child {
+                width: 30px;
+            }
+            &:nth-child(2) {
+                width: 100px;
+            }
+            &:nth-child(3) {
+                width: 160px;
+            }
+            &:nth-child(5) {
+                width: 120px;
+            }
+
+            .fa {
+                padding: 0 10px;
+                vertical-align: middle;
+                font-size: 18px;
+                cursor: pointer;
+            }
+            .fa-edit {
+                color: #31b0d5;
+            }
+            .fa-trash {
+                color: #c9302c;
+            }
+        }
     }
 }

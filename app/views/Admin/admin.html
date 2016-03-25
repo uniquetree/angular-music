@@ -5,45 +5,48 @@
         <div class="g-menu sidebar-nav navbar-collapse collapse pull-left" data-ng-init="loadMenus()">
             <show-admin-menu menus="adminMenus" pages="pages"></show-admin-menu>
         </div>
-        <div class="g-content pull-left {{pages.page}}" ng-include="pages.pageUrl" autoscroll></div>
+        <div class="g-content pull-left" ng-include="pages.pageUrl" autoscroll></div>
     </div>
 </div>
 <footer ng-include="'app/views/Templates/footer.html'" class="g-footer"></footer>
 
 <!-- userInfo.html -->
 <script type="text/ng-template" id="userInfo.html">
-    <div class="user-info" ng-controller="InfoCtrl">
-        <div class="base-info clearfix">
+    <div class="userInfo" ng-controller="InfoCtrl">
+        <div class="user-info">
+            <div class="base-info clearfix">
             <span class="username">
                 {{userInfo.username}}
                 <i class="fa" ng-if="userInfo.sex != 0" ng-class="{1: 'fa-mars', 2: 'fa-venus'}[userInfo.sex]"></i>
             </span>
-            <!--<a href="/#/admin?page=editInfo" type="button" class="btn btn-info btn-sm pull-right">编辑个人资料</a>-->
+                <!--<a href="/#/admin?page=editInfo" type="button" class="btn btn-info btn-sm pull-right">编辑个人资料</a>-->
+            </div>
+            <div class="other-info">
+                <p class="info">个人介绍：{{userInfo.info}}</p>
+                <p><span class="area">所在地区：{{userInfo.areaName.province}} {{userInfo.areaName.city}} {{userInfo.areaName.district}}</span>
+                    <span class="birth">生日：{{userInfo.birth}}</span></p>
+            </div>
         </div>
-        <div class="other-info">
-            <p class="info">个人介绍：{{userInfo.info}}</p>
-            <p><span class="area">所在地区：{{userInfo.areaName.province}} {{userInfo.areaName.city}} {{userInfo.areaName.district}}</span>
-                <span class="birth">生日：{{userInfo.birth}}</span></p>
+        <div class="list">
+            <nav class="list-title">听歌排行</nav>
         </div>
-    </div>
-    <div class="list">
-        <nav class="list-title">听歌排行</nav>
     </div>
 </script>
 
 <!-- editInfo.html -->
 <script type="text/ng-template" id="editInfo.html">
-    <nav class="edit-info-title">编辑个人资料</nav>
-    <form class="form-horizontal clearfix" ng-controller="InfoCtrl">
-        <div class="form-group clearfix username">
-            <label for="username" class="pull-left">昵称：</label>
-            <div class="input-group pull-left">
-                <div class="input-group-addon"><i class="fa fa-user"></i></div>
-                <input type="text" class="form-control" id="username" placeholder="昵称" ng-model="userInfo.username">
+    <div class="editInfo" ng-controller="InfoCtrl">
+        <nav class="edit-info-title">编辑个人资料</nav>
+        <form class="form-horizontal clearfix">
+            <div class="form-group clearfix username">
+                <label for="username" class="pull-left">昵称：</label>
+                <div class="input-group pull-left">
+                    <div class="input-group-addon"><i class="fa fa-user"></i></div>
+                    <input type="text" class="form-control" id="username" placeholder="昵称" ng-model="userInfo.username">
+                </div>
             </div>
-        </div>
-        <div class="form-group sex">
-            <label>性别：</label>
+            <div class="form-group sex">
+                <label>性别：</label>
             <span class="sex-radio">
                 <label class="radio-inline">
                     <input type="radio" name="sexRadio" id="sex-mars" value="1"
@@ -58,23 +61,73 @@
                            ng-model="userInfo.sex" ng-checked="userInfo.sex == 0"> 保密
                 </label>
             </span>
-        </div>
-        <date-picker date="userInfo.birth"></date-picker>
-        <city-select area="userInfo.area"></city-select>
-        <div class="form-group">
-            <label for="info">个人简介：</label>
-            <div>
+            </div>
+            <date-picker date="userInfo.birth"></date-picker>
+            <city-select code="userInfo.code"></city-select>
+            <div class="form-group">
+                <label for="info">个人简介：</label>
+                <div>
                 <textarea id="info" class="form-control" rows="6" cols="40" name="info"
                           placeholder="个人简介" ng-model="userInfo.info">{{userInfo.info}}</textarea>
+                </div>
             </div>
-        </div>
-        <button class="btn btn-primary" ng-click="updateUserInfo()">更新</button>
-    </form>
+            <button class="btn btn-primary" ng-click="updateUserInfo()">更新</button>
+        </form>
+    </div>
 </script>
 
 <!-- singers.html -->
 <script type="text/ng-template" id="singers.html">
-    Content of singers.html
+    <div class="singers">
+        <ol class="breadcrumb">
+            <li class="active">歌手列表</li>
+            <!--<li><a href="#/admin?page=singers">歌手列表</a></li>-->
+            <!--<li class="active">添加歌手</li>-->
+        </ol>
+        <div class="clearfix edit-btns">
+            <button class="btn btn-danger btn-sm pull-right" ng-click="deleteSinger()">删除歌手</button>
+            <button class="btn btn-info btn-sm pull-right">添加歌手</button>
+        </div>
+        <table class="table table-condensed table-striped table-hover">
+            <thead>
+                <tr>
+                    <th ng-model="selection">
+                        <input type="checkbox" ng-click="toggleSelectAll()" ng-checked="selection.length == entries.length">
+                    </th>
+                    <th>序号</th>
+                    <th>歌手名</th>
+                    <th>歌手简介</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th>
+                        <input type="checkbox" ng-click="toggle(entry)" ng-checked="isInSelection()">
+                    </th>
+                    <th>1</th>
+                    <td>Mark</td>
+                    <td>Otto</td>
+                    <td>
+                        <i class="fa fa-edit"></i>
+                        <i class="fa fa-trash"></i>
+                    </td>
+                </tr>
+                <!--<tr ng-repeat="singer in singers">-->
+                    <!--<th>-->
+                        <!--<input type="checkbox" ng-click="toggle(entry)" ng-checked="isInSelection()">-->
+                    <!--</th>-->
+                    <!--<th>1</th>-->
+                    <!--<td>Mark</td>-->
+                    <!--<td>Otto</td>-->
+                    <!--<td>-->
+                        <!--<i class="fa fa-edit"></i>-->
+                        <!--<i class="fa fa-trash"></i>-->
+                    <!--</td>-->
+                <!--</tr>-->
+            </tbody>
+        </table>
+    </div>
 </script>
 
 <!-- albums.html -->

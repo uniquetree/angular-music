@@ -77,7 +77,7 @@ router.post('/login', function(req, res, next) {
                         username: user.username,
                         img: user.img,
                         sex: user.sex,
-                        area: user.area,
+                        code: user.code,
                         birth: user.birth,
                         info: user.info,
                         role: user.role

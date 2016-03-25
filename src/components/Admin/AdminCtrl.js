@@ -35,6 +35,7 @@ musicApp.factory('AdminService', ['$http', function($http) {
     };
 }]);
 
+// 管理中心页面控制器
 musicApp.controller('AdminCtrl', ['$scope', '$location', '$window', '$routeParams', 'AdminService',
     function($scope, $location, $window, $routeParams, AdminService){
 
@@ -73,19 +74,20 @@ musicApp.controller('AdminCtrl', ['$scope', '$location', '$window', '$routeParam
     }
 ]);
 
+// 用户信息控制器
 musicApp.controller('InfoCtrl', ['$scope', '$location', '$window', '$routeParams', 'AdminService',
     function($scope, $location, $window, $routeParams, AdminService){
 
         var areas = [];
         $scope.userInfo = JSON.parse($window.sessionStorage.userInfo);
-        if($scope.userInfo.area !== '') {
+        if($scope.userInfo.code !== '') {
 
             if(angular.isUndefined($window.localStorage.areas)) {
                 AdminService.getAreas().success(function(data, status, headers, config) {
 
                     if(data.success) {
                         $window.localStorage.areas = JSON.stringify({areas: data.areas});
-                        $scope.userInfo.areaName = $func.getAreaName($scope.userInfo.area, data.areas);
+                        $scope.userInfo.areaName = $func.getAreaName($scope.userInfo.code, data.areas);
                     } else {
                         console.log(data.msg);
                     }
@@ -95,7 +97,7 @@ musicApp.controller('InfoCtrl', ['$scope', '$location', '$window', '$routeParams
                 });
             } else {
                 areas = JSON.parse($window.localStorage.areas).areas;
-                $scope.userInfo.areaName = $func.getAreaName($scope.userInfo.area, areas);
+                $scope.userInfo.areaName = $func.getAreaName($scope.userInfo.code, areas);
             }
         }
 
@@ -122,5 +124,12 @@ musicApp.controller('InfoCtrl', ['$scope', '$location', '$window', '$routeParams
                 console.log(data.msg);
             });
         };
+    }
+]);
+
+// 歌手列表控制器
+musicApp.controller('singerCtrl', ['$scope', '$location', '$window', '$routeParams', 'AdminService',
+    function($scope, $location, $window, $routeParams, AdminService){
+
     }
 ]);

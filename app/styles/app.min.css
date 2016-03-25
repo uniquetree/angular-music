@@ -73,12 +73,48 @@
 
 .editInfo textarea[name="info"] {
   overflow-x: hidden;
-  overflow-y: scroll;
+  overflow-y: auto;
   resize: none; }
 
 .editInfo .form-group {
   margin-right: 0;
   margin-left: 0; }
+
+.singers .breadcrumb {
+  margin-bottom: 10px; }
+
+.singers .edit-btns {
+  margin-bottom: 10px; }
+  .singers .edit-btns button {
+    margin-left: 10px; }
+
+.singers .table th,
+.singers .table td {
+  text-align: center; }
+  .singers .table th:first-child,
+  .singers .table td:first-child {
+    width: 30px; }
+  .singers .table th:nth-child(2),
+  .singers .table td:nth-child(2) {
+    width: 100px; }
+  .singers .table th:nth-child(3),
+  .singers .table td:nth-child(3) {
+    width: 160px; }
+  .singers .table th:nth-child(5),
+  .singers .table td:nth-child(5) {
+    width: 120px; }
+  .singers .table th .fa,
+  .singers .table td .fa {
+    padding: 0 10px;
+    vertical-align: middle;
+    font-size: 18px;
+    cursor: pointer; }
+  .singers .table th .fa-edit,
+  .singers .table td .fa-edit {
+    color: #31b0d5; }
+  .singers .table th .fa-trash,
+  .singers .table td .fa-trash {
+    color: #c9302c; }
 
 @charset "UTF-8";
 /**

@@ -2,6 +2,7 @@
  * 用户管理模块指令集
  * Created by 郑树聪 on 2016/3/8.
  */
+var $func = require('../Common/Functions');
 var $config = require('../Common/config');
 
 var musicApp = $config.musicApp;
@@ -55,15 +56,15 @@ musicApp.directive('citySelect', ['$window', 'AdminService', function($window, A
         replace: true,
         restrict: 'EA',
         scope: {
-            area: '='
+            code: '='
         },
         template: '<div class="form-group clearfix area"><label class="pull-left">地区：</label>' +
             '<div class="input-group pull-left">' +
-            '<select class="form-control" ng-model="province" ng-options="province.province for province in provinces">' +
+            '<select class="form-control" ng-model="provinceCode" ng-options="province.code as province.province for province in provinces">' +
             '<option value="">-- 省份 --</option></select>' +
-            '<select class="form-control" ng-model="city" ng-options="city.city for city in cities">' +
+            '<select class="form-control" ng-model="cityCode" ng-options="city.code as city.city for city in cities">' +
             '<option value="">-- 城市 --</option></select>' +
-            '<select class="form-control" ng-model="district" ng-options="district.district for district in districts">' +
+            '<select class="form-control" ng-model="districtCode" ng-options="district.code as district.district for district in districts">' +
             '<option value="">-- 地区 --</option></select></div></div>',
         link: function($scope, elem, attrs) {
 
@@ -88,42 +89,52 @@ musicApp.directive('citySelect', ['$window', 'AdminService', function($window, A
                 $scope.provinces = initProvinces(areas);
             }
 
-            $scope.$watch('province', function (value) {
+            if($scope.code) {
+                var areaName = $func.getAreaName($scope.code, $scope.areas);
+                $scope.provinceCode = areaName.provinceCode;
+                $scope.cityCode = areaName.cityCode;
+                $scope.districtCode = areaName.districtCode;
+            }
+
+            // 监控省份选中
+            $scope.$watch('provinceCode', function (value) {
 
                 $scope.cities = [];
                 if(value){
-                    if(value.city !== '') {
-                        $scope.cities.push(value);
+                    var thisProvince =getAreaByCode(value);
+                    // 初始化城市下拉选项
+                    if(thisProvince.city !== '') {
+                        $scope.cities.push(thisProvince);
                     } else {
-                        for(var i=0; i < $scope.areas.length; i++){
-                            if($scope.areas[i].parent === value.id){
-                                $scope.cities.push($scope.areas[i]);
+                        for(var j=0; j < $scope.areas.length; j++){
+                            if($scope.areas[j].parent === thisProvince.id){
+                                $scope.cities.push($scope.areas[j]);
                             }
                         }
                     }
-
-                    $scope.area = value.code;
+                    $scope.code = value;
                 }
             });
-
-            $scope.$watch('city', function (value) {
+            // 监控市区选中
+            $scope.$watch('cityCode', function (value) {
 
                 $scope.districts = [];
 
                 if(value) {
+                    var thisCity = getAreaByCode(value);
                     for(var i=0; i < $scope.areas.length; i++){
-                        if($scope.areas[i].parent === value.id){
+                        if($scope.areas[i].parent === thisCity.id){
                             $scope.districts.push($scope.areas[i]);
                         }
                     }
-                    $scope.area = value.code;
+                    $scope.code = value;
                 }
             });
-
-            $scope.$watch('district', function (value) {
+            // 监控县区选中
+            $scope.$watch('districtCode', function (value) {
 
                 if(value){
-                    $scope.area = value.code;
+                    $scope.code = value;
                 }
             });
 
@@ -137,6 +148,18 @@ musicApp.directive('citySelect', ['$window', 'AdminService', function($window, A
                 }
 
                 return provinces;
+            }
+
+            // 根据code获取对应区域对象
+            function  getAreaByCode(code) {
+                var thisArea;
+                for(var i=0; i < $scope.areas.length; i++) {
+                    if($scope.areas[i].code === code) {
+                        thisArea = $scope.areas[i];
+                        break;
+                    }
+                }
+                return thisArea;
             }
         }
     };

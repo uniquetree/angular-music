@@ -16,7 +16,7 @@ var user_tb = 'music_users';
  * userInfo.username [String] 用户名
  * userInfo.email [String] 邮箱,[必须项]
  * userInfo.password [String] 密码
- * userInfo.area [String] 地区
+ * userInfo.code [String] 地区代码
  * userInfo.brith [String] 出身日期
  * userInfo.sex [Number] 性别,默认0
  * userInfo.status [Number] 用户类型,默认2
@@ -27,7 +27,7 @@ var User = function(userInfo) {
     this.username = userInfo.username || '';
     this.email = userInfo.email;
     this.password = userInfo.password;
-    this.area = userInfo.area || null;
+    this.code = userInfo.code || null;
     this.birth = userInfo.birth || null;
     this.sex = userInfo.sex || 0;
     this.role = (typeof userInfo.role !== 'undefined')? userInfo.role : 2;
@@ -63,9 +63,9 @@ User.prototype.create = function(callback){
  */
 User.prototype.update = function(oldEmail, callback){
 
-    var sql = 'update ' + user_tb + ' set username=?, email=?, password=?, img=?, area=?, birth=?, sex=?, ' +
+    var sql = 'update ' + user_tb + ' set username=?, email=?, password=?, img=?, code=?, birth=?, sex=?, ' +
         'role=?, info=? where email=?';
-    db.query(sql, [this.username, this.email, this.password, this.img, this.area, this.birth,
+    db.query(sql, [this.username, this.email, this.password, this.img, this.code, this.birth,
         this.sex, this.role, this.info, oldEmail], callback);
 };
 
@@ -75,6 +75,3 @@ User.prototype.delete = function(){
 };
 
 module.exports = User;
-
-//var test = new User();
-//test.findOne();

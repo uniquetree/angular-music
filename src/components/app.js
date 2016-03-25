@@ -86,14 +86,14 @@ $config.musicApp.config(['$routeProvider', function($routeProvider) {
         .when('/myMusic', {
             templateUrl: 'app/views/MyMusic/myMusic.html',
             controller: 'MyMusicCtrl',
-            reloadOnSearch: false,
+            //reloadOnSearch: false,
             access: { requiredLogin: true }
         })
         // 管理中心
         .when('/admin', {
             templateUrl: 'app/views/Admin/admin.html',
             controller: 'AdminCtrl',
-            reloadOnSearch: false,
+            //reloadOnSearch: false,
             access: { requiredLogin: true }
         })
         .otherwise({
