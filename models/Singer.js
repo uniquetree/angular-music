@@ -25,18 +25,32 @@ var Singer = function (singerInfo, pagination) {
 // 查找singers
 Singer.prototype.findSingers = function(callback){
 
-    var sql = 'select id, singer_name, singer_info from ' + singer_tb + ' where id >= (' +
+    var sql = 'select id, name, info from ' + singer_tb + ' where id >= (' +
         'select id from ' + singer_tb + ' order by id limit ?, 1) order by create_time limit ?;';
-    var count_sql = 'select count(*) as totalNum from ' + singer_tb + '';
+    var count_sql = 'select count(*) as totalItems from ' + singer_tb + '';
     db.query(sql + count_sql, [this.currPage*this.pageSize, this.pageSize], callback);
+};
+
+// 查找某位singer
+Singer.prototype.findSingerById = function(callback){
+
+    var sql = 'select id, name, info from ' + singer_tb + ' where id = ?';
+    db.query(sql, [this.id], callback);
 };
 
 // 添加歌手
 Singer.prototype.addSinger = function(callback) {
 
     var create_time = new Date();
-    var sql = 'insert into ' + singer_tb + '(singer_name, singer_info, create_time) values (?, ?, ?)';
+    var sql = 'insert into ' + singer_tb + '(name, info, create_time) values (?, ?, ?)';
     db.query(sql, [this.singerName, this.singerInfo, create_time], callback);
+};
+
+// 更新某位singer的信息
+Singer.prototype.updateSinger = function(callback){
+
+    var sql = 'update ' + singer_tb + ' set name=?, info=? where id = ?';
+    db.query(sql, [this.singerName, this.singerInfo, this.id], callback);
 };
 
 // 删除歌手

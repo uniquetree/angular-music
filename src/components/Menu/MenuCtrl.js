@@ -29,7 +29,7 @@ musicApp.controller('MenuCtrl', ['$scope', '$location',
 
             $scope.pages.page = subMenu.page;
             $scope.pages.pageUrl = subMenu.page +'.html';
-            $location.search('page', subMenu.page);
+            //$location.search('page', subMenu.page);
         };
     }
 ]);

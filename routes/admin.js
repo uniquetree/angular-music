@@ -105,15 +105,52 @@ router.post('/getSingers', function(req, res, next) {
             res.json({
                 success: true,
                 singers: results[0],
-                totalNum: results[1][0].totalNum,
+                totalItems: results[1][0].totalItems,
                 currPage: pagination.currPage,
                 pageSize: pagination.pageSize
             });
         }
     });
 });
+// 根据id获取某位歌手信息
+router.post('/getSingerById', function(req, res, next) {
+
+    var singer = new Singer({id: req.body.id});
+    singer.findSingerById(function(isError, results) {
+        if(isError) {
+            res.send(500);
+            console.log(results.message);
+        } else {
+            res.json({
+                success: true,
+                singer: results[0]
+            });
+        }
+    });
+});
+// 更新某位歌手信息
+router.post('/updateSinger', expressJwt({secret: secretToken}), tokenManager.verifyToken, function(req, res, next){
+
+    var singerInfo = {
+        id: req.body.id,
+        singerName: req.body.singerName,
+        singerInfo: req.body.singerInfo
+    };
+    var singer = new Singer(singerInfo);
+    singer.updateSinger(function(isError, results) {
+
+        if(isError) {
+            res.send(500);
+            console.log(results.message);
+        } else {
+            res.json({
+                success: true
+            });
+        }
+    });
+});
 // 删除歌手
-router.post('/deleteSingers', function(req, res, next){
+router.post('/deleteSingers', expressJwt({secret: secretToken}), tokenManager.verifyToken, function(req, res, next){
 
     var ids = req.body.ids;
     var singer = new Singer();

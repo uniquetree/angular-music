@@ -1,10 +1,6 @@
 /**
  * Created by 郑树聪 on 2016/3/10.
  */
-.g-menu {
-
-}
-
 // 个人中心样式
 .userInfo {
 
@@ -60,6 +56,15 @@
 // 编辑资料样式
 .editInfo {
 
+    label {
+        font-weight: normal;
+    }
+    textarea[name="info"] {
+        overflow-x: hidden;
+        overflow-y: auto;
+        resize: none;
+    }
+
     .edit-info-title {
         height: 32px;
         border-bottom: 1px solid #e7e7e7;
@@ -86,6 +91,7 @@
 
     .username,
     .birth {
+
         .input-group {
             width: 320px;
             padding-left: 12px;
@@ -105,28 +111,18 @@
         }
     }
 
-    label {
-        font-weight: normal;
-    }
-    textarea[name="info"] {
-        overflow-x: hidden;
-        overflow-y: auto;
-        resize: none;
-    }
-    .form-group {
-        margin-right: 0;
-        margin-left: 0;
-    }
 }
 
 // 歌手列表样式
 .singers {
 
     .breadcrumb {
+        padding-left: 0;
+        padding-right: 0;
         margin-bottom: 10px;
     }
 
-    .edit-btns {
+    .edit-bars {
 
         .btn {
             margin: 10px 0 10px 10px;
@@ -163,6 +159,19 @@
             }
             .fa-trash {
                 color: #c9302c;
+            }
+        }
+    }
+
+    .singerHandle {
+
+        .singerName {
+            height: 34px;
+            line-height: 34px;
+
+            .input-group {
+                width: 320px;
+                padding-left: 12px;
             }
         }
     }

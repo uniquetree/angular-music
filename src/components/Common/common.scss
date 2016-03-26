@@ -40,6 +40,19 @@ body,
             border-left: 1px solid #e7e7e7;
         }
     }
+
+    label {
+        font-weight: normal;
+    }
+    textarea {
+        overflow-x: hidden;
+        overflow-y: auto;
+        resize: none;
+    }
+    .form-group {
+        margin-right: 0;
+        margin-left: 0;
+    }
 }
 
 .m-search {

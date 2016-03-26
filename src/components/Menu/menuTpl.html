@@ -6,7 +6,7 @@
         <ul class="nav nav-pills nav-stacked sub-menus" ng-class="{false: 'hidden'}[menu.isMenuOpen]" ng-if="menu.subMenus.length>0">
             <li class="sub-menu" ng-repeat="subMenu in menu.subMenus"
                 ng-class="{active: pages.page===subMenu.page}" title="{{subMenu.name}}" ng-click="changeUrl(subMenu)">
-                <a><i class="fa fa-{{subMenu.icon}}"></i>{{subMenu.name}}</a>
+                <a href="#/admin?page={{subMenu.page}}"><i class="fa fa-{{subMenu.icon}}"></i>{{subMenu.name}}</a>
             </li>
         </ul>
     </li>

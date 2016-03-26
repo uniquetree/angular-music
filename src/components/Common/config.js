@@ -15,8 +15,11 @@ module.exports = {
         updateUserInfo: 'api/user/updateUserInfo',
         getMenuByRole: 'api/admin/getMenuByRole',
         getAreas: 'api/admin/getAreas',
-        addSinger: 'api/admin/addSinger',
+
         getSingers: 'api/admin/getSingers',
+        getSingerById: 'api/admin/getSingerById',
+        addSinger: 'api/admin/addSinger',
+        updateSinger: 'api/admin/updateSinger',
         deleteSingers: 'api/admin/deleteSingers'
     }
 };
