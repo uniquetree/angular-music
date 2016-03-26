@@ -83,10 +83,8 @@
 .singers .breadcrumb {
   margin-bottom: 10px; }
 
-.singers .edit-btns {
-  margin-bottom: 10px; }
-  .singers .edit-btns button {
-    margin-left: 10px; }
+.singers .edit-btns .btn {
+  margin: 10px 0 10px 10px; }
 
 .singers .table th,
 .singers .table td {
@@ -115,40 +113,6 @@
   .singers .table th .fa-trash,
   .singers .table td .fa-trash {
     color: #c9302c; }
-
-@charset "UTF-8";
-/**
- * Created by 郑树聪 on 2016/3/1.
- */
-html,
-body,
-.wrap {
-  width: 100%;
-  height: 100%;
-  background-color: #F5F5F5; }
-
-.g-body .g-container {
-  width: 1170px;
-  min-height: 700px;
-  _height: 700px;
-  padding: 0;
-  border: 1px solid #e7e7e7;
-  margin: 10px auto;
-  background-color: #F8F8F8; }
-  .g-body .g-container .g-menu {
-    width: 240px;
-    padding: 0; }
-  .g-body .g-container .g-content {
-    width: 928px;
-    min-height: 700px;
-    _height: 700px;
-    padding: 20px 32px;
-    border-left: 1px solid #e7e7e7; }
-
-.uib-datepicker-popup {
-  padding: 0 16px; }
-  .uib-datepicker-popup button {
-    border: none; }
 
 @charset "UTF-8";
 /**
@@ -181,6 +145,20 @@ body,
     _height: 700px;
     padding: 20px 32px;
     border-left: 1px solid #e7e7e7; }
+
+.m-search .form-group {
+  border-radius: 17px;
+  overflow: hidden;
+  background-color: #EAEAEA; }
+  .m-search .form-group .glyphicon-search {
+    top: 0;
+    margin-left: 14px;
+    vertical-align: middle; }
+  .m-search .form-group input {
+    padding-left: 32px;
+    border: none;
+    margin-left: -32px;
+    background-color: #EAEAEA; }
 
 .uib-datepicker-popup {
   padding: 0 16px; }
@@ -237,19 +215,54 @@ body,
       background-color: #2F3030; }
       .g-header .user-bar .user-info .dropdown .dropdown-menu i.fa {
         padding-right: 6px; }
-  .g-header .m-search .form-group {
-    border-radius: 17px;
-    overflow: hidden;
+
+@charset "UTF-8";
+/**
+ * Created by 郑树聪 on 2016/3/1.
+ */
+html,
+body,
+.wrap {
+  width: 100%;
+  height: 100%;
+  background-color: #F5F5F5; }
+
+.g-body .g-container {
+  width: 1170px;
+  min-height: 700px;
+  _height: 700px;
+  padding: 0;
+  border: 1px solid #e7e7e7;
+  margin: 10px auto;
+  background-color: #F8F8F8; }
+  .g-body .g-container .g-menu {
+    width: 240px;
+    padding: 0; }
+  .g-body .g-container .g-content {
+    width: 928px;
+    min-height: 700px;
+    _height: 700px;
+    padding: 20px 32px;
+    border-left: 1px solid #e7e7e7; }
+
+.m-search .form-group {
+  border-radius: 17px;
+  overflow: hidden;
+  background-color: #EAEAEA; }
+  .m-search .form-group .glyphicon-search {
+    top: 0;
+    margin-left: 14px;
+    vertical-align: middle; }
+  .m-search .form-group input {
+    padding-left: 32px;
+    border: none;
+    margin-left: -32px;
     background-color: #EAEAEA; }
-    .g-header .m-search .form-group .glyphicon-search {
-      top: 0;
-      margin-left: 14px;
-      vertical-align: middle; }
-    .g-header .m-search .form-group input {
-      padding-left: 32px;
-      border: none;
-      margin-left: -32px;
-      background-color: #EAEAEA; }
+
+.uib-datepicker-popup {
+  padding: 0 16px; }
+  .uib-datepicker-popup button {
+    border: none; }
 
 @charset "UTF-8";
 /**

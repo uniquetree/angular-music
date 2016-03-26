@@ -85,8 +85,14 @@
             <!--<li class="active">添加歌手</li>-->
         </ol>
         <div class="clearfix edit-btns">
-            <button class="btn btn-danger btn-sm pull-right" ng-click="deleteSinger()">删除歌手</button>
-            <button class="btn btn-info btn-sm pull-right">添加歌手</button>
+            <form class="navbar-form pull-left m-search" role="search">
+                <div class="form-group">
+                    <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                    <input type="text" class="form-control" placeholder="查找歌手">
+                </div>
+            </form>
+            <button class="btn btn-danger btn-sm pull-right" ng-click="deleteSinger()">删除选中的歌手</button>
+            <a href="/#/admin?page=singers&subPage=addSinger" class="btn btn-info btn-sm pull-right" role="button">添加歌手</a>
         </div>
         <table class="table table-condensed table-striped table-hover">
             <thead>

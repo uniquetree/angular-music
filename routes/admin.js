@@ -13,6 +13,7 @@ var adminMenus = require('../config/config').adminMenus;
 var router = express.Router();
 
 var User = require('../models/User');
+var Singer = require('../models/Singer');
 
 var Db = require('../utils/Db');
 var db = new Db();
@@ -50,36 +51,6 @@ router.get('/getMenuByRole', expressJwt({secret: secretToken}), tokenManager.ver
     }
 });
 
-// 更新用户接口
-router.post('/updateUserInfo', expressJwt({secret: secretToken}), tokenManager.verifyToken, function(req, res, next){
-
-    var userInfo = req.body.userInfo;
-    if(typeof userInfo.password === 'undefined') {
-        var token = tokenManager.getToken(req.headers);
-        if(token) {
-            try {
-                var decoded = jwt.verify(token, secretToken);
-                userInfo.password = decoded.password;
-            } catch(err) {
-                return next();
-            }
-        } else {
-            next();
-        }
-    }
-    var user = new User(userInfo);
-    var oldEmail = userInfo.email;
-    user.update(userInfo.email, function(isError, results) {
-        if(isError){
-            res.send(500);
-        } else {
-            res.json({
-                success: true
-            });
-        }
-    });
-});
-
 // 获取省份、城市、地区数据
 router.get('/getAreas', function(req, res, next) {
 
@@ -87,10 +58,73 @@ router.get('/getAreas', function(req, res, next) {
     db.query(sql, [], function(isError, results){
         if(isError){
             res.send(500);
+            console.log(results.message);
         } else {
             res.json({
                 success: true,
                 areas: results
+            });
+        }
+    });
+});
+
+// 添加歌手
+router.post('/addSinger', function(req, res, next){
+
+    var singerInfo = {
+        singerName: req.body.singerName,
+        singerInfo: req.body.singerInfo
+    };
+    var singer = new Singer(singerInfo);
+    singer.addSinger(function(isError, results) {
+
+        if(isError) {
+            res.send(500);
+            console.log(results.message);
+        } else {
+            res.json({
+                success: true
+            });
+        }
+    });
+});
+// 获取歌手列表
+router.post('/getSingers', function(req, res, next) {
+
+    var pagination = {
+        currPage: Number(req.body.currPage),
+        pageSize: Number(req.body.pageSize),
+        keyword: req.body.keyword
+    };
+    var singer = new Singer({}, pagination);
+    singer.findSingers(function(isError, results) {
+        if(isError) {
+            res.send(500);
+            console.log(results.message);
+        } else {
+            res.json({
+                success: true,
+                singers: results[0],
+                totalNum: results[1][0].totalNum,
+                currPage: pagination.currPage,
+                pageSize: pagination.pageSize
+            });
+        }
+    });
+});
+// 删除歌手
+router.post('/deleteSingers', function(req, res, next){
+
+    var ids = req.body.ids;
+    var singer = new Singer();
+    singer.deleteSinger(ids, function(isError, results) {
+
+        if(isError) {
+            res.send(500);
+            console.log(results.message);
+        } else {
+            res.json({
+                success: true
             });
         }
     });

@@ -39,4 +39,9 @@ Db.prototype.query = function(sql, params, callback){
     });
 };
 
+Db.prototype.format = function(sql, params) {
+
+    return mysql.format(sql, params);
+};
+
 module.exports = Db;

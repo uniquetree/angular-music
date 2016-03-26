@@ -12,8 +12,11 @@ module.exports = {
         login: 'api/user/login',
         logout: 'api/user/logout',
         // 管理中心
+        updateUserInfo: 'api/user/updateUserInfo',
         getMenuByRole: 'api/admin/getMenuByRole',
-        updateUserInfo: 'api/admin/updateUserInfo',
-        getAreas: 'api/admin/getAreas'
+        getAreas: 'api/admin/getAreas',
+        addSinger: 'api/admin/addSinger',
+        getSingers: 'api/admin/getSingers',
+        deleteSingers: 'api/admin/deleteSingers'
     }
 };

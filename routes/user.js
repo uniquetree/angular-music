@@ -100,6 +100,36 @@ router.post('/logout', expressJwt({secret: secretToken}), tokenManager.verifyTok
     }
 });
 
+// 更新用户接口
+router.post('/updateUserInfo', expressJwt({secret: secretToken}), tokenManager.verifyToken, function(req, res, next){
+
+    var userInfo = req.body.userInfo;
+    if(typeof userInfo.password === 'undefined') {
+        var token = tokenManager.getToken(req.headers);
+        if(token) {
+            try {
+                var decoded = jwt.verify(token, secretToken);
+                userInfo.password = decoded.password;
+            } catch(err) {
+                return next();
+            }
+        } else {
+            next();
+        }
+    }
+    var user = new User(userInfo);
+    var oldEmail = userInfo.email;
+    user.update(userInfo.email, function(isError, results) {
+        if(isError){
+            res.send(500);
+        } else {
+            res.json({
+                success: true
+            });
+        }
+    });
+});
+
 // 测试接口
 router.get('/test', expressJwt({secret: secretToken}), function(req, res, next){
     var token = (req.body && req.body.access_token) || (req.query && req.query.access_token) || req.headers['access-token'];
