@@ -60,8 +60,8 @@ musicApp.factory('AdminService', ['$http', function($http) {
                 method: 'POST',
                 url: url,
                 data: {
-                    singerName: singer.name,
-                    singerInfo: singer.info
+                    name: singer.name,
+                    info: singer.info
                 }
             });
         },
@@ -73,8 +73,8 @@ musicApp.factory('AdminService', ['$http', function($http) {
                 url: url,
                 data: {
                     id: singer.id,
-                    singerName: singer.name,
-                    singerInfo: singer.info
+                    name: singer.name,
+                    info: singer.info
                 }
             });
         },

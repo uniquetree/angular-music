@@ -2,6 +2,16 @@
 /**
  * Created by 郑树聪 on 2016/3/10.
  */
+.singers .breadcrumb,
+.albums .breadcrumb {
+  padding-left: 0;
+  padding-right: 0;
+  margin-bottom: 10px; }
+
+.singers .edit-bars .btn,
+.albums .edit-bars .btn {
+  margin: 10px 0 10px 10px; }
+
 .userInfo .user-info .base-info {
   height: 52px;
   padding: 10px;
@@ -75,14 +85,6 @@
   width: 120px;
   margin-right: 10px;
   text-align: center; }
-
-.singers .breadcrumb {
-  padding-left: 0;
-  padding-right: 0;
-  margin-bottom: 10px; }
-
-.singers .edit-bars .btn {
-  margin: 10px 0 10px 10px; }
 
 .singers .table th,
 .singers .table td {

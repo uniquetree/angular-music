@@ -4,15 +4,14 @@
 var Db = require('../utils/Db');
 var Common = require('../utils/Common');
 var db = new Db();
-var common = new Common();
 
 var singer_tb = 'singers';
 
 var Singer = function (singerInfo, pagination, keyword) {
     if(typeof singerInfo !== 'undefined') {
         this.id = singerInfo.id;
-        this.singerName = singerInfo.singerName;
-        this.singerInfo = singerInfo.singerInfo;
+        this.name = singerInfo.name;
+        this.singerInfo = singerInfo.info;
     }
 
     if(typeof pagination !== 'undefined') {
@@ -58,14 +57,14 @@ Singer.prototype.addSinger = function(callback) {
 
     var create_time = new Date();
     var sql = 'insert into ' + singer_tb + '(name, info, create_time) values (?, ?, ?)';
-    db.query(sql, [this.singerName, this.singerInfo, create_time], callback);
+    db.query(sql, [this.name, this.info, create_time], callback);
 };
 
 // 更新某位singer的信息
 Singer.prototype.updateSinger = function(callback){
 
     var sql = 'update ' + singer_tb + ' set name=?, info=? where id = ?';
-    db.query(sql, [this.singerName, this.singerInfo, this.id], callback);
+    db.query(sql, [this.name, this.info, this.id], callback);
 };
 
 // 删除歌手

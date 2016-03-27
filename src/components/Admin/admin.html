@@ -97,13 +97,13 @@
             </div>
         </form>
         <button class="btn btn-danger btn-sm pull-right" ng-click="deleteSinger()">删除选中的歌手</button>
-        <a href="/#/admin?page=singers&subPage=singerHandle" class="btn btn-info btn-sm pull-right" role="button">添加歌手</a>
+        <a href="#/admin?page=singers&subPage=singerHandle" class="btn btn-info btn-sm pull-right" role="button">添加歌手</a>
     </div>
     <table id="singer-table" class="table table-condensed table-striped table-hover"
            data-ng-init="getSingers(pagination.currPage, pagination.itemsPerPage)">
         <thead>
             <tr>
-                <th ng-model="selection">
+                <th>
                     <input type="checkbox" ng-click="toggleSelectAll()" ng-checked="isSelectAllModel">
                 </th>
                 <th>序号</th>
@@ -181,7 +181,7 @@
            data-ng-init="getSingers(pagination.currPage, pagination.itemsPerPage)">
         <thead>
         <tr>
-            <th ng-model="selection">
+            <th>
                 <input type="checkbox" ng-click="toggleSelectAll()" ng-checked="isSelectAllModel">
             </th>
             <th>序号</th>
@@ -210,21 +210,21 @@
                     previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"
                     boundary-links="true" force-ellipses="true" ng-change="pageChanged()"></uib-pagination>
 </script>
-<!--添加歌手模板 singerHandle.html-->
-<script type="text/ng-template" id="singerHandle.html">
+<!--添加歌手模板 albumHandle.html-->
+<script type="text/ng-template" id="albumHandle.html">
     <form class="form-horizontal clearfix singerHandle" data-ng-init="singerHandle()">
         <div class="form-group clearfix singerName">
             <label for="singer-name" class="pull-left">昵称：</label>
             <div class="input-group pull-left">
                 <div class="input-group-addon"><i class="fa fa-user"></i></div>
-                <input type="text" class="form-control" id="singer-name" placeholder="昵称" ng-model="singerInfo.name">
+                <input type="text" class="form-control" id="album-name" placeholder="昵称" ng-model="albumInfo.name">
             </div>
         </div>
         <div class="form-group">
             <label for="singer-info">歌手简介：</label>
             <div>
-                <textarea id="singer-info" class="form-control" rows="6" cols="40" name="singer-info"
-                          placeholder="歌手简介" ng-model="singerInfo.info"></textarea>
+                <textarea id="album-info" class="form-control" rows="6" cols="40" name="singer-info"
+                          placeholder="歌手简介" ng-model="albumInfo.info"></textarea>
             </div>
         </div>
         <button class="btn btn-primary" ng-click="saveSingerInfo()">保存</button>

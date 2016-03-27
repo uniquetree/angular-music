@@ -5,7 +5,7 @@ var express = require('express');
 var jwt = require('jsonwebtoken');
 var expressJwt = require('express-jwt');
 
-var redisClient = require('../config/redis_db').redisClient;
+//var redisClient = require('../config/redis_db').redisClient;
 var tokenManager = require('../utils/TokenManager');
 var secretToken = require('../config/config').secretToken;
 var adminMenus = require('../config/config').adminMenus;
@@ -72,8 +72,8 @@ router.get('/getAreas', function(req, res, next) {
 router.post('/addSinger', expressJwt({secret: secretToken}), tokenManager.verifyToken, function(req, res, next){
 
     var singerInfo = {
-        singerName: req.body.singerName,
-        singerInfo: req.body.singerInfo
+        name: req.body.name,
+        info: req.body.info
     };
     var singer = new Singer(singerInfo);
     singer.addSinger(function(isError, results) {
@@ -133,8 +133,8 @@ router.post('/updateSinger', expressJwt({secret: secretToken}), tokenManager.ver
 
     var singerInfo = {
         id: req.body.id,
-        singerName: req.body.singerName,
-        singerInfo: req.body.singerInfo
+        name: req.body.name,
+        info: req.body.info
     };
     var singer = new Singer(singerInfo);
     singer.updateSinger(function(isError, results) {
