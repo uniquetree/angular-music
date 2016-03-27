@@ -33,14 +33,15 @@ Singer.prototype.findSingers = function(callback){
 
     if(typeof this.keyword !== 'undefined') {
         sql = 'select id, name, info from ' + singer_tb + ' where id >= (' +
-            'select id from ' + singer_tb + ' order by id limit ?, 1) and name like ? order by create_time limit ?;';
+            'select id from ' + singer_tb + ' where name like ? order by id limit ?, 1)' +
+            ' and name like ? order by create_time limit ?;';
         count_sql = 'select count(*) as totalItems from ' + singer_tb + ' where name like ?';
-        params = [this.currPage*this.pageSize, this.keyword, this.pageSize, this.keyword];
+        params = [this.keyword, this.currPage*this.pageSize, this.keyword, this.pageSize, this.keyword];
     } else {
         sql = 'select id, name, info from ' + singer_tb + ' where id >= (' +
             'select id from ' + singer_tb + ' order by id limit ?, 1) order by create_time limit ?;';
-        count_sql = 'select count(*) as totalItems from ' + singer_tb + ' where name like ?';
-        params = [this.currPage*this.pageSize, this.pageSize, this.keyword];
+        count_sql = 'select count(*) as totalItems from ' + singer_tb;
+        params = [this.currPage*this.pageSize, this.pageSize];
     }
     db.query(sql + count_sql, params, callback);
 };
@@ -56,7 +57,7 @@ Singer.prototype.findSingerById = function(callback){
 Singer.prototype.addSinger = function(callback) {
 
     var create_time = new Date();
-    var sql = 'insert into ' + singer_tb + '(name, info, create_time) values (?, ?, ?)';
+    var sql = 'insert into ' + singer_tb + ' (name, info, create_time) values (?, ?, ?)';
     db.query(sql, [this.name, this.info, create_time], callback);
 };
 

@@ -2,6 +2,8 @@
  * Angular项目前端配置
  * Created by 郑树聪 on 2016/2/28.
  */
+var apiUser = 'api/user/';
+var apiAdmin = 'api/admin/';
 
 module.exports = {
     musicApp: angular.module('musicApp', ['ngRoute', 'ui.bootstrap']),
@@ -20,6 +22,13 @@ module.exports = {
         getSingerById: 'api/admin/getSingerById',
         addSinger: 'api/admin/addSinger',
         updateSinger: 'api/admin/updateSinger',
-        deleteSingers: 'api/admin/deleteSingers'
+        deleteSingers: 'api/admin/deleteSingers',
+
+        getAlbums: 'api/admin/getAlbums',
+        getAlbumById: 'api/admin/getAlbumById',
+        getAlbumBySingerId: 'api/admin/getAlbumBySingerId',
+        addAlbum: 'api/admin/addAlbum',
+        updateAlbum: 'api/admin/updateAlbum',
+        deleteAlums: 'api/admin/deleteAlums'
     }
 };

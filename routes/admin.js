@@ -14,9 +14,12 @@ var router = express.Router();
 
 var User = require('../models/User');
 var Singer = require('../models/Singer');
+var Album = require('../models/Album');
 
 var Db = require('../utils/Db');
+var Common = require('../utils/Common');
 var db = new Db();
+var common = new Common();
 
 // 根据用户类型获取管理中心侧边栏菜单
 router.get('/getMenuByRole', expressJwt({secret: secretToken}), tokenManager.verifyToken, function(req, res, next) {
@@ -156,6 +159,53 @@ router.post('/deleteSingers', expressJwt({secret: secretToken}), tokenManager.ve
     var singer = new Singer();
     singer.deleteSinger(ids, function(isError, results) {
 
+        if(isError) {
+            res.send(500);
+            console.log(results.message);
+        } else {
+
+            // 同时删除歌手的专辑
+            var album = new Album();
+            album.deleteAlbumBySingerId(ids, function(isError, results) {
+                if(isError) {
+                    res.send(500);
+                    console.log(results.message);
+                } else {
+                    res.json({
+                        success: true
+                    });
+                }
+            });
+        }
+    });
+});
+
+
+// 分页获取专辑列表，关键字查找
+router.post('/getAlbums', function(req, res) {
+
+});
+// 根据id获取专辑信息
+router.post('/getAlbumById', function(req, res){
+
+});
+// 获取某位歌手的专辑
+router.post('/getAlbumBySingerId', function(req, res){
+
+});
+router.post('/addAlbum', function(req, res) {
+
+});
+router.post('/updateAlbum', function(req, res) {
+
+});
+// 根据id删除专辑
+router.post('/deleteAlums', function(req, res) {
+
+    var ids = req.body.ids;
+    // 同时删除歌手的专辑
+    var album = new Album();
+    album.deleteAlbumBySingerId(ids, function(isError, results) {
         if(isError) {
             res.send(500);
             console.log(results.message);

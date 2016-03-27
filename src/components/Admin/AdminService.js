@@ -28,6 +28,7 @@ musicApp.factory('AdminService', ['$http', function($http) {
             var url = $config.base_url + $config.api.updateUserInfo;
             return $http.post(url, userInfo);
         },
+
         // 获取歌手列表
         getSingers: function(pagination){
 
