@@ -1,6 +1,21 @@
 /**
  * Created by 郑树聪 on 2016/3/10.
  */
+.singers,
+.albums {
+    .breadcrumb {
+        padding-left: 0;
+        padding-right: 0;
+        margin-bottom: 10px;
+    }
+
+    .edit-bars {
+
+        .btn {
+            margin: 10px 0 10px 10px;
+        }
+    }
+}
 // 个人中心样式
 .userInfo {
 
@@ -116,19 +131,6 @@
 // 歌手列表样式
 .singers {
 
-    .breadcrumb {
-        padding-left: 0;
-        padding-right: 0;
-        margin-bottom: 10px;
-    }
-
-    .edit-bars {
-
-        .btn {
-            margin: 10px 0 10px 10px;
-        }
-    }
-
     .table {
 
         th,
@@ -147,19 +149,9 @@
             &:nth-child(5) {
                 width: 120px;
             }
-
-            .fa {
-                padding: 0 10px;
-                vertical-align: middle;
-                font-size: 18px;
-                cursor: pointer;
-            }
-            .fa-edit {
-                color: #31b0d5;
-            }
-            .fa-trash {
-                color: #c9302c;
-            }
+        }
+        .singer-name-td {
+            cursor: pointer;
         }
     }
 

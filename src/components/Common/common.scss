@@ -12,10 +12,6 @@ body,
     background-color: #F5F5F5;
 }
 
-.wrap {
-
-}
-
 .g-body {
 
     .g-container {
@@ -52,6 +48,21 @@ body,
     .form-group {
         margin-right: 0;
         margin-left: 0;
+    }
+    .table {
+
+        .fa {
+            padding: 0 10px;
+            vertical-align: middle;
+            font-size: 18px;
+            cursor: pointer;
+        }
+        .fa-edit {
+            color: #31b0d5;
+        }
+        .fa-trash {
+            color: #c9302c;
+        }
     }
 }
 

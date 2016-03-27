@@ -69,7 +69,7 @@ router.get('/getAreas', function(req, res, next) {
 });
 
 // 添加歌手
-router.post('/addSinger', function(req, res, next){
+router.post('/addSinger', expressJwt({secret: secretToken}), tokenManager.verifyToken, function(req, res, next){
 
     var singerInfo = {
         singerName: req.body.singerName,
@@ -88,15 +88,15 @@ router.post('/addSinger', function(req, res, next){
         }
     });
 });
-// 获取歌手列表
+// 分页获取歌手列表，关键字查找
 router.post('/getSingers', function(req, res, next) {
 
     var pagination = {
         currPage: Number(req.body.currPage),
-        pageSize: Number(req.body.pageSize),
-        keyword: req.body.keyword
+        pageSize: Number(req.body.pageSize)
     };
-    var singer = new Singer({}, pagination);
+    var keyword = req.body.keyword;
+    var singer = new Singer({}, pagination, keyword);
     singer.findSingers(function(isError, results) {
         if(isError) {
             res.send(500);

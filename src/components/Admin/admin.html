@@ -87,7 +87,7 @@
         <div class="singers-container clearfix" ng-include="subPageUrl" autoscroll></div>
     </div>
 </script>
-<!--添加歌手列表模板 singerList.html-->
+<!--歌手列表模板 singerList.html-->
 <script type="text/ng-template" id="singerList.html">
     <div class="clearfix edit-bars">
         <form class="navbar-form pull-left m-search" role="search">
@@ -99,11 +99,12 @@
         <button class="btn btn-danger btn-sm pull-right" ng-click="deleteSinger()">删除选中的歌手</button>
         <a href="/#/admin?page=singers&subPage=singerHandle" class="btn btn-info btn-sm pull-right" role="button">添加歌手</a>
     </div>
-    <table class="table table-condensed table-striped table-hover" data-ng-init="getSingers(pagination.currPage, pagination.itemsPerPage)">
+    <table id="singer-table" class="table table-condensed table-striped table-hover"
+           data-ng-init="getSingers(pagination.currPage, pagination.itemsPerPage)">
         <thead>
             <tr>
                 <th ng-model="selection">
-                    <input type="checkbox" ng-click="toggleSelectAll()" ng-checked="selection.length == entries.length">
+                    <input type="checkbox" ng-click="toggleSelectAll()" ng-checked="isSelectAllModel">
                 </th>
                 <th>序号</th>
                 <th>歌手名</th>
@@ -112,9 +113,9 @@
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="singer in singers">
+            <tr ng-repeat="singer in singers" ng-click="goToSingerPage(singer.id)">
                 <td>
-                    <input type="checkbox" ng-click="toggle(entry)" ng-checked="isInSelection()">
+                    <input type="checkbox" name="singer-check" ng-click="toggleSelect($event, singer.id)">
                 </td>
                 <td>{{(pagination.currPage-1)*pagination.itemsPerPage + $index + 1}}</td>
                 <td>{{singer.name}}</td>
@@ -154,7 +155,80 @@
 
 <!-- albums.html -->
 <script type="text/ng-template" id="albums.html">
-    Content of albums.html
+    <div class="albums" ng-controller="AlbumsCtrl">
+        <ol class="breadcrumb">
+            <li ng-repeat="breadcrumb in breadcrumbs" ng-class="{active: $last}">
+                <a href="{{breadcrumb.href}}" ng-if="breadcrumb.href">{{breadcrumb.name}}</a>
+                <span ng-if="$last">{{breadcrumb.name}}</span>
+            </li>
+        </ol>
+        <div class="singers-container clearfix" ng-include="subPageUrl" autoscroll></div>
+    </div>
+</script>
+<!--专辑列表模板 albumList.html-->
+<script type="text/ng-template" id="albumList.html">
+    <div class="clearfix edit-bars">
+        <form class="navbar-form pull-left m-search" role="search">
+            <div class="form-group">
+                <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                <input type="text" ng-model="keyword" class="form-control" placeholder="查找专辑">
+            </div>
+        </form>
+        <button class="btn btn-danger btn-sm pull-right" ng-click="deleteAlbum()">删除选中的专辑</button>
+        <a href="/#/admin?page=albums&subPage=albumHandle" class="btn btn-info btn-sm pull-right" role="button">添加专辑</a>
+    </div>
+    <table id="albums-table" class="table table-condensed table-striped table-hover"
+           data-ng-init="getSingers(pagination.currPage, pagination.itemsPerPage)">
+        <thead>
+        <tr>
+            <th ng-model="selection">
+                <input type="checkbox" ng-click="toggleSelectAll()" ng-checked="isSelectAllModel">
+            </th>
+            <th>序号</th>
+            <th>歌手名</th>
+            <th>歌手简介</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="singer in singers">
+            <td>
+                <input type="checkbox" name="singer-check" ng-click="toggleSelect($event, singer.id)">
+            </td>
+            <td>{{(pagination.currPage-1)*pagination.itemsPerPage + $index + 1}}</td>
+            <td class="singer-name-td" ng-click="goToSingerPage(singer.id)">{{singer.name}}</td>
+            <td>{{singer.info}}</td>
+            <td>
+                <a href="#/admin?page=singers&subPage=singerHandle&singerId={{singer.id}}"><i class="fa fa-edit"></i></a>
+                <i class="fa fa-trash" ng-click="deleteSinger(singer.id)"></i>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <uib-pagination ng-if="pagination.totalItems>0" total-items="pagination.totalItems" ng-model="pagination.currPage"
+                    max-size="pagination.maxSize" items-per-page="pagination.itemsPerPage" class="pagination-sm pull-right"
+                    previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"
+                    boundary-links="true" force-ellipses="true" ng-change="pageChanged()"></uib-pagination>
+</script>
+<!--添加歌手模板 singerHandle.html-->
+<script type="text/ng-template" id="singerHandle.html">
+    <form class="form-horizontal clearfix singerHandle" data-ng-init="singerHandle()">
+        <div class="form-group clearfix singerName">
+            <label for="singer-name" class="pull-left">昵称：</label>
+            <div class="input-group pull-left">
+                <div class="input-group-addon"><i class="fa fa-user"></i></div>
+                <input type="text" class="form-control" id="singer-name" placeholder="昵称" ng-model="singerInfo.name">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="singer-info">歌手简介：</label>
+            <div>
+                <textarea id="singer-info" class="form-control" rows="6" cols="40" name="singer-info"
+                          placeholder="歌手简介" ng-model="singerInfo.info"></textarea>
+            </div>
+        </div>
+        <button class="btn btn-primary" ng-click="saveSingerInfo()">保存</button>
+    </form>
 </script>
 
 <!-- songs.html -->

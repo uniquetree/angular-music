@@ -99,18 +99,9 @@
   .singers .table th:nth-child(5),
   .singers .table td:nth-child(5) {
     width: 120px; }
-  .singers .table th .fa,
-  .singers .table td .fa {
-    padding: 0 10px;
-    vertical-align: middle;
-    font-size: 18px;
-    cursor: pointer; }
-  .singers .table th .fa-edit,
-  .singers .table td .fa-edit {
-    color: #31b0d5; }
-  .singers .table th .fa-trash,
-  .singers .table td .fa-trash {
-    color: #c9302c; }
+
+.singers .table .singer-name-td {
+  cursor: pointer; }
 
 .singers .singerHandle .singerName {
   height: 34px;
@@ -159,6 +150,18 @@ body,
 .g-body .form-group {
   margin-right: 0;
   margin-left: 0; }
+
+.g-body .table .fa {
+  padding: 0 10px;
+  vertical-align: middle;
+  font-size: 18px;
+  cursor: pointer; }
+
+.g-body .table .fa-edit {
+  color: #31b0d5; }
+
+.g-body .table .fa-trash {
+  color: #c9302c; }
 
 .m-search .form-group {
   border-radius: 17px;
@@ -222,6 +225,18 @@ body,
 .g-body .form-group {
   margin-right: 0;
   margin-left: 0; }
+
+.g-body .table .fa {
+  padding: 0 10px;
+  vertical-align: middle;
+  font-size: 18px;
+  cursor: pointer; }
+
+.g-body .table .fa-edit {
+  color: #31b0d5; }
+
+.g-body .table .fa-trash {
+  color: #c9302c; }
 
 .m-search .form-group {
   border-radius: 17px;
