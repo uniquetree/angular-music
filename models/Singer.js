@@ -1,4 +1,5 @@
 /**
+ * 后台歌手singer模型
  * Created by 郑树聪 on 2016/3/26.
  */
 var Db = require('../utils/Db');
