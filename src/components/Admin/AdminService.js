@@ -13,29 +13,25 @@ musicApp.factory('AdminService', ['$http', function($http) {
         // 获取左侧菜单数据
         getMenu: function(){
 
-            var url = $config.base_url + $config.api.getMenuByRole;
-            return $http.get(url, {});
+            return $http.get($config.api.getMenuByRole, {});
         },
         // 获取省份、城市、地区数据
         getAreas: function(){
 
-            var url = $config.base_url + $config.api.getAreas;
-            return $http.get(url, {});
+            return $http.get($config.api.getAreas, {});
         },
         // 更新用户信息
         updateUserInfo: function(userInfo){
 
-            var url = $config.base_url + $config.api.updateUserInfo;
-            return $http.post(url, userInfo);
+            return $http.post($config.api.updateUserInfo, userInfo);
         },
 
         // 获取歌手列表
         getSingers: function(pagination){
 
-            var url = $config.base_url + $config.api.getSingers;
             return $http({
                 method: 'GET',
-                url: url,
+                url: $config.api.getSingers,
                 params: {
                     currPage: pagination.currPage,
                     pageSize: pagination.pageSize,
@@ -46,10 +42,9 @@ musicApp.factory('AdminService', ['$http', function($http) {
         // 根据id获取某位歌手信息
         getSingerById: function(id){
 
-            var url = $config.base_url + $config.api.getSingerById;
             return $http({
-                method: 'POST',
-                url: url,
+                method: 'GET',
+                url: $config.api.getSingerById,
                 data: {
                     id: id
                 }
@@ -57,10 +52,9 @@ musicApp.factory('AdminService', ['$http', function($http) {
         },
         addSinger: function(singer){
 
-            var url = $config.base_url + $config.api.addSinger;
             return $http({
                 method: 'POST',
-                url: url,
+                url: $config.api.addSinger,
                 data: {
                     name: singer.name,
                     info: singer.info
@@ -69,10 +63,9 @@ musicApp.factory('AdminService', ['$http', function($http) {
         },
         updateSinger: function(singer) {
 
-            var url = $config.base_url + $config.api.updateSinger;
             return $http({
                 method: 'POST',
-                url: url,
+                url: $config.api.updateSinger,
                 data: {
                     id: singer.id,
                     name: singer.name,
@@ -82,12 +75,99 @@ musicApp.factory('AdminService', ['$http', function($http) {
         },
         deleteSingers: function(ids){
 
-            var url = $config.base_url + $config.api.deleteSingers;
             return $http({
                 method: 'POST',
-                url: url,
+                url: $config.api.deleteSingers,
                 data: {
                     ids: ids
+                }
+            });
+        },
+
+        getAlbums: function(pagination){
+
+            return $http({
+                method: 'GET',
+                url: $config.api.getAlbums,
+                params: {
+                    currPage: pagination.currPage,
+                    pageSize: pagination.pageSize,
+                    keyword: pagination.keyword
+                }
+            });
+        },
+        getAlbumById: function(id){
+
+            return $http({
+                method: 'GET',
+                url: $config.api.getAlbumById,
+                params: {
+                    id: id
+                }
+            });
+        },
+        getAlbumsBySingerId: function(singerId){
+
+            return $http({
+                method: 'GET',
+                url: $config.api.getAlbumsBySingerId,
+                params: {
+                    singerId: singerId
+                }
+            });
+        },
+        addAlbum: function(albumInfo){
+
+            return $http({
+                method: 'POST',
+                url: $config.api.addAlbum,
+                data: {
+                    albumName: albumInfo.albumName,
+                    info: albumInfo.info,
+                    publishDate: albumInfo.publishDate,
+                    singerId: albumInfo.singerId
+                }
+            });
+        },
+        updateAlbum: function(albumInfo){
+
+            return $http({
+                method: 'POST',
+                url: $config.api.updateAlbum,
+                data: {
+                    id: albumInfo.id,
+                    albumName: albumInfo.albumName,
+                    info: albumInfo.info,
+                    publishDate: albumInfo.publishDate,
+                    singerId: albumInfo.singerId
+                }
+            });
+        },
+        /**
+         * 根据id删除专辑
+         * @param ids {Array} 要删除的项
+         */
+        deleteAlumsById: function(ids){
+
+            return $http({
+                method: 'POST',
+                url: $config.api.deleteAlumsById,
+                data: {
+                    ids: ids
+                }
+            });
+        },
+        /**
+         * 根据歌手id删除专辑
+         * @param singerIds {Array} 要删除专辑的歌手id
+         */
+        deleteAlbumsBySingerId: function(singerIds){
+
+            return $http({
+                method: 'POST',
+                url: $config.api.deleteAlbumsBySingerId,
+                data: {
+                    singerIds: singerIds
                 }
             });
         }

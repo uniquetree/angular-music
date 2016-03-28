@@ -111,19 +111,19 @@ musicApp.controller('PageTableCtrl', ['$scope', 'PageTableData', function($scope
 
     /**
      * 全选事件
-     * @param elementId {String} 分页表格的id
+     * @param tableId {String} 分页表格的id
      */
-    $scope.toggleSelectAll = function(elementId) {
+    $scope.toggleSelectAll = function(tableId) {
 
         $scope.isSelectAllModel = !$scope.isSelectAllModel;
 
         if($scope.isSelectAllModel) {
             PageTableData.selectItemIds = angular.copy(PageTableData.itemIds);
-            angular.element(document.getElementById(elementId)).find('input[name="item-check"]')
+            angular.element(document.getElementById(tableId)).find('input[name="item-check"]')
                 .prop('checked', true).attr('isSelected', '1');
         } else {
             PageTableData.selectItemIds = [];
-            angular.element(document.getElementById(elementId)).find('input[name="item-check"]')
+            angular.element(document.getElementById(tableId)).find('input[name="item-check"]')
                 .prop('checked', false).removeAttr('isSelected');
         }
 

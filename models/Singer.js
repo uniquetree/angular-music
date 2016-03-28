@@ -49,7 +49,7 @@ Singer.prototype.findSingers = function(callback){
 // 查找某位singer
 Singer.prototype.findSingerById = function(callback){
 
-    var sql = 'select id, name, info from ' + singer_tb + ' where id = ?';
+    var sql = 'select id, name, info from ' + singer_tb + ' where id = ? limit 1';
     db.query(sql, [this.id], callback);
 };
 

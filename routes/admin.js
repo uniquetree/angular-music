@@ -71,26 +71,6 @@ router.get('/getAreas', function(req, res, next) {
     });
 });
 
-// 添加歌手
-router.post('/addSinger', expressJwt({secret: secretToken}), tokenManager.verifyToken, function(req, res, next){
-
-    var singerInfo = {
-        name: req.body.name,
-        info: req.body.info
-    };
-    var singer = new Singer(singerInfo);
-    singer.addSinger(function(isError, results) {
-
-        if(isError) {
-            res.send(500);
-            console.log(results.message);
-        } else {
-            res.json({
-                success: true
-            });
-        }
-    });
-});
 // 分页获取歌手列表，关键字查找
 router.get('/getSingers', function(req, res, next) {
 
@@ -116,9 +96,9 @@ router.get('/getSingers', function(req, res, next) {
     });
 });
 // 根据id获取某位歌手信息
-router.post('/getSingerById', function(req, res, next) {
+router.get('/getSingerById', function(req, res, next) {
 
-    var singer = new Singer({id: req.body.id});
+    var singer = new Singer({id: req.query.id});
     singer.findSingerById(function(isError, results) {
         if(isError) {
             res.send(500);
@@ -127,6 +107,26 @@ router.post('/getSingerById', function(req, res, next) {
             res.json({
                 success: true,
                 singer: results[0]
+            });
+        }
+    });
+});
+// 添加歌手
+router.post('/addSinger', expressJwt({secret: secretToken}), tokenManager.verifyToken, function(req, res, next){
+
+    var singerInfo = {
+        name: req.body.name,
+        info: req.body.info
+    };
+    var singer = new Singer(singerInfo);
+    singer.addSinger(function(isError, results) {
+
+        if(isError) {
+            res.send(500);
+            console.log(results.message);
+        } else {
+            res.json({
+                success: true
             });
         }
     });
@@ -180,32 +180,131 @@ router.post('/deleteSingers', expressJwt({secret: secretToken}), tokenManager.ve
     });
 });
 
-
 // 分页获取专辑列表，关键字查找
-router.post('/getAlbums', function(req, res) {
+router.get('/getAlbums', function(req, res) {
 
+    var pagination = {
+        currPage: Number(req.query.currPage),
+        pageSize: Number(req.query.pageSize)
+    };
+    var keyword = req.query.keyword;
+    var album = new Album({}, pagination, keyword);
+    album.findAlbums(function(isError, results) {
+        if(isError) {
+            res.send(500);
+            console.log(results.message);
+        } else {
+            res.json({
+                success: true,
+                albums: results[0],
+                totalItems: results[1][0].totalItems,
+                currPage: pagination.currPage,
+                pageSize: pagination.pageSize
+            });
+        }
+    });
 });
 // 根据id获取专辑信息
-router.post('/getAlbumById', function(req, res){
+router.get('/getAlbumById', function(req, res){
 
+    var album = new Album({id: req.query.id});
+    album.findAlbumById(function(isError, results) {
+        if(isError) {
+            res.send(500);
+            console.log(results.message);
+        } else {
+            res.json({
+                success: true,
+                album: results[0]
+            });
+        }
+    });
 });
 // 获取某位歌手的专辑
-router.post('/getAlbumBySingerId', function(req, res){
+router.get('/getAlbumsBySingerId', function(req, res){
 
+    var album = new Album({singerId: req.query.singerId});
+    album.findAlbumsBySingerId(function(isError, results) {
+        if(isError) {
+            res.send(500);
+            console.log(results.message);
+        } else {
+            res.json({
+                success: true,
+                albums: results
+            });
+        }
+    });
 });
-router.post('/addAlbum', function(req, res) {
+// 添加专辑
+router.post('/addAlbum', expressJwt({secret: secretToken}), tokenManager.verifyToken, function(req, res) {
 
+    var albumInfo = {
+        albumName: req.body.albumName,
+        info: req.body.info,
+        publishDate: req.body.publishDate,
+        singerId: req.body.singerId
+    };
+    var album = new Album(albumInfo);
+    album.addAlbum(function(isError, results) {
+
+        if(isError) {
+            res.send(500);
+            console.log(results.message);
+        } else {
+            res.json({
+                success: true
+            });
+        }
+    });
 });
-router.post('/updateAlbum', function(req, res) {
+// 更新专辑信息
+router.post('/updateAlbum', expressJwt({secret: secretToken}), tokenManager.verifyToken, function(req, res) {
 
+    var albumInfo = {
+        id: req.body.id,
+        albumName: req.body.albumName,
+        info: req.body.info,
+        publishDate: req.body.publishDate,
+        singerId: req.body.singerId
+    };
+    var album = new Album(albumInfo);
+    album.updateAlbum(function(isError, results) {
+
+        if(isError) {
+            res.send(500);
+            console.log(results.message);
+        } else {
+            res.json({
+                success: true
+            });
+        }
+    });
 });
 // 根据id删除专辑
-router.post('/deleteAlums', function(req, res) {
+router.post('/deleteAlumsById', expressJwt({secret: secretToken}), tokenManager.verifyToken, function(req, res) {
 
     var ids = req.body.ids;
     // 同时删除歌手的专辑
     var album = new Album();
-    album.deleteAlbumBySingerId(ids, function(isError, results) {
+    album.deleteAlumsById(ids, function(isError, results) {
+        if(isError) {
+            res.send(500);
+            console.log(results.message);
+        } else {
+            res.json({
+                success: true
+            });
+        }
+    });
+});
+// 根据歌手id删除专辑
+router.post('/deleteAlbumsBySingerId', expressJwt({secret: secretToken}), tokenManager.verifyToken, function(req, res) {
+
+    var singerIds = req.body.singerIds;
+    // 同时删除歌手的专辑
+    var album = new Album();
+    album.deleteAlbumsBySingerId(singerIds, function(isError, results) {
         if(isError) {
             res.send(500);
             console.log(results.message);
