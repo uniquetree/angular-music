@@ -96,6 +96,12 @@ $config.musicApp.config(['$routeProvider', function($routeProvider) {
             //reloadOnSearch: false,
             access: { requiredLogin: true }
         })
+        // 歌手主页
+        .when('/singer', {
+            templateUrl: 'app/views/Home/home.html',
+            controller: 'UserCtrl',
+            access: { requiredLogin: false }
+        })
         .otherwise({
             redirectTo: "/",
             access: { requiredLogin: false }
@@ -108,8 +114,8 @@ $config.musicApp.run(function($rootScope, $location, $window, AuthenticationServ
     $rootScope.$on("$routeChangeStart", function(event, nextRoute, currentRoute) {
 
         // 未登录,跳转到登录页
-        if (nextRoute !== null && nextRoute.access !== null && nextRoute.access.requiredLogin &&
-            !AuthenticationService.isAuthenticated && !$window.sessionStorage.token) {
+        if (nextRoute !== null && !angular.isUndefined(nextRoute.access) && nextRoute.access !== null &&
+            nextRoute.access.requiredLogin && !AuthenticationService.isAuthenticated && !$window.sessionStorage.token) {
 
             // 未登录时将原先要跳转到的url的存到全局变量prevUrl
             $rootScope.prevUrl = nextRoute.originalPath;

@@ -92,13 +92,13 @@ router.post('/addSinger', expressJwt({secret: secretToken}), tokenManager.verify
     });
 });
 // 分页获取歌手列表，关键字查找
-router.post('/getSingers', function(req, res, next) {
+router.get('/getSingers', function(req, res, next) {
 
     var pagination = {
-        currPage: Number(req.body.currPage),
-        pageSize: Number(req.body.pageSize)
+        currPage: Number(req.query.currPage),
+        pageSize: Number(req.query.pageSize)
     };
-    var keyword = req.body.keyword;
+    var keyword = req.query.keyword;
     var singer = new Singer({}, pagination, keyword);
     singer.findSingers(function(isError, results) {
         if(isError) {

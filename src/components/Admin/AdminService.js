@@ -34,11 +34,12 @@ musicApp.factory('AdminService', ['$http', function($http) {
 
             var url = $config.base_url + $config.api.getSingers;
             return $http({
-                method: 'POST',
+                method: 'GET',
                 url: url,
-                data: {
+                params: {
                     currPage: pagination.currPage,
-                    pageSize: pagination.pageSize
+                    pageSize: pagination.pageSize,
+                    keyword: pagination.keyword
                 }
             });
         },
@@ -92,3 +93,23 @@ musicApp.factory('AdminService', ['$http', function($http) {
         }
     };
 }]);
+
+/**
+ * 分页表格（全选功能）数据共享服务
+ * @param pagination {Object} 分页器参数
+ * @param itemIds {Array} 当前页的选项id
+ * @param selectItemIds {Array} 选中的项id
+ */
+musicApp.factory('PageTableData', function(){
+
+    return {
+        pagination: {
+            currPage: 1,
+            itemsPerPage: 10,
+            maxSize: 3,
+            totalItems: 0
+        },
+        itemIds: [],
+        selectItemIds: []
+    };
+});

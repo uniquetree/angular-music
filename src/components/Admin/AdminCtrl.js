@@ -103,360 +103,69 @@ musicApp.controller('InfoCtrl', ['$scope', '$location', '$window', '$routeParams
     }
 ]);
 
-// 歌手列表控制器
-musicApp.controller('SingerCtrl', ['$scope', '$location', '$routeParams', '$log', 'AdminService',
-    function($scope, $location, $routeParams, $log, AdminService){
+// 表格分页处理控制器
+musicApp.controller('PageTableCtrl', ['$scope', 'PageTableData', function($scope, PageTableData){
 
-        if(!angular.isUndefined($routeParams.subPage)) {
-            if($routeParams.subPage === 'singerList') {
-                $scope.subPageUrl = 'singerList.html';
-                $scope.breadcrumbs = [
-                    {name: '歌手列表', href: false}
-                ];
-            } else {
-                $scope.subPageUrl = $routeParams.subPage + '.html';
-                var subPageName = '添加歌手';
-                if(!angular.isUndefined($routeParams.singerId)) {
-                    subPageName = '修改歌手信息';
-                }
-                $scope.breadcrumbs = [
-                    {name: '歌手列表', href: '#/admin?page=singers&subPage=singerList'},
-                    {name: subPageName, href: false}
-                ];
-            }
+    // 分页器默认参数
+    $scope.pagination = PageTableData.pagination;
+
+    /**
+     * 全选事件
+     * @param elementId {String} 分页表格的id
+     */
+    $scope.toggleSelectAll = function(elementId) {
+
+        $scope.isSelectAllModel = !$scope.isSelectAllModel;
+
+        if($scope.isSelectAllModel) {
+            PageTableData.selectItemIds = angular.copy(PageTableData.itemIds);
+            angular.element(document.getElementById(elementId)).find('input[name="item-check"]')
+                .prop('checked', true).attr('isSelected', '1');
         } else {
-            $location.search('subPage', 'singerList');
-            $scope.subPageUrl = 'singerList.html';
-            $scope.breadcrumbs = [
-                {name: '歌手列表', href: false}
-            ];
+            PageTableData.selectItemIds = [];
+            angular.element(document.getElementById(elementId)).find('input[name="item-check"]')
+                .prop('checked', false).removeAttr('isSelected');
         }
 
-        $scope.selectSingerIds = [];    // 勾选中的歌手id
-        $scope.singerIds = [];
-        // 全选事件
-        $scope.toggleSelectAll = function() {
+    };
+    /**
+     * 单选事件
+     * @param $event {Object} 触发的事件对象
+     * @param itemId {Array} 选中的项id
+     */
+    $scope.toggleSelect = function($event, itemId) {
 
-            $scope.isSelectAllModel = !$scope.isSelectAllModel;
-
-            if($scope.isSelectAllModel) {
-                $scope.selectSingerIds = angular.copy($scope.singerIds);
-                angular.element(document.getElementById(('singer-table'))).find('input[name="singer-check"]')
-                    .prop('checked', true).attr('isSelected', '1');
-            } else {
-                $scope.selectSingerIds = [];
-                angular.element(document.getElementById(('singer-table'))).find('input[name="singer-check"]')
-                    .prop('checked', false).removeAttr('isSelected');
-            }
-
-        };
-        // 单选事件
-        $scope.toggleSelect = function($event, singerId) {
-
-            if($event.target.getAttribute('isSelected') !== '1') {
-                // 未选中变为选中
-                $event.target.setAttribute('isSelected', '1');
-                $scope.selectSingerIds.push(singerId);
-            } else {
-                // 选中变为未选中
-                $event.target.removeAttribute('isSelected');
-                var index = $scope.selectSingerIds.indexOf(singerId);
-                if(index !== -1){
-                    $scope.selectSingerIds.splice(index, 1);
-                }
-            }
-
-            if($scope.selectSingerIds.length === $scope.singerIds.length) {
-                $scope.isSelectAllModel = true;
-            } else {
-                $scope.isSelectAllModel = false;
-            }
-        };
-
-        // 分页器默认参数
-        $scope.pagination = {
-            currPage: 1,
-            itemsPerPage: 10,
-            maxSize: 3,
-            totalItems: 0
-        };
-        // 获取歌手列表数据
-        $scope.getSingers = function(nextPage, pageSize){
-
-            var params = {
-                currPage: nextPage || 1,
-                pageSize: pageSize || 10
-            };
-            if($scope.keyword) {
-                params.keyword = $scope.keyword;
-            }
-
-            AdminService.getSingers(params).success(function(data) {
-
-                if(data.success) {
-                    $scope.singers = data.singers;
-                    for(var i=0; i<data.singers.length; i++) {
-                        $scope.singerIds.push(data.singers[i].id);
-                    }
-                    $scope.pagination.totalItems = data.totalItems;
-                    $scope.pagination.currPage = data.currPage;
-                } else {
-                    console.log(data.msg);
-                }
-            }).error(function(data) {
-                console.log(data.msg);
-            });
-        };
-        // 页码改变时事件
-        $scope.pageChanged = function() {
-            //$log.log('Page changed to: ' + $scope.pagination.currPage);
-            $scope.getSingers($scope.pagination.currPage, 10, $scope.keyword);
-        };
-
-        $scope.singerInfo = {};
-        // 操作歌手：判断是添加歌手还是编辑歌手
-        $scope.singerHandle = function() {
-            $scope.isAddSinger = true;
-            if(!angular.isUndefined($routeParams.singerId)) {
-                $scope.isAddSinger = false;
-                var id = $routeParams.singerId;
-                AdminService.getSingerById(id).success(function(data){
-
-                    if(data.success) {
-                        $scope.singerInfo = data.singer;
-                    }
-                });
-            }
-        };
-        // 修改歌手信息
-        $scope.saveSingerInfo = function() {
-
-            if($scope.isAddSinger) {
-
-                AdminService.addSinger($scope.singerInfo).success(function(data){
-                    if(data.success) {
-                        alert('添加成功');
-                        $location.path('#/admin?page=singers&subPage=singerList');
-                    }
-                });
-            } else {
-
-                AdminService.updateSinger($scope.singerInfo).success(function(data){
-                    if(data.success) {
-                        alert('更新成功');
-                    }
-                });
-            }
-        };
-        // 删除单个歌手
-        $scope.deleteSinger = function(id){
-
-            if(angular.isUndefined(id)) {
-                id = $scope.selectSingerIds;
-            }
-
-            var ids = [];
-            if(angular.isArray(id)) {
-                if (id.length > 0){
-                    ids = id;
-                } else {
-                    alert('请先勾选要删除的项！');
-                    return;
-                }
-            } else {
-                ids.push(id);
-            }
-            AdminService.deleteSingers(ids).success(function(data) {
-
-                if(data.success) {
-                    alert('删除成功');
-                    $scope.getSingers();
-                }
-            });
-        };
-        // 跳转到某位歌手主页
-        $scope.goToSingerPage = function(id) {
-
-            $location.path('/singer?singerId=' + id);
-        };
-    }
-]);
-
-// 专辑列表控制器
-musicApp.controller('AlbumsCtrl', ['$scope', '$location', '$routeParams', '$log', 'AdminService',
-    function($scope, $location, $routeParams, $log, AdminService){
-
-        if(!angular.isUndefined($routeParams.subPage)) {
-            if($routeParams.subPage === 'singerList') {
-                $scope.subPageUrl = 'singerList.html';
-                $scope.breadcrumbs = [
-                    {name: '歌手列表', href: false}
-                ];
-            } else {
-                $scope.subPageUrl = $routeParams.subPage + '.html';
-                var subPageName = '添加歌手';
-                if(!angular.isUndefined($routeParams.singerId)) {
-                    subPageName = '修改歌手信息';
-                }
-                $scope.breadcrumbs = [
-                    {name: '歌手列表', href: '#/admin?page=singers&subPage=singerList'},
-                    {name: subPageName, href: false}
-                ];
-            }
+        if($event.target.getAttribute('isSelected') !== '1') {
+            // 未选中变为选中
+            $event.target.setAttribute('isSelected', '1');
+            PageTableData.selectItemIds.push(itemId);
         } else {
-            $location.search('subPage', 'singerList');
-            $scope.subPageUrl = 'singerList.html';
-            $scope.breadcrumbs = [
-                {name: '歌手列表', href: false}
-            ];
+            // 选中变为未选中
+            $event.target.removeAttribute('isSelected');
+            var index = PageTableData.selectItemIds.indexOf(itemId);
+            if(index !== -1){
+                PageTableData.selectItemIds.splice(index, 1);
+            }
         }
 
-        $scope.selectSingerIds = [];    // 勾选中的歌手id
-        $scope.singerIds = [];
-        // 全选事件
-        $scope.toggleSelectAll = function() {
+        if(PageTableData.selectItemIds.length === PageTableData.itemIds.length) {
+            $scope.isSelectAllModel = true;
+        } else {
+            $scope.isSelectAllModel = false;
+        }
+    };
 
-            $scope.isSelectAllModel = !$scope.isSelectAllModel;
+    /**
+     * 页码改变时事件
+     * @param getItems {Function} 页码改变时调用的方法
+     * @param $scope.keyword {String} 父控制器参数，搜索关键字
+     */
+    $scope.pageChanged = function(getItems) {
 
-            if($scope.isSelectAllModel) {
-                $scope.selectSingerIds = angular.copy($scope.singerIds);
-                angular.element(document.getElementById(('singer-table'))).find('input[name="singer-check"]')
-                    .prop('checked', true).attr('isSelected', '1');
-            } else {
-                $scope.selectSingerIds = [];
-                angular.element(document.getElementById(('singer-table'))).find('input[name="singer-check"]')
-                    .prop('checked', false).removeAttr('isSelected');
-            }
+        getItems($scope.pagination.currPage, 10, $scope.keyword);
+    };
 
-        };
-        // 单选事件
-        $scope.toggleSelect = function($event, singerId) {
+}]);
 
-            if($event.target.getAttribute('isSelected') !== '1') {
-                // 未选中变为选中
-                $event.target.setAttribute('isSelected', '1');
-                $scope.selectSingerIds.push(singerId);
-            } else {
-                // 选中变为未选中
-                $event.target.removeAttribute('isSelected');
-                var index = $scope.selectSingerIds.indexOf(singerId);
-                if(index !== -1){
-                    $scope.selectSingerIds.splice(index, 1);
-                }
-            }
-
-            if($scope.selectSingerIds.length === $scope.singerIds.length) {
-                $scope.isSelectAllModel = true;
-            } else {
-                $scope.isSelectAllModel = false;
-            }
-        };
-
-        // 分页器默认参数
-        $scope.pagination = {
-            currPage: 1,
-            itemsPerPage: 10,
-            maxSize: 3,
-            totalItems: 0
-        };
-        // 获取歌手列表数据
-        $scope.getSingers = function(nextPage, pageSize){
-
-            var params = {
-                currPage: nextPage || 1,
-                pageSize: pageSize || 10
-            };
-            if($scope.keyword) {
-                params.keyword = $scope.keyword;
-            }
-
-            AdminService.getSingers(params).success(function(data) {
-
-                if(data.success) {
-                    $scope.singers = data.singers;
-                    for(var i=0; i<data.singers.length; i++) {
-                        $scope.singerIds.push(data.singers[i].id);
-                    }
-                    $scope.pagination.totalItems = data.totalItems;
-                    $scope.pagination.currPage = data.currPage;
-                } else {
-                    console.log(data.msg);
-                }
-            }).error(function(data) {
-                console.log(data.msg);
-            });
-        };
-        // 页码改变时事件
-        $scope.pageChanged = function() {
-            //$log.log('Page changed to: ' + $scope.pagination.currPage);
-            $scope.getSingers($scope.pagination.currPage, 10, $scope.keyword);
-        };
-
-        $scope.singerInfo = {};
-        // 操作歌手：判断是添加歌手还是编辑歌手
-        $scope.singerHandle = function() {
-            $scope.isAddSinger = true;
-            if(!angular.isUndefined($routeParams.singerId)) {
-                $scope.isAddSinger = false;
-                var id = $routeParams.singerId;
-                AdminService.getSingerById(id).success(function(data){
-
-                    if(data.success) {
-                        $scope.singerInfo = data.singer;
-                    }
-                });
-            }
-        };
-        // 修改歌手信息
-        $scope.saveSingerInfo = function() {
-
-            if($scope.isAddSinger) {
-
-                AdminService.addSinger($scope.singerInfo).success(function(data){
-                    if(data.success) {
-                        alert('添加成功');
-                        $location.path('#/admin?page=singers&subPage=singerList');
-                    }
-                });
-            } else {
-
-                AdminService.updateSinger($scope.singerInfo).success(function(data){
-                    if(data.success) {
-                        alert('更新成功');
-                    }
-                });
-            }
-        };
-        // 删除单个歌手
-        $scope.deleteSinger = function(id){
-
-            if(angular.isUndefined(id)) {
-                id = $scope.selectSingerIds;
-            }
-
-            var ids = [];
-            if(angular.isArray(id)) {
-                if (id.length > 0){
-                    ids = id;
-                } else {
-                    alert('请先勾选要删除的项！');
-                    return;
-                }
-            } else {
-                ids.push(id);
-            }
-            AdminService.deleteSingers(ids).success(function(data) {
-
-                if(data.success) {
-                    alert('删除成功');
-                    $scope.getSingers();
-                }
-            });
-        };
-        // 跳转到某位歌手主页
-        $scope.goToSingerPage = function(id) {
-
-            $location.path('/singer?singerId=' + id);
-        };
-    }
-]);
+require('./SingerCtrl');
+require('./AlbumCtrl');
