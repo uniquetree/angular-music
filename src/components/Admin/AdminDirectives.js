@@ -16,7 +16,7 @@ musicApp.directive('datePicker', function(){
             date: '=',
             label: '@'
         },
-        template: '<div class="form-group clearfix birth">' +
+        template: '<div class="form-group clearfix select-date">' +
             '<label class="pull-left">{{label}}：</label>' +
             '<div class="input-group pull-left"><span class="input-group-addon"><i class="fa fa-calendar"></i></span>' +
             '<input type="text" class="form-control" ng-click="open()" uib-datepicker-popup ng-model="date" ' +
@@ -166,3 +166,27 @@ musicApp.directive('citySelect', ['$window', 'AdminService', function($window, A
         }
     };
 }]);
+
+musicApp.directive('singerSelect', function(AdminService){
+
+    return {
+        replace: true,
+        restrict: 'EA',
+        scope: {
+            selectedSingerId: '='
+        },
+        template: '<div class="form-group singer-select"><label class="pull-left">歌手选择：</label>' +
+            '<div class="input-group">' +
+            '<select class="form-control" ng-model="selectedSingerId" ng-options="singer.id as singer.singer_name for singer in allSingers">' +
+            '<option value="">-- 选择歌手 --</option></select></div></div>',
+        link: function($scope) {
+
+            AdminService.getAllSingers().success(function(data) {
+
+                if(data.success) {
+                    $scope.allSingers = data.allSingers;
+                }
+            });
+        }
+    };
+});

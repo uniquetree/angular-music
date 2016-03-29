@@ -82,14 +82,13 @@ musicApp.controller('InfoCtrl', ['$scope', '$location', '$window', '$routeParams
 
             // 格式化日期
             var birth = $scope.userInfo.birth;
-            $scope.userInfo.birth = birth.getFullYear() + '-' +
-                (birth.getMonth()+1 < 10 ? '0'+(birth.getMonth()+1) : birth.getMonth()+1) + '-' +
-                (birth.getDate() < 10 ? '0'+birth.getDate() : birth.getDate());
+            $scope.userInfo.birth = $func.formatDate(birth);
 
             AdminService.updateUserInfo({userInfo: $scope.userInfo}).success(function(data) {
 
                 if(data.success) {
                     $window.sessionStorage.userInfo = JSON.stringify($scope.userInfo);
+                    $scope.userInfo.birth = birth;
                     alert('更新成功！');
                 } else {
                     alert('更新失败！');
@@ -105,6 +104,15 @@ musicApp.controller('InfoCtrl', ['$scope', '$location', '$window', '$routeParams
 
 // 表格分页处理控制器
 musicApp.controller('PageTableCtrl', ['$scope', 'PageTableData', function($scope, PageTableData){
+
+    PageTableData.pagination = {
+        currPage: 1,
+        itemsPerPage: 10,
+        maxSize: 3,
+        totalItems: 0
+    };
+    PageTableData.itemIds = [];
+    PageTableData.selectItemIds = [];
 
     // 分页器默认参数
     $scope.pagination = PageTableData.pagination;

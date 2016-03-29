@@ -2,6 +2,15 @@
 /**
  * Created by 郑树聪 on 2016/3/10.
  */
+.select-date,
+.singer-select {
+  height: 34px;
+  line-height: 34px; }
+  .select-date .input-group,
+  .singer-select .input-group {
+    width: 320px;
+    padding-left: 12px; }
+
 .singers .breadcrumb,
 .albums .breadcrumb {
   padding-left: 0;
@@ -11,6 +20,44 @@
 .singers .edit-bars .btn,
 .albums .edit-bars .btn {
   margin: 10px 0 10px 10px; }
+
+.singers .table th,
+.singers .table td,
+.albums .table th,
+.albums .table td {
+  text-align: center; }
+  .singers .table th:first-child,
+  .singers .table td:first-child,
+  .albums .table th:first-child,
+  .albums .table td:first-child {
+    width: 30px; }
+  .singers .table th:nth-child(2),
+  .singers .table td:nth-child(2),
+  .albums .table th:nth-child(2),
+  .albums .table td:nth-child(2) {
+    width: 100px; }
+  .singers .table th:last-child,
+  .singers .table td:last-child,
+  .albums .table th:last-child,
+  .albums .table td:last-child {
+    width: 120px; }
+
+.singers .table .name-td,
+.albums .table .name-td {
+  cursor: pointer; }
+
+.singers .singerHandle .singerName,
+.singers .albumHandle .singerName,
+.albums .singerHandle .singerName,
+.albums .albumHandle .singerName {
+  height: 34px;
+  line-height: 34px; }
+  .singers .singerHandle .singerName .input-group,
+  .singers .albumHandle .singerName .input-group,
+  .albums .singerHandle .singerName .input-group,
+  .albums .albumHandle .singerName .input-group {
+    width: 320px;
+    padding-left: 12px; }
 
 .userInfo .user-info .base-info {
   height: 52px;
@@ -46,14 +93,6 @@
     font-size: 18px;
     font-weight: bold; }
 
-.editInfo label {
-  font-weight: normal; }
-
-.editInfo textarea[name="info"] {
-  overflow-x: hidden;
-  overflow-y: auto;
-  resize: none; }
-
 .editInfo .edit-info-title {
   height: 32px;
   border-bottom: 1px solid #e7e7e7;
@@ -68,13 +107,11 @@
     padding-top: 0; }
 
 .editInfo .username,
-.editInfo .birth,
 .editInfo .area {
   height: 34px;
   line-height: 34px; }
 
-.editInfo .username .input-group,
-.editInfo .birth .input-group {
+.editInfo .username .input-group {
   width: 320px;
   padding-left: 12px; }
 
@@ -86,41 +123,9 @@
   margin-right: 10px;
   text-align: center; }
 
-.singers .table th,
-.singers .table td,
-.albums .table th,
-.albums .table td {
-  text-align: center; }
-  .singers .table th:first-child,
-  .singers .table td:first-child,
-  .albums .table th:first-child,
-  .albums .table td:first-child {
-    width: 30px; }
-  .singers .table th:nth-child(2),
-  .singers .table td:nth-child(2),
-  .albums .table th:nth-child(2),
-  .albums .table td:nth-child(2) {
-    width: 100px; }
-  .singers .table th:last-child,
-  .singers .table td:last-child,
-  .albums .table th:last-child,
-  .albums .table td:last-child {
-    width: 120px; }
-
-.singers .table .name-td,
-.albums .table .name-td {
-  cursor: pointer; }
-
 .singers .table th:nth-child(3),
 .singers .table td:nth-child(3) {
   width: 160px; }
-
-.singers .singerHandle .singerName {
-  height: 34px;
-  line-height: 34px; }
-  .singers .singerHandle .singerName .input-group {
-    width: 320px;
-    padding-left: 12px; }
 
 @charset "UTF-8";
 /**
@@ -152,6 +157,7 @@ body,
     border-left: 1px solid #e7e7e7; }
 
 .g-body label {
+  width: 70px;
   font-weight: normal; }
 
 .g-body textarea {
@@ -227,6 +233,7 @@ body,
     border-left: 1px solid #e7e7e7; }
 
 .g-body label {
+  width: 70px;
   font-weight: normal; }
 
 .g-body textarea {

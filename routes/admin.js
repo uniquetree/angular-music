@@ -71,6 +71,23 @@ router.get('/getAreas', function(req, res, next) {
     });
 });
 
+// 获取所有歌手的id、name
+router.get('/getAllSingers', function(req, res) {
+
+    var singer = new Singer();
+    singer.findAllSingers(function(isError, results) {
+
+        if(isError) {
+            res.send(500);
+            console.log(results.message);
+        } else {
+            res.json({
+                success: true,
+                allSingers: results
+            });
+        }
+    });
+});
 // 分页获取歌手列表，关键字查找
 router.get('/getSingers', function(req, res, next) {
 
@@ -223,7 +240,7 @@ router.get('/getAlbumById', function(req, res){
 // 获取某位歌手的专辑
 router.get('/getAlbumsBySingerId', function(req, res){
 
-    var album = new Album({singerId: req.query.singerId});
+    var album = new Album({singer_id: req.query.singer_id});
     album.findAlbumsBySingerId(function(isError, results) {
         if(isError) {
             res.send(500);
@@ -240,10 +257,10 @@ router.get('/getAlbumsBySingerId', function(req, res){
 router.post('/addAlbum', expressJwt({secret: secretToken}), tokenManager.verifyToken, function(req, res) {
 
     var albumInfo = {
-        albumName: req.body.albumName,
+        album_name: req.body.album_name,
         album_info: req.body.album_info,
-        publishDate: req.body.publishDate,
-        singerId: req.body.singerId
+        publish_date: req.body.publish_date,
+        singer_id: req.body.singer_id
     };
     var album = new Album(albumInfo);
     album.addAlbum(function(isError, results) {
@@ -263,10 +280,10 @@ router.post('/updateAlbum', expressJwt({secret: secretToken}), tokenManager.veri
 
     var albumInfo = {
         id: req.body.id,
-        albumName: req.body.albumName,
+        album_name: req.body.album_name,
         album_info: req.body.album_info,
-        publishDate: req.body.publishDate,
-        singerId: req.body.singerId
+        publish_date: req.body.publish_date,
+        singer_id: req.body.singer_id
     };
     var album = new Album(albumInfo);
     album.updateAlbum(function(isError, results) {

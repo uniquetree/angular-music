@@ -25,6 +25,12 @@ var Singer = function (singerInfo, pagination, keyword) {
     }
 };
 
+Singer.prototype.findAllSingers = function(callback) {
+
+    var sql = 'select id, singer_name from ' + singer_tb;
+    db.query(sql, [], callback);
+};
+
 // 查找singers
 Singer.prototype.findSingers = function(callback){
 

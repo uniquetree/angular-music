@@ -17,6 +17,7 @@ module.exports = {
         getMenuByRole: base_url + 'api/admin/getMenuByRole',
         getAreas: base_url + 'api/admin/getAreas',
         // 歌手
+        getAllSingers: base_url + 'api/admin/getAllSingers',
         getSingers: base_url + 'api/admin/getSingers',
         getSingerById: base_url + 'api/admin/getSingerById',
         addSinger: base_url + 'api/admin/addSinger',

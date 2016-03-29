@@ -26,6 +26,14 @@ musicApp.factory('AdminService', ['$http', function($http) {
             return $http.post($config.api.updateUserInfo, userInfo);
         },
 
+        // 获取获取所有歌手的id、name
+        getAllSingers: function(){
+
+            return $http({
+                method: 'GET',
+                url: $config.api.getAllSingers
+            });
+        },
         // 获取歌手列表
         getSingers: function(pagination){
 
@@ -112,7 +120,7 @@ musicApp.factory('AdminService', ['$http', function($http) {
                 method: 'GET',
                 url: $config.api.getAlbumsBySingerId,
                 params: {
-                    singerId: singerId
+                    singer_id: singerId
                 }
             });
         },
@@ -122,10 +130,10 @@ musicApp.factory('AdminService', ['$http', function($http) {
                 method: 'POST',
                 url: $config.api.addAlbum,
                 data: {
-                    albumName: albumInfo.albumName,
+                    album_name: albumInfo.album_name,
                     album_info: albumInfo.album_info,
-                    publishDate: albumInfo.publishDate,
-                    singerId: albumInfo.singerId
+                    publish_date: albumInfo.publish_date,
+                    singer_id: albumInfo.singer_id
                 }
             });
         },
@@ -136,10 +144,10 @@ musicApp.factory('AdminService', ['$http', function($http) {
                 url: $config.api.updateAlbum,
                 data: {
                     id: albumInfo.id,
-                    albumName: albumInfo.albumName,
+                    album_name: albumInfo.album_name,
                     album_info: albumInfo.album_info,
-                    publishDate: albumInfo.publishDate,
-                    singerId: albumInfo.singerId
+                    publish_date: albumInfo.publish_date,
+                    singer_id: albumInfo.singer_id
                 }
             });
         },

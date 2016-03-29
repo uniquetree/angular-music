@@ -1,6 +1,16 @@
 /**
  * Created by 郑树聪 on 2016/3/10.
  */
+.select-date,
+.singer-select {
+    height: 34px;
+    line-height: 34px;
+
+    .input-group {
+        width: 320px;
+        padding-left: 12px;
+    }
+}
 .singers,
 .albums {
     .breadcrumb {
@@ -13,6 +23,40 @@
 
         .btn {
             margin: 10px 0 10px 10px;
+        }
+    }
+    .table {
+
+        th,
+        td {
+            text-align: center;
+
+            &:first-child {
+                width: 30px;
+            }
+            &:nth-child(2) {
+                width: 100px;
+            }
+            &:last-child {
+                width: 120px;
+            }
+        }
+        .name-td {
+            cursor: pointer;
+        }
+    }
+
+    .singerHandle,
+    .albumHandle {
+
+        .singerName {
+            height: 34px;
+            line-height: 34px;
+
+            .input-group {
+                width: 320px;
+                padding-left: 12px;
+            }
         }
     }
 }
@@ -71,15 +115,6 @@
 // 编辑资料样式
 .editInfo {
 
-    label {
-        font-weight: normal;
-    }
-    textarea[name="info"] {
-        overflow-x: hidden;
-        overflow-y: auto;
-        resize: none;
-    }
-
     .edit-info-title {
         height: 32px;
         border-bottom: 1px solid #e7e7e7;
@@ -98,14 +133,12 @@
     }
 
     .username,
-    .birth,
     .area {
         height: 34px;
         line-height: 34px;
     }
 
-    .username,
-    .birth {
+    .username {
 
         .input-group {
             width: 320px;
@@ -128,30 +161,6 @@
 
 }
 
-.singers,
-.albums {
-    .table {
-
-        th,
-        td {
-            text-align: center;
-
-            &:first-child {
-                width: 30px;
-            }
-            &:nth-child(2) {
-                width: 100px;
-            }
-            &:last-child {
-                width: 120px;
-            }
-        }
-        .name-td {
-            cursor: pointer;
-        }
-    }
-}
-
 // 歌手列表样式
 .singers {
 
@@ -162,19 +171,6 @@
 
             &:nth-child(3) {
                 width: 160px;
-            }
-        }
-    }
-
-    .singerHandle {
-
-        .singerName {
-            height: 34px;
-            line-height: 34px;
-
-            .input-group {
-                width: 320px;
-                padding-left: 12px;
             }
         }
     }

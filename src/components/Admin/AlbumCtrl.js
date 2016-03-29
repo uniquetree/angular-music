@@ -38,14 +38,14 @@ musicApp.controller('AlbumCtrl', ['$scope', '$location', '$routeParams', '$log',
         }
 
         // 获取歌手列表数据
-        $scope.getAlbums = function(nextPage, pageSize){
+        $scope.getAlbums = function(nextPage, pageSize, keyword){
 
             var params = {
                 currPage: nextPage || 1,
                 pageSize: pageSize || 10
             };
-            if($scope.keyword) {
-                params.keyword = $scope.keyword;
+            if(keyword) {
+                params.keyword = keyword;
             }
 
             AdminService.getAlbums(params).success(function(data) {
@@ -64,6 +64,14 @@ musicApp.controller('AlbumCtrl', ['$scope', '$location', '$routeParams', '$log',
                 console.log(data.msg);
             });
         };
+        // 回车搜索专辑
+        $scope.search = function($event) {
+
+            var keyCode = $event.which || $event.keyCode;
+            if (keyCode === 13) {
+                $scope.getAlbums(1, 10, $event.target.value);
+            }
+        };
 
         $scope.albumInfo = {};
         // 操作歌手：判断是添加歌手还是编辑歌手
@@ -76,26 +84,34 @@ musicApp.controller('AlbumCtrl', ['$scope', '$location', '$routeParams', '$log',
 
                     if(data.success) {
                         $scope.albumInfo = data.album;
-                        $scope.albumInfo.publish_date = new Date($scope.albumInfo.publish_date);
+                        if($scope.albumInfo.publish_date) {
+                            $scope.albumInfo.publish_date = new Date($scope.albumInfo.publish_date);
+                        } else {
+                            $scope.albumInfo.publish_date = new Date();
+                        }
                     }
                 });
             }
         };
-        // 修改歌手信息
+        // 修改专辑信息
         $scope.saveAlbumInfo = function() {
+
+            var date = $scope.albumInfo.publish_date;
+            $scope.albumInfo.publish_date = $func.formatDate(date);
 
             if($scope.isAddAlbum) {
 
                 AdminService.addAlbum($scope.albumInfo).success(function(data){
                     if(data.success) {
                         alert('添加成功');
-                        $location.path('#/admin?page=albums&subPage=albumList');
+                        $location.search('subPage', 'albumList');
                     }
                 });
             } else {
 
                 AdminService.updateAlbum($scope.albumInfo).success(function(data){
-                    if(data.success) {
+                    if(data.success){
+                        $scope.albumInfo.publish_date = date;
                         alert('更新成功');
                     }
                 });

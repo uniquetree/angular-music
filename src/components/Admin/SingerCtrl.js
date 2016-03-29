@@ -39,14 +39,14 @@ musicApp.controller('SingerCtrl', ['$scope', '$location', '$routeParams', '$log'
         }
 
         // 获取歌手列表数据
-        $scope.getSingers = function(nextPage, pageSize){
+        $scope.getSingers = function(nextPage, pageSize, keyword){
 
             var params = {
                 currPage: nextPage || 1,
                 pageSize: pageSize || 10
             };
-            if($scope.keyword) {
-                params.keyword = $scope.keyword;
+            if(keyword) {
+                params.keyword = keyword;
             }
 
             AdminService.getSingers(params).success(function(data) {
@@ -65,6 +65,14 @@ musicApp.controller('SingerCtrl', ['$scope', '$location', '$routeParams', '$log'
             }).error(function(data) {
                 console.log(data.msg);
             });
+        };
+        // 回车搜索专辑
+        $scope.search = function($event) {
+
+            var keyCode = $event.which || $event.keyCode;
+            if (keyCode === 13) {
+                $scope.getSingers(1, 10, $event.target.value);
+            }
         };
 
         $scope.singerInfo = {};
@@ -90,7 +98,7 @@ musicApp.controller('SingerCtrl', ['$scope', '$location', '$routeParams', '$log'
                 AdminService.addSinger($scope.singerInfo).success(function(data){
                     if(data.success) {
                         alert('添加成功');
-                        $location.path('#/admin?page=singers&subPage=singerList');
+                        $location.search('subPage', 'singerList');
                     }
                 });
             } else {

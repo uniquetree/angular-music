@@ -93,7 +93,7 @@
         <form class="navbar-form pull-left m-search" role="search">
             <div class="form-group">
                 <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-                <input type="text" ng-model="keyword" class="form-control" placeholder="查找歌手">
+                <input type="text" class="form-control" placeholder="查找歌手" ng-keypress="search($event)">
             </div>
         </form>
         <button class="btn btn-danger btn-sm pull-right" ng-click="deleteSinger()">删除选中的歌手</button>
@@ -173,10 +173,10 @@
         <form class="navbar-form pull-left m-search" role="search">
             <div class="form-group">
                 <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-                <input type="text" ng-model="keyword" class="form-control" placeholder="查找专辑" ng-keypress="search($event)">
+                <input type="text" class="form-control" placeholder="查找专辑" ng-keypress="search($event)">
             </div>
         </form>
-        <button class="btn btn-danger btn-sm pull-right" ng-click="deleteAlbum()">删除选中的专辑</button>
+        <button class="btn btn-danger btn-sm pull-right" ng-click="deleteAlumsById()">删除选中的专辑</button>
         <a href="/#/admin?page=albums&subPage=albumHandle" class="btn btn-info btn-sm pull-right" role="button">添加专辑</a>
     </div>
     <div class="item-table" ng-controller="PageTableCtrl">
@@ -215,23 +215,20 @@
         <uib-pagination ng-if="pagination.totalItems>0" total-items="pagination.totalItems" ng-model="pagination.currPage"
                         max-size="pagination.maxSize" items-per-page="pagination.itemsPerPage" class="pagination-sm pull-right"
                         previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"
-                        boundary-links="true" force-ellipses="true" ng-change="pageChanged()"></uib-pagination>
+                        boundary-links="true" force-ellipses="true" ng-change="pageChanged(getAlbums)"></uib-pagination>
     </div>
 </script>
 <!--添加专辑模板 albumHandle.html-->
 <script type="text/ng-template" id="albumHandle.html">
-    <form class="form-horizontal clearfix singerHandle" data-ng-init="albumHandle()">
+    <form class="form-horizontal clearfix albumHandle" data-ng-init="albumHandle()">
         <div class="form-group clearfix singerName">
-            <label for="singer-name" class="pull-left">专辑名：</label>
+            <label for="album-name" class="pull-left">专辑名：</label>
             <div class="input-group pull-left">
                 <div class="input-group-addon"><i class="fa fa-user"></i></div>
                 <input type="text" class="form-control" id="album-name" placeholder="专辑名" ng-model="albumInfo.album_name">
             </div>
         </div>
-        <div class="form-group">
-            <label for="singer-info">所属歌手：</label>
-            <div></div>
-        </div>
+        <singer-select selected-singer-id="albumInfo.singer_id"></singer-select>
         <date-picker date="albumInfo.publish_date" label="出版日期"></date-picker>
         <div class="form-group">
             <label for="album-info">专辑简介：</label>

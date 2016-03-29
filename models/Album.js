@@ -13,10 +13,10 @@ var singer_tb = 'singers';
 var Album = function (albumInfo, pagination, keyword) {
     if(typeof albumInfo !== 'undefined') {
         this.id = albumInfo.id;
-        this.albumName = albumInfo.albumName;
+        this.album_name = albumInfo.album_name;
         this.album_info = albumInfo.album_info;
-        this.publishDate = albumInfo.publishDate;
-        this.singerId = albumInfo.singerId;
+        this.publish_date = albumInfo.publish_date;
+        this.singer_id = albumInfo.singer_id;
     }
 
     if(typeof pagination !== 'undefined') {
@@ -65,7 +65,7 @@ Album.prototype.findAlbumById = function(callback){
 Album.prototype.findAlbumsBySingerId = function(callback){
 
     var sql = 'select id, album_name, album_info, publish_date, singer_id from ' + album_tb + ' where singer_id = ?';
-    var params = [this.singerId];
+    var params = [this.singer_id];
     db.query(sql, params, callback);
 };
 
@@ -77,7 +77,7 @@ Album.prototype.addAlbum = function(callback) {
         create_time = new Date();
 
     sql = 'insert into ' + album_tb + '(album_name, album_info, publish_date, create_time, singer_id) values (?, ?, ?, ?, ?)';
-    params = [this.albumName, this.album_info, this.publishDate, create_time, this.singerId];
+    params = [this.album_name, this.album_info, this.publish_date, create_time, this.singer_id];
     db.query(sql, params, callback);
 };
 
@@ -85,7 +85,7 @@ Album.prototype.addAlbum = function(callback) {
 Album.prototype.updateAlbum = function(callback){
 
     var sql = 'update ' + album_tb + ' set album_name=?, album_info=?, publish_date=?, singer_id=? where id = ?';
-    db.query(sql, [this.albumName, this.album_info, this.publishDate, this.singerId, this.id], callback);
+    db.query(sql, [this.album_name, this.album_info, this.publish_date, this.singer_id, this.id], callback);
 };
 
 // 删除专辑，ids要删除的专辑的id，数组
