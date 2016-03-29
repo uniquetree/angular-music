@@ -36,7 +36,7 @@ Singer.prototype.findAllSingers = function(callback) {
 };
 
 // 根据条件筛选歌手
-Singer.prototype.findAllSingerByFilters = function(callback) {
+Singer.prototype.findAllSingersByFilters = function(callback) {
 
     var filters = ' where ',
         params = [];

@@ -201,6 +201,7 @@ router.post('/deleteSingers', expressJwt({secret: secretToken}), tokenManager.ve
     });
 });
 
+
 // 分页获取专辑列表，关键字查找
 router.get('/getAlbums', function(req, res) {
 
@@ -335,6 +336,14 @@ router.post('/deleteAlbumsBySingerId', expressJwt({secret: secretToken}), tokenM
             });
         }
     });
+});
+
+
+router.get('/', function(req, res) {
+
+});
+router.post('/', function(req, res) {
+
 });
 
 module.exports = router;
