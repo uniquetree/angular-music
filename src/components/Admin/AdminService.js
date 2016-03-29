@@ -65,6 +65,8 @@ musicApp.factory('AdminService', ['$http', function($http) {
                 url: $config.api.addSinger,
                 data: {
                     singer_name: singer.singer_name,
+                    singer_type: singer.singer_type,
+                    language: singer.language,
                     singer_info: singer.singer_info
                 }
             });
@@ -77,6 +79,8 @@ musicApp.factory('AdminService', ['$http', function($http) {
                 data: {
                     id: singer.id,
                     singer_name: singer.singer_name,
+                    singer_type: singer.singer_type,
+                    language: singer.language,
                     singer_info: singer.singer_info
                 }
             });

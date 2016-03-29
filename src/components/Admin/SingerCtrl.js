@@ -13,6 +13,9 @@ var musicApp = $config.musicApp;
 musicApp.controller('SingerCtrl', ['$scope', '$location', '$routeParams', '$log', 'AdminService', 'PageTableData',
     function($scope, $location, $routeParams, $log, AdminService, PageTableData){
 
+        $scope.singerTypes = $config.singerTypes;
+        $scope.languages = $config.languages;
+
         if(!angular.isUndefined($routeParams.subPage)) {
             if($routeParams.subPage === 'singerList') {
                 $scope.subPageUrl = 'singerList.html';
@@ -55,7 +58,25 @@ musicApp.controller('SingerCtrl', ['$scope', '$location', '$routeParams', '$log'
                     $scope.singers = data.singers;
 
                     for(var i=0; i<data.singers.length; i++) {
-                        PageTableData.itemIds.push(data.singers[i].id);
+
+                        for(var j=0; j<$config.singerTypes.length; j++) {
+                            if($scope.singers[i].singer_type === $config.singerTypes[j].id) {
+                                $scope.singers[i].singer_type_text = $config.singerTypes[j].text;
+                                break;
+                            } else {
+                                $scope.singers[i].singer_type_text = '';
+                            }
+                        }
+                        for(var k=0; k<$config.languages.length; k++) {
+                            if($scope.singers[i].language === $config.languages[k].id) {
+                                $scope.singers[i].language_text = $config.languages[k].text;
+                                break;
+                            } else {
+                                $scope.singers[i].language_text = '';
+                            }
+                        }
+
+                        PageTableData.itemIds.push($scope.singers[i].id);
                     }
                     PageTableData.pagination.totalItems = data.totalItems;
                     PageTableData.pagination.currPage = data.currPage;

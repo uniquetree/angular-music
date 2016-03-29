@@ -2,13 +2,14 @@
  * 专辑模型
  * Created by 郑树聪 on 2016/3/28.
  */
+var config = require('../config/config');
 var Db = require('../utils/Db');
 var Common = require('../utils/Common');
 var db = new Db();
 var common = new Common();
 
-var album_tb = 'albums';
-var singer_tb = 'singers';
+var album_tb = config.tableName.album_tb;
+var singer_tb = config.tableName.singer_tb;
 
 var Album = function (albumInfo, pagination, keyword) {
     if(typeof albumInfo !== 'undefined') {

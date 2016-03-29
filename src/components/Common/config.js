@@ -33,3 +33,18 @@ module.exports = {
         deleteAlbumsBySingerId: base_url + 'api/admin/deleteAlbumsBySingerId'
     }
 };
+
+module.exports.singerTypes = [
+    {id: 1, text: '男歌手'},
+    {id: 2, text: '女歌手'},
+    {id: 3, text: '乐队组合'}
+];
+
+module.exports.languages = [
+    {id: 1, text: '华语'},
+    {id: 2, text: '粤语'},
+    {id: 3, text: '欧美'},
+    {id: 4, text: '日语'},
+    {id: 5, text: '韩语'},
+    {id: 6, text: '小语种'}
+];

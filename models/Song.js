@@ -2,11 +2,12 @@
  * 后台: 音乐模型类
  * Created by 郑树聪 on 2016/2/25.
  */
+var config = require('../config/config');
 var Db = require('../utils/Db');
 var Common = require('../utils/Common');
 var db = new Db();
 
-var song_tb = 'songs';
+var song_tb = config.tableName.song_tb;
 
 var Song = function (songInfo, pagination, keyword) {
     if(typeof songInfo !== 'undefined') {

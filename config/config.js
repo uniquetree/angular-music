@@ -25,6 +25,18 @@ module.exports = {
     secretToken: 'fas3456daj8lf6kjg3asldk2mvdsfasd23gert4ddg'
 };
 
+module.exports.tableName = {
+    language_tb: 'language',
+    singer_type_tb: 'singer_type',
+    nation_tb: 'nation',
+    user_tb: 'music_users',
+    playlist_tb: 'playlists',
+    singer_tb: 'singers',
+    album_tb: 'albums',
+    song_tb: 'songs',
+    users_playlists: 'users_playlists'
+};
+
 // 管理中心菜单配置
 module.exports.adminMenus = [
     {

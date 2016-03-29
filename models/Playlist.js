@@ -2,12 +2,13 @@
  * 后台: 菜单模型类
  * Created by 郑树聪 on 2016/2/25.
  */
+var config = require('../config/config');
 var Db = require('../utils/Db');
 var Common = require('../utils/Common');
 var db = new Db();
 var common = new Common();
 
-var playlist_tb = 'playlists';
+var playlist_tb = config.tableName.playlist_tb;
 
 var Playlist = function (type) {
     this.menu = [];

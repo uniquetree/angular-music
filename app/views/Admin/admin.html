@@ -109,6 +109,8 @@
                     </th>
                     <th>序号</th>
                     <th>歌手名</th>
+                    <th>分类</th>
+                    <th>语种</th>
                     <th>歌手简介</th>
                     <th>操作</th>
                 </tr>
@@ -120,6 +122,8 @@
                     </td>
                     <td>{{(pagination.currPage-1)*pagination.itemsPerPage + $index + 1}}</td>
                     <td class="name-td" ng-click="goToSingerPage(singer.id)">{{singer.singer_name}}</td>
+                    <td>{{singer.singer_type_text}}</td>
+                    <td>{{singer.language_text}}</td>
                     <td>{{singer.singer_info}}</td>
                     <td>
                         <a href="#/admin?page=singers&subPage=singerHandle&singerId={{singer.id}}"><i class="fa fa-edit"></i></a>
@@ -142,6 +146,24 @@
             <div class="input-group pull-left">
                 <div class="input-group-addon"><i class="fa fa-user"></i></div>
                 <input type="text" class="form-control" id="singer-name" placeholder="歌手" ng-model="singerInfo.singer_name">
+            </div>
+        </div>
+        <div class="form-group singer-type-select">
+            <label class="pull-left">歌手分类：</label>
+            <div class="input-group">
+                <select class="form-control" ng-model="singerInfo.singer_type"
+                        ng-options="singerType.id as singerType.text for singerType in singerTypes">' +
+                    <option value="">-- 选择分类 --</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group language-select">
+            <label class="pull-left">歌手语种：</label>
+            <div class="input-group">
+                <select class="form-control" ng-model="singerInfo.language"
+                        ng-options="language.id as language.text for language in languages">' +
+                    <option value="">-- 选择语种 --</option>
+                </select>
             </div>
         </div>
         <div class="form-group">

@@ -3,10 +3,14 @@
  * Created by 郑树聪 on 2016/3/10.
  */
 .select-date,
+.singer-type-select,
+.language-select,
 .singer-select {
   height: 34px;
   line-height: 34px; }
   .select-date .input-group,
+  .singer-type-select .input-group,
+  .language-select .input-group,
   .singer-select .input-group {
     width: 320px;
     padding-left: 12px; }

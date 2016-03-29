@@ -133,6 +133,8 @@ router.post('/addSinger', expressJwt({secret: secretToken}), tokenManager.verify
 
     var singerInfo = {
         singer_name: req.body.singer_name,
+        singer_type: req.body.singer_type,
+        language: req.body.language,
         singer_info: req.body.singer_info
     };
     var singer = new Singer(singerInfo);
@@ -154,6 +156,8 @@ router.post('/updateSinger', expressJwt({secret: secretToken}), tokenManager.ver
     var singerInfo = {
         id: req.body.id,
         singer_name: req.body.singer_name,
+        singer_type: req.body.singer_type,
+        language: req.body.language,
         singer_info: req.body.singer_info
     };
     var singer = new Singer(singerInfo);
