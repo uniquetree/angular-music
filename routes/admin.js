@@ -115,8 +115,8 @@ router.get('/getSingerById', function(req, res, next) {
 router.post('/addSinger', expressJwt({secret: secretToken}), tokenManager.verifyToken, function(req, res, next){
 
     var singerInfo = {
-        name: req.body.name,
-        info: req.body.info
+        singer_name: req.body.singer_name,
+        singer_info: req.body.singer_info
     };
     var singer = new Singer(singerInfo);
     singer.addSinger(function(isError, results) {
@@ -136,8 +136,8 @@ router.post('/updateSinger', expressJwt({secret: secretToken}), tokenManager.ver
 
     var singerInfo = {
         id: req.body.id,
-        name: req.body.name,
-        info: req.body.info
+        singer_name: req.body.singer_name,
+        singer_info: req.body.singer_info
     };
     var singer = new Singer(singerInfo);
     singer.updateSinger(function(isError, results) {
@@ -241,7 +241,7 @@ router.post('/addAlbum', expressJwt({secret: secretToken}), tokenManager.verifyT
 
     var albumInfo = {
         albumName: req.body.albumName,
-        info: req.body.info,
+        album_info: req.body.album_info,
         publishDate: req.body.publishDate,
         singerId: req.body.singerId
     };
@@ -264,7 +264,7 @@ router.post('/updateAlbum', expressJwt({secret: secretToken}), tokenManager.veri
     var albumInfo = {
         id: req.body.id,
         albumName: req.body.albumName,
-        info: req.body.info,
+        album_info: req.body.album_info,
         publishDate: req.body.publishDate,
         singerId: req.body.singerId
     };

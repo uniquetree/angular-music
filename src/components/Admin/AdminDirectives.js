@@ -13,28 +13,30 @@ musicApp.directive('datePicker', function(){
         restrict: 'EA',
         replace: true,
         scope: {
-            date: '='
+            date: '=',
+            label: '@'
         },
         template: '<div class="form-group clearfix birth">' +
-            '<label class="pull-left">生日：</label>' +
+            '<label class="pull-left">{{label}}：</label>' +
             '<div class="input-group pull-left"><span class="input-group-addon"><i class="fa fa-calendar"></i></span>' +
             '<input type="text" class="form-control" ng-click="open()" uib-datepicker-popup ng-model="date" ' +
             'is-open="opened" datepicker-options="dateOptions" on-open-focus="false" show-button-bar="false" /></div></div>',
         link: function($scope, elem, attrs) {
 
-            if(!$scope.date) {
+            if(angular.isUndefined($scope.date)) {
                 $scope.date = new Date();
             } else {
                 $scope.date = new Date($scope.date);
             }
 
-            $scope.opened = false;
             $scope.dateOptions = {
                 dateDisabled: disabled,
                 maxDate: new Date(),
                 startingDay: 1,
                 showWeeks: false
             };
+
+            $scope.opened = false;
 
             $scope.open = function(){
                 $scope.opened = true;

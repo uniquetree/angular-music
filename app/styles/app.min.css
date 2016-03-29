@@ -87,23 +87,33 @@
   text-align: center; }
 
 .singers .table th,
-.singers .table td {
+.singers .table td,
+.albums .table th,
+.albums .table td {
   text-align: center; }
   .singers .table th:first-child,
-  .singers .table td:first-child {
+  .singers .table td:first-child,
+  .albums .table th:first-child,
+  .albums .table td:first-child {
     width: 30px; }
   .singers .table th:nth-child(2),
-  .singers .table td:nth-child(2) {
+  .singers .table td:nth-child(2),
+  .albums .table th:nth-child(2),
+  .albums .table td:nth-child(2) {
     width: 100px; }
-  .singers .table th:nth-child(3),
-  .singers .table td:nth-child(3) {
-    width: 160px; }
-  .singers .table th:nth-child(5),
-  .singers .table td:nth-child(5) {
+  .singers .table th:last-child,
+  .singers .table td:last-child,
+  .albums .table th:last-child,
+  .albums .table td:last-child {
     width: 120px; }
 
-.singers .table .singer-name-td {
+.singers .table .name-td,
+.albums .table .name-td {
   cursor: pointer; }
+
+.singers .table th:nth-child(3),
+.singers .table td:nth-child(3) {
+  width: 160px; }
 
 .singers .singerHandle .singerName {
   height: 34px;

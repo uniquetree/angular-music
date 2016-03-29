@@ -76,6 +76,7 @@ musicApp.controller('AlbumCtrl', ['$scope', '$location', '$routeParams', '$log',
 
                     if(data.success) {
                         $scope.albumInfo = data.album;
+                        $scope.albumInfo.publish_date = new Date($scope.albumInfo.publish_date);
                     }
                 });
             }
@@ -101,7 +102,7 @@ musicApp.controller('AlbumCtrl', ['$scope', '$location', '$routeParams', '$log',
             }
         };
         // 删除单个歌手
-        $scope.deleteAlbum = function(id){
+        $scope.deleteAlumsById = function(id){
 
             if(angular.isUndefined(id)) {
                 id = PageTableData.selectItemIds;
@@ -118,7 +119,7 @@ musicApp.controller('AlbumCtrl', ['$scope', '$location', '$routeParams', '$log',
             } else {
                 ids.push(id);
             }
-            AdminService.deleteAlbums(ids).success(function(data) {
+            AdminService.deleteAlumsById(ids).success(function(data) {
 
                 if(data.success) {
                     alert('删除成功');

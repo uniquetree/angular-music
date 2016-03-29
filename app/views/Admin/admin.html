@@ -61,7 +61,7 @@
                     </label>
                 </span>
             </div>
-            <date-picker date="userInfo.birth"></date-picker>
+            <date-picker date="userInfo.birth" label="生日"></date-picker>
             <city-select code="userInfo.code"></city-select>
             <div class="form-group">
                 <label for="info">个人简介：</label>
@@ -119,8 +119,8 @@
                         <input type="checkbox" name="item-check" ng-click="toggleSelect($event, singer.id)">
                     </td>
                     <td>{{(pagination.currPage-1)*pagination.itemsPerPage + $index + 1}}</td>
-                    <td ng-click="goToSingerPage(singer.id)">{{singer.name}}</td>
-                    <td>{{singer.info}}</td>
+                    <td class="name-td" ng-click="goToSingerPage(singer.id)">{{singer.singer_name}}</td>
+                    <td>{{singer.singer_info}}</td>
                     <td>
                         <a href="#/admin?page=singers&subPage=singerHandle&singerId={{singer.id}}"><i class="fa fa-edit"></i></a>
                         <i class="fa fa-trash" ng-click="deleteSinger(singer.id)"></i>
@@ -138,17 +138,17 @@
 <script type="text/ng-template" id="singerHandle.html">
     <form class="form-horizontal clearfix singerHandle" data-ng-init="singerHandle()">
         <div class="form-group clearfix singerName">
-            <label for="singer-name" class="pull-left">昵称：</label>
+            <label for="singer-name" class="pull-left">歌手：</label>
             <div class="input-group pull-left">
                 <div class="input-group-addon"><i class="fa fa-user"></i></div>
-                <input type="text" class="form-control" id="singer-name" placeholder="昵称" ng-model="singerInfo.name">
+                <input type="text" class="form-control" id="singer-name" placeholder="歌手" ng-model="singerInfo.singer_name">
             </div>
         </div>
         <div class="form-group">
             <label for="singer-info">歌手简介：</label>
             <div>
                 <textarea id="singer-info" class="form-control" rows="6" cols="40" name="singer-info"
-                          placeholder="歌手简介" ng-model="singerInfo.info"></textarea>
+                          placeholder="歌手简介" ng-model="singerInfo.singer_info"></textarea>
             </div>
         </div>
         <button class="btn btn-primary" ng-click="saveSingerInfo()">保存</button>
@@ -173,7 +173,7 @@
         <form class="navbar-form pull-left m-search" role="search">
             <div class="form-group">
                 <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-                <input type="text" ng-model="keyword" class="form-control" placeholder="查找专辑">
+                <input type="text" ng-model="keyword" class="form-control" placeholder="查找专辑" ng-keypress="search($event)">
             </div>
         </form>
         <button class="btn btn-danger btn-sm pull-right" ng-click="deleteAlbum()">删除选中的专辑</button>
@@ -201,13 +201,13 @@
                         <input type="checkbox" name="item-check" ng-click="toggleSelect($event, album.id)">
                     </td>
                     <td>{{(pagination.currPage-1)*pagination.itemsPerPage + $index + 1}}</td>
-                    <td class="album-name-td" ng-click="goToSingerPage(album.id)">{{album.album_name}}</td>
-                    <td>{{album.info}}</td>
+                    <td class="name-td" ng-click="goToAlbumPage(album.id)">{{album.album_name}}</td>
+                    <td>{{album.album_info}}</td>
                     <td>{{album.publish_date}}</td>
-                    <td>{{album.singer_id}}</td>
+                    <td>{{album.singer_name}}</td>
                     <td>
-                        <a href="#/admin?page=singers&subPage=singerHandle&singerId={{album.id}}"><i class="fa fa-edit"></i></a>
-                        <i class="fa fa-trash" ng-click="deleteSinger(album.id)"></i>
+                        <a href="#/admin?page=albums&subPage=albumHandle&albumId={{album.id}}"><i class="fa fa-edit"></i></a>
+                        <i class="fa fa-trash" ng-click="deleteAlumsById(album.id)"></i>
                     </td>
                 </tr>
             </tbody>
@@ -222,17 +222,22 @@
 <script type="text/ng-template" id="albumHandle.html">
     <form class="form-horizontal clearfix singerHandle" data-ng-init="albumHandle()">
         <div class="form-group clearfix singerName">
-            <label for="singer-name" class="pull-left">昵称：</label>
+            <label for="singer-name" class="pull-left">专辑名：</label>
             <div class="input-group pull-left">
                 <div class="input-group-addon"><i class="fa fa-user"></i></div>
-                <input type="text" class="form-control" id="album-name" placeholder="昵称" ng-model="albumInfo.name">
+                <input type="text" class="form-control" id="album-name" placeholder="专辑名" ng-model="albumInfo.album_name">
             </div>
         </div>
         <div class="form-group">
-            <label for="singer-info">专辑简介：</label>
+            <label for="singer-info">所属歌手：</label>
+            <div></div>
+        </div>
+        <date-picker date="albumInfo.publish_date" label="出版日期"></date-picker>
+        <div class="form-group">
+            <label for="album-info">专辑简介：</label>
             <div>
-                <textarea id="album-info" class="form-control" rows="6" cols="40" name="singer-info"
-                          placeholder="专辑简介" ng-model="albumInfo.info"></textarea>
+                <textarea id="album-info" class="form-control" rows="6" cols="40" name="album-info"
+                          placeholder="专辑简介" ng-model="albumInfo.album_info"></textarea>
             </div>
         </div>
         <button class="btn btn-primary" ng-click="saveAlbumInfo()">保存</button>

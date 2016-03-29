@@ -128,9 +128,8 @@
 
 }
 
-// 歌手列表样式
-.singers {
-
+.singers,
+.albums {
     .table {
 
         th,
@@ -143,15 +142,27 @@
             &:nth-child(2) {
                 width: 100px;
             }
-            &:nth-child(3) {
-                width: 160px;
-            }
-            &:nth-child(5) {
+            &:last-child {
                 width: 120px;
             }
         }
-        .singer-name-td {
+        .name-td {
             cursor: pointer;
+        }
+    }
+}
+
+// 歌手列表样式
+.singers {
+
+    .table {
+
+        th,
+        td {
+
+            &:nth-child(3) {
+                width: 160px;
+            }
         }
     }
 

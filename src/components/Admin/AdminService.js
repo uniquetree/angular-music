@@ -45,7 +45,7 @@ musicApp.factory('AdminService', ['$http', function($http) {
             return $http({
                 method: 'GET',
                 url: $config.api.getSingerById,
-                data: {
+                params: {
                     id: id
                 }
             });
@@ -56,8 +56,8 @@ musicApp.factory('AdminService', ['$http', function($http) {
                 method: 'POST',
                 url: $config.api.addSinger,
                 data: {
-                    name: singer.name,
-                    info: singer.info
+                    singer_name: singer.singer_name,
+                    singer_info: singer.singer_info
                 }
             });
         },
@@ -68,8 +68,8 @@ musicApp.factory('AdminService', ['$http', function($http) {
                 url: $config.api.updateSinger,
                 data: {
                     id: singer.id,
-                    name: singer.name,
-                    info: singer.info
+                    singer_name: singer.singer_name,
+                    singer_info: singer.singer_info
                 }
             });
         },
@@ -123,7 +123,7 @@ musicApp.factory('AdminService', ['$http', function($http) {
                 url: $config.api.addAlbum,
                 data: {
                     albumName: albumInfo.albumName,
-                    info: albumInfo.info,
+                    album_info: albumInfo.album_info,
                     publishDate: albumInfo.publishDate,
                     singerId: albumInfo.singerId
                 }
@@ -137,7 +137,7 @@ musicApp.factory('AdminService', ['$http', function($http) {
                 data: {
                     id: albumInfo.id,
                     albumName: albumInfo.albumName,
-                    info: albumInfo.info,
+                    album_info: albumInfo.album_info,
                     publishDate: albumInfo.publishDate,
                     singerId: albumInfo.singerId
                 }
