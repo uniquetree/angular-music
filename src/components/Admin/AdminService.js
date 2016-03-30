@@ -182,6 +182,71 @@ musicApp.factory('AdminService', ['$http', function($http) {
                     singerIds: singerIds
                 }
             });
+        },
+
+        getSongsByPage: function(songInfo, pagination) {
+
+            return $http({
+                method: 'GET',
+                url: $config.api.getSongsByPage,
+                params: {
+                    language: songInfo.language,
+                    singer_id: songInfo.singer_id,
+                    album_id: songInfo.album_id,
+                    currPage: pagination.currPage,
+                    pageSize: pagination.pageSize,
+                    keyword: pagination.keyword
+                }
+            });
+        },
+        getSongById: function(id) {
+
+            return $http({
+                method: 'GET',
+                url: $config.api.getSongById,
+                params: {
+                    id: id
+                }
+            });
+        },
+        uploadSong: function(songInfo) {
+
+            return $http({
+                method: 'POST',
+                url: $config.api.uploadSong,
+                data: {
+                    song_name: songInfo.song_name,
+                    url: songInfo.url,
+                    publish_date: songInfo.publish_date,
+                    singer_id: songInfo.singer_id,
+                    album_id: songInfo.album_id
+                }
+            });
+        },
+        updateSong: function(ids) {
+
+            return $http({
+                method: 'POST',
+                url: $config.api.updateSong,
+                data: {
+                    id: songInfo.id,
+                    song_name: songInfo.song_name,
+                    url: songInfo.url,
+                    publish_date: songInfo.publish_date,
+                    singer_id: songInfo.singer_id,
+                    album_id: songInfo.album_id
+                }
+            });
+        },
+        deleteSongsByIds: function(songInfo) {
+
+            return $http({
+                method: 'POST',
+                url: $config.api.deleteSongsByIds,
+                data: {
+                    ids: ids
+                }
+            });
         }
     };
 }]);

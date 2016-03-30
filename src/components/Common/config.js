@@ -30,7 +30,13 @@ module.exports = {
         addAlbum: base_url + 'api/admin/addAlbum',
         updateAlbum: base_url + 'api/admin/updateAlbum',
         deleteAlumsById: base_url + 'api/admin/deleteAlumsById',
-        deleteAlbumsBySingerId: base_url + 'api/admin/deleteAlbumsBySingerId'
+        deleteAlbumsBySingerId: base_url + 'api/admin/deleteAlbumsBySingerId',
+        // 歌曲
+        getSongsByPage: base_url + 'api/admin/getSongsByPage',
+        getSongById: base_url + 'api/admin/getSongById',
+        uploadSong: base_url + 'api/admin/uploadSong',
+        updateSong: base_url + 'api/admin/updateSong',
+        deleteSongsByIds: base_url + 'api/admin/deleteSongsById'
     }
 };
 
