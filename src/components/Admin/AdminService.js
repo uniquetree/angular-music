@@ -184,18 +184,18 @@ musicApp.factory('AdminService', ['$http', function($http) {
             });
         },
 
-        getSongsByPage: function(songInfo, pagination) {
+        getSongsByPage: function(filters) {
 
             return $http({
                 method: 'GET',
                 url: $config.api.getSongsByPage,
                 params: {
-                    language: songInfo.language,
-                    singer_id: songInfo.singer_id,
-                    album_id: songInfo.album_id,
-                    currPage: pagination.currPage,
-                    pageSize: pagination.pageSize,
-                    keyword: pagination.keyword
+                    language: filters.language,
+                    singer_id: filters.singer_id,
+                    album_id: filters.album_id,
+                    currPage: filters.currPage,
+                    pageSize: filters.pageSize,
+                    keyword: filters.keyword
                 }
             });
         },

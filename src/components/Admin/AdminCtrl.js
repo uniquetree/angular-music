@@ -177,3 +177,4 @@ musicApp.controller('PageTableCtrl', ['$scope', 'PageTableData', function($scope
 
 require('./SingerCtrl');
 require('./AlbumCtrl');
+require('./SongCtrl');

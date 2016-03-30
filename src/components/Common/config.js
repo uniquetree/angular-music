@@ -5,7 +5,7 @@
 var base_url = 'http://localhost:3000/';
 
 module.exports = {
-    musicApp: angular.module('musicApp', ['ngRoute', 'ui.bootstrap']),
+    musicApp: angular.module('musicApp', ['ngRoute', 'ui.bootstrap', 'ui.uploader']),
     base_url: base_url,
     api: {
         // 用户操作

@@ -14,7 +14,8 @@
     }
 }
 .singers,
-.albums {
+.albums,
+.songs {
     .breadcrumb {
         padding-left: 0;
         padding-right: 0;
@@ -175,5 +176,16 @@
                 width: 160px;
             }
         }
+    }
+}
+
+.songs {
+    .songs-title {
+        height: 32px;
+        border-bottom: 1px solid #e7e7e7;
+        margin-bottom: 10px;
+        line-height: 32px;
+        font-size: 18px;
+        font-weight: bold;
     }
 }

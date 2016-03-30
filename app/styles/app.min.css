@@ -16,50 +16,65 @@
     padding-left: 12px; }
 
 .singers .breadcrumb,
-.albums .breadcrumb {
+.albums .breadcrumb,
+.songs .breadcrumb {
   padding-left: 0;
   padding-right: 0;
   margin-bottom: 10px; }
 
 .singers .edit-bars .btn,
-.albums .edit-bars .btn {
+.albums .edit-bars .btn,
+.songs .edit-bars .btn {
   margin: 10px 0 10px 10px; }
 
 .singers .table th,
 .singers .table td,
 .albums .table th,
-.albums .table td {
+.albums .table td,
+.songs .table th,
+.songs .table td {
   text-align: center; }
   .singers .table th:first-child,
   .singers .table td:first-child,
   .albums .table th:first-child,
-  .albums .table td:first-child {
+  .albums .table td:first-child,
+  .songs .table th:first-child,
+  .songs .table td:first-child {
     width: 30px; }
   .singers .table th:nth-child(2),
   .singers .table td:nth-child(2),
   .albums .table th:nth-child(2),
-  .albums .table td:nth-child(2) {
+  .albums .table td:nth-child(2),
+  .songs .table th:nth-child(2),
+  .songs .table td:nth-child(2) {
     width: 100px; }
   .singers .table th:last-child,
   .singers .table td:last-child,
   .albums .table th:last-child,
-  .albums .table td:last-child {
+  .albums .table td:last-child,
+  .songs .table th:last-child,
+  .songs .table td:last-child {
     width: 120px; }
 
 .singers .table .name-td,
-.albums .table .name-td {
+.albums .table .name-td,
+.songs .table .name-td {
   cursor: pointer; }
 
 .singers .singerHandle .singerName,
 .singers .albumHandle .singerName,
 .albums .singerHandle .singerName,
-.albums .albumHandle .singerName {
+.albums .albumHandle .singerName,
+.songs .singerHandle .singerName,
+.songs .albumHandle .singerName {
   height: 34px;
   line-height: 34px; }
   .singers .singerHandle .singerName .input-group,
   .singers .albumHandle .singerName .input-group,
   .albums .singerHandle .singerName .input-group,
-  .albums .albumHandle .singerName .input-group {
+  .albums .albumHandle .singerName .input-group,
+  .songs .singerHandle .singerName .input-group,
+  .songs .albumHandle .singerName .input-group {
     width: 320px;
     padding-left: 12px; }
 
@@ -130,6 +145,14 @@
 .singers .table th:nth-child(3),
 .singers .table td:nth-child(3) {
   width: 160px; }
+
+.songs .songs-title {
+  height: 32px;
+  border-bottom: 1px solid #e7e7e7;
+  margin-bottom: 10px;
+  line-height: 32px;
+  font-size: 18px;
+  font-weight: bold; }
 
 @charset "UTF-8";
 /**
