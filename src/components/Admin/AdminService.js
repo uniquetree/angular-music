@@ -209,11 +209,11 @@ musicApp.factory('AdminService', ['$http', function($http) {
                 }
             });
         },
-        uploadSong: function(songInfo) {
+        uploadSongs: function(songInfo) {
 
             return $http({
                 method: 'POST',
-                url: $config.api.uploadSong,
+                url: $config.api.uploadSongs,
                 data: {
                     song_name: songInfo.song_name,
                     url: songInfo.url,
@@ -223,7 +223,7 @@ musicApp.factory('AdminService', ['$http', function($http) {
                 }
             });
         },
-        updateSong: function(ids) {
+        updateSong: function(songInfo) {
 
             return $http({
                 method: 'POST',
@@ -238,7 +238,7 @@ musicApp.factory('AdminService', ['$http', function($http) {
                 }
             });
         },
-        deleteSongsByIds: function(songInfo) {
+        deleteSongsByIds: function(ids) {
 
             return $http({
                 method: 'POST',

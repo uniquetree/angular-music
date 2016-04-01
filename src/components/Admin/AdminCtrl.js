@@ -175,6 +175,17 @@ musicApp.controller('PageTableCtrl', ['$scope', 'PageTableData', function($scope
 
 }]);
 
+musicApp.controller('UploadCtrl', ['$scope', function($scope){
+
+    var types = ['success', 'info', 'warning', 'danger'];
+    $scope.files = [];
+
+    $scope.btnSelectFile = function(){
+
+        document.querySelector('#upload-mp3').click();
+    };
+}]);
+
 require('./SingerCtrl');
 require('./AlbumCtrl');
 require('./SongCtrl');

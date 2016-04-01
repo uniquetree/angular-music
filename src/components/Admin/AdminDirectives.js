@@ -190,3 +190,27 @@ musicApp.directive('singerSelect', function(AdminService){
         }
     };
 });
+
+musicApp.directive('singerAndAlbumSelect', function(AdminService){
+
+    return {
+        replace: true,
+        restrict: 'EA',
+        scope: {
+            selectedSingerId: '='
+        },
+        template: '<div class="form-group singer-select"><label class="pull-left">歌手选择：</label>' +
+        '<div class="input-group">' +
+        '<select class="form-control" ng-model="selectedSingerId" ng-options="singer.id as singer.singer_name for singer in allSingers">' +
+        '<option value="">-- 选择歌手 --</option></select></div></div>',
+        link: function($scope) {
+
+            AdminService.getAllSingers().success(function(data) {
+
+                if(data.success) {
+                    $scope.allSingers = data.allSingers;
+                }
+            });
+        }
+    };
+});

@@ -146,13 +146,33 @@
 .singers .table td:nth-child(3) {
   width: 160px; }
 
-.songs .songs-title {
+.upload .title,
+.songs .title {
   height: 32px;
   border-bottom: 1px solid #e7e7e7;
   margin-bottom: 10px;
   line-height: 32px;
   font-size: 18px;
   font-weight: bold; }
+
+.upload .upload-btns {
+  margin-bottom: 12px; }
+  .upload .upload-btns .fa {
+    margin-right: 5px; }
+
+.upload .music-lists .music-list .music-list-info {
+  height: 24px;
+  line-height: 24px;
+  font-size: 14px; }
+  .upload .music-lists .music-list .music-list-info .fa-minus-circle {
+    margin: 2px;
+    font-size: 18px;
+    color: #c9302c;
+    cursor: pointer; }
+
+.upload .music-lists .music-list .progress {
+  height: 10px;
+  margin-bottom: 10px; }
 
 @charset "UTF-8";
 /**

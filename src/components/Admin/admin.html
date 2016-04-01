@@ -266,7 +266,7 @@
 <!-- songs.html -->
 <script type="text/ng-template" id="songs.html">
     <div class="songs" ng-controller="SongCtrl">
-        <nav class="songs-title">歌曲列表</nav>
+        <nav class="title">歌曲列表</nav>
         <div class="songs-lists">
             <div class="clearfix edit-bars">
                 <form class="navbar-form pull-left m-search" role="search">
@@ -333,7 +333,39 @@
 
 <!-- uploadMusic.html -->
 <script type="text/ng-template" id="uploadMusic.html">
-    Content of uploadMusic.html
+    <div class="upload" ng-controller="UploadCtrl">
+        <nav class="title">上传音乐</nav>
+        <form class="upload-form">
+            <singer-and-album-select selected-singer-id="singerId"></singer-and-album-select>
+            <div class="upload-btns">
+                <button type="button" class="btn btn-info btn-sm" ng-click="btnSelectFile()">
+                    <i class="fa fa-files-o"></i>选择音乐文件
+                </button>
+                <button type="button" class="btn btn-success btn-sm" ng-click="btnUpload()">
+                    <i class="fa fa-upload"></i>上传
+                </button>
+                <button type="button" class="btn btn-danger btn-sm" ng-click="btnClean()">
+                    <i class="fa fa-trash"></i>删除全部
+                </button>
+            </div>
+            <div class="form-group" hidden>
+                <input type="file" id="upload-mp3" multiple/>
+            </div>
+            <div class="panel panel-default music-lists" ng-show="files.length>0">
+                <div class="panel-heading">上传的曲目</div>
+                <div class="panel-body">
+                    <div class="music-list" ng-repeat="file in files">
+                        <div class="music-list-info">
+                            <span>{{$index}} {{file.name}} ({{file.size}})</span>
+                            <i class="fa fa-minus-circle pull-right" title="删除" ng-click="btn_remove(file)"></i>
+                        </div>
+                        <uib-progressbar class="progress-striped" value="{{file.loaded}}" type="{{type}}"
+                                         title="{{file.loaded}}"></uib-progressbar>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
 </script>
 
 <!-- users.html -->

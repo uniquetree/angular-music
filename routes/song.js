@@ -5,13 +5,15 @@
 var express = require('express');
 var jwt = require('jsonwebtoken');
 var expressJwt = require('express-jwt');
-var uuid = require('node-uuid');
 
 //var redisClient = require('../config/redis_db').redisClient;
 var tokenManager = require('../utils/TokenManager');
 var secretToken = require('../config/config').secretToken;
 
 var router = express.Router();
+
+var Common = require('../utils/Common');
+var common = new Common();
 
 var Song = require('../models/Song');
 
@@ -66,29 +68,6 @@ router.get('/getSongById', function(req, res) {
         }
     });
 });
-// 上传歌曲
-router.post('/uploadSong', function(req, res) {
-
-    var songInfo = {
-        song_name: req.body.song_name,
-        url: req.body.url,
-        publish_date: req.body.publish_date,
-        singer_id: req.body.singer_id,
-        album_id: req.body.album_id
-    };
-    var song = new Song(songInfo);
-    song.uploadSong(function(isError, result) {
-
-        if(isError) {
-            res.send(500);
-            console.log(result.message);
-        } else {
-            res.json({
-                success: true
-            });
-        }
-    });
-});
 // 编辑歌曲基本信息
 router.post('/updateSong', function(req, res) {
 
@@ -119,6 +98,36 @@ router.post('/deleteSongsByIds', function(req, res) {
     var ids = req.body.ids;
     var song = new Song();
     song.deleteSongsByIds(ids, function(isError, result) {
+
+        if(isError) {
+            res.send(500);
+            console.log(result.message);
+        } else {
+            res.json({
+                success: true
+            });
+        }
+    });
+});
+// 上传歌曲
+router.post('/uploadSongs', function(req, res) {
+
+    var fields;
+
+    common.uploadMp3(req, function(err, result){
+
+        if(!err) {
+            fields = result;
+        }
+    });
+
+    var songInfo = {
+        publish_date: req.body.publish_date,
+        singer_id: req.body.singer_id,
+        album_id: req.body.album_id
+    };
+    var song = new Song(songInfo);
+    song.uploadSong(function(isError, result) {
 
         if(isError) {
             res.send(500);
