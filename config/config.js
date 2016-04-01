@@ -22,7 +22,8 @@ module.exports = {
         port: 3306,
         multipleStatements: true
     },
-    secretToken: 'fas3456daj8lf6kjg3asldk2mvdsfasd23gert4ddg'
+    secretToken: 'fas3456daj8lf6kjg3asldk2mvdsfasd23gert4ddg',
+    musicUploadDir: 'app/resources/'
 };
 
 module.exports.tableName = {

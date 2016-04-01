@@ -3,6 +3,9 @@
  * Created by 郑树聪 on 2016/2/28.
  */
 var base_url = 'http://localhost:3000/';
+var singer_url = 'api/singer/';
+var album_url = 'api/album/';
+var song_url = 'api/song/';
 
 module.exports = {
     musicApp: angular.module('musicApp', ['ngRoute', 'ui.bootstrap', 'ui.uploader']),
@@ -17,26 +20,26 @@ module.exports = {
         getMenuByRole: base_url + 'api/admin/getMenuByRole',
         getAreas: base_url + 'api/admin/getAreas',
         // 歌手
-        getAllSingers: base_url + 'api/admin/getAllSingers',
-        getSingers: base_url + 'api/admin/getSingers',
-        getSingerById: base_url + 'api/admin/getSingerById',
-        addSinger: base_url + 'api/admin/addSinger',
-        updateSinger: base_url + 'api/admin/updateSinger',
-        deleteSingers: base_url + 'api/admin/deleteSingers',
+        getAllSingers: base_url + singer_url + 'getAllSingers',
+        getSingers: base_url + singer_url + 'getSingers',
+        getSingerById: base_url + singer_url + 'getSingerById',
+        addSinger: base_url + singer_url + 'addSinger',
+        updateSinger: base_url + singer_url + 'updateSinger',
+        deleteSingers: base_url + singer_url + 'deleteSingers',
         // 专辑
-        getAlbums: base_url + 'api/admin/getAlbums',
-        getAlbumById: base_url + 'api/admin/getAlbumById',
-        getAlbumBySingerId: base_url + 'api/admin/getAlbumBySingerId',
-        addAlbum: base_url + 'api/admin/addAlbum',
-        updateAlbum: base_url + 'api/admin/updateAlbum',
-        deleteAlumsById: base_url + 'api/admin/deleteAlumsById',
-        deleteAlbumsBySingerId: base_url + 'api/admin/deleteAlbumsBySingerId',
+        getAlbums: base_url + album_url + 'getAlbums',
+        getAlbumById: base_url  + album_url+ 'getAlbumById',
+        getAlbumBySingerId: base_url + album_url + 'getAlbumBySingerId',
+        addAlbum: base_url + album_url + 'addAlbum',
+        updateAlbum: base_url + album_url + 'updateAlbum',
+        deleteAlumsById: base_url + album_url + 'deleteAlumsById',
+        deleteAlbumsBySingerId: base_url + album_url + 'deleteAlbumsBySingerId',
         // 歌曲
-        getSongsByPage: base_url + 'api/admin/getSongsByPage',
-        getSongById: base_url + 'api/admin/getSongById',
-        uploadSong: base_url + 'api/admin/uploadSong',
-        updateSong: base_url + 'api/admin/updateSong',
-        deleteSongsByIds: base_url + 'api/admin/deleteSongsById'
+        getSongsByPage: base_url + song_url + 'getSongsByPage',
+        getSongById: base_url + song_url  + 'getSongById',
+        uploadSong: base_url + song_url  + 'uploadSong',
+        updateSong: base_url + song_url  + 'updateSong',
+        deleteSongsByIds: base_url + song_url  + 'deleteSongsById'
     }
 };
 

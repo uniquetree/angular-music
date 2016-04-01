@@ -22,12 +22,18 @@ app.use('/app', express.static(path.join(__dirname, 'app')));
 //app.use('/bower_components', express.static(path.join(__dirname, 'bower_components')));
 
 // 路由配置
-var routes = require('./routes/index');
-var routesUser = require('./routes/user');
-var routesAdmin = require('./routes/admin');
+var routes = require('./routes/index'),
+    routesUser = require('./routes/user'),
+    routesAdmin = require('./routes/admin'),
+    routesSinger = require('./routes/singer'),
+    routesAlbum = require('./routes/album'),
+    routesSong = require('./routes/song');
 app.use('/', routes);
 app.use('/api/user', routesUser);
 app.use('/api/admin', routesAdmin);
+app.use('/api/singer', routesSinger);
+app.use('/api/album', routesAlbum);
+app.use('/api/song', routesSong);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

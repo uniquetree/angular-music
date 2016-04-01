@@ -31,7 +31,6 @@ module.exports = {
         loaders: [
             {test: /\.css$/, loader: ExtractTextPlugin.extract("style-loader", "css-loader")},
             {test: /\.scss$/, loader: 'style!css!sass?sourceMap'},
-            {test: /\.less$/, loader: 'style!css!less?sourceMap'},
             {test: /\.(png|jpg)$/, loader: 'url-loader?limit=8192'},
             //bootstrap
             {test: /\.(woff|woff2)(\?v=\d+\.\d+\.\d+)?$/, loader: 'url?limit=10000&mimetype=application/font-woff&name=fonts/[name].[ext]'},
