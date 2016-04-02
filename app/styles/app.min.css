@@ -155,20 +155,33 @@
   font-size: 18px;
   font-weight: bold; }
 
+.upload .fa {
+  margin-right: 5px; }
+
+.upload .singer-album-select label {
+  width: auto;
+  height: 34px;
+  line-height: 34px; }
+
+.upload .singer-album-select .input-group {
+  width: auto; }
+  .upload .singer-album-select .input-group select {
+    width: 147px;
+    border-radius: 4px; }
+    .upload .singer-album-select .input-group select:first-child {
+      margin-right: 10px; }
+
 .upload .upload-btns {
   margin-bottom: 12px; }
-  .upload .upload-btns .fa {
-    margin-right: 5px; }
 
 .upload .music-lists .music-list .music-list-info {
   height: 24px;
+  margin-bottom: 5px;
   line-height: 24px;
   font-size: 14px; }
-  .upload .music-lists .music-list .music-list-info .fa-minus-circle {
-    margin: 2px;
-    font-size: 18px;
-    color: #c9302c;
-    cursor: pointer; }
+  .upload .music-lists .music-list .music-list-info .success {
+    font-weight: bold;
+    color: #4cae4c; }
 
 .upload .music-lists .music-list .progress {
   height: 10px;

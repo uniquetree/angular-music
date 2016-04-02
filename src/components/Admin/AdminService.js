@@ -209,20 +209,6 @@ musicApp.factory('AdminService', ['$http', function($http) {
                 }
             });
         },
-        uploadSongs: function(songInfo) {
-
-            return $http({
-                method: 'POST',
-                url: $config.api.uploadSongs,
-                data: {
-                    song_name: songInfo.song_name,
-                    url: songInfo.url,
-                    publish_date: songInfo.publish_date,
-                    singer_id: songInfo.singer_id,
-                    album_id: songInfo.album_id
-                }
-            });
-        },
         updateSong: function(songInfo) {
 
             return $http({

@@ -333,34 +333,57 @@
 
 <!-- uploadMusic.html -->
 <script type="text/ng-template" id="uploadMusic.html">
-    <div class="upload" ng-controller="UploadCtrl">
+    <div class="upload" ng-controller="UploadMusicCtrl">
         <nav class="title">上传音乐</nav>
         <form class="upload-form">
-            <singer-and-album-select selected-singer-id="singerId"></singer-and-album-select>
+            <singer-and-album-select selected-singer-id="songInfo.singerId" selected-album-id="songInfo.albumId"></singer-and-album-select>
+            <language-select selected-language-id="songInfo.language"></language-select>
             <div class="upload-btns">
                 <button type="button" class="btn btn-info btn-sm" ng-click="btnSelectFile()">
                     <i class="fa fa-files-o"></i>选择音乐文件
                 </button>
-                <button type="button" class="btn btn-success btn-sm" ng-click="btnUpload()">
-                    <i class="fa fa-upload"></i>上传
+                <button type="button" class="btn btn-success btn-sm" ng-click="uploader.uploadAll()"
+                        ng-disabled="!uploader.getNotUploadedItems().length">
+                    <i class="fa fa-upload"></i>全部上传
                 </button>
-                <button type="button" class="btn btn-danger btn-sm" ng-click="btnClean()">
+                <button type="button" class="btn btn-warning  btn-sm" ng-click="uploader.cancelAll()"
+                        ng-disabled="!uploader.isUploading">
+                    <i class="fa fa-ban"></i>全部取消上传
+                </button>
+                <button type="button" class="btn btn-danger btn-sm" ng-click="uploader.clearQueue()"
+                        ng-disabled="!uploader.queue.length">
                     <i class="fa fa-trash"></i>删除全部
                 </button>
             </div>
             <div class="form-group" hidden>
-                <input type="file" id="upload-mp3" multiple/>
+                <input type="file" id="upload-mp3" accept="audio/mpeg" nv-file-select="" uploader="uploader" multiple/>
             </div>
-            <div class="panel panel-default music-lists" ng-show="files.length>0">
+            <div class="panel panel-default music-lists" ng-hide="!uploader.queue.length">
                 <div class="panel-heading">上传的曲目</div>
                 <div class="panel-body">
-                    <div class="music-list" ng-repeat="file in files">
+                    <div class="music-list" ng-repeat="item in uploader.queue">
                         <div class="music-list-info">
-                            <span>{{$index}} {{file.name}} ({{file.size}})</span>
-                            <i class="fa fa-minus-circle pull-right" title="删除" ng-click="btn_remove(file)"></i>
+                            <span>{{$index+1}}、{{item.file.name}} ({{ item.file.size/1024/1024|number:2 }} MB)</span>
+                            <span class="success" ng-show="item.success">success</span>
+                            <div class="sub-upload-btn pull-right">
+                                <button type="button" class="btn btn-success btn-xs" ng-click="item.upload()"
+                                        ng-disabled="item.isReady || item.isUploading || item.isSuccess">
+                                    <i class="fa fa-upload"></i>上传
+                                </button>
+                                <button type="button" class="btn btn-warning  btn-xs" ng-click="item.cancel()"
+                                        ng-disabled="!item.isUploading">
+                                    <i class="fa fa-ban"></i>取消上传
+                                </button>
+                                <button type="button" class="btn btn-danger btn-xs" ng-click="item.remove()"
+                                        ng-disabled="!uploader.queue.length">
+                                    <i class="fa fa-trash"></i>删除
+                                </button>
+                            </div>
                         </div>
-                        <uib-progressbar class="progress-striped" value="{{file.loaded}}" type="{{type}}"
-                                         title="{{file.loaded}}"></uib-progressbar>
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="0" aria-valuemin="0"
+                                 aria-valuemax="100" ng-style="{ 'width': item.progress + '%' }"></div>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -112,29 +112,27 @@ router.post('/deleteSongsByIds', function(req, res) {
 // 上传歌曲
 router.post('/uploadSongs', function(req, res) {
 
-    var fields;
-
-    common.uploadMp3(req, function(err, result){
+    common.uploadMp3(req, function(err, fields){
 
         if(!err) {
-            fields = result;
-        }
-    });
+            var songInfo = {
+                song_name: fields.name,
+                url: fields.path,
+                publish_date: req.body.publish_date,
+                singer_id: req.body.singer_id,
+                album_id: req.body.album_id
+            };
+            var song = new Song(songInfo);
+            song.uploadSong(function(isError, result) {
 
-    var songInfo = {
-        publish_date: req.body.publish_date,
-        singer_id: req.body.singer_id,
-        album_id: req.body.album_id
-    };
-    var song = new Song(songInfo);
-    song.uploadSong(function(isError, result) {
-
-        if(isError) {
-            res.send(500);
-            console.log(result.message);
-        } else {
-            res.json({
-                success: true
+                if(isError) {
+                    res.send(500);
+                    console.log(result.message);
+                } else {
+                    res.json({
+                        success: true
+                    });
+                }
             });
         }
     });

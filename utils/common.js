@@ -55,9 +55,7 @@ Common.prototype.uploadMp3 = function(req, options, next) {
         for (x in files) {
             //后缀名
             var extName = /\.[^\.]+/.exec(files[x].name);
-            var ext = Array.isArray(extName)
-                ? extName[0]
-                : '';
+            var ext = Array.isArray(extName) ? extName[0] : '';
             //重命名，以防文件重复
             var avatarName = uuid() + ext;
             //移动的文件目录
@@ -101,14 +99,14 @@ Common.prototype.deleteFiles = function(urls) {
 
 /**
  * 获取mp3的id3文件标签信息
- * @param path [String] mp3文件路径
+ * @param newPath [String] mp3文件路径
  * @returns tag 获取到的标签
  */
-function getMp3Tags(path){
+function getMp3Tags(newPath){
 
     var tags;
     new jsmediatags.Reader(newPath)
-        .setTagsToRead(["title", "artist"])
+        .setTagsToRead(["title", "artist", 'album', 'year'])
         .read({
             onSuccess: function(tag) {
                 tags = tag;

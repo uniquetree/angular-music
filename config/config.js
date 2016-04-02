@@ -23,7 +23,7 @@ module.exports = {
         multipleStatements: true
     },
     secretToken: 'fas3456daj8lf6kjg3asldk2mvdsfasd23gert4ddg',
-    musicUploadDir: './app/resources/music'
+    musicUploadDir: '../app/resources/music/'
 };
 
 module.exports.tableName = {

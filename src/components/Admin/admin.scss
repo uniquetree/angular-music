@@ -13,6 +13,7 @@
         padding-left: 12px;
     }
 }
+
 .singers,
 .albums,
 .songs {
@@ -193,12 +194,33 @@
 
 .upload {
 
+    .fa {
+        margin-right: 5px;
+    }
+
+    .singer-album-select {
+
+        label {
+            width: auto;
+            height: 34px;
+            line-height: 34px;
+        }
+        .input-group {
+            width: auto;
+
+            select {
+                width: 147px;
+                border-radius: 4px;
+
+                &:first-child {
+                    margin-right: 10px;
+                }
+            }
+        }
+    }
+
     .upload-btns {
         margin-bottom: 12px;
-
-        .fa {
-            margin-right: 5px;
-        }
     }
 
     .music-lists {
@@ -207,14 +229,13 @@
 
             .music-list-info {
                 height: 24px;
+                margin-bottom: 5px;
                 line-height: 24px;
                 font-size: 14px;
 
-                .fa-minus-circle {
-                    margin: 2px;
-                    font-size: 18px;
-                    color: #c9302c;
-                    cursor: pointer;
+                .success {
+                    font-weight: bold;
+                    color: #4cae4c;
                 }
             }
             .progress {

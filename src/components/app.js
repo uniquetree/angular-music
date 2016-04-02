@@ -6,6 +6,10 @@
 
 var $config = require('./Common/config');
 
+$config.musicApp.config(['cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
+        cfpLoadingBarProvider.includeSpinner = false;
+}]);
+
 /**
  * 用户认证服务
  */
@@ -68,39 +72,45 @@ $config.musicApp.config(['$routeProvider', function($routeProvider) {
         .when('/', {
             templateUrl: 'app/views/Home/home.html',
             controller: 'UserCtrl',
-            access: { requiredLogin: false }
+            access: { requiredLogin: false },
+            ignoreLoadingBar: true
         })
         // 登录页
         .when("/login", {
             templateUrl: 'app/views/User/login.html',
             controller: 'UserCtrl',
-            access: { requiredLogin: false }
+            access: { requiredLogin: false },
+            ignoreLoadingBar: true
         })
         // 注册页
         .when('/register', {
             templateUrl: 'app/views/User/register.html',
             controller: 'UserCtrl',
-            access: { requiredLogin: false }
+            access: { requiredLogin: false },
+            ignoreLoadingBar: true
         })
         // 我的音乐
         .when('/myMusic', {
             templateUrl: 'app/views/MyMusic/myMusic.html',
             controller: 'MyMusicCtrl',
             //reloadOnSearch: false,
-            access: { requiredLogin: true }
+            access: { requiredLogin: true },
+            ignoreLoadingBar: true
         })
         // 管理中心
         .when('/admin', {
             templateUrl: 'app/views/Admin/admin.html',
             controller: 'AdminCtrl',
             //reloadOnSearch: false,
-            access: { requiredLogin: true }
+            access: { requiredLogin: true },
+            ignoreLoadingBar: true
         })
         // 歌手主页
         .when('/singer', {
             templateUrl: 'app/views/Home/home.html',
             controller: 'UserCtrl',
-            access: { requiredLogin: false }
+            access: { requiredLogin: false },
+            ignoreLoadingBar: true
         })
         .otherwise({
             redirectTo: "/",

@@ -1,9 +1,10 @@
+/app/resources
 lib-cov
 *.seed
 *.log
 *.csv
 *.dat
-*.out
+*.outs
 *.pid
 *.gz
 

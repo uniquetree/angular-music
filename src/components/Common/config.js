@@ -8,7 +8,7 @@ var album_url = 'api/album/';
 var song_url = 'api/song/';
 
 module.exports = {
-    musicApp: angular.module('musicApp', ['ngRoute', 'ui.bootstrap', 'ui.uploader']),
+    musicApp: angular.module('musicApp', ['ngRoute', 'ui.bootstrap', 'angular-loading-bar', 'angularFileUpload']),
     base_url: base_url,
     api: {
         // 用户操作
@@ -29,7 +29,7 @@ module.exports = {
         // 专辑
         getAlbums: base_url + album_url + 'getAlbums',
         getAlbumById: base_url  + album_url+ 'getAlbumById',
-        getAlbumBySingerId: base_url + album_url + 'getAlbumBySingerId',
+        getAlbumsBySingerId: base_url + album_url + 'getAlbumsBySingerId',
         addAlbum: base_url + album_url + 'addAlbum',
         updateAlbum: base_url + album_url + 'updateAlbum',
         deleteAlumsById: base_url + album_url + 'deleteAlumsById',
