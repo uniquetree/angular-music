@@ -27,6 +27,7 @@ module.exports = {
         updateSinger: base_url + singer_url + 'updateSinger',
         deleteSingers: base_url + singer_url + 'deleteSingers',
         // 专辑
+        getAllAlbums: base_url + album_url + 'getAllAlbums',
         getAlbums: base_url + album_url + 'getAlbums',
         getAlbumById: base_url  + album_url+ 'getAlbumById',
         getAlbumsBySingerId: base_url + album_url + 'getAlbumsBySingerId',

@@ -96,6 +96,14 @@ musicApp.factory('AdminService', ['$http', function($http) {
             });
         },
 
+        // 获取所有专辑的id和name
+        getAllAlbums: function(){
+
+            return $http({
+                method: 'GET',
+                url: $config.api.getAllAlbums
+            });
+        },
         getAlbums: function(pagination){
 
             return $http({

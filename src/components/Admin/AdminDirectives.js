@@ -213,7 +213,7 @@ musicApp.directive('languageSelect', function(){
 });
 
 // 歌手延伸专辑选择
-musicApp.directive('singerAndAlbumSelect', function(AdminService){
+musicApp.directive('singerAndAlbumSelect', function($filter, AdminService){
 
     return {
         replace: true,
@@ -223,33 +223,35 @@ musicApp.directive('singerAndAlbumSelect', function(AdminService){
             selectedAlbumId: '='
         },
         template: '<div class="form-group singer-album-select clearfix"><label class="pull-left">歌手及专辑：</label>' +
-        '<div class="input-group pull-left">' +
-        '<select class="form-control" ng-model="selectedSingerId" ng-options="singer.id as singer.singer_name for singer in allSingers">' +
-        '<option value="">-- 选择歌手 --</option></select>' +
-        '<select class="form-control" ng-model="selectedAlbumId" ng-options="album.id as album.album_name for album in albums">' +
-        '<option value="">-- 歌手专辑 --</option></select></div></div>',
+            '<div class="input-group pull-left">' +
+            '<select class="form-control" ng-model="selectedSingerId" ' +
+            'ng-options="singer.id as singer.singer_name for singer in allSingers">' +
+            '<option value="">-- 选择歌手 --</option></select>' +
+            '<select class="form-control" ng-model="selectedAlbumId" ' +
+            'ng-options="album.id as album.album_name for album in albums | filter: filterAlbums">' +
+            '<option value="">-- 歌手专辑 --</option></select></div></div>',
         link: function($scope) {
 
             $scope.allSingers = [];
             $scope.albums = [];
-
+            // 获取所有歌手
             AdminService.getAllSingers().success(function(data) {
 
                 if(data.success) {
                     $scope.allSingers = data.allSingers;
                 }
             });
-
-            $scope.$watch('selectedSingerId', function(value) {
-
-                if(value) {
-                    AdminService.getAlbumsBySingerId(value).success(function(data) {
-                        if(data.success) {
-                            $scope.albums = data.albums;
-                        }
-                    });
+            // 获取所有专辑
+            AdminService.getAllAlbums().success(function(data) {
+                if(data.success) {
+                    $scope.albums = data.albums;
                 }
             });
+            // 根据歌手id过滤专辑
+            $scope.filterAlbums = function(album){
+                return album.singer_id === $scope.selectedSingerId;
+            };
+
         }
     };
 });

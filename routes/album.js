@@ -14,6 +14,23 @@ var router = express.Router();
 
 var Album = require('../models/Album');
 
+// 获取所有专辑
+router.get('/getAllAlbums', function(req, res) {
+
+    var album = new Album();
+    album.getAllAlbums(function(isError, results) {
+
+        if(isError) {
+            res.send(500);
+            console.log(results.message);
+        } else {
+            res.json({
+                success: true,
+                albums: results
+            })
+        }
+    });
+});
 // 分页获取专辑列表，关键字查找
 router.get('/getAlbums', function(req, res) {
 

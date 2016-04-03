@@ -30,6 +30,13 @@ var Album = function (albumInfo, pagination, keyword) {
     }
 };
 
+// 获取所有专辑id和name
+Album.prototype.getAllAlbums = function(callback) {
+
+    var sql = 'select id, album_name, singer_id from ' + album_tb;
+    db.query(sql, [], callback);
+};
+
 // 分页查找专辑
 Album.prototype.findAlbums = function(callback){
 
