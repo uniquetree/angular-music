@@ -17,7 +17,7 @@ var common = new Common();
 
 var Song = require('../models/Song');
 
-// 分页获取歌曲
+// 根据条件筛选分页查找歌曲
 router.get('/getSongsByPage', function(req, res) {
 
     var songInfo = {
@@ -48,7 +48,7 @@ router.get('/getSongsByPage', function(req, res) {
     });
 
 });
-// 根据筛选条件获取歌曲
+// 根据id获取歌曲
 router.get('/getSongById', function(req, res) {
 
     var songInfo = {
@@ -69,7 +69,7 @@ router.get('/getSongById', function(req, res) {
     });
 });
 // 编辑歌曲基本信息
-router.post('/updateSong', function(req, res) {
+router.post('/updateSong', expressJwt({secret: secretToken}), tokenManager.verifyToken, function(req, res) {
 
     var songInfo = {
         id: req.body.id,
@@ -93,7 +93,7 @@ router.post('/updateSong', function(req, res) {
     });
 });
 // 删除歌曲
-router.post('/deleteSongsByIds', function(req, res) {
+router.post('/deleteSongsByIds', expressJwt({secret: secretToken}), tokenManager.verifyToken, function(req, res) {
 
     var ids = req.body.ids;
     var song = new Song();
@@ -110,7 +110,7 @@ router.post('/deleteSongsByIds', function(req, res) {
     });
 });
 // 上传歌曲
-router.post('/uploadSongs', function(req, res) {
+router.post('/uploadSongs', expressJwt({secret: secretToken}), tokenManager.verifyToken, function(req, res) {
 
     common.uploadMp3(req, function(err, fields){
 

@@ -36,9 +36,9 @@ var Song = function (songInfo, pagination, keyword) {
 // 根据条件筛选分页查找歌曲
 Song.prototype.filterSongsByPage = function(callback){
 
-    var sql = '',
-        count_sql = '',
-        params = [],
+    var sql,
+        count_sql,
+        params,
         sql_params1 = [],
         sql_params2 = [],
         sql_filters1 = '',
@@ -124,8 +124,8 @@ Song.prototype.uploadSong = function(callback) {
 // 编辑歌曲基本信息
 Song.prototype.updateSong = function(callback){
 
-    var sql = 'update ' + song_tb + ' set song_name=?, url=?, publish_date=?, singer_id=?, album_id=? where id = ?';
-    db.query(sql, [this.song_name, this.url, this.publish_date, this.singer_id, this.album_id, this.id], callback);
+    var sql = 'update ' + song_tb + ' set song_name=?, publish_date=?, singer_id=?, album_id=? where id = ?';
+    db.query(sql, [this.song_name, this.publish_date, this.singer_id, this.album_id, this.id], callback);
 };
 
 // 删除歌曲
