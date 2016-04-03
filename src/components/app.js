@@ -135,7 +135,6 @@ $config.musicApp.run(function($rootScope, $location, $window, AuthenticationServ
 });
 
 // 加载页面angular控制器组件
-require('./Common/AngularUiCtrl');
 require('./Common/MainCtrl');
 require('./Header/HeaderCtrl');
 require('./User/UserCtrl');

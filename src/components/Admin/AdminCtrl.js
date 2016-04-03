@@ -32,7 +32,7 @@ musicApp.controller('AdminCtrl', ['$scope', '$location', '$window', '$routeParam
             if($window.sessionStorage.adminMenus) {
                 $scope.adminMenus = JSON.parse($window.sessionStorage.adminMenus);
             } else {
-                AdminService.getMenu().success(function(data, status, headers, config) {
+                AdminService.getMenu().success(function(data) {
 
                     if(data.success) {
                         $scope.adminMenus = data.menus;
@@ -40,7 +40,7 @@ musicApp.controller('AdminCtrl', ['$scope', '$location', '$window', '$routeParam
                     } else {
                         console.log(data.msg);
                     }
-                }).error(function(data, status, headers, config){
+                }).error(function(data){
 
                     console.log(data.msg);
                 });
@@ -59,7 +59,7 @@ musicApp.controller('InfoCtrl', ['$scope', '$location', '$window', '$routeParams
         if($scope.userInfo.code !== '') {
 
             if(angular.isUndefined($window.localStorage.areas)) {
-                AdminService.getAreas().success(function(data, status, headers, config) {
+                AdminService.getAreas().success(function(data) {
 
                     if(data.success) {
                         $window.localStorage.areas = JSON.stringify({areas: data.areas});
@@ -67,7 +67,7 @@ musicApp.controller('InfoCtrl', ['$scope', '$location', '$window', '$routeParams
                     } else {
                         console.log(data.msg);
                     }
-                }).error(function(data, status, headers, config){
+                }).error(function(data){
 
                     console.log(data.msg);
                 });
@@ -156,11 +156,7 @@ musicApp.controller('PageTableCtrl', ['$scope', 'PageTableData', function($scope
             }
         }
 
-        if(PageTableData.selectItemIds.length === PageTableData.itemIds.length) {
-            $scope.isSelectAllModel = true;
-        } else {
-            $scope.isSelectAllModel = false;
-        }
+        $scope.isSelectAllModel = (PageTableData.selectItemIds.length === PageTableData.itemIds.length);
     };
 
     /**
@@ -184,7 +180,8 @@ musicApp.controller('UploadMusicCtrl', ['$scope', 'FileUploader', function($scop
         method: 'POST',
         formData: {
             singer_id: $scope.songInfo.singerId,
-            album_id: $scope.songInfo.albumId
+            album_id: $scope.songInfo.albumId,
+            language: $scope.songInfo.language
         }
     });
 

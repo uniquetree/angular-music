@@ -69,8 +69,8 @@ module.exports.adminMenus = [
         role: 1,
         subMenus: [
             {name: '普通用户列表', page: 'users', icon: 'user', role: 1},
-            {name: '管理员列表', page: 'admins', icon: 'user-plus', role: 1},
-            {name: '超级管理员列表', page: 'supAdmins', icon: 'user-secret', role: 0}
+            {name: '管理员列表', page: 'admins', icon: 'user-plus', role: 1}
+            //{name: '超级管理员列表', page: 'supAdmins', icon: 'user-secret', role: 0}
         ]
     }
 ];
