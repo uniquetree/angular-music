@@ -171,23 +171,32 @@ musicApp.controller('PageTableCtrl', ['$scope', 'PageTableData', function($scope
 
 }]);
 
-musicApp.controller('UploadMusicCtrl', ['$scope', 'FileUploader', function($scope, FileUploader){
+musicApp.controller('UploadMusicCtrl', ['$scope', '$window', 'FileUploader', function($scope, $window, FileUploader){
 
     $scope.songInfo = {};
-
-    $scope.uploader = new FileUploader({
-        url: $config.api.uploadSongs,
-        method: 'POST',
-        formData: {
-            singer_id: $scope.songInfo.singerId,
-            album_id: $scope.songInfo.albumId,
-            language: $scope.songInfo.language
-        }
-    });
 
     // 点击选择文件触发input[type=file]标签的点击事件
     $scope.btnSelectFile = function(){
         document.querySelector('#upload-mp3').click();
+    };
+
+    // 实例化上传控件
+    $scope.uploader = new FileUploader({
+        url: $config.api.uploadSongs,
+        method: 'POST',
+        headers: {
+            Authorization: 'Bearer ' + $window.sessionStorage.token
+        }
+    });
+    // 上传之前对每一文件的操作事件
+    $scope.uploader.onBeforeUploadItem = function(item) {
+        item.formData.push({singer_id: $scope.songInfo.singerId});
+        item.formData.push({album_id: $scope.songInfo.albumId});
+        item.formData.push({language: $scope.songInfo.language});
+    };
+    // 全部上传后事件
+    $scope.uploader.onCompleteAll = function() {
+        console.info('onCompleteAll');
     };
 }]);
 

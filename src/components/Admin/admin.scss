@@ -201,15 +201,15 @@
     .singer-album-select {
 
         label {
-            width: auto;
+            width: 84px;
             height: 34px;
             line-height: 34px;
         }
         .input-group {
-            width: auto;
+            padding-left: 12px;
 
             select {
-                width: 147px;
+                width: 149px;
                 border-radius: 4px;
 
                 &:first-child {

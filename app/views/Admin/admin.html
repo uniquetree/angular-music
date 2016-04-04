@@ -302,8 +302,8 @@
                         </td>
                         <td>{{(pagination.currPage-1)*pagination.itemsPerPage + $index + 1}}</td>
                         <td class="name-td">{{song.song_name}}</td>
-                        <td>{{song.singer_name}}</td>
-                        <td>{{song.album_name}}</td>
+                        <td>{{song.singer_name || song.tag_singer_name}}</td>
+                        <td>{{song.album_name || song.tag_album_name}}</td>
                         <td>{{song.publish_date}}</td>
                         <td>{{song.listen_count}}</td>
                         <td>{{song.like_count}}</td>
@@ -322,10 +322,6 @@
         </div>
     </div>
 </script>
-<!-- songsList.html -->
-<script type="text/ng-template" id="songList.html">
-    Content of songs.html
-</script>
 <!-- songsEdit.html -->
 <script type="text/ng-template" id="songEdit.html">
     Content of songs.html
@@ -336,14 +332,14 @@
     <div class="upload" ng-controller="UploadMusicCtrl">
         <nav class="title">上传音乐</nav>
         <form class="upload-form">
-            <singer-and-album-select selected-singer-id="songInfo.singerId" selected-album-id="songInfo.albumId"></singer-and-album-select>
             <language-select selected-language-id="songInfo.language"></language-select>
+            <singer-and-album-select selected-singer-id="songInfo.singerId" selected-album-id="songInfo.albumId"></singer-and-album-select>
             <div class="upload-btns">
                 <button type="button" class="btn btn-info btn-sm" ng-click="btnSelectFile()">
                     <i class="fa fa-files-o"></i>选择音乐文件
                 </button>
                 <button type="button" class="btn btn-success btn-sm" ng-click="uploader.uploadAll()"
-                        ng-disabled="!uploader.getNotUploadedItems().length">
+                        ng-disabled="!uploader.getNotUploadedItems().length || !songInfo.language">
                     <i class="fa fa-upload"></i>全部上传
                 </button>
                 <button type="button" class="btn btn-warning  btn-sm" ng-click="uploader.cancelAll()"
@@ -356,7 +352,7 @@
                 </button>
             </div>
             <div class="form-group" hidden>
-                <input type="file" id="upload-mp3" accept="audio/mpeg" nv-file-select="" uploader="uploader" multiple/>
+                <input type="file" name="music" id="upload-mp3" accept="audio/mpeg" nv-file-select="" uploader="uploader" multiple/>
             </div>
             <div class="panel panel-default music-lists" ng-hide="!uploader.queue.length">
                 <div class="panel-heading">上传的曲目</div>
@@ -367,7 +363,7 @@
                             <span class="success" ng-show="item.success">success</span>
                             <div class="sub-upload-btn pull-right">
                                 <button type="button" class="btn btn-success btn-xs" ng-click="item.upload()"
-                                        ng-disabled="item.isReady || item.isUploading || item.isSuccess">
+                                        ng-disabled="item.isReady || item.isUploading || item.isSuccess || !songInfo.language">
                                     <i class="fa fa-upload"></i>上传
                                 </button>
                                 <button type="button" class="btn btn-warning  btn-xs" ng-click="item.cancel()"
@@ -381,8 +377,8 @@
                             </div>
                         </div>
                         <div class="progress">
-                            <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="0" aria-valuemin="0"
-                                 aria-valuemax="100" ng-style="{ 'width': item.progress + '%' }"></div>
+                            <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="0"
+                                 aria-valuemin="0" aria-valuemax="100" ng-style="{ 'width': item.progress + '%' }"></div>
                         </div>
                     </div>
                 </div>

@@ -110,31 +110,42 @@ router.post('/deleteSongsByIds', expressJwt({secret: secretToken}), tokenManager
     });
 });
 // 上传歌曲
-router.post('/uploadSongs', expressJwt({secret: secretToken}), tokenManager.verifyToken, function(req, res) {
+router.post('/uploadSongs', expressJwt({secret: secretToken}), tokenManager.verifyToken, function(req, res, next) {
 
-    common.uploadMp3(req, function(err, fields){
+    var owner_pid = req.user.pid;
 
-        if(!err) {
-            var songInfo = {
-                song_name: fields.name,
-                url: fields.path,
-                publish_date: req.body.publish_date,
-                singer_id: req.body.singer_id,
-                album_id: req.body.album_id
-            };
-            var song = new Song(songInfo);
-            song.uploadSong(function(isError, result) {
+    var promise = common.uploadMp3(req);
+    promise.then(function(fields) {
+        return common.getMp3Tags(fields);
+    }).then(function(tags){
 
-                if(isError) {
-                    res.send(500);
-                    console.log(result.message);
-                } else {
-                    res.json({
-                        success: true
-                    });
-                }
-            });
-        }
+        var songInfo = {
+            song_name: tags.name,
+            url: tags.url,
+            size: tags.size,
+            publish_date: tags.year ? new Date(tags.year):new Date(),
+            tag_singer_name: tags.tag_singer_name,
+            tag_album_name: tags.tag_album_name,
+            language: tags.language,
+            singer_id: tags.singer_id,
+            album_id: tags.album_id,
+            owner_pid: owner_pid
+        };
+        var song = new Song(songInfo);
+        song.uploadSong(function(isError, result) {
+
+            if(isError) {
+                res.send(500);
+                console.log(result.message);
+            } else {
+                res.json({
+                    success: true
+                });
+            }
+        });
+    }, function(err) {
+        res.send(500);
+        console.log(err);
     });
 });
 

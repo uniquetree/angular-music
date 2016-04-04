@@ -21,6 +21,7 @@ body,
         padding: 0;
         border: 1px solid #e7e7e7;
         margin: 10px auto;
+        border-radius: 4px;
         background-color: #F8F8F8;
 
         .g-menu {
@@ -38,7 +39,7 @@ body,
     }
 
     label {
-        width: 70px;
+        width: 84px;
         font-weight: normal;
     }
     textarea {
@@ -65,6 +66,10 @@ body,
             color: #c9302c;
         }
     }
+}
+
+.require {
+    color: red;
 }
 
 .m-search {

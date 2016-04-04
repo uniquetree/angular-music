@@ -201,10 +201,11 @@ musicApp.directive('languageSelect', function(){
         scope: {
             selectedLanguageId: '='
         },
-        template: '<div class="form-group language-select"><label class="pull-left">语种选择：</label>' +
-        '<div class="input-group">' +
-        '<select class="form-control" ng-model="selectedLanguageId" ng-options="language.id as language.text for language in languages">' +
-        '<option value="">-- 选择语种 --</option></select></div></div>',
+        template: '<div class="form-group language-select"><label class="pull-left">语种选择：<span class="require">*</span></label>' +
+            '<div class="input-group">' +
+            '<select class="form-control" ng-model="selectedLanguageId"' +
+            ' ng-options="language.id as language.text for language in languages">' +
+            '<option value="">-- 选择语种 --</option></select></div></div>',
         link: function($scope) {
 
             $scope.languages = $config.languages;

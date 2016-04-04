@@ -159,14 +159,14 @@
   margin-right: 5px; }
 
 .upload .singer-album-select label {
-  width: auto;
+  width: 84px;
   height: 34px;
   line-height: 34px; }
 
 .upload .singer-album-select .input-group {
-  width: auto; }
+  padding-left: 12px; }
   .upload .singer-album-select .input-group select {
-    width: 147px;
+    width: 149px;
     border-radius: 4px; }
     .upload .singer-album-select .input-group select:first-child {
       margin-right: 10px; }
@@ -205,6 +205,7 @@ body,
   padding: 0;
   border: 1px solid #e7e7e7;
   margin: 10px auto;
+  border-radius: 4px;
   background-color: #F8F8F8; }
   .g-body .g-container .g-menu {
     width: 240px;
@@ -217,7 +218,7 @@ body,
     border-left: 1px solid #e7e7e7; }
 
 .g-body label {
-  width: 70px;
+  width: 84px;
   font-weight: normal; }
 
 .g-body textarea {
@@ -240,6 +241,9 @@ body,
 
 .g-body .table .fa-trash {
   color: #c9302c; }
+
+.require {
+  color: red; }
 
 .m-search .form-group {
   border-radius: 17px;
@@ -281,6 +285,7 @@ body,
   padding: 0;
   border: 1px solid #e7e7e7;
   margin: 10px auto;
+  border-radius: 4px;
   background-color: #F8F8F8; }
   .g-body .g-container .g-menu {
     width: 240px;
@@ -293,7 +298,7 @@ body,
     border-left: 1px solid #e7e7e7; }
 
 .g-body label {
-  width: 70px;
+  width: 84px;
   font-weight: normal; }
 
 .g-body textarea {
@@ -316,6 +321,9 @@ body,
 
 .g-body .table .fa-trash {
   color: #c9302c; }
+
+.require {
+  color: red; }
 
 .m-search .form-group {
   border-radius: 17px;

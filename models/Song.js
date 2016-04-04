@@ -16,11 +16,15 @@ var Song = function (songInfo, pagination, keyword) {
         this.id = songInfo.id;
         this.song_name = songInfo.song_name;
         this.url = songInfo.url;
+        this.language = songInfo.language;
         this.publish_date = songInfo.publish_date;
         this.listen_count = songInfo.listen_count;
         this.like_count = songInfo.like_count;
         this.singer_id = songInfo.singer_id || 0;
         this.album_id = songInfo.album_id || 0;
+        this.owner_pid = songInfo.owner_pid;
+        this.tag_singer_name = songInfo.tag_singer_name;
+        this.tag_album_name = songInfo.tag_album_name;
     }
 
     if(typeof pagination !== 'undefined') {
@@ -96,8 +100,9 @@ Song.prototype.filterSongsByPage = function(callback){
     params = params.concat(sql_params2);
 
     sql = 'select s1.id, s1.song_name, s1.url, s1.publish_date, s1.listen_count, s1.like_count, s1.singer_id, s1.album_id,' +
-        ' s2.singer_name, a.album_name from ' + song_tb + ' as s1 left join ' + singer_tb + ' as s2 on s1.singer_id=s2.id ' +
-        'left join ' + album_tb + ' as a on s1.album_id=a.id where s1.id >= (select id from ' + song_tb + sql_filters2 +
+        ' s1.tag_singer_name, s1.tag_album_name, s2.singer_name, a.album_name from ' + song_tb +
+        ' as s1 left join ' + singer_tb + ' as s2 on s1.singer_id=s2.id left join ' + album_tb +
+        ' as a on s1.album_id=a.id where s1.id >= (select id from ' + song_tb + sql_filters2 +
         ' order by id limit ?, 1) ' + sql_filters1 + 'order by s1.create_time limit ?;';
     count_sql = 'select count(*) as totalItems from ' + song_tb + sql_filters2;
 
@@ -116,9 +121,11 @@ Song.prototype.findSongById = function(callback){
 Song.prototype.uploadSong = function(callback) {
 
     var create_time = new Date();
-    var sql = 'insert into ' + song_tb + ' (song_name, url, publish_date, singer_id, album_id, create_time)' +
-        ' values (?, ?, ?, ?, ?, ?)';
-    db.query(sql, [this.song_name, this.url, this.publish_date, this.singer_id, this.album_id, create_time], callback);
+    var sql = 'insert into ' + song_tb + ' (song_name, url, language, publish_date, singer_id, album_id, owner_pid,' +
+        ' tag_singer_name, tag_album_name, create_time) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
+    var params = [this.song_name, this.url, this.language, this.publish_date, this.singer_id, this.album_id, this.owner_pid,
+        this.tag_singer_name, this.tag_album_name, create_time];
+    db.query(sql, params, callback);
 };
 
 // 编辑歌曲基本信息
@@ -132,7 +139,6 @@ Song.prototype.updateSong = function(callback){
 Song.prototype.deleteSongsByIds = function(ids, callback) {
 
     var sql = 'delete from ' + song_tb + ' where id in (?)';
-    //sql = db.format(sql, [ids]);
     db.query(sql, [ids], callback);
 };
 
