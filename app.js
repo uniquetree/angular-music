@@ -27,13 +27,15 @@ var routes = require('./routes/index'),
     routesAdmin = require('./routes/admin'),
     routesSinger = require('./routes/singer'),
     routesAlbum = require('./routes/album'),
-    routesSong = require('./routes/song');
+    routesSong = require('./routes/song'),
+    routesPlaylist = require('./routes/Playlist');
 app.use('/', routes);
 app.use('/api/user', routesUser);
 app.use('/api/admin', routesAdmin);
 app.use('/api/singer', routesSinger);
 app.use('/api/album', routesAlbum);
 app.use('/api/song', routesSong);
+app.use('/api/playlist', routesPlaylist);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

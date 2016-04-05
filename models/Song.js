@@ -10,6 +10,7 @@ var db = new Db();
 var song_tb = config.tableName.song_tb;
 var singer_tb = config.tableName.singer_tb;
 var album_tb = config.tableName.album_tb;
+var playlist_song_tb = config.tableName.playlist_song_tb;
 
 var Song = function (songInfo, pagination, keyword) {
     if(typeof songInfo !== 'undefined') {
@@ -115,6 +116,12 @@ Song.prototype.findSongById = function(callback){
     var sql = 'select id, song_name, url, publish_date, listen_count, like_count, singer_id, album_id from ' +
         song_tb + ' where id = ? limit 1';
     db.query(sql, [this.id], callback);
+};
+// 根据歌单id获取歌曲
+Song.prototype.getSongByPlaylistId = function(id, callback) {
+
+    var sql = 'select s.id, s.song_name, url, s.publish_date, s.listen_count, s.like_count, s.singer_id, s.album_id from ' +
+        song_tb + ' as s right join ( select song_id from ' + playlist_song_tb + ' where playlist_id = ?) as ps on s.id = ps.song_id'
 };
 
 // 上传添加歌曲

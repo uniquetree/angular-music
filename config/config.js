@@ -30,12 +30,13 @@ module.exports.tableName = {
     language_tb: 'language',
     singer_type_tb: 'singer_type',
     nation_tb: 'nation',
-    user_tb: 'music_users',
-    playlist_tb: 'playlists',
-    singer_tb: 'singers',
-    album_tb: 'albums',
-    song_tb: 'songs',
-    users_playlists: 'users_playlists'
+    user_tb: 'users',
+    playlist_tb: 'playlist',
+    playlist_user_tb: 'playlist_user',
+    playlist_song_tb: 'playlist_song',
+    singer_tb: 'singer',
+    album_tb: 'album',
+    song_tb: 'song'
 };
 
 // 管理中心菜单配置
