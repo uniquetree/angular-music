@@ -15,10 +15,25 @@ $config.musicApp.controller('HeaderCtrl', ['$scope', '$location', '$window', 'Au
             {id: '2', name: '我的音乐', href: '#/myMusic'},
             {id: '3', name: '管理中心', href: '#/admin'}
         ];
-        $scope.selected = '1';
-        $scope.isActive = function(id, currUrl) {
+        $scope.subNavbarItems = [
+            {name: '最新音乐', href: '#/discover'},
+            {name: '排行榜', href: '#/discover/toplist'},
+            {name: '歌单', href: '#/discover/playlist'},
+            {name: '歌手', href: '#/discover/singer'}
+        ];
+        $scope.isActive = function(currUrl) {
             var href = '#' + $location.url();
-            return currUrl === href;
+            var patt = new RegExp(currUrl);
+            if(href !== '#/' && currUrl ==='#/') {
+                return false;
+            }
+            return patt.test(href);
+        };
+        // 判断是否首页
+        $scope.isHome = function(){
+            var reg = new RegExp('/discover');
+            var path = $location.url();
+            return path === '/' || reg.test(path);
         };
 
         // 判断是否登录

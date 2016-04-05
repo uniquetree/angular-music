@@ -75,6 +75,12 @@ $config.musicApp.config(['$routeProvider', function($routeProvider) {
             access: { requiredLogin: false },
             ignoreLoadingBar: true
         })
+        .when('/discover:subPage', {
+            templateUrl: 'app/views/Home/home.html',
+            controller: 'UserCtrl',
+            access: { requiredLogin: false },
+            ignoreLoadingBar: true
+        })
         // 登录页
         .when("/login", {
             templateUrl: 'app/views/User/login.html',

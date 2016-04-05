@@ -6,14 +6,15 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="/#/">
+        <a class="navbar-brand" href="#/">
             <span class="glyphicon glyphicon-music" aria-hidden="true"></span>
             云音乐
         </a>
         <nav class="collapse navbar-collapse">
             <ul id="m-sub-nav" class="nav navbar-nav m-sub-nav" on-finish-render-filters="Complete">
-                <li ng-repeat="item in items" ng-class="{active: isActive(item.id, item.href)}">
+                <li class="item" ng-repeat="item in items" ng-class="{active: isActive(item.href)}">
                     <a ng-href="{{item.href}}">{{item.name}}</a>
+                    <span class="triangle-up" ng-show="isActive(item.href)"></span>
                 </li>
             </ul>
             <div class="user-bar pull-right">
@@ -28,4 +29,11 @@
             </form>
         </nav>
     </div>
+</nav>
+<nav class="sub-navbar">
+    <ul class="nav nav-pills clearfix home-sub-nav" ng-if="isHome()">
+        <li ng-repeat="item in subNavbarItems" ng-class="{active: isActive(item.href)}">
+            <a ng-href="{{item.href}}">{{item.name}}</a>
+        </li>
+    </ul>
 </nav>
