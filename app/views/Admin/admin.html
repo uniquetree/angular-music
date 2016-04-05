@@ -302,8 +302,8 @@
                         </td>
                         <td>{{(pagination.currPage-1)*pagination.itemsPerPage + $index + 1}}</td>
                         <td class="name-td">{{song.song_name}}</td>
-                        <td>{{song.singer_name || song.tag_singer_name}}</td>
-                        <td>{{song.album_name || song.tag_album_name}}</td>
+                        <td>{{song.singer_name || '未知'}}</td>
+                        <td>{{song.album_name || '未知'}}</td>
                         <td>{{song.publish_date}}</td>
                         <td>{{song.listen_count}}</td>
                         <td>{{song.like_count}}</td>
@@ -352,7 +352,7 @@
                 </button>
             </div>
             <div class="form-group" hidden>
-                <input type="file" name="music" id="upload-mp3" accept="audio/mpeg" nv-file-select="" uploader="uploader" multiple/>
+                <input type="file" name="file" id="upload-mp3" accept="audio/mpeg" nv-file-select="" uploader="uploader" multiple/>
             </div>
             <div class="panel panel-default music-lists" ng-hide="!uploader.queue.length">
                 <div class="panel-heading">上传的曲目</div>
@@ -371,7 +371,7 @@
                                     <i class="fa fa-ban"></i>取消上传
                                 </button>
                                 <button type="button" class="btn btn-danger btn-xs" ng-click="item.remove()"
-                                        ng-disabled="!uploader.queue.length">
+                                        ng-disabled="!isUploaded">
                                     <i class="fa fa-trash"></i>删除
                                 </button>
                             </div>

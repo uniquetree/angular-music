@@ -37,6 +37,13 @@ Album.prototype.getAllAlbums = function(callback) {
     db.query(sql, [], callback);
 };
 
+// 根据专辑名和歌手id查找
+Album.prototype.findAlbumIdByFilters = function(callback) {
+
+    var sql = 'select id from ' + album_tb + ' where album_name=? and singer_id=? limit 1';
+    db.query(sql, [this.album_name, this.singer_id], callback);
+};
+
 // 分页查找专辑
 Album.prototype.findAlbums = function(callback){
 
@@ -77,22 +84,24 @@ Album.prototype.findAlbumsBySingerId = function(callback){
     db.query(sql, params, callback);
 };
 
-// 添加一张新专辑
+// 添加一张新专辑并返回最新添加的专辑的id，若插入记录重复则返回的是0
 Album.prototype.addAlbum = function(callback) {
 
     var sql,
+        lastest_id_sql,
         params,
         create_time = new Date();
 
-    sql = 'insert into ' + album_tb + '(album_name, album_info, publish_date, create_time, singer_id) values (?, ?, ?, ?, ?)';
+    sql = 'insert ignore into ' + album_tb + '(album_name, album_info, publish_date, create_time, singer_id) values (?, ?, ?, ?, ?);';
+    lastest_id_sql = 'select LAST_INSERT_ID()';
     params = [this.album_name, this.album_info, this.publish_date, create_time, this.singer_id];
-    db.query(sql, params, callback);
+    db.query(sql+lastest_id_sql, params, callback);
 };
 
 // 更新某张专辑的信息
 Album.prototype.updateAlbum = function(callback){
 
-    var sql = 'update ' + album_tb + ' set album_name=?, album_info=?, publish_date=?, singer_id=? where id = ?';
+    var sql = 'update ignore ' + album_tb + ' set album_name=?, album_info=?, publish_date=?, singer_id=? where id = ?';
     db.query(sql, [this.album_name, this.album_info, this.publish_date, this.singer_id, this.id], callback);
 };
 

@@ -35,6 +35,13 @@ Singer.prototype.findAllSingers = function(callback) {
     db.query(sql, [], callback);
 };
 
+// 根据筛选条件获取歌手的id
+Singer.prototype.findSingerIdByFilters = function(callback) {
+
+    var sql = 'select id from ' + singer_tb + ' where singer_name=? and language=? and singer_info=? limit 1';
+    db.query(sql, [this.singer_name, this.language, this.singer_info], callback);
+};
+
 // 根据条件筛选歌手
 Singer.prototype.findAllSingersByFilters = function(callback) {
 
@@ -87,14 +94,14 @@ Singer.prototype.findSingerById = function(callback){
 Singer.prototype.addSinger = function(callback) {
 
     var create_time = new Date();
-    var sql = 'insert into ' + singer_tb + ' (singer_name, singer_type, language, singer_info, create_time) values (?, ?, ?, ?, ?)';
+    var sql = 'insert ignore into ' + singer_tb + ' (singer_name, singer_type, language, singer_info, create_time) values (?, ?, ?, ?, ?)';
     db.query(sql, [this.singer_name, this.singer_type, this.language, this.singer_info, create_time], callback);
 };
 
 // 更新某位singer的信息
 Singer.prototype.updateSinger = function(callback){
 
-    var sql = 'update ' + singer_tb + ' set singer_name=?, singer_type=?, language=?, singer_info=? where id = ?';
+    var sql = 'update ignore ' + singer_tb + ' set singer_name=?, singer_type=?, language=?, singer_info=? where id = ?';
     db.query(sql, [this.singer_name, this.singer_type, this.language, this.singer_info, this.id], callback);
 };
 

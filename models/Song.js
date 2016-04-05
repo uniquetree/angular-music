@@ -121,7 +121,7 @@ Song.prototype.findSongById = function(callback){
 Song.prototype.uploadSong = function(callback) {
 
     var create_time = new Date();
-    var sql = 'insert into ' + song_tb + ' (song_name, url, language, publish_date, singer_id, album_id, owner_pid,' +
+    var sql = 'insert ignore into ' + song_tb + ' (song_name, url, language, publish_date, singer_id, album_id, owner_pid,' +
         ' tag_singer_name, tag_album_name, create_time) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
     var params = [this.song_name, this.url, this.language, this.publish_date, this.singer_id, this.album_id, this.owner_pid,
         this.tag_singer_name, this.tag_album_name, create_time];
@@ -131,7 +131,7 @@ Song.prototype.uploadSong = function(callback) {
 // 编辑歌曲基本信息
 Song.prototype.updateSong = function(callback){
 
-    var sql = 'update ' + song_tb + ' set song_name=?, publish_date=?, singer_id=?, album_id=? where id = ?';
+    var sql = 'update ignore ' + song_tb + ' set song_name=?, publish_date=?, singer_id=?, album_id=? where id = ?';
     db.query(sql, [this.song_name, this.publish_date, this.singer_id, this.album_id, this.id], callback);
 };
 

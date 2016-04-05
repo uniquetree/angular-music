@@ -302,8 +302,8 @@
                         </td>
                         <td>{{(pagination.currPage-1)*pagination.itemsPerPage + $index + 1}}</td>
                         <td class="name-td">{{song.song_name}}</td>
-                        <td>{{song.singer_name || song.tag_singer_name}}</td>
-                        <td>{{song.album_name || song.tag_album_name}}</td>
+                        <td>{{song.singer_name || '未知'}}</td>
+                        <td>{{song.album_name || '未知'}}</td>
                         <td>{{song.publish_date}}</td>
                         <td>{{song.listen_count}}</td>
                         <td>{{song.like_count}}</td>

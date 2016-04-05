@@ -2,6 +2,7 @@
  * 歌曲路由
  * Created by 郑树聪 on 2016/4/1.
  */
+var Q = require('q');
 var express = require('express');
 var jwt = require('jsonwebtoken');
 var expressJwt = require('express-jwt');
@@ -15,6 +16,8 @@ var router = express.Router();
 var Common = require('../utils/Common');
 var common = new Common();
 
+var Singer = require('../models/Singer');
+var Album = require('../models/Album');
 var Song = require('../models/Song');
 
 // 根据条件筛选分页查找歌曲
@@ -123,7 +126,7 @@ router.post('/uploadSongs', expressJwt({secret: secretToken}), tokenManager.veri
             song_name: tags.name,
             url: tags.url,
             size: tags.size,
-            publish_date: tags.year ? new Date(tags.year):new Date(),
+            publish_date: tags.year ? new Date(tags.year): null,
             tag_singer_name: tags.tag_singer_name,
             tag_album_name: tags.tag_album_name,
             language: tags.language,
@@ -131,22 +134,106 @@ router.post('/uploadSongs', expressJwt({secret: secretToken}), tokenManager.veri
             album_id: tags.album_id,
             owner_pid: owner_pid
         };
-        var song = new Song(songInfo);
-        song.uploadSong(function(isError, result) {
+        //若未传歌手id且mp3文件的id3标签歌手名不为空，则新建歌手，否则直接添加歌曲，歌手idhe专辑id都设置默认未知0
+        if((typeof tags.singer_id === 'undefined' || tags.singer_id === 'undefined') && tags.tag_singer_name) {
 
-            if(isError) {
-                res.send(500);
-                console.log(result.message);
-            } else {
-                res.json({
-                    success: true
+            var singerInfo = {
+                singer_name: tags.tag_singer_name,
+                language: tags.language,
+                singer_info: '默认歌手信息'
+            };
+            // 添加歌手
+            return singerPromise('addSinger', singerInfo).then(function(){
+
+                // 查找新建的歌手的id
+                return singerPromise('findSingerIdByFilters', singerInfo).then(function(data){
+
+                    songInfo.singer_id = data[0].id;
+                    // 若若未传专辑id且mp3文件的id3标签专辑名不为空，则新建标签，否则直接添加歌曲，专辑id设置默认未知0
+                    if((typeof tags.album_id === 'undefined' || tags.album_id === 'undefined') && tags.tag_album_name) {
+                        var albumInfo = {
+                            singer_id: data[0].id,
+                            album_name: tags.tag_album_name,
+                            publish_date: tags.year ? new Date(tags.year): null
+                        };
+                        // 添加专辑
+                        return albumPromise('addAlbum', albumInfo).then(function(result) {
+
+                            if(result[1][0]['LAST_INSERT_ID()'] !== 0) {
+                                songInfo.album_id = result[1][0];
+                                return songPromise('uploadSong', songInfo);
+                            } else {
+                                return albumPromise('findAlbumIdByFilters', albumInfo).then(function(data){
+
+                                    songInfo.album_id = data[0].id;
+                                    // 添加歌曲
+                                    return songPromise('uploadSong', songInfo);
+                                });
+                            }
+                        });
+                    } else {
+                        return songPromise('uploadSong', songInfo);
+                    }
                 });
-            }
-        });
+            });
+        } else {
+
+            return songPromise('uploadSong', songInfo);
+        }
+    }).then(function(data) {
+
+        res.json({
+            success: true
+        })
     }, function(err) {
         res.send(500);
         console.log(err);
     });
 });
+
+function singerPromise(action, singerInfo, callback) {
+
+    var deferred = Q.defer();
+    var singer = new Singer(singerInfo);
+    singer[action](function(isError, result) {
+
+        if (isError) {
+            deferred.reject(result.message);
+        } else {
+            deferred.resolve(result);
+        }
+    });
+    return deferred.promise.nodeify(callback);
+}
+
+function albumPromise(action, albumInfo, callback) {
+
+    var deferred = Q.defer();
+    var album = new Album(albumInfo);
+    album[action](function(isError, result) {
+
+        if (isError) {
+            deferred.reject(result.message);
+        } else {
+            deferred.resolve(result);
+        }
+    });
+    return deferred.promise.nodeify(callback);
+}
+
+function songPromise(action, songInfo, callback) {
+
+    var deferred = Q.defer();
+    var song = new Song(songInfo);
+    song[action](function(isError, result) {
+
+        if (isError) {
+            deferred.reject(result.message);
+        } else {
+            deferred.resolve(result);
+        }
+    });
+    return deferred.promise.nodeify(callback);
+}
 
 module.exports = router;
