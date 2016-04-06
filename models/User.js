@@ -53,6 +53,7 @@ User.prototype.create = function(callback){
 
     var registered_time = common.getCurrentTime();
     var sql = 'insert into ' + user_tb + '(username, email, password, type, registered_time) values (?, ?, ?, ?, ?)';
+    var create_playlist_sql = '';
     db.query(sql, [this.username, this.email, this.password, this.type, registered_time], callback);
 };
 

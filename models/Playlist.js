@@ -12,11 +12,23 @@ var playlist_tb = config.tableName.playlist_tb;
 var playlist_user_tb = config.tableName.playlist_user_tb;
 
 var Playlist = function (playlistInfo) {
-    if(typeof songInfo !== 'undefined') {
+    if(typeof playlistInfo !== 'undefined') {
         this.id = playlistInfo.id;
         this.playlist_name = playlistInfo.playlist_name;
         this.playlist_info = playlistInfo.playlist_info;
     }
+};
+
+Playlist.prototype.findPlaylists = function(callback){
+
+    var sql = 'select id, name, href, sub_menu_id from ' + menu_tb + 'where type=?';
+    db.query(sql, [this.type], callback);
+};
+
+Playlist.prototype.filterPlayListsByPage = function(callback){
+
+    var sql = 'select id, name, href, sub_menu_id from ' + menu_tb + 'where type=?';
+    db.query(sql, [this.type], callback);
 };
 
 /**
@@ -33,37 +45,53 @@ Playlist.prototype.getPlayListsByUserId = function(userId, isOwner, callback) {
     db.query(sql, [userId, isOwner], callback);
 };
 
-Playlist.prototype.findPlaylists = function(callback){
+// 添加歌单，同时在歌单和用户关系表添加记录
+Playlist.prototype.addPlaylist = function(userId, callback){
 
-    var sql = 'select id, name, href, sub_menu_id from ' + menu_tb + 'where type=?';
-    db.query(sql, [this.type], callback);
+    var create_time = common.getCurrentTime();
+    var sqls = [],
+        params = [];
+
+    var sql1 = 'insert ignore into ' + playlist_tb + ' (playlist_name, playlist_info, create_time) values (?, ?, ?);';
+    var lastest_id_sql1 = 'select LAST_INSERT_ID()';
+    sqls.push(sql1+lastest_id_sql1);
+    params.push([this.playlist_name, this.playlist_info, create_time]);
+
+    var sql2 = 'insert ignore into ' + playlist_user_tb + ' (user_id, playlist_id) values (?, ?);';
+    var lastest_id_sql2 = 'select LAST_INSERT_ID()';
+    sqls.push(sql2+lastest_id_sql2);
+    params.push([userId]);
+    db.queryWithQueues(sqls, params, callback);
 };
+// 验证歌单是创建的还是收藏的
+Playlist.prototype.checkPlaylistIsOwner = function(userId, callback) {
 
-Playlist.prototype.filterPlayListsByPage = function(callback){
-
-    var sql = 'select id, name, href, sub_menu_id from ' + menu_tb + 'where type=?';
-    db.query(sql, [this.type], callback);
+    var check_sql = 'select is_owner from ' + playlist_user_tb + ' where playlist_id=? and user_id=?';
+    db.query(check_sql, [this.id, userId], callback);
 };
+// 更新歌单信息
+Playlist.prototype.updatePlaylist = function(callback) {
 
-Playlist.prototype.addPlaylist = function(callback){
-
-    var sql = 'insert ignore into ' + playlist_tb + ' (playlist_name, playlist_info) values (?, ?)';
-    var params = [this.playlist_name, this.playlist_info];
-    var lastest_id_sql = 'select LAST_INSERT_ID()';
-    db.query(sql + lastest_id_sql, params, callback);
-};
-
-Playlist.prototype.addPlaylistWithUserId = function(userId, playlistId, isOwner, callback){
-
-    var sql = 'insert ignore into ' + playlist_user_tb + ' (user_id, playlist_id, is_owner) values (?, ?, ?)';
-    var params = [userId, playlistId, isOwner];
+    var sql = 'update ignore ' + playlist_tb + ' set playlist_name=?, playlist_info=? where id = ?',
+        params = [this.playlist_name, this.playlist_info, this.id];
     db.query(sql, params, callback);
 };
+// 删除歌单,isOwner===1时删除创建，否则删除收藏的
+Playlist.prototype.deletePlaylistById = function(isOwner, userId, callback){
 
-Playlist.prototype.deletePlaylistByIds = function(callback){
+    var sql = '',
+        params = [];
+    if(isOwner === 1) {
+        var delete_playlist_sql = 'delete from ' + playlist_tb + ' where id=?;',
+            delete_playlist_user_sql = 'delete from ' + playlist_user_tb + ' where playlist_id=? and user_id=?';
+        sql = delete_playlist_sql+delete_playlist_user_sql;
+        params = [this.id, this.id, userId];
+    } else {
+        sql = 'delete from ' + playlist_user_tb + ' where playlist_id=? and user_id=?';
+        params = [this.id, userId];
+    }
 
-    var sql = 'select id, name, href, sub_menu_id from ' + menu_tb + 'where type=?';
-    db.query(sql, [this.type], callback);
+    db.query(sql, params, callback);
 };
 
 module.exports = Playlist;
