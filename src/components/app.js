@@ -99,7 +99,7 @@ $config.musicApp.config(['$routeProvider', function($routeProvider) {
         .when('/myMusic', {
             templateUrl: 'app/views/MyMusic/myMusic.html',
             controller: 'MyMusicCtrl',
-            //reloadOnSearch: false,
+            reloadOnSearch: false,
             access: { requiredLogin: true },
             ignoreLoadingBar: true
         })

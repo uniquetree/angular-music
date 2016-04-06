@@ -1,10 +1,80 @@
 <!-- MyMusic view -->
 <header ng-include="'app/views/Header/header.html'" class="g-header" ng-controller="HeaderCtrl"></header>
-
 <div class="g-body">
-    <div class="container g-container">
-        我的音乐
+    <div id="g-myMusic" class="container g-container" ng-controller="MyMusicCtrl">
+        <div class="g-menu sidebar-nav navbar-collapse collapse pull-left" data-ng-init="loadPlaylists()">
+            <ul class="nav nav-pills nav-stacked menus">
+                <li class="menu" title="创建的歌单">
+                    <a class="menu-title" ng-click="toggleMenuOpen('isCreateMenuOpen', isCreateMenuOpen)">
+                        <i class="fa" ng-class="{true: 'fa-chevron-down', false: 'fa-chevron-right'}[isCreateMenuOpen]"></i>
+                        创建的歌单
+                        <button type="button" class="btn btn-default btn-xs pull-right">
+                            <i class="fa fa-plus"></i>新建
+                        </button>
+                    </a>
+                    <ul class="nav nav-pills nav-stacked sub-menus" ng-class="{false: 'hidden'}[isCreateMenuOpen]">
+                        <li class="sub-menu" ng-repeat="createPlaylist in createPlaylists"
+                            ng-class="{active: locationId===createPlaylist.id}"
+                            title="{{createPlaylist.playlist_name}}" ng-click="changeUrl(createPlaylist, 'isCreateMenuOpen')">
+                            <div class="media">
+                                <div class="avatar media-left">
+                                    <a href="#">
+                                        <img class="media-object" src="" alt="" width="40" height="40">
+                                    </a>
+                                </div>
+                                <div class="media-body">
+                                    <p class="media-heading">{{createPlaylist.playlist_name}}</p>
+                                    <p class="num">100首</p>
+                                </div>
+                            </div>
+                            <span class="hidden oper">
+                                <i title="编辑" class="fa fa-edit"></i>
+                                <i title="删除" class="fa fa-trash-o"></i>
+                            </span>
+                        </li>
+                    </ul>
+                </li>
+                <li class="menu" title="收藏的歌单">
+                    <a class="menu-title" ng-click="toggleMenuOpen('isCollectMenuOpen', isCollectMenuOpen)">
+                        <i class="fa" ng-class="{true: 'fa-chevron-down', false: 'fa-chevron-right'}[isCollectMenuOpen]"></i>
+                        收藏的歌单
+                    </a>
+                    <ul class="nav nav-pills nav-stacked sub-menus" ng-class="{false: 'hidden'}[isCollectMenuOpen]">
+                        <li class="sub-menu" ng-repeat="collectPlaylist in collectPlaylists"
+                            ng-class="{active: locationId===collectPlaylist.id}"
+                            title="{{collectPlaylist.playlist_name}}" ng-click="changeUrl(collectPlaylist, 'isCollectMenuOpen')">
+                            <div class="media">
+                                <div class="avatar media-left">
+                                    <a href="#">
+                                        <img class="media-object" src="" alt="" width="40" height="40">
+                                    </a>
+                                </div>
+                                <div class="media-body">
+                                    <p class="media-heading">{{collectPlaylist.playlist_name}}</p>
+                                    <p class="num">100首</p>
+                                </div>
+                            </div>
+                            <span class="hidden oper">
+                                <i title="删除" class="fa fa-trash-o"></i>
+                            </span>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div class="g-content pull-left" autoscroll>
+            <div class="media">
+                <div class="media-left media-middle">
+                    <a href="#">
+                        <img class="media-object" src="" alt="" width="160" height="160">
+                    </a>
+                </div>
+                <div class="media-body">
+                    <h4 class="media-heading">{{currPlaylistInfo.playlist_name}}</h4>
+                    ...
+                </div>
+            </div>
+        </div>
     </div>
 </div>
-
 <footer ng-include="'app/views/Templates/footer.html'" class="g-footer"></footer>

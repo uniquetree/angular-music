@@ -144,7 +144,7 @@ function getPlayListsByUserId(userId, isOwner, res) {
         } else {
             res.json({
                 success: true,
-                playlist: results
+                playlists: results
             });
         }
     });

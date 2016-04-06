@@ -1,4 +1,4 @@
-<nav class="navbar navbar-inverse navbar-fixed-top m-nav" data-ng-init="load()">
+<nav class="navbar navbar-inverse m-nav" data-ng-init="load()">
     <div class="container g-container">
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
             <span class="sr-only">Toggle navigation</span>
@@ -29,11 +29,11 @@
             </form>
         </nav>
     </div>
-</nav>
-<nav class="sub-navbar">
-    <ul class="nav nav-pills clearfix home-sub-nav" ng-if="isHome()">
-        <li ng-repeat="item in subNavbarItems" ng-class="{active: isActive(item.href)}">
-            <a ng-href="{{item.href}}">{{item.name}}</a>
-        </li>
-    </ul>
+    <nav class="sub-navbar">
+        <ul class="nav nav-pills clearfix home-sub-nav" ng-if="isHome()">
+            <li ng-repeat="item in subNavbarItems" ng-class="{active: isActive(item.href)}">
+                <a ng-href="{{item.href}}">{{item.name}}</a>
+            </li>
+        </ul>
+    </nav>
 </nav>

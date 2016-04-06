@@ -19,18 +19,6 @@ var Playlist = function (playlistInfo) {
     }
 };
 
-Playlist.prototype.findPlaylists = function(callback){
-
-    var sql = 'select id, name, href, sub_menu_id from ' + menu_tb + 'where type=?';
-    db.query(sql, [this.type], callback);
-};
-
-Playlist.prototype.filterPlayListsByPage = function(callback){
-
-    var sql = 'select id, name, href, sub_menu_id from ' + menu_tb + 'where type=?';
-    db.query(sql, [this.type], callback);
-};
-
 /**
  * 获取用户创建/收藏的歌单
  * @param userId [Number] 用户id
@@ -39,7 +27,7 @@ Playlist.prototype.filterPlayListsByPage = function(callback){
  */
 Playlist.prototype.getPlayListsByUserId = function(userId, isOwner, callback) {
 
-    var sql = 'select p.id, p.playlist_name, p.playlist_info, p.like_count, p.play_count, p.create_date from ' + playlist_tb +
+    var sql = 'select p.id, p.playlist_name, p.playlist_info, p.like_count, p.play_count, p.create_time from ' + playlist_tb +
         ' as p right join (select playlist_id from ' + playlist_user_tb + ' where user_id=? and is_owner=?) as pu on' +
         ' p.id = pu.playlist_id';
     db.query(sql, [userId, isOwner], callback);
@@ -52,14 +40,13 @@ Playlist.prototype.addPlaylist = function(userId, callback){
     var sqls = [],
         params = [];
 
+    var lastest_id_sql = 'select LAST_INSERT_ID()';
     var sql1 = 'insert ignore into ' + playlist_tb + ' (playlist_name, playlist_info, create_time) values (?, ?, ?);';
-    var lastest_id_sql1 = 'select LAST_INSERT_ID()';
-    sqls.push(sql1+lastest_id_sql1);
+    sqls.push(sql1+lastest_id_sql);
     params.push([this.playlist_name, this.playlist_info, create_time]);
 
     var sql2 = 'insert ignore into ' + playlist_user_tb + ' (user_id, playlist_id) values (?, ?);';
-    var lastest_id_sql2 = 'select LAST_INSERT_ID()';
-    sqls.push(sql2+lastest_id_sql2);
+    sqls.push(sql2+lastest_id_sql);
     params.push([userId]);
     db.queryWithQueues(sqls, params, callback);
 };

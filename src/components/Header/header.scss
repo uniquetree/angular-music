@@ -7,12 +7,13 @@ $userBarHeight: 120px;
 .g-header {
 
     .m-nav {
+        border: none;
         margin-bottom: 0;
+        border-radius: 0;
     }
     .sub-navbar {
         width: 100%;
-        min-height: 8px;
-        margin-top: 50px;
+        min-height: 5px;
         background-color: #AE0A0A;
         //box-shadow: inset 0 0 6px 2px rgba(50,50,50,.4);
 
@@ -77,9 +78,9 @@ $userBarHeight: 120px;
                 bottom: -1px;
                 width: 0;
                 height: 0;
-                border-left: 6px solid transparent;
-                border-right: 6px solid transparent;
-                border-bottom: 7px solid #AE0A0A;
+                border-left: 9px solid transparent;
+                border-right: 9px solid transparent;
+                border-bottom: 9px solid #AE0A0A;
             }
         }
     }

@@ -1,0 +1,74 @@
+/**
+ * Created by 郑树聪 on 2016/4/7.
+ */
+#g-myMusic {
+
+    .menu {
+
+        .menu-title {
+
+            & > .fa {
+                width: 20px;
+                height: 20px;
+            }
+
+            button {
+                height: 22px;
+                line-height: 16px;
+
+                .fa {
+                    vertical-align: middle;
+                    font-size: 14px;
+                    color: #AE0A0A;
+                }
+            }
+        }
+
+        .sub-menu {
+            position: relative;
+            padding: 6px 0 6px 20px;
+            cursor: pointer;
+
+            &.active {
+                background-color: rgba(51, 51, 51, 0.1);
+            }
+
+            &:hover  {
+                background-color: rgba(51, 51, 51, 0.1);
+
+                & > .oper {
+                    display: block !important;
+
+                    .fa:hover {
+                        opacity: 1;
+                    }
+                }
+            }
+            a {
+                padding: 0;
+            }
+            p {
+                margin-bottom: 0;
+                &.num {
+                    color: #333;
+                }
+            }
+            .avatar {
+                width: 40px;
+                height: 40px;
+                margin-right: 10px;
+            }
+            .oper {
+                position: absolute;
+                right: 5px;
+                bottom: 5px;
+                color: #222;
+                .fa {
+                    font-size: 16px;
+                    opacity: .6;
+                }
+            }
+        }
+    }
+
+}

@@ -347,12 +347,13 @@ body,
     border: none; }
 
 .g-header .m-nav {
-  margin-bottom: 0; }
+  border: none;
+  margin-bottom: 0;
+  border-radius: 0; }
 
 .g-header .sub-navbar {
   width: 100%;
-  min-height: 8px;
-  margin-top: 50px;
+  min-height: 5px;
   background-color: #AE0A0A; }
   .g-header .sub-navbar .home-sub-nav {
     width: 448px;
@@ -395,9 +396,9 @@ body,
     bottom: -1px;
     width: 0;
     height: 0;
-    border-left: 6px solid transparent;
-    border-right: 6px solid transparent;
-    border-bottom: 7px solid #AE0A0A; }
+    border-left: 9px solid transparent;
+    border-right: 9px solid transparent;
+    border-bottom: 9px solid #AE0A0A; }
 
 .g-header .user-bar {
   width: 120px; }
@@ -452,6 +453,53 @@ body,
 
 .menus .sub-menus a {
   padding-left: 34px; }
+
+@charset "UTF-8";
+/**
+ * Created by 郑树聪 on 2016/4/7.
+ */
+#g-myMusic .menu .menu-title > .fa {
+  width: 20px;
+  height: 20px; }
+
+#g-myMusic .menu .menu-title button {
+  height: 22px;
+  line-height: 16px; }
+  #g-myMusic .menu .menu-title button .fa {
+    vertical-align: middle;
+    font-size: 14px;
+    color: #AE0A0A; }
+
+#g-myMusic .menu .sub-menu {
+  position: relative;
+  padding: 6px 0 6px 20px;
+  cursor: pointer; }
+  #g-myMusic .menu .sub-menu.active {
+    background-color: rgba(51, 51, 51, 0.1); }
+  #g-myMusic .menu .sub-menu:hover {
+    background-color: rgba(51, 51, 51, 0.1); }
+    #g-myMusic .menu .sub-menu:hover > .oper {
+      display: block !important; }
+      #g-myMusic .menu .sub-menu:hover > .oper .fa:hover {
+        opacity: 1; }
+  #g-myMusic .menu .sub-menu a {
+    padding: 0; }
+  #g-myMusic .menu .sub-menu p {
+    margin-bottom: 0; }
+    #g-myMusic .menu .sub-menu p.num {
+      color: #333; }
+  #g-myMusic .menu .sub-menu .avatar {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px; }
+  #g-myMusic .menu .sub-menu .oper {
+    position: absolute;
+    right: 5px;
+    bottom: 5px;
+    color: #222; }
+    #g-myMusic .menu .sub-menu .oper .fa {
+      font-size: 16px;
+      opacity: .6; }
 
 @charset "UTF-8";
 /**

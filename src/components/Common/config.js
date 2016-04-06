@@ -6,7 +6,7 @@ var base_url = 'http://localhost:3000/';
 var singer_url = 'api/singer/';
 var album_url = 'api/album/';
 var song_url = 'api/song/';
-var playlist_url = '/api/playlist/';
+var playlist_url = 'api/playlist/';
 
 module.exports = {
     musicApp: angular.module('musicApp', ['ngRoute', 'ui.bootstrap', 'angular-loading-bar', 'angularFileUpload']),
