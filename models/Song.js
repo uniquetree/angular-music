@@ -4,7 +4,6 @@
  */
 var config = require('../config/config');
 var Db = require('../utils/Db');
-var Common = require('../utils/Common');
 var db = new Db();
 
 var song_tb = config.tableName.song_tb;
@@ -152,6 +151,22 @@ Song.prototype.deleteSongsByIds = function(ids, callback) {
 
     var sql = 'delete from ' + song_tb + ' where id in (?)';
     db.query(sql, [ids], callback);
+};
+
+// 添加某首歌曲到自己创建的歌单
+Song.prototype.collectSong = function(playlistId, callback) {
+
+    var sql = 'insert ignore ' + playlist_song_tb + ' (playlist_id, song_id) values (?, ?)';
+    var param = [playlistId, this.id];
+    db.query(sql, param, callback);
+};
+
+// 从自己创建的歌单的取消收藏某首歌曲
+Song.prototype.cancelCollectSong = function(playlistId, callback) {
+
+    var sql = 'delete from ' + playlist_song_tb + ' where playlist_id=? and song_id=?';
+    var param = [playlistId, this.id];
+    db.query(sql, param, callback);
 };
 
 module.exports = Song;

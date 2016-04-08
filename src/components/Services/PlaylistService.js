@@ -51,7 +51,7 @@ musicApp.factory('PlaylistService', ['$http', function($http) {
                 }
             });
         },
-        // 删除某张歌单
+        // 删除某张歌单(创建的、收藏的)
         deletePlaylistById: function(id){
 
             return $http({

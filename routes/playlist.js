@@ -12,9 +12,7 @@ var secretToken = require('../config/config').secretToken;
 
 var router = express.Router();
 
-var btoa = require('btoa');
-var Common = require('../utils/Common');
-var common = new Common();
+var common = require('../utils/Common');
 
 var Playlist = require('../models/Playlist');
 
@@ -66,38 +64,29 @@ router.post('/updatePlaylist', expressJwt({secret: secretToken}), tokenManager.v
         playlist_name: req.body.playlist_name,
         playlist_info: req.body.playlist_info
     };
-    var playlist = new Playlist(playlistInfo);
+    common.checkPlaylistIsOwner(userId, playlistInfo).then(function(isOwner) {
+        if(isOwner === 1) {
+            var playlist = new Playlist(playlistInfo);
+            playlist.updatePlaylist(function(isError, results) {
 
-    playlist.checkPlaylistIsOwner(userId, function(isError, results) {
-
-        if(isError) {
-            res.send(500);
-            console.log(results.message);
+                if(isError) {
+                    res.sendStatus(500);
+                    console.log(results.message);
+                } else {
+                    res.json({
+                        success: true
+                    });
+                }
+            });
         } else {
-
-            var isOwner = 0;
-            if(results.length > 0) {
-                isOwner = results[0].is_owner;
-            }
-            if(isOwner === 1) {
-                playlist.updatePlaylist(function(isError, results) {
-
-                    if(isError) {
-                        res.send(500);
-                        console.log(results.message);
-                    } else {
-                        res.json({
-                            success: true
-                        });
-                    }
-                });
-            } else {
-                res.json({
-                    success: false,
-                    msg: '该歌单并非由此用户创建'
-                });
-            }
+            res.json({
+                success: false,
+                msg: '该歌单并非由此用户创建'
+            });
         }
+    }, function(error) {
+        res.sendStatus(500);
+        console.log(error);
     });
 });
 // 删除歌单
@@ -107,30 +96,23 @@ router.post('/deletePlaylistById', expressJwt({secret: secretToken}), tokenManag
     var playlistInfo = {
         id: req.body.id
     };
-    var playlist = new Playlist(playlistInfo);
-    playlist.checkPlaylistIsOwner(userId, function(isError, results) {
+    common.checkPlaylistIsOwner(userId, playlistInfo).then(function(isOwner) {
 
-        if(isError) {
-            res.send(500);
-            console.log(results.message);
-        } else {
+        var playlist = new Playlist(playlistInfo);
+        playlist.deletePlaylistById(isOwner, userId, function(isError, results) {
 
-            var isOwner = 0;
-            if(results.length > 0) {
-                isOwner = results[0].is_owner;
+            if(isError) {
+                res.sendStatus(500);
+                console.log(results.message);
+            } else {
+                res.json({
+                    success: true
+                });
             }
-            playlist.deletePlaylistById(isOwner, userId, function(isError, results) {
-
-                if(isError) {
-                    res.send(500);
-                    console.log(results.message);
-                } else {
-                    res.json({
-                        success: true
-                    });
-                }
-            });
-        }
+        });
+    }, function(error) {
+        res.sendStatus(500);
+        console.log(error);
     });
 });
 

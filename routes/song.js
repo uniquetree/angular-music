@@ -13,8 +13,7 @@ var secretToken = require('../config/config').secretToken;
 
 var router = express.Router();
 
-var Common = require('../utils/Common');
-var common = new Common();
+var common = require('../utils/Common');
 
 var Singer = require('../models/Singer');
 var Album = require('../models/Album');
@@ -71,6 +70,7 @@ router.get('/getSongById', function(req, res) {
         }
     });
 });
+// 获取某张歌单歌曲
 router.get('/getSongsByPlaylistId', function(req, res) {
 
     var playlistId = req.query.playlistId;
@@ -206,6 +206,97 @@ router.post('/uploadSongs', expressJwt({secret: secretToken}), tokenManager.veri
         console.log(err);
     });
 });
+// 收藏歌曲到歌单
+router.post('/collectSong', expressJwt({secret: secretToken}), tokenManager.verifyToken, function(req, res) {
+
+    if(typeof req.body.playlistId === 'undefined' || typeof req.body.songId === 'undefined') {
+        res.json({
+            success: false,
+            msg: '缺少专辑id或歌曲id'
+        });
+        return;
+    }
+
+    var userId = req.user.pid;
+    var playlistInfo = {
+        id: req.body.playlistId
+    };
+    common.checkPlaylistIsOwner(userId, playlistInfo).then(function(isOwner) {
+        // 若是用户自建歌单则收藏
+        if(isOwner === 1) {
+            var songInfo = {
+                id: req.body.songId
+            };
+            var song = new Song(songInfo);
+            song.collectSong(playlistInfo.id, function(isError, results) {
+
+                if(isError) {
+                    res.sendStatus(500);
+                    console.log(results.message);
+                } else {
+                    res.json({
+                        success: true
+                    });
+                }
+            });
+        } else {
+            res.json({
+                success: false,
+                msg: '该歌单并非由用户自建'
+            });
+        }
+    }, function(error) {
+        res.sendStatus(500);
+        console.log(error);
+    });
+});
+// 取消收藏歌曲到歌单
+router.post('/cancelCollectSong', expressJwt({secret: secretToken}), tokenManager.verifyToken, function(req, res) {
+
+    if(typeof req.body.playlistId === 'undefined' || typeof req.body.songId === 'undefined') {
+        res.json({
+            success: false,
+            msg: '缺少专辑id或歌曲id'
+        });
+        return;
+    }
+
+    var userId = req.user.pid;
+    var playlistInfo = {
+        id: req.body.playlistId
+    };
+    common.checkPlaylistIsOwner(userId, playlistInfo).then(function(isOwner) {
+        // 若是用户自建歌单则收藏
+        if(isOwner === 1) {
+            var songInfo = {
+                id: req.body.songId
+            };
+            var song = new Song(songInfo);
+            song.cancelCollectSong(playlistInfo.id, function(isError, results) {
+
+                if(isError) {
+                    res.sendStatus(500);
+                    console.log(results.message);
+                } else {
+                    res.json({
+                        success: true
+                    });
+                }
+            });
+        } else {
+            res.json({
+                success: false,
+                msg: '该歌单并非由用户自建'
+            });
+        }
+    }, function(error) {
+        res.sendStatus(500);
+        console.log(error);
+    });
+});
+
+module.exports = router;
+
 
 function singerPromise(action, singerInfo, callback) {
 
@@ -251,5 +342,3 @@ function songPromise(action, songInfo, callback) {
     });
     return deferred.promise.nodeify(callback);
 }
-
-module.exports = router;

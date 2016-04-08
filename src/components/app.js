@@ -126,6 +126,8 @@ $config.musicApp.config(['$routeProvider', function($routeProvider) {
 
 $config.musicApp.run(function($rootScope, $location, $window, AuthenticationService) {
 
+    $rootScope.defaultSongImg = $config.default_song_img;
+
     // 监听路由变化，进行相应处理
     $rootScope.$on("$routeChangeStart", function(event, nextRoute, currentRoute) {
 

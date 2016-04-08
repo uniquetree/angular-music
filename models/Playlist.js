@@ -4,9 +4,8 @@
  */
 var config = require('../config/config');
 var Db = require('../utils/Db');
-var Common = require('../utils/Common');
 var db = new Db();
-var common = new Common();
+var common = require('../utils/Common');
 
 var playlist_tb = config.tableName.playlist_tb;
 var playlist_user_tb = config.tableName.playlist_user_tb;
@@ -37,15 +36,6 @@ Playlist.prototype.getPlayListsByUserId = function(userId, isOwner, callback) {
         ' where user_id=? and is_owner=?) as pu on p.id = pu.playlist_id';
     db.query(sql, [userId, isOwner], callback);
 };
-// 根据歌单id获取该歌单歌曲及最新添加的一首歌的url
-Playlist.prototype.getPlayListSongFirstAndCount = function(playlistId, callback){
-
-    var first_song_sql = 'select s.url from ' + song_tb + ' as s right join ' + playlist_song_tb + ' as ps on s.id=ps.song_id' +
-        ' where ps.playlist_id=? order by s.create_time desc limit 1;';
-    var count_song_sql = 'select count(*) as song_count from ' + playlist_song_tb + ' where playlist_id=?';
-    db.query(first_song_sql+count_song_sql, [playlistId, playlistId], callback);
-};
-
 // 添加歌单，同时在歌单和用户关系表添加记录
 Playlist.prototype.addPlaylist = function(userId, callback){
 

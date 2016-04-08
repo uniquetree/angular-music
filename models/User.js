@@ -4,9 +4,8 @@
  */
 var config = require('../config/config');
 var Db = require('../utils/Db');
-var Common = require('../utils/Common');
+var common = require('../utils/Common');
 var db = new Db();
-var common = new Common();
 
 var user_tb = config.tableName.user_tb;
 

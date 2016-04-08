@@ -9,6 +9,7 @@ var musicApp = $config.musicApp;
 musicApp.factory('SongService', ['$http', function($http) {
 
     return {
+        // 分页获取所有歌曲
         getSongsByPage: function(filters) {
 
             return $http({
@@ -24,6 +25,7 @@ musicApp.factory('SongService', ['$http', function($http) {
                 }
             });
         },
+        // 根据歌曲id获取歌曲信息
         getSongById: function(id) {
 
             return $http({
@@ -34,6 +36,7 @@ musicApp.factory('SongService', ['$http', function($http) {
                 }
             });
         },
+        // 根据歌单id获取歌单歌曲
         getSongsByPlaylistId: function(id) {
 
             return $http({
@@ -44,6 +47,7 @@ musicApp.factory('SongService', ['$http', function($http) {
                 }
             });
         },
+        // 更新歌曲信息
         updateSong: function(songInfo) {
 
             return $http({
@@ -59,6 +63,7 @@ musicApp.factory('SongService', ['$http', function($http) {
                 }
             });
         },
+        // 根据数组id删除歌曲
         deleteSongsByIds: function(ids) {
 
             return $http({
@@ -66,6 +71,30 @@ musicApp.factory('SongService', ['$http', function($http) {
                 url: $config.api.deleteSongsByIds,
                 data: {
                     ids: ids
+                }
+            });
+        },
+        // 收藏某首歌曲到自建歌单
+        collectSong: function(playlistId, songId) {
+
+            return $http({
+                method: 'POST',
+                url: $config.api.collectSong,
+                data: {
+                    playlistId: playlistId,
+                    songId: songId
+                }
+            });
+        },
+        // 从自建歌单中取消某首收藏歌曲
+        cancelCollectSong: function(playlistId, songId) {
+
+            return $http({
+                method: 'POST',
+                url: $config.api.cancelCollectSong,
+                data: {
+                    playlistId: playlistId,
+                    songId: songId
                 }
             });
         }

@@ -8,7 +8,7 @@
                     <a class="menu-title" ng-click="toggleMenuOpen('isCreateMenuOpen')">
                         <i class="fa" ng-class="{true: 'fa-chevron-down', false: 'fa-chevron-right'}[isCreateMenuOpen]"></i>
                         创建的歌单
-                        <button type="button" class="btn btn-default btn-xs pull-right" ng-click="open(true)">
+                        <button type="button" class="btn btn-default btn-xs pull-right" ng-click="open($event, true)">
                             <i class="fa fa-plus"></i>新建
                         </button>
                     </a>
@@ -20,7 +20,7 @@
                                 <div class="avatar media-left">
                                     <a href="javascript:void(0);">
                                         <img class="media-object" width="40" height="40"
-                                             ng-src="{{createPlaylist.first_mp3_img || 'http://localhost:3000/app/images/default_song_img.jpg'}}">
+                                             ng-src="{{createPlaylist.first_mp3_img || defaultSongImg}}">
                                     </a>
                                 </div>
                                 <div class="media-body">
@@ -29,8 +29,8 @@
                                 </div>
                             </div>
                             <span class="hidden oper">
-                                <i title="编辑" class="fa fa-edit" ng-click="open(false, createPlaylist)"></i>
-                                <i title="删除" class="fa fa-trash-o"></i>
+                                <i title="编辑" class="fa fa-edit" ng-click="open($event, false, createPlaylist)"></i>
+                                <i title="删除" class="fa fa-trash-o" ng-click="deletePlaylist($event, createPlaylist.id)"></i>
                             </span>
                         </li>
                     </ul>
@@ -48,7 +48,7 @@
                                 <div class="avatar media-left">
                                     <a href="javascript:void(0);">
                                         <img class="media-object" width="40" height="40"
-                                             ng-src="{{collectPlaylist.first_mp3_img || 'http://localhost:3000/app/images/default_song_img.jpg'}}">
+                                             ng-src="{{collectPlaylist.first_mp3_img || defaultSongImg}}">
                                     </a>
                                 </div>
                                 <div class="media-body">
@@ -57,7 +57,7 @@
                                 </div>
                             </div>
                             <span class="hidden oper">
-                                <i title="删除" class="fa fa-trash-o"></i>
+                                <i title="删除" class="fa fa-trash-o" ng-click="deletePlaylist($event, collectPlaylist.id)"></i>
                             </span>
                         </li>
                     </ul>
@@ -69,7 +69,7 @@
                 <div class="media-left media-middle">
                     <a href="javascript:void(0);">
                         <img class="media-object img-thumbnail"
-                             ng-src="{{currPlaylistInfo.first_mp3_img || 'http://localhost:3000/app/images/default_song_img.jpg'}}">
+                             ng-src="{{currPlaylistInfo.first_mp3_img || defaultSongImg}}">
                     </a>
                 </div>
                 <div class="media-body">
@@ -110,7 +110,8 @@
                             <!--<td>{{currPlaylistSong.publish_date}}</td>-->
                             <td>
                                 <i class="fa fa-play-circle" ng-click="play(currPlaylistSong.url)"></i>
-                                <i class="fa fa-trash" ng-click="deleteSinger(currPlaylistSong.id)"></i>
+                                <i class="fa fa-trash" ng-if="isOwner"
+                                   ng-click="cancelCollectSong(currPlaylistInfo.id, currPlaylistSong.id)"></i>
                             </td>
                         </tr>
                     </tbody>
@@ -121,9 +122,10 @@
 </div>
 <footer ng-include="'app/views/Templates/footer.html'" class="g-footer"></footer>
 
+<!-- 添加/修改歌单弹窗 -->
 <script type="text/ng-template" id="myModalContent.html">
     <div class="modal-header">
-        <h3 class="modal-title">添加歌单</h3>
+        <h3 class="modal-title">添加/修改歌单</h3>
     </div>
     <div class="modal-body">
         <form class="form-horizontal">

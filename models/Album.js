@@ -4,9 +4,8 @@
  */
 var config = require('../config/config');
 var Db = require('../utils/Db');
-var Common = require('../utils/Common');
+//var common = require('../utils/Common');
 var db = new Db();
-var common = new Common();
 
 var album_tb = config.tableName.album_tb;
 var singer_tb = config.tableName.singer_tb;

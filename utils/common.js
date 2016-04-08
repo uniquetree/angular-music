@@ -11,23 +11,13 @@ var btoa = require('btoa');
 
 var $config = require('../config/config');
 
-var Common = function(){
+var Playlist = require('../models/Playlist');
 
-};
-
-Common.prototype.getCurrentTime = function(){
+// 格式化获取当前时间：xxxx-xx-xx
+module.exports.getCurrentTime = function(){
 
     var currentTime = new Date();
     return currentTime.toLocaleString().replace(/年|月/g,'-').replace(/日/g,'');
-};
-
-Common.prototype.successCallBack = function(isError, results, callback) {
-    if(isError) {
-        res.send(500);
-        console.log(results.message);
-    } else {
-        callback(results);
-    }
 };
 
 /**
@@ -35,7 +25,7 @@ Common.prototype.successCallBack = function(isError, results, callback) {
  * @param req [Object] 发送的请求
  * @param options [Object] 参数对象[可选]
  */
-Common.prototype.uploadMp3 = function(req, options, callback) {
+module.exports.uploadMp3 = function(req, options, callback) {
 
     var deferred = Q.defer();
 
@@ -89,30 +79,9 @@ Common.prototype.uploadMp3 = function(req, options, callback) {
 };
 
 /**
- * 删除磁盘上的文件
- * @param urls [Array] 要删除文件的绝对路径组成的数组
- * @returns {boolean}
- */
-Common.prototype.deleteFiles = function(urls) {
-
-    var isError = false;
-    for(var i=0; i<urls.length; i++) {
-        fs.unlink(urls[i], function (err) {
-
-            if(err) {
-                isError = true;
-            }
-        });
-        if(isError) {
-            return false;
-        }
-    }
-};
-
-/**
  * 获取mp3的id3文件标签信息
  */
-Common.prototype.getMp3Tags = function(fields, callback){
+module.exports.getMp3Tags = function(fields, callback){
 
     var deferred = Q.defer();
     jsmediatags.read(fields['file'].path, {
@@ -142,23 +111,50 @@ Common.prototype.getMp3Tags = function(fields, callback){
     return deferred.promise.nodeify(callback);
 };
 
-Common.prototype.getMp3ImgById3 = function(url, callback) {
+/**
+ * 删除磁盘上的文件
+ * @param urls [Array] 要删除文件的绝对路径组成的数组
+ * @returns {boolean}
+ */
+module.exports.deleteFiles = function(urls) {
 
-    var deferred = Q.defer();
+    var isError = false;
+    for(var i=0; i<urls.length; i++) {
+        fs.unlink(urls[i], function (err) {
 
-    jsmediatags.read(url, {
-        onSuccess: function(tag) {
-            deferred.resolve(tag.tags);
-        },
-        onError: function(error) {
-            deferred.reject(error);
+            if(err) {
+                isError = true;
+            }
+        });
+        if(isError) {
+            return false;
         }
-    });
-
-    return deferred.promise.nodeify(callback);
+    }
 };
 
-module.exports = Common;
+/**
+ * 验证歌单是自建还是收藏
+ * @param userId [Number] 当前用户id
+ * @param playlistInfo [Object] 当前操作的用户对象
+ */
+module.exports.checkPlaylistIsOwner = function(userId, playlistInfo, callback) {
+
+    var deferred = Q.defer();
+    var playlist = new Playlist(playlistInfo);
+    playlist.checkPlaylistIsOwner(userId, function(isError, results) {
+
+        if(isError) {
+            deferred.reject(results.message);
+        } else {
+            var isOwner = 1;
+            if(results.length > 0) {
+                isOwner = results[0].is_owner;
+            }
+            deferred.resolve(isOwner);
+        }
+    });
+    return deferred.promise.nodeify(callback);
+};
 
 /**
  * 将图片二进制数据保存为文件

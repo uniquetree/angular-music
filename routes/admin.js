@@ -15,9 +15,7 @@ var router = express.Router();
 var User = require('../models/User');
 
 var Db = require('../utils/Db');
-var Common = require('../utils/Common');
 var db = new Db();
-var common = new Common();
 
 // 根据用户类型获取管理中心侧边栏菜单
 router.get('/getMenuByRole', expressJwt({secret: secretToken}), tokenManager.verifyToken, function(req, res, next) {

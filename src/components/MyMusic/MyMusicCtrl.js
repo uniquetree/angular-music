@@ -16,6 +16,8 @@ musicApp.controller('MyMusicCtrl', ['$scope', '$q', '$location', '$window', '$ro
         $scope.isCreateMenuOpen = false;
         $scope.isCollectMenuOpen = false;
 
+        $scope.isOwner = true;
+
         // 创建的歌单列表
         $scope.createPlaylists = [];
         // 收藏的歌单列表
@@ -38,12 +40,14 @@ musicApp.controller('MyMusicCtrl', ['$scope', '$q', '$location', '$window', '$ro
                         $scope.locationId = data.playlists[0].id;
                         $scope.currPlaylistInfo = data.playlists[0];
                         $scope.isCreateMenuOpen = true;
+                        $scope.isOwner = true;
                     } else {
                         for(var i=0; i<data.playlists.length; i++) {
                             if(data.playlists[i].id == $routeParams.playlistId) {
                                 $scope.locationId = data.playlists[i].id;
                                 $scope.currPlaylistInfo = data.playlists[i];
                                 $scope.isCreateMenuOpen = true;
+                                $scope.isOwner = true;
                             }
                         }
                     }
@@ -62,6 +66,7 @@ musicApp.controller('MyMusicCtrl', ['$scope', '$q', '$location', '$window', '$ro
                                 $scope.locationId = data.playlists[i].id;
                                 $scope.currPlaylistInfo = data.playlists[i];
                                 $scope.isCollectMenuOpen = true;
+                                $scope.isOwner = false;
                             }
                         }
                     }
@@ -77,27 +82,36 @@ musicApp.controller('MyMusicCtrl', ['$scope', '$q', '$location', '$window', '$ro
         // 点击列表改变url参数
         $scope.changeUrl = function(newPlaylist, whichMenu) {
 
-            $scope.currPlaylistSongs = [];
-            SongService.getSongsByPlaylistId(newPlaylist.id).success(function(data){
+            if($scope.currPlaylistInfo.id !== newPlaylist.id) {
+                $scope.currPlaylistSongs = [];
+                SongService.getSongsByPlaylistId(newPlaylist.id).success(function(data){
 
-                if(data.success) {
-                    $scope.currPlaylistSongs = data.playlist_songs;
+                    if(data.success) {
+                        $scope.currPlaylistSongs = data.playlist_songs;
+                    }
+                });
+
+                $location.search('playlistId', newPlaylist.id.toString());
+                $scope.locationId = newPlaylist.id;
+
+                $scope[whichMenu] = true;
+                if(whichMenu === 'isCollectMenuOpen') {
+                    $scope.isOwner = false;
+                } else {
+                    $scope.isOwner = true;
                 }
-            });
 
-            $location.search('playlistId', newPlaylist.id.toString());
-            $scope.locationId = newPlaylist.id;
-
-            $scope[whichMenu] = true;
-
-            $scope.currPlaylistInfo = newPlaylist;
+                $scope.currPlaylistInfo = newPlaylist;
+            }
         };
         /**
          * 点击弹窗新建/修改歌单信息
          * @param isCreate [Boolean] 判断是创建歌单还是修改，true为新建（默认值）
          * @param playlist [Object] 当前编辑的歌单对象
          */
-        $scope.open = function (isCreate, playlist) {
+        $scope.open = function ($event, isCreate, playlist) {
+
+            $event.stopPropagation();
 
             if(angular.isUndefined(isCreate)) {
                 isCreate = true;
@@ -135,6 +149,44 @@ musicApp.controller('MyMusicCtrl', ['$scope', '$q', '$location', '$window', '$ro
                 }
             }, function () {
                 console.log('Modal dismissed at: ' + new Date());
+            });
+        };
+        /**
+         * 点击，删除自建歌单或者取消收藏歌单
+         * @param playlistId [Number] 要删除的歌单id
+         */
+        $scope.deletePlaylist = function($event, playlistId) {
+
+            $event.stopPropagation();
+
+            PlaylistService.deletePlaylistById(playlistId).success(function(data) {
+
+                if(data.success) {
+                    window.location.reload();
+                } else {
+                    console.log(data.message);
+                    alert('删除失败！');
+                }
+            }).error(function(data) {
+                console.log(data.message);
+                alert('删除失败！');
+            });
+        };
+        /**
+         * 从自建歌单中取消某首收藏歌曲
+         * @param playlistId [Number] 歌单id
+         * @param songId [Number] 歌曲id
+         */
+        $scope.cancelCollectSong = function(playlistId, songId) {
+
+            SongService.cancelCollectSong(playlistId, songId).success(function(data) {
+
+                if(data.success) {
+                    window.location.reload();
+                } else {
+                    console.log(data.msg);
+                    alert('取消收藏有误!');
+                }
             });
         };
         // 监控当前显示歌单的状态，若歌单改变则重新请求
