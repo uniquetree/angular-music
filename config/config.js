@@ -23,7 +23,9 @@ module.exports = {
         multipleStatements: true
     },
     secretToken: 'fas3456daj8lf6kjg3asldk2mvdsfasd23gert4ddg',
-    musicUploadDir: 'http://localhost:3000/app/resources/music/'
+    musicUploadDir: '../app/resources/music/',
+    songImgDir: '../app/resources/images/',
+    baseUrl: 'http://localhost:3000/'
 };
 
 module.exports.tableName = {

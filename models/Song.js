@@ -24,8 +24,9 @@ var Song = function (songInfo, pagination, keyword) {
         this.singer_id = songInfo.singer_id || 0;
         this.album_id = songInfo.album_id || 0;
         this.owner_pid = songInfo.owner_pid;
-        this.tag_singer_name = songInfo.tag_singer_name;
-        this.tag_album_name = songInfo.tag_album_name;
+        this.song_img = songInfo.song_img;
+        //this.tag_singer_name = songInfo.tag_singer_name;
+        //this.tag_album_name = songInfo.tag_album_name;
     }
 
     if(typeof pagination !== 'undefined') {
@@ -101,7 +102,7 @@ Song.prototype.filterSongsByPage = function(callback){
     params = params.concat(sql_params2);
 
     sql = 'select s1.id, s1.song_name, s1.url, s1.publish_date, s1.listen_count, s1.like_count, s1.singer_id, s1.album_id,' +
-        ' s1.tag_singer_name, s1.tag_album_name, s2.singer_name, a.album_name from ' + song_tb +
+        ' s1.song_img, s2.singer_name, a.album_name from ' + song_tb +
         ' as s1 left join ' + singer_tb + ' as s2 on s1.singer_id=s2.id left join ' + album_tb +
         ' as a on s1.album_id=a.id where s1.id >= (select id from ' + song_tb + sql_filters2 +
         ' order by id limit ?, 1) ' + sql_filters1 + 'order by s1.create_time limit ?;';
@@ -121,7 +122,7 @@ Song.prototype.findSongById = function(callback){
 Song.prototype.getSongsByPlaylistId = function(id, callback) {
 
     var sql = 'select s1.id, s1.song_name, s1.url, s1.publish_date, s1.listen_count, s1.like_count, s1.singer_id, s1.album_id,' +
-        ' s2.singer_name, a.album_name from ' + song_tb + ' as s1 left join ' + singer_tb +
+        ' s1.song_img, s2.singer_name, a.album_name from ' + song_tb + ' as s1 left join ' + singer_tb +
         ' as s2 on s1.singer_id=s2.id left join ' + album_tb + ' as a on s1.album_id=a.id'+
         ' right join (select song_id from ' + playlist_song_tb + ' where playlist_id = ?)' +
         ' as ps on s1.id = ps.song_id';
@@ -133,9 +134,9 @@ Song.prototype.uploadSong = function(callback) {
 
     var create_time = new Date();
     var sql = 'insert ignore into ' + song_tb + ' (song_name, url, language, publish_date, singer_id, album_id, owner_pid,' +
-        ' tag_singer_name, tag_album_name, create_time) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
-    var params = [this.song_name, this.url, this.language, this.publish_date, this.singer_id, this.album_id, this.owner_pid,
-        this.tag_singer_name, this.tag_album_name, create_time];
+        ' song_img, create_time) values (?, ?, ?, ?, ?, ?, ?, ?, ?)';
+    var params = [this.song_name, this.url, this.language, this.publish_date, this.singer_id, this.album_id,
+        this.owner_pid, this.song_img, create_time];
     db.query(sql, params, callback);
 };
 

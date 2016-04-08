@@ -4,7 +4,7 @@
 require('../Services/PlaylistService');
 require('../Services/SongService');
 var $config = require('../Common/config');
-var $func = require('../Common/Functions');
+//var $func = require('../Common/Functions');
 
 $config.musicApp.controller('MyMusicCtrl', ['$scope', '$q', '$location', '$window', '$routeParams',
     'PlaylistService', 'SongService',
@@ -90,28 +90,11 @@ $config.musicApp.controller('MyMusicCtrl', ['$scope', '$q', '$location', '$windo
             $scope.currPlaylistInfo = newPlaylist;
         };
 
-        $scope.$watch('currPlaylistInfo', function(value){
+        $scope.$watch('currPlaylistInfo.id', function(value){
 
             if(value) {
-                if(value.first_mp3_url) {
-                    $func.getMp3ImgById3($q, value.first_mp3_url).then(function(tag) {
-                        if( "picture" in tag.tags ) {
-                            var image = tag.tags.picture;
-                            var base64String = "";
-                            for (var i = 0; i < image.data.length; i++) {
-                                base64String += String.fromCharCode(image.data[i]);
-                            }
-                            $scope.currPlaylistInfo.img = 'data:' + image.format + ';base64,' + window.btoa(base64String);
-                        } else {
-                            $scope.currPlaylistInfo.img = '';
-                        }
-                    }, function (error) {
-                        console.log(error);
-                        $scope.currPlaylistInfo.img = '';
-                    });
-                }
 
-                SongService.getSongsByPlaylistId(value.id).success(function(data){
+                SongService.getSongsByPlaylistId(value).success(function(data){
 
                     if(data.success) {
                         $scope.playlistSongs = data.playlist_songs;

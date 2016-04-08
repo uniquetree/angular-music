@@ -130,7 +130,7 @@ router.post('/deleteSongsByIds', expressJwt({secret: secretToken}), tokenManager
     });
 });
 // 上传歌曲
-router.post('/uploadSongs', expressJwt({secret: secretToken}), tokenManager.verifyToken, function(req, res, next) {
+router.post('/uploadSongs', expressJwt({secret: secretToken}), tokenManager.verifyToken, function(req, res) {
 
     var owner_pid = req.user.pid;
 
@@ -144,8 +144,7 @@ router.post('/uploadSongs', expressJwt({secret: secretToken}), tokenManager.veri
             url: tags.url,
             size: tags.size,
             publish_date: tags.year ? new Date(tags.year): null,
-            tag_singer_name: tags.tag_singer_name,
-            tag_album_name: tags.tag_album_name,
+            song_img: tags.song_img,
             language: tags.language,
             singer_id: tags.singer_id,
             album_id: tags.album_id,
@@ -177,7 +176,7 @@ router.post('/uploadSongs', expressJwt({secret: secretToken}), tokenManager.veri
                         return albumPromise('addAlbum', albumInfo).then(function(result) {
 
                             if(result[1][0]['LAST_INSERT_ID()'] !== 0) {
-                                songInfo.album_id = result[1][0];
+                                songInfo.album_id = result[1][0]['LAST_INSERT_ID()'];
                                 return songPromise('uploadSong', songInfo);
                             } else {
                                 return albumPromise('findAlbumIdByFilters', albumInfo).then(function(data){
@@ -203,7 +202,7 @@ router.post('/uploadSongs', expressJwt({secret: secretToken}), tokenManager.veri
             success: true
         })
     }, function(err) {
-        res.send(500);
+        res.sendStatus(500);
         console.log(err);
     });
 });

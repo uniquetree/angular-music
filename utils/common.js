@@ -7,6 +7,7 @@ var formidable = require('formidable');
 var uuid = require('node-uuid');
 var fs = require('fs');
 var jsmediatags = require("jsmediatags");
+var btoa = require('btoa');
 
 var $config = require('../config/config');
 
@@ -71,12 +72,13 @@ Common.prototype.uploadMp3 = function(req, options, callback) {
                     var newPath = form.uploadDir + avatarName;
                     fs.renameSync(files[x].path, newPath);
 
+                    newPath = newPath.replace('../', $config.baseUrl);
                     fields[x] = {
                         size: files[x].size,
                         path: newPath,
-                        name: files[x].name,
-                        type: files[x].type,
-                        extName: ext
+                        //type: files[x].type,
+                        //extName: ext,
+                        name: files[x].name
                     };
                 }
             }
@@ -115,18 +117,23 @@ Common.prototype.getMp3Tags = function(fields, callback){
     var deferred = Q.defer();
     jsmediatags.read(fields['file'].path, {
         onSuccess: function(tag) {
-            tag = {
-                name: tag.tags.title || fields['file'].name,
-                tag_singer_name: tag.tags.artist,
-                tag_album_name: tag.tags.album,
-                year: tag.tags.year,
-                url: fields['file'].path,
-                size: fields['file'].size,
-                singer_id: fields['singer_id'],
-                album_id: fields['album_id'],
-                language: fields['language']
-            };
-            deferred.resolve(tag);
+
+            saveMusicImg(tag.tags).then(function(imagePath) {
+
+                tag = {
+                    name: tag.tags.title || fields['file'].name,
+                    tag_singer_name: tag.tags.artist,
+                    tag_album_name: tag.tags.album,
+                    year: tag.tags.year,
+                    url: fields['file'].path,
+                    song_img: imagePath,
+                    size: fields['file'].size,
+                    singer_id: fields['singer_id'],
+                    album_id: fields['album_id'],
+                    language: fields['language']
+                };
+                deferred.resolve(tag);
+            });
         },
         onError: function(error) {
             deferred.reject(error);
@@ -152,3 +159,33 @@ Common.prototype.getMp3ImgById3 = function(url, callback) {
 };
 
 module.exports = Common;
+
+/**
+ * 将图片二进制数据保存为文件
+ * @param tags 读取MP3文件得到的id3标签信息
+ */
+function saveMusicImg(tags, callback) {
+
+    var deferred = Q.defer();
+    if( "picture" in tags ) {
+        var image = tags.picture;
+        var base64String = "";
+        for (var i = 0; i < image.data.length; i++) {
+            base64String += String.fromCharCode(image.data[i]);
+        }
+        var imgName = uuid() + (image.format.replace('image/', '.'));
+        var imgPath = $config.songImgDir + imgName;
+        var dataBuffer = new Buffer(btoa(base64String), 'base64');
+        fs.writeFile(imgPath, dataBuffer, function(err) {
+            if(err){
+                deferred.reject(err);
+            }else{
+                imgPath = imgPath.replace('../', $config.baseUrl);
+                deferred.resolve(imgPath);
+            }
+        });
+    } else {
+        deferred.reject('歌曲不存在图片');
+    }
+    return deferred.promise.nodeify(callback);
+}

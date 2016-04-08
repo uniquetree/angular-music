@@ -31,8 +31,8 @@ Playlist.prototype.getPlayListsByUserId = function(userId, isOwner, callback) {
 
     var sql = 'select p.id, p.playlist_name, p.playlist_info, p.like_count, p.play_count, p.create_time, ' +
         '(select count(*) from ' + playlist_song_tb + ' as ps where ps.playlist_id=p.id) as song_count, ' +
-        '(select s.url from ' + song_tb + ' as s right join ' + playlist_song_tb + ' as ps on s.id=ps.playlist_id' +
-        ' where ps.playlist_id=p.id order by s.create_time desc limit 1) as first_mp3_url' +
+        '(select s.song_img from ' + song_tb + ' as s right join ' + playlist_song_tb + ' as ps on s.id=ps.song_id' +
+        ' where ps.playlist_id=p.id order by s.create_time desc limit 1) as first_mp3_img' +
         ' from ' + playlist_tb + ' as p right join (select playlist_id from ' + playlist_user_tb +
         ' where user_id=? and is_owner=?) as pu on p.id = pu.playlist_id';
     db.query(sql, [userId, isOwner], callback);
