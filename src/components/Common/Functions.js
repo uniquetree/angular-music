@@ -1,7 +1,6 @@
 /**
  * Created by 郑树聪 on 2016/3/24.
  */
-//var jsmediatags = require("../vendors/jsmediatags.min.js");
 
 module.exports.getAreaName = function(code, areas) {
 
@@ -58,19 +57,3 @@ module.exports.formatDate = function(date) {
         (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-' +
         (date.getDate() < 10 ? '0'+date.getDate() : date.getDate());
 };
-
-//module.exports.getMp3ImgById3 = function($q, url) {
-//
-//    var defer = $q.defer();
-//
-//    jsmediatags.read(url, {
-//        onSuccess: function(tag) {
-//            defer.resolve(tag);
-//        },
-//        onError: function(error) {
-//            defer.reject(error);
-//        }
-//    });
-//
-//    return defer.promise;
-//};

@@ -34,7 +34,7 @@ body,
             width: ($g-container-width)-($g-menu-width)-2;
             min-height: 700px;
             _height: 700px;
-            padding: 20px 32px;
+            padding: 20px 24px;
             border-left: 1px solid #e7e7e7;
         }
     }
@@ -53,6 +53,11 @@ body,
         margin-left: 0;
     }
     .table {
+
+        th,
+        td {
+            text-align: center;
+        }
 
         .fa {
             padding: 0 10px;

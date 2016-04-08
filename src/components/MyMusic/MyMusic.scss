@@ -71,4 +71,78 @@
         }
     }
 
+    .g-content {
+        padding: 20px 0;
+
+        .media {
+            padding: 0 20px;
+            margin-bottom: 20px;
+
+            .media-object {
+                width: 120px;
+                height: 120px;
+            }
+
+            .media-body {
+
+                .media-heading {
+                    height: 32px;
+                    line-height: 32px;
+                    font-size: 16px;
+                }
+                .btns {
+
+                    .fa {
+                        margin-right: 5px;
+                    }
+                }
+            }
+        }
+
+        .playlist-songs {
+
+            .title {
+                height: 32px;
+                border-bottom: 2px solid #AE0A0A;
+                line-height: 32px;
+                text-indent: 20px;
+                font-size: 18px;
+                font-weight: bold;
+
+                span {
+                    padding-left: 10px;
+                    padding-right: 10px;
+                    vertical-align: middle;
+                    font-size: 14px;
+                    font-weight: normal;
+                    color: #c0c0c0;
+                }
+                .play-count {
+                    .count {
+                        color: #AE0A0A;
+                    }
+                }
+            }
+
+            .table {
+
+                th,
+                td {
+                    &:first-child {
+                        width: 80px;
+                    }
+                }
+
+                th {
+                    &:not(:last-child) {
+                        border-right: 1px solid #ddd;
+                    }
+                }
+
+                tr:last-child {
+                    border-bottom: 1px solid #ddd;
+                }
+            }
+        }
+    }
 }

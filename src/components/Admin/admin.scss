@@ -1,6 +1,23 @@
 /**
  * Created by 郑树聪 on 2016/3/10.
  */
+$title-border-bottom: 2px solid #AE0A0A;
+
+.list,
+.editInfo,
+.upload,
+.songs {
+    .title {
+        height: 32px;
+        border-bottom: $title-border-bottom;
+        margin-bottom: 10px;
+        line-height: 32px;
+        text-indent: 10px;
+        font-size: 18px;
+        font-weight: bold;
+    }
+}
+
 .select-date,
 .singer-type-select,
 .language-select,
@@ -33,7 +50,6 @@
 
         th,
         td {
-            text-align: center;
 
             &:first-child {
                 width: 30px;
@@ -72,7 +88,7 @@
         .base-info {
             height: 52px;
             padding: 10px;
-            border-bottom: 1px solid #e7e7e7;
+            border-bottom: $title-border-bottom;
             line-height: 42px;
         }
         .other-info {
@@ -101,68 +117,50 @@
             }
         }
     }
-
-    .list {
-        padding-left: 10px;
-
-        .list-title {
-            height: 32px;
-            border-bottom: 1px solid #e7e7e7;
-            margin-bottom: 10px;
-            line-height: 32px;
-            font-size: 18px;
-            font-weight: bold;
-        }
-    }
 }
 
 // 编辑资料样式
 .editInfo {
 
-    .edit-info-title {
-        height: 32px;
-        border-bottom: 1px solid #e7e7e7;
-        margin-bottom: 10px;
-        line-height: 32px;
-        font-size: 18px;
-        font-weight: bold;
-    }
+    form {
+        padding-right: 10px;
+        padding-left: 10px;
 
-    .sex-radio {
-        padding-left: 12px;
-
-        .radio-inline {
-            padding-top: 0;
-        }
-    }
-
-    .username,
-    .area {
-        height: 34px;
-        line-height: 34px;
-    }
-
-    .username {
-
-        .input-group {
-            width: 320px;
+        .sex-radio {
             padding-left: 12px;
+
+            .radio-inline {
+                padding-top: 0;
+            }
+        }
+
+        .username,
+        .area {
+            height: 34px;
+            line-height: 34px;
+        }
+
+        .username {
+
+            .input-group {
+                width: 320px;
+                padding-left: 12px;
+            }
+        }
+
+        .area {
+
+            .input-group {
+                padding-left: 12px;
+            }
+
+            select.form-control {
+                width: 120px;
+                margin-right: 10px;
+                text-align: center;
+            }
         }
     }
-
-    .area {
-
-        .input-group {
-            padding-left: 12px;
-        }
-
-        select.form-control {
-            width: 120px;
-            margin-right: 10px;
-            text-align: center;
-        }
-    }
-
 }
 
 // 歌手列表样式
@@ -180,67 +178,62 @@
     }
 }
 
-.upload,
-.songs {
-    .title {
-        height: 32px;
-        border-bottom: 1px solid #e7e7e7;
-        margin-bottom: 10px;
-        line-height: 32px;
-        font-size: 18px;
-        font-weight: bold;
-    }
-}
-
 .upload {
 
     .fa {
         margin-right: 5px;
     }
 
-    .singer-album-select {
+    .upload-form {
 
-        label {
-            width: 84px;
-            height: 34px;
-            line-height: 34px;
-        }
-        .input-group {
-            padding-left: 12px;
+        padding-right: 10px;
+        padding-left: 10px;
 
-            select {
-                width: 149px;
-                border-radius: 4px;
 
-                &:first-child {
-                    margin-right: 10px;
+        .singer-album-select {
+
+            label {
+                width: 84px;
+                height: 34px;
+                line-height: 34px;
+            }
+            .input-group {
+                padding-left: 12px;
+
+                select {
+                    width: 149px;
+                    border-radius: 4px;
+
+                    &:first-child {
+                        margin-right: 10px;
+                    }
                 }
             }
         }
-    }
 
-    .upload-btns {
-        margin-bottom: 12px;
-    }
+        .upload-btns {
+            margin-bottom: 12px;
+        }
 
-    .music-lists {
+        .music-lists {
 
-        .music-list {
+            .music-list {
 
-            .music-list-info {
-                height: 24px;
-                margin-bottom: 5px;
-                line-height: 24px;
-                font-size: 14px;
+                .music-list-info {
+                    height: 24px;
+                    margin-bottom: 5px;
+                    line-height: 24px;
+                    font-size: 14px;
 
-                .success {
-                    font-weight: bold;
-                    color: #4cae4c;
+                    .success {
+                        font-weight: bold;
+                        color: #4cae4c;
+                    }
                 }
-            }
-            .progress {
-                height: 10px;
-                margin-bottom: 10px;
+                .progress {
+                    height: 10px;
+                    margin-bottom: 10px;
+                }
             }
         }
     }

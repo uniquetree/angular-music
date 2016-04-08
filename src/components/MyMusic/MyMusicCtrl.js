@@ -6,10 +6,13 @@ require('../Services/SongService');
 var $config = require('../Common/config');
 //var $func = require('../Common/Functions');
 
-$config.musicApp.controller('MyMusicCtrl', ['$scope', '$q', '$location', '$window', '$routeParams',
-    'PlaylistService', 'SongService',
-    function($scope, $q, $location, $window, $routeParams, PlaylistService, SongService){
+var musicApp = $config.musicApp;
 
+musicApp.controller('MyMusicCtrl', ['$scope', '$q', '$location', '$window', '$routeParams', '$uibModal',
+    'PlaylistService', 'SongService',
+    function($scope, $q, $location, $window, $routeParams, $uibModal, PlaylistService, SongService){
+
+        // 判断歌单菜单是否展开的
         $scope.isCreateMenuOpen = false;
         $scope.isCollectMenuOpen = false;
 
@@ -20,7 +23,7 @@ $config.musicApp.controller('MyMusicCtrl', ['$scope', '$q', '$location', '$windo
         // 当前选中的歌单信息
         $scope.currPlaylistInfo = {};
         // 当前选中歌单的歌曲
-        $scope.currPlaylistSongs = {};
+        $scope.currPlaylistSongs = [];
 
         // 加载歌单（创建的、收藏的）
         $scope.loadPlaylists = function(){
@@ -74,11 +77,11 @@ $config.musicApp.controller('MyMusicCtrl', ['$scope', '$q', '$location', '$windo
         // 点击列表改变url参数
         $scope.changeUrl = function(newPlaylist, whichMenu) {
 
-            $scope.playlistSongs = [];
+            $scope.currPlaylistSongs = [];
             SongService.getSongsByPlaylistId(newPlaylist.id).success(function(data){
 
                 if(data.success) {
-                    $scope.playlistSongs = data.playlist_songs;
+                    $scope.currPlaylistSongs = data.playlist_songs;
                 }
             });
 
@@ -89,7 +92,52 @@ $config.musicApp.controller('MyMusicCtrl', ['$scope', '$q', '$location', '$windo
 
             $scope.currPlaylistInfo = newPlaylist;
         };
+        /**
+         * 点击弹窗新建/修改歌单信息
+         * @param isCreate [Boolean] 判断是创建歌单还是修改，true为新建（默认值）
+         * @param playlist [Object] 当前编辑的歌单对象
+         */
+        $scope.open = function (isCreate, playlist) {
 
+            if(angular.isUndefined(isCreate)) {
+                isCreate = true;
+            }
+
+            var modalInstance = $uibModal.open({
+                animation: true,
+                templateUrl: 'myModalContent.html',
+                controller: function ($scope, $uibModalInstance) {
+
+                    $scope.playlist = playlist;
+                    $scope.ok = function () {
+                        $uibModalInstance.close($scope.playlist);
+                    };
+                    $scope.cancel = function () {
+                        $uibModalInstance.dismiss('取消');
+                    };
+                }
+            });
+            modalInstance.result.then(function (playlist) {
+                if(isCreate) {
+
+                    PlaylistService.addPlaylist(playlist).success(function(data) {
+                        if(data.success){
+                            window.location.reload();
+                        }
+                    });
+                } else {
+                    PlaylistService.updatePlaylist(playlist).success(function(data) {
+
+                        if(data.success) {
+                            window.location.reload();
+                        }
+                    });
+                }
+            }, function () {
+                console.log('Modal dismissed at: ' + new Date());
+            });
+        };
+        // 监控当前显示歌单的状态，若歌单改变则重新请求
         $scope.$watch('currPlaylistInfo.id', function(value){
 
             if(value) {
@@ -97,9 +145,9 @@ $config.musicApp.controller('MyMusicCtrl', ['$scope', '$q', '$location', '$windo
                 SongService.getSongsByPlaylistId(value).success(function(data){
 
                     if(data.success) {
-                        $scope.playlistSongs = data.playlist_songs;
+                        $scope.currPlaylistSongs = data.playlist_songs;
                     } else {
-                        $scope.playlistSongs = [];
+                        $scope.currPlaylistSongs = [];
                     }
                 });
             }
