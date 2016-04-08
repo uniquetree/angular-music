@@ -39,6 +39,7 @@ module.exports = {
         // 歌曲
         getSongsByPage: base_url + song_url + 'getSongsByPage',
         getSongById: base_url + song_url  + 'getSongById',
+        getSongsByPlaylistId: base_url + song_url + 'getSongsByPlaylistId',
         uploadSongs: base_url + song_url  + 'uploadSongs',
         updateSong: base_url + song_url  + 'updateSong',
         deleteSongsByIds: base_url + song_url  + 'deleteSongsById',

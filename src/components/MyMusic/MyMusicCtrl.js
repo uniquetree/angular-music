@@ -2,15 +2,20 @@
  * Created by 郑树聪 on 2016/2/29.
  */
 require('../Services/PlaylistService');
+require('../Services/SongService');
 var $config = require('../Common/config');
+var $func = require('../Common/Functions');
 
-$config.musicApp.controller('MyMusicCtrl', ['$scope', '$location', '$window', '$routeParams', 'PlaylistService',
-    function($scope, $location, $window, $routeParams, PlaylistService){
+$config.musicApp.controller('MyMusicCtrl', ['$scope', '$q', '$location', '$window', '$routeParams',
+    'PlaylistService', 'SongService',
+    function($scope, $q, $location, $window, $routeParams, PlaylistService, SongService){
 
         $scope.isCreateMenuOpen = false;
         $scope.isCollectMenuOpen = false;
 
+        // 创建的歌单列表
         $scope.createPlaylists = [];
+        // 收藏的歌单列表
         $scope.collectPlaylists = [];
         // 当前选中的歌单信息
         $scope.currPlaylistInfo = {};
@@ -23,6 +28,7 @@ $config.musicApp.controller('MyMusicCtrl', ['$scope', '$location', '$window', '$
             PlaylistService.getPlayListsByUserCreate().success(function(data) {
 
                 if(data.success) {
+
                     $scope.createPlaylists = data.playlists;
                     if(angular.isUndefined($routeParams.playlistId) || $routeParams.playlistId === '') {
                         $location.search('playlistId', data.playlists[0].id.toString());
@@ -31,7 +37,7 @@ $config.musicApp.controller('MyMusicCtrl', ['$scope', '$location', '$window', '$
                         $scope.isCreateMenuOpen = true;
                     } else {
                         for(var i=0; i<data.playlists.length; i++) {
-                            if(data.playlists[i].id == $location.search('playlistId')) {
+                            if(data.playlists[i].id == $routeParams.playlistId) {
                                 $scope.locationId = data.playlists[i].id;
                                 $scope.currPlaylistInfo = data.playlists[i];
                                 $scope.isCreateMenuOpen = true;
@@ -44,14 +50,15 @@ $config.musicApp.controller('MyMusicCtrl', ['$scope', '$location', '$window', '$
             PlaylistService.getPlayListsByUserCollect().success(function(data) {
 
                 if(data.success) {
+
                     $scope.collectPlaylists = data.playlists;
                     if(!angular.isUndefined($routeParams.playlistId) || $routeParams.playlistId !== '') {
 
                         for(var i=0; i<data.playlists.length; i++) {
-                            if(data.playlists[i].id == $location.search('playlistId')) {
+                            if(data.playlists[i].id == $routeParams.playlistId) {
                                 $scope.locationId = data.playlists[i].id;
                                 $scope.currPlaylistInfo = data.playlists[i];
-                                $scope.isCreateMenuOpen = true;
+                                $scope.isCollectMenuOpen = true;
                             }
                         }
                     }
@@ -60,18 +67,59 @@ $config.musicApp.controller('MyMusicCtrl', ['$scope', '$location', '$window', '$
         };
 
         // 菜单列表展开折叠切换
-        $scope.toggleMenuOpen = function(whichMenu, isMenuOpen) {
+        $scope.toggleMenuOpen = function(whichMenu) {
 
-            $scope[whichMenu] = !isMenuOpen;
+            $scope[whichMenu] = !$scope[whichMenu];
         };
-        $scope.changeUrl = function(createPlaylist, whichMenu) {
+        // 点击列表改变url参数
+        $scope.changeUrl = function(newPlaylist, whichMenu) {
 
-            $location.search('playlistId', createPlaylist.id.toString());
-            $scope.locationId = createPlaylist.id;
+            $scope.playlistSongs = [];
+            SongService.getSongsByPlaylistId(newPlaylist.id).success(function(data){
 
-            //$scope[whichMenu] = true;
+                if(data.success) {
+                    $scope.playlistSongs = data.playlist_songs;
+                }
+            });
 
-            $scope.currPlaylistInfo = createPlaylist;
+            $location.search('playlistId', newPlaylist.id.toString());
+            $scope.locationId = newPlaylist.id;
+
+            $scope[whichMenu] = true;
+
+            $scope.currPlaylistInfo = newPlaylist;
         };
+
+        $scope.$watch('currPlaylistInfo', function(value){
+
+            if(value) {
+                if(value.first_mp3_url) {
+                    $func.getMp3ImgById3($q, value.first_mp3_url).then(function(tag) {
+                        if( "picture" in tag.tags ) {
+                            var image = tag.tags.picture;
+                            var base64String = "";
+                            for (var i = 0; i < image.data.length; i++) {
+                                base64String += String.fromCharCode(image.data[i]);
+                            }
+                            $scope.currPlaylistInfo.img = 'data:' + image.format + ';base64,' + window.btoa(base64String);
+                        } else {
+                            $scope.currPlaylistInfo.img = '';
+                        }
+                    }, function (error) {
+                        console.log(error);
+                        $scope.currPlaylistInfo.img = '';
+                    });
+                }
+
+                SongService.getSongsByPlaylistId(value.id).success(function(data){
+
+                    if(data.success) {
+                        $scope.playlistSongs = data.playlist_songs;
+                    } else {
+                        $scope.playlistSongs = [];
+                    }
+                });
+            }
+        });
     }
 ]);

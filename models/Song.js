@@ -118,10 +118,14 @@ Song.prototype.findSongById = function(callback){
     db.query(sql, [this.id], callback);
 };
 // 根据歌单id获取歌曲
-Song.prototype.getSongByPlaylistId = function(id, callback) {
+Song.prototype.getSongsByPlaylistId = function(id, callback) {
 
-    var sql = 'select s.id, s.song_name, url, s.publish_date, s.listen_count, s.like_count, s.singer_id, s.album_id from ' +
-        song_tb + ' as s right join ( select song_id from ' + playlist_song_tb + ' where playlist_id = ?) as ps on s.id = ps.song_id'
+    var sql = 'select s1.id, s1.song_name, s1.url, s1.publish_date, s1.listen_count, s1.like_count, s1.singer_id, s1.album_id,' +
+        ' s2.singer_name, a.album_name from ' + song_tb + ' as s1 left join ' + singer_tb +
+        ' as s2 on s1.singer_id=s2.id left join ' + album_tb + ' as a on s1.album_id=a.id'+
+        ' right join (select song_id from ' + playlist_song_tb + ' where playlist_id = ?)' +
+        ' as ps on s1.id = ps.song_id';
+    db.query(sql, [id], callback);
 };
 
 // 上传添加歌曲

@@ -217,6 +217,16 @@ musicApp.factory('AdminService', ['$http', function($http) {
                 }
             });
         },
+        getSongsByPlaylistId: function(id) {
+
+            return $http({
+                method: 'GET',
+                url: $config.api.getSongsByPlaylistId,
+                params: {
+                    playlistId: id
+                }
+            });
+        },
         updateSong: function(songInfo) {
 
             return $http({

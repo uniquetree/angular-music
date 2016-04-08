@@ -12,6 +12,10 @@ var secretToken = require('../config/config').secretToken;
 
 var router = express.Router();
 
+var btoa = require('btoa');
+var Common = require('../utils/Common');
+var common = new Common();
+
 var Playlist = require('../models/Playlist');
 
 // 分页获取所有歌单

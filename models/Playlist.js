@@ -10,6 +10,8 @@ var common = new Common();
 
 var playlist_tb = config.tableName.playlist_tb;
 var playlist_user_tb = config.tableName.playlist_user_tb;
+var playlist_song_tb = config.tableName.playlist_song_tb;
+var song_tb = config.tableName.song_tb;
 
 var Playlist = function (playlistInfo) {
     if(typeof playlistInfo !== 'undefined') {
@@ -27,10 +29,21 @@ var Playlist = function (playlistInfo) {
  */
 Playlist.prototype.getPlayListsByUserId = function(userId, isOwner, callback) {
 
-    var sql = 'select p.id, p.playlist_name, p.playlist_info, p.like_count, p.play_count, p.create_time from ' + playlist_tb +
-        ' as p right join (select playlist_id from ' + playlist_user_tb + ' where user_id=? and is_owner=?) as pu on' +
-        ' p.id = pu.playlist_id';
+    var sql = 'select p.id, p.playlist_name, p.playlist_info, p.like_count, p.play_count, p.create_time, ' +
+        '(select count(*) from ' + playlist_song_tb + ' as ps where ps.playlist_id=p.id) as song_count, ' +
+        '(select s.url from ' + song_tb + ' as s right join ' + playlist_song_tb + ' as ps on s.id=ps.playlist_id' +
+        ' where ps.playlist_id=p.id order by s.create_time desc limit 1) as first_mp3_url' +
+        ' from ' + playlist_tb + ' as p right join (select playlist_id from ' + playlist_user_tb +
+        ' where user_id=? and is_owner=?) as pu on p.id = pu.playlist_id';
     db.query(sql, [userId, isOwner], callback);
+};
+// 根据歌单id获取该歌单歌曲及最新添加的一首歌的url
+Playlist.prototype.getPlayListSongFirstAndCount = function(playlistId, callback){
+
+    var first_song_sql = 'select s.url from ' + song_tb + ' as s right join ' + playlist_song_tb + ' as ps on s.id=ps.song_id' +
+        ' where ps.playlist_id=? order by s.create_time desc limit 1;';
+    var count_song_sql = 'select count(*) as song_count from ' + playlist_song_tb + ' where playlist_id=?';
+    db.query(first_song_sql+count_song_sql, [playlistId, playlistId], callback);
 };
 
 // 添加歌单，同时在歌单和用户关系表添加记录

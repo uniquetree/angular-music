@@ -71,6 +71,23 @@ router.get('/getSongById', function(req, res) {
         }
     });
 });
+router.get('/getSongsByPlaylistId', function(req, res) {
+
+    var playlistId = req.query.playlistId;
+    var song = new Song();
+    song.getSongsByPlaylistId(playlistId, function(isError, results) {
+
+        if(isError){
+            res.send(500);
+            console.log(results.message);
+        } else {
+            res.json({
+                success: true,
+                playlist_songs: results
+            })
+        }
+    });
+});
 // 编辑歌曲基本信息
 router.post('/updateSong', expressJwt({secret: secretToken}), tokenManager.verifyToken, function(req, res) {
 

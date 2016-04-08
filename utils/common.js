@@ -109,8 +109,6 @@ Common.prototype.deleteFiles = function(urls) {
 
 /**
  * 获取mp3的id3文件标签信息
- * @param newPath [String] mp3文件路径
- * @returns tag 获取到的标签
  */
 Common.prototype.getMp3Tags = function(fields, callback){
 
@@ -134,6 +132,22 @@ Common.prototype.getMp3Tags = function(fields, callback){
             deferred.reject(error);
         }
     });
+    return deferred.promise.nodeify(callback);
+};
+
+Common.prototype.getMp3ImgById3 = function(url, callback) {
+
+    var deferred = Q.defer();
+
+    jsmediatags.read(url, {
+        onSuccess: function(tag) {
+            deferred.resolve(tag.tags);
+        },
+        onError: function(error) {
+            deferred.reject(error);
+        }
+    });
+
     return deferred.promise.nodeify(callback);
 };
 
