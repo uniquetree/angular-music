@@ -6,7 +6,7 @@
         <ul class="nav nav-pills nav-stacked sub-menus" ng-class="{false: 'hidden'}[menu.isMenuOpen]" ng-if="menu.subMenus.length>0">
             <li class="sub-menu" ng-repeat="subMenu in menu.subMenus" ui-sref-active="active"
                 title="{{subMenu.name}}">
-                <a ui-sref="admin.{{subMenu.state}}"><i class="fa fa-{{subMenu.icon}}"></i>{{subMenu.name}}</a>
+                <a ui-sref="{{subMenu.state}}"><i class="fa fa-{{subMenu.icon}}"></i>{{subMenu.name}}</a>
             </li>
         </ul>
     </li>

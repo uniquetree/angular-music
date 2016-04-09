@@ -38,6 +38,10 @@ musicApp.controller('AdminCtrl', ['$scope', '$location', '$window', '$state', 'A
                 });
             }
         };
+
+        $scope.$watch('$state.name', function(value) {
+
+        });
     }
 ]);
 

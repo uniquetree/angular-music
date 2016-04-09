@@ -49,8 +49,8 @@ module.exports.adminMenus = [
         icon: 'home',
         role: 2,
         subMenus: [
-            {name: '我的主页', state: 'userInfo', icon: 'user', role: 2},
-            {name: '编辑资料', state: 'editInfo', icon: 'edit', role: 2}
+            {name: '我的主页', state: 'admin.userInfo', icon: 'user', role: 2},
+            {name: '编辑资料', state: 'admin.editInfo', icon: 'edit', role: 2}
         ]
     },
     {
@@ -59,10 +59,10 @@ module.exports.adminMenus = [
         icon: 'music',
         role: 1,
         subMenus: [
-            {name: '歌手列表', state: 'singers', icon: 'users', role: 1},
-            {name: '专辑列表', state: 'albums', icon: 'tags', role: 1},
-            {name: '音乐列表', state: 'songs', icon: 'list', role: 1},
-            {name: '上传音乐', state: 'uploadMusic', icon: 'upload', role: 1}
+            {name: '歌手列表', state: 'admin.singers', icon: 'users', role: 1},
+            {name: '专辑列表', state: 'admin.albums', icon: 'tags', role: 1},
+            {name: '音乐列表', state: 'admin.songs', icon: 'list', role: 1},
+            {name: '上传音乐', state: 'admin.uploadMusic', icon: 'upload', role: 1}
         ]
     },
     {
@@ -71,8 +71,8 @@ module.exports.adminMenus = [
         icon: 'certificate',
         role: 1,
         subMenus: [
-            {name: '普通用户列表', state: 'users', icon: 'user', role: 1},
-            {name: '管理员列表', state: 'admins', icon: 'user-plus', role: 1}
+            {name: '普通用户列表', state: 'admin.users', icon: 'user', role: 1},
+            {name: '管理员列表', state: 'admin.admins', icon: 'user-plus', role: 1}
             //{name: '超级管理员列表', state: 'supAdmins', icon: 'user-secret', role: 0}
         ]
     }
