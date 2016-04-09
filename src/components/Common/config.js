@@ -9,7 +9,7 @@ var song_url = 'api/song/';
 var playlist_url = 'api/playlist/';
 
 module.exports = {
-    musicApp: angular.module('musicApp', ['ngRoute', 'ui.bootstrap', 'angular-loading-bar', 'angularFileUpload']),
+    musicApp: angular.module('musicApp', ['ngRoute', 'ui.bootstrap', 'ui.router', 'angular-loading-bar', 'angularFileUpload']),
     base_url: base_url,
     default_song_img: 'http://localhost:3000/app/images/default_song_img.jpg'
 };

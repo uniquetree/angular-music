@@ -14,18 +14,8 @@ var $config = require('../Common/config');
 var musicApp = $config.musicApp;
 
 // 管理中心页面控制器
-musicApp.controller('AdminCtrl', ['$scope', '$location', '$window', '$routeParams', 'AdminService',
-    function($scope, $location, $window, $routeParams, AdminService){
-
-        $scope.pages = {};
-        // 判断当前页的参数
-        if(!angular.isUndefined($routeParams.page)) {
-            $scope.pages.page = $routeParams.page;
-        } else {
-            $location.search('page', 'userInfo');
-            $scope.pages.page = 'userInfo';
-        }
-        $scope.pages.pageUrl = $scope.pages.page +'.html';
+musicApp.controller('AdminCtrl', ['$scope', '$location', '$window', '$state', 'AdminService',
+    function($scope, $location, $window, $state, AdminService){
 
         // 初始化当前用户的管理中心菜单
         $scope.loadMenus = function(){

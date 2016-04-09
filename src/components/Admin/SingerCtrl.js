@@ -9,36 +9,11 @@ var $config = require('../Common/config');
 var musicApp = $config.musicApp;
 
 // 歌手列表控制器
-musicApp.controller('SingerCtrl', ['$scope', '$location', '$routeParams', '$log', 'SingerService', 'PageTableData',
-    function($scope, $location, $routeParams, $log, SingerService, PageTableData){
+musicApp.controller('SingerCtrl', ['$rootScope', '$scope', '$location', '$state', '$log', 'SingerService', 'PageTableData',
+    function($rootScope, $scope, $location, $state, $log, SingerService, PageTableData){
 
         $scope.singerTypes = $config.singerTypes;
         $scope.languages = $config.languages;
-
-        if(!angular.isUndefined($routeParams.subPage)) {
-            if($routeParams.subPage === 'singerList') {
-                $scope.subPageUrl = 'singerList.html';
-                $scope.breadcrumbs = [
-                    {name: '歌手列表', href: false}
-                ];
-            } else {
-                $scope.subPageUrl = $routeParams.subPage + '.html';
-                var subPageName = '添加歌手';
-                if(!angular.isUndefined($routeParams.singerId)) {
-                    subPageName = '修改歌手信息';
-                }
-                $scope.breadcrumbs = [
-                    {name: '歌手列表', href: '#/admin?page=singers&subPage=singerList'},
-                    {name: subPageName, href: false}
-                ];
-            }
-        } else {
-            $location.search('subPage', 'singerList');
-            $scope.subPageUrl = 'singerList.html';
-            $scope.breadcrumbs = [
-                {name: '歌手列表', href: false}
-            ];
-        }
 
         // 获取歌手列表数据
         $scope.getSingers = function(nextPage, pageSize, keyword){
@@ -96,24 +71,10 @@ musicApp.controller('SingerCtrl', ['$scope', '$location', '$routeParams', '$log'
         };
 
         $scope.singerInfo = {};
-        // 操作歌手：判断是添加歌手还是编辑歌手
-        $scope.singerHandle = function() {
-            $scope.isAddSinger = true;
-            if(!angular.isUndefined($routeParams.singerId)) {
-                $scope.isAddSinger = false;
-                var id = $routeParams.singerId;
-                SingerService.getSingerById(id).success(function(data){
-
-                    if(data.success) {
-                        $scope.singerInfo = data.singer;
-                    }
-                });
-            }
-        };
         // 修改歌手信息
         $scope.saveSingerInfo = function() {
 
-            if($scope.isAddSinger) {
+            if($state.is('admin.singers.addSinger')) {
 
                 SingerService.addSinger($scope.singerInfo).success(function(data){
                     if(data.success) {
@@ -161,5 +122,33 @@ musicApp.controller('SingerCtrl', ['$scope', '$location', '$routeParams', '$log'
 
             $location.path('/singer?singerId=' + id);
         };
+
+        $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){
+
+            if(toState.name === 'admin.singers.addSinger') {
+                $scope.breadcrumbs = [
+                    {name: '歌手列表', state: 'admin.singers.singerList'},
+                    {name: '添加歌手', state: false}
+                ];
+            } else if(toState.name === 'admin.singers.editSinger') {
+                $scope.breadcrumbs = [
+                    {name: '歌手列表', state: 'admin.singers.singerList'},
+                    {name: '修改歌手信息', state: false}
+                ];
+
+                var id = toParams.singerId;
+                SingerService.getSingerById(id).success(function(data){
+
+                    if(data.success) {
+                        $scope.singerInfo = data.singer;
+                    }
+                });
+
+            } else {
+                $scope.breadcrumbs = [
+                    {name: '歌手列表', state: false}
+                ];
+            }
+        });
     }
 ]);

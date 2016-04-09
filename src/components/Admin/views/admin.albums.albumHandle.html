@@ -1,0 +1,19 @@
+<form class="form-horizontal clearfix albumHandle">
+    <div class="form-group clearfix singerName">
+        <label for="album-name" class="pull-left">专辑名：</label>
+        <div class="input-group pull-left">
+            <div class="input-group-addon"><i class="fa fa-user"></i></div>
+            <input type="text" class="form-control" id="album-name" placeholder="专辑名" ng-model="albumInfo.album_name">
+        </div>
+    </div>
+    <singer-select selected-singer-id="albumInfo.singer_id"></singer-select>
+    <date-picker date="albumInfo.publish_date" label="出版日期"></date-picker>
+    <div class="form-group">
+        <label for="album-info">专辑简介：</label>
+        <div>
+            <textarea id="album-info" class="form-control" rows="6" cols="40" name="album-info"
+                      placeholder="专辑简介" ng-model="albumInfo.album_info"></textarea>
+        </div>
+    </div>
+    <button class="btn btn-primary" ng-click="saveAlbumInfo()">保存</button>
+</form>

@@ -1,0 +1,39 @@
+<div class="editInfo" ng-controller="InfoCtrl">
+    <nav class="title">编辑个人资料</nav>
+    <form class="form-horizontal clearfix">
+        <div class="form-group clearfix username">
+            <label for="username" class="pull-left">昵称：</label>
+            <div class="input-group pull-left">
+                <div class="input-group-addon"><i class="fa fa-user"></i></div>
+                <input type="text" class="form-control" id="username" placeholder="昵称" ng-model="userInfo.username">
+            </div>
+        </div>
+        <div class="form-group sex">
+            <label>性别：</label>
+                <span class="sex-radio">
+                    <label class="radio-inline">
+                        <input type="radio" name="sexRadio" id="sex-mars" value="1"
+                               ng-model="userInfo.sex" ng-checked="userInfo.sex == 1"> 男
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="sexRadio" id="sex-venus" value="2"
+                               ng-model="userInfo.sex" ng-checked="userInfo.sex == 2"> 女
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="sexRadio" id="sex-secret" value="0"
+                               ng-model="userInfo.sex" ng-checked="userInfo.sex == 0"> 保密
+                    </label>
+                </span>
+        </div>
+        <date-picker date="userInfo.birth" label="生日"></date-picker>
+        <city-select code="userInfo.code"></city-select>
+        <div class="form-group">
+            <label for="info">个人简介：</label>
+            <div>
+                <textarea id="info" class="form-control" rows="6" cols="40" name="info"
+                          placeholder="个人简介" ng-model="userInfo.info"></textarea>
+            </div>
+        </div>
+        <button class="btn btn-primary" ng-click="updateUserInfo()">更新</button>
+    </form>
+</div>

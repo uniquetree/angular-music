@@ -1,0 +1,48 @@
+<div class="clearfix edit-bars">
+    <form class="navbar-form pull-left m-search" role="search">
+        <div class="form-group">
+            <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+            <input type="text" class="form-control" placeholder="查找专辑" ng-keypress="search($event)">
+        </div>
+    </form>
+    <button class="btn btn-danger btn-sm pull-right" ng-click="deleteAlumsById()">删除选中的专辑</button>
+    <a ui-sref="admin.albums.addAlbum" class="btn btn-info btn-sm pull-right" role="button">添加专辑</a>
+</div>
+<div class="item-table" ng-controller="PageTableCtrl">
+    <table id="album-table" class="table table-condensed table-striped table-hover"
+           ng-init="getAlbums(pagination.currPage, pagination.itemsPerPage)">
+        <thead>
+        <tr>
+            <th>
+                <input type="checkbox" ng-click="toggleSelectAll('album-table')" ng-checked="isSelectAllModel">
+            </th>
+            <th>序号</th>
+            <th>专辑名</th>
+            <th>专辑简介</th>
+            <th>出版日期</th>
+            <th>所属歌手</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="album in albums">
+            <td>
+                <input type="checkbox" name="item-check" ng-click="toggleSelect($event, album.id)">
+            </td>
+            <td>{{(pagination.currPage-1)*pagination.itemsPerPage + $index + 1}}</td>
+            <td class="name-td" ng-click="goToAlbumPage(album.id)">{{album.album_name}}</td>
+            <td>{{album.album_info}}</td>
+            <td>{{album.publish_date}}</td>
+            <td>{{album.singer_name}}</td>
+            <td>
+                <a ui-sref="admin.albums.editAlbum({albumId: {{album.id}}})"><i class="fa fa-edit"></i></a>
+                <i class="fa fa-trash" ng-click="deleteAlumsById(album.id)"></i>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <uib-pagination ng-if="pagination.totalItems>0" total-items="pagination.totalItems" ng-model="pagination.currPage"
+                    max-size="pagination.maxSize" items-per-page="pagination.itemsPerPage" class="pagination-sm pull-right"
+                    previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"
+                    boundary-links="true" force-ellipses="true" ng-change="pageChanged(getAlbums)"></uib-pagination>
+</div>

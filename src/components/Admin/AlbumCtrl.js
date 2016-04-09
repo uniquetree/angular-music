@@ -10,33 +10,8 @@ var $config = require('../Common/config');
 
 var musicApp = $config.musicApp;
 
-musicApp.controller('AlbumCtrl', ['$scope', '$location', '$routeParams', '$log', 'AlbumService', 'PageTableData',
-    function($scope, $location, $routeParams, $log, AlbumService, PageTableData){
-
-        if(!angular.isUndefined($routeParams.subPage)) {
-            if($routeParams.subPage === 'albumList') {
-                $scope.subPageUrl = 'albumList.html';
-                $scope.breadcrumbs = [
-                    {name: '专辑列表', href: false}
-                ];
-            } else {
-                $scope.subPageUrl = $routeParams.subPage + '.html';
-                var subPageName = '添加专辑';
-                if(!angular.isUndefined($routeParams.albumId)) {
-                    subPageName = '修改专辑信息';
-                }
-                $scope.breadcrumbs = [
-                    {name: '专辑列表', href: '#/admin?page=albums&subPage=albumList'},
-                    {name: subPageName, href: false}
-                ];
-            }
-        } else {
-            $location.search('subPage', 'albumList');
-            $scope.subPageUrl = 'albumList.html';
-            $scope.breadcrumbs = [
-                {name: '专辑列表', href: false}
-            ];
-        }
+musicApp.controller('AlbumCtrl', ['$rootScope', '$scope', '$location', '$routeParams', '$log', 'AlbumService', 'PageTableData',
+    function($rootScope, $scope, $location, $routeParams, $log, AlbumService, PageTableData){
 
         // 获取歌手列表数据
         $scope.getAlbums = function(nextPage, pageSize, keyword){
@@ -75,25 +50,6 @@ musicApp.controller('AlbumCtrl', ['$scope', '$location', '$routeParams', '$log',
         };
 
         $scope.albumInfo = {};
-        // 操作歌手：判断是添加歌手还是编辑歌手
-        $scope.albumHandle = function() {
-            $scope.isAddAlbum = true;
-            if(!angular.isUndefined($routeParams.albumId)) {
-                $scope.isAddAlbum = false;
-                var id = $routeParams.albumId;
-                AlbumService.getAlbumById(id).success(function(data){
-
-                    if(data.success) {
-                        $scope.albumInfo = data.album;
-                        if($scope.albumInfo.publish_date) {
-                            $scope.albumInfo.publish_date = new Date($scope.albumInfo.publish_date);
-                        } else {
-                            $scope.albumInfo.publish_date = new Date();
-                        }
-                    }
-                });
-            }
-        };
         // 修改专辑信息
         $scope.saveAlbumInfo = function() {
 
@@ -118,7 +74,7 @@ musicApp.controller('AlbumCtrl', ['$scope', '$location', '$routeParams', '$log',
                 });
             }
         };
-        // 删除单个歌手
+        // 删除单张专辑
         $scope.deleteAlumsById = function(id){
 
             if(angular.isUndefined(id)) {
@@ -149,5 +105,38 @@ musicApp.controller('AlbumCtrl', ['$scope', '$location', '$routeParams', '$log',
 
             $location.path('/album?albumId=' + id);
         };
+
+        $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){
+
+            if(toState.name === 'admin.albums.addAlbum') {
+                $scope.breadcrumbs = [
+                    {name: '专辑列表', state: 'admin.albums.albumList'},
+                    {name: '添加专辑', state: false}
+                ];
+            } else if(toState.name === 'admin.albums.editAlbum') {
+                $scope.breadcrumbs = [
+                    {name: '专辑列表', state: 'admin.albums.albumList'},
+                    {name: '修改专辑信息', state: false}
+                ];
+
+                var id = toParams.albumId;
+                AlbumService.getAlbumById(id).success(function(data){
+
+                    if(data.success) {
+                        $scope.albumInfo = data.album;
+                        if($scope.albumInfo.publish_date) {
+                            $scope.albumInfo.publish_date = new Date($scope.albumInfo.publish_date);
+                        } else {
+                            $scope.albumInfo.publish_date = new Date();
+                        }
+                    }
+                });
+
+            } else {
+                $scope.breadcrumbs = [
+                    {name: '专辑列表', state: false}
+                ];
+            }
+        });
     }
 ]);

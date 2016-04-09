@@ -1,0 +1,19 @@
+<div class="userInfo" ng-controller="InfoCtrl">
+    <div class="user-info">
+        <div class="base-info clearfix">
+            <span class="username">
+                {{userInfo.username}}
+                <i class="fa" ng-if="userInfo.sex != 0" ng-class="{1: 'fa-mars', 2: 'fa-venus'}[userInfo.sex]"></i>
+            </span>
+            <a ui-sref="admin.editInfo" type="button" class="btn btn-info btn-sm pull-right">编辑个人资料</a>
+        </div>
+        <div class="other-info">
+            <p class="info">个人介绍：{{userInfo.info}}</p>
+            <p><span class="area">所在地区：{{userInfo.areaName.province}} {{userInfo.areaName.city}} {{userInfo.areaName.district}}</span>
+                <span class="birth">生日：{{userInfo.birth}}</span></p>
+        </div>
+    </div>
+    <div class="list">
+        <nav class="title">听歌排行</nav>
+    </div>
+</div>

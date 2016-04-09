@@ -12,8 +12,8 @@ musicApp.directive('loginBox', function(){
     return {
         replace: true,
         template: '<ul class="login-box clearfix">' +
-        '<li class="login"><a href="/#/login"><i class="fa fa-sign-in"></i> 登录</a></li>' +
-        '<li class="register"><a href="/#/register"><i class="fa fa-user-plus"></i> 注册</a></li>' +
+        '<li class="login"><a ui-sref="login"><i class="fa fa-sign-in"></i> 登录</a></li>' +
+        '<li class="register"><a ui-sref="register"><i class="fa fa-user-plus"></i> 注册</a></li>' +
         '</ul>'
     };
 });

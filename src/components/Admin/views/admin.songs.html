@@ -1,0 +1,56 @@
+<div class="songs" ng-controller="SongCtrl">
+    <nav class="title">歌曲列表</nav>
+    <div class="songs-lists">
+        <div class="clearfix edit-bars">
+            <form class="navbar-form pull-left m-search" role="search">
+                <div class="form-group">
+                    <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                    <input type="text" class="form-control" placeholder="查找歌曲" ng-keypress="search($event)">
+                </div>
+            </form>
+            <button class="btn btn-danger btn-sm pull-right" ng-click="deleteAlumsById()">删除选中的歌曲</button>
+        </div>
+        <div class="item-table" ng-controller="PageTableCtrl">
+            <table id="song-table" class="table table-condensed table-striped table-hover"
+                   ng-init="getSongsByPage(pagination.currPage, pagination.itemsPerPage)">
+                <thead>
+                <tr>
+                    <th>
+                        <input type="checkbox" ng-click="toggleSelectAll('song-table')" ng-checked="isSelectAllModel">
+                    </th>
+                    <th>序号</th>
+                    <th>音乐标题</th>
+                    <th>歌手</th>
+                    <th>专辑</th>
+                    <th>出版时间</th>
+                    <th>播放数</th>
+                    <th>点赞数</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="song in songs">
+                    <td>
+                        <input type="checkbox" name="item-check" ng-click="toggleSelect($event, song.id)">
+                    </td>
+                    <td>{{(pagination.currPage-1)*pagination.itemsPerPage + $index + 1}}</td>
+                    <td class="name-td">{{song.song_name}}</td>
+                    <td>{{song.singer_name || '未知'}}</td>
+                    <td>{{song.album_name || '未知'}}</td>
+                    <td>{{song.publish_date}}</td>
+                    <td>{{song.listen_count}}</td>
+                    <td>{{song.like_count}}</td>
+                    <td>
+                        <a href="#/admin?page=songs&subPage=songEdit&albumId={{song.id}}"><i class="fa fa-edit"></i></a>
+                        <i class="fa fa-trash" ng-click="deleteAlumsById(song.id)"></i>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <uib-pagination ng-if="pagination.totalItems>0" total-items="pagination.totalItems" ng-model="pagination.currPage"
+                            max-size="pagination.maxSize" items-per-page="pagination.itemsPerPage" class="pagination-sm pull-right"
+                            previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"
+                            boundary-links="true" force-ellipses="true" ng-change="pageChanged(getAlbums)"></uib-pagination>
+        </div>
+    </div>
+</div>

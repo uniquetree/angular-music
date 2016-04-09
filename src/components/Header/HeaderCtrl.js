@@ -11,15 +11,15 @@ $config.musicApp.controller('HeaderCtrl', ['$scope', '$location', '$window', 'Au
 
         // 导航栏选项
         $scope.items = [
-            {id: '1', name: '发现音乐', href: '#/'},
-            {id: '2', name: '我的音乐', href: '#/myMusic'},
-            {id: '3', name: '管理中心', href: '#/admin'}
+            {id: '1', name: '发现音乐', state: 'home'},
+            {id: '2', name: '我的音乐', state: 'myMusic'},
+            {id: '3', name: '管理中心', state: 'admin'}
         ];
         $scope.subNavbarItems = [
-            {name: '最新音乐', href: '#/discover'},
-            {name: '排行榜', href: '#/discover/toplist'},
-            {name: '歌单', href: '#/discover/playlist'},
-            {name: '歌手', href: '#/discover/singer'}
+            //{name: '最新音乐', state: '#/discover'},
+            {name: '排行榜', state: 'toplists'},
+            {name: '歌单', state: 'playlists'},
+            {name: '歌手', state: 'singers'}
         ];
         $scope.isActive = function(currUrl) {
             var href = '#' + $location.url();

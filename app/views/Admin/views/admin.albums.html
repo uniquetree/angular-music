@@ -1,0 +1,9 @@
+<div class="albums" ng-controller="AlbumCtrl">
+    <ol class="breadcrumb">
+        <li ng-repeat="breadcrumb in breadcrumbs" ng-class="{active: $last}">
+            <a ng-if="breadcrumb.state" ui-sref="{{breadcrumb.state}}">{{breadcrumb.name}}</a>
+            <span ng-if="$last">{{breadcrumb.name}}</span>
+        </li>
+    </ol>
+    <div class="albums-container clearfix" ui-view></div>
+</div>
