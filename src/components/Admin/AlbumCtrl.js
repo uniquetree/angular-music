@@ -3,14 +3,15 @@
  * Created by 郑树聪 on 2016/3/28.
  */
 require('./AdminService');
+require('../Services/AlbumService');
 
 var $func = require('../Common/Functions');
 var $config = require('../Common/config');
 
 var musicApp = $config.musicApp;
 
-musicApp.controller('AlbumCtrl', ['$scope', '$location', '$routeParams', '$log', 'AdminService', 'PageTableData',
-    function($scope, $location, $routeParams, $log, AdminService, PageTableData){
+musicApp.controller('AlbumCtrl', ['$scope', '$location', '$routeParams', '$log', 'AlbumService', 'PageTableData',
+    function($scope, $location, $routeParams, $log, AlbumService, PageTableData){
 
         if(!angular.isUndefined($routeParams.subPage)) {
             if($routeParams.subPage === 'albumList') {
@@ -48,7 +49,7 @@ musicApp.controller('AlbumCtrl', ['$scope', '$location', '$routeParams', '$log',
                 params.keyword = keyword;
             }
 
-            AdminService.getAlbums(params).success(function(data) {
+            AlbumService.getAlbums(params).success(function(data) {
 
                 if(data.success) {
                     $scope.albums = data.albums;
@@ -80,7 +81,7 @@ musicApp.controller('AlbumCtrl', ['$scope', '$location', '$routeParams', '$log',
             if(!angular.isUndefined($routeParams.albumId)) {
                 $scope.isAddAlbum = false;
                 var id = $routeParams.albumId;
-                AdminService.getAlbumById(id).success(function(data){
+                AlbumService.getAlbumById(id).success(function(data){
 
                     if(data.success) {
                         $scope.albumInfo = data.album;
@@ -101,7 +102,7 @@ musicApp.controller('AlbumCtrl', ['$scope', '$location', '$routeParams', '$log',
 
             if($scope.isAddAlbum) {
 
-                AdminService.addAlbum($scope.albumInfo).success(function(data){
+                AlbumService.addAlbum($scope.albumInfo).success(function(data){
                     if(data.success) {
                         alert('添加成功');
                         $location.search('subPage', 'albumList');
@@ -109,7 +110,7 @@ musicApp.controller('AlbumCtrl', ['$scope', '$location', '$routeParams', '$log',
                 });
             } else {
 
-                AdminService.updateAlbum($scope.albumInfo).success(function(data){
+                AlbumService.updateAlbum($scope.albumInfo).success(function(data){
                     if(data.success){
                         $scope.albumInfo.publish_date = date;
                         alert('更新成功');
@@ -135,7 +136,7 @@ musicApp.controller('AlbumCtrl', ['$scope', '$location', '$routeParams', '$log',
             } else {
                 ids.push(id);
             }
-            AdminService.deleteAlumsById(ids).success(function(data) {
+            AlbumService.deleteAlumsById(ids).success(function(data) {
 
                 if(data.success) {
                     alert('删除成功');

@@ -2,6 +2,7 @@
  * Created by 郑树聪 on 2016/3/30.
  */
 require('./AdminService');
+require('../Services/SongService');
 
 var $func = require('../Common/Functions');
 var $config = require('../Common/config');
@@ -9,8 +10,8 @@ var $config = require('../Common/config');
 var musicApp = $config.musicApp;
 
 // 歌手列表控制器
-musicApp.controller('SongCtrl', ['$scope', '$location', '$routeParams', '$log', 'AdminService', 'PageTableData',
-    function($scope, $location, $routeParams, $log, AdminService, PageTableData){
+musicApp.controller('SongCtrl', ['$scope', '$location', '$routeParams', '$log', 'SongService', 'PageTableData',
+    function($scope, $location, $routeParams, $log, SongService, PageTableData){
 
         $scope.singerTypes = $config.singerTypes;
         $scope.languages = $config.languages;
@@ -36,7 +37,7 @@ musicApp.controller('SongCtrl', ['$scope', '$location', '$routeParams', '$log', 
                 params.keyword = keyword;
             }
 
-            AdminService.getSongsByPage(params).success(function(data) {
+            SongService.getSongsByPage(params).success(function(data) {
 
                 if(data.success) {
 

@@ -168,7 +168,7 @@ musicApp.directive('citySelect', ['$window', 'AdminService', function($window, A
 }]);
 
 // 歌手选择
-musicApp.directive('singerSelect', function(AdminService){
+musicApp.directive('singerSelect', function(SingerService){
 
     return {
         replace: true,
@@ -182,7 +182,7 @@ musicApp.directive('singerSelect', function(AdminService){
             '<option value="">-- 选择歌手 --</option></select></div></div>',
         link: function($scope) {
 
-            AdminService.getAllSingers().success(function(data) {
+            SingerService.getAllSingers().success(function(data) {
 
                 if(data.success) {
                     $scope.allSingers = data.allSingers;
@@ -214,7 +214,7 @@ musicApp.directive('languageSelect', function(){
 });
 
 // 歌手延伸专辑选择
-musicApp.directive('singerAndAlbumSelect', function($filter, AdminService){
+musicApp.directive('singerAndAlbumSelect', function($filter, SingerService, AlbumService){
 
     return {
         replace: true,
@@ -236,14 +236,14 @@ musicApp.directive('singerAndAlbumSelect', function($filter, AdminService){
             $scope.allSingers = [];
             $scope.albums = [];
             // 获取所有歌手
-            AdminService.getAllSingers().success(function(data) {
+            SingerService.getAllSingers().success(function(data) {
 
                 if(data.success) {
                     $scope.allSingers = data.allSingers;
                 }
             });
             // 获取所有专辑
-            AdminService.getAllAlbums().success(function(data) {
+            AlbumService.getAllAlbums().success(function(data) {
                 if(data.success) {
                     $scope.albums = data.albums;
                 }

@@ -2,37 +2,11 @@
  * 用户操作服务、控制器,登录/登出
  * Created by 郑树聪 on 2016/2/17.
  */
+require('../Services/UserService');
+
 var $config = require('../Common/config');
 
-$config.musicApp.factory('UserService', ['$http', '$window', function($http, $window){
-    return {
-        // 注册服务
-        register: function(username, email, password){
-
-            return $http.post($config.api.register, {
-                username: username,
-                email: email,
-                password: password
-            });
-        },
-        // 登录服务
-        login: function(email, password) {
-
-            return $http.post($config.api.login, {
-                email: email,
-                password: password
-            });
-        },
-        // 登出服务
-        logout: function() {
-
-            return $http.post($config.api.logout, {
-                email: JSON.parse($window.sessionStorage.userInfo).email,
-                token: $window.sessionStorage.token
-            });
-        }
-    };
-}]).controller('UserCtrl', ['$rootScope', '$scope', '$location', '$window', 'UserService', 'AuthenticationService',
+$config.musicApp.controller('UserCtrl', ['$rootScope', '$scope', '$location', '$window', 'UserService', 'AuthenticationService',
     function($rootScope, $scope, $location, $window, UserService, AuthenticationService){
 
         // 注册事件

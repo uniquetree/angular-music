@@ -1,17 +1,16 @@
 /**
  * Created by 郑树聪 on 2016/3/28.
  */
-
 require('./AdminService');
+require('../Services/SingerService');
 
-var $func = require('../Common/Functions');
 var $config = require('../Common/config');
 
 var musicApp = $config.musicApp;
 
 // 歌手列表控制器
-musicApp.controller('SingerCtrl', ['$scope', '$location', '$routeParams', '$log', 'AdminService', 'PageTableData',
-    function($scope, $location, $routeParams, $log, AdminService, PageTableData){
+musicApp.controller('SingerCtrl', ['$scope', '$location', '$routeParams', '$log', 'SingerService', 'PageTableData',
+    function($scope, $location, $routeParams, $log, SingerService, PageTableData){
 
         $scope.singerTypes = $config.singerTypes;
         $scope.languages = $config.languages;
@@ -52,7 +51,7 @@ musicApp.controller('SingerCtrl', ['$scope', '$location', '$routeParams', '$log'
                 params.keyword = keyword;
             }
 
-            AdminService.getSingers(params).success(function(data) {
+            SingerService.getSingers(params).success(function(data) {
 
                 if(data.success) {
                     $scope.singers = data.singers;
@@ -103,7 +102,7 @@ musicApp.controller('SingerCtrl', ['$scope', '$location', '$routeParams', '$log'
             if(!angular.isUndefined($routeParams.singerId)) {
                 $scope.isAddSinger = false;
                 var id = $routeParams.singerId;
-                AdminService.getSingerById(id).success(function(data){
+                SingerService.getSingerById(id).success(function(data){
 
                     if(data.success) {
                         $scope.singerInfo = data.singer;
@@ -116,7 +115,7 @@ musicApp.controller('SingerCtrl', ['$scope', '$location', '$routeParams', '$log'
 
             if($scope.isAddSinger) {
 
-                AdminService.addSinger($scope.singerInfo).success(function(data){
+                SingerService.addSinger($scope.singerInfo).success(function(data){
                     if(data.success) {
                         alert('添加成功');
                         $location.search('subPage', 'singerList');
@@ -124,7 +123,7 @@ musicApp.controller('SingerCtrl', ['$scope', '$location', '$routeParams', '$log'
                 });
             } else {
 
-                AdminService.updateSinger($scope.singerInfo).success(function(data){
+                SingerService.updateSinger($scope.singerInfo).success(function(data){
                     if(data.success) {
                         alert('更新成功');
                     }
@@ -149,7 +148,7 @@ musicApp.controller('SingerCtrl', ['$scope', '$location', '$routeParams', '$log'
             } else {
                 ids.push(id);
             }
-            AdminService.deleteSingers(ids).success(function(data) {
+            SingerService.deleteSingers(ids).success(function(data) {
 
                 if(data.success) {
                     alert('删除成功');

@@ -4,7 +4,9 @@
  */
 require('../Menu/MenuDirectives');
 require('./AdminDirectives');
+
 require('./AdminService');
+require('../Services/UserService');
 
 var $func = require('../Common/Functions');
 var $config = require('../Common/config');
@@ -46,13 +48,12 @@ musicApp.controller('AdminCtrl', ['$scope', '$location', '$window', '$routeParam
                 });
             }
         };
-
     }
 ]);
 
 // 用户信息控制器
-musicApp.controller('InfoCtrl', ['$scope', '$location', '$window', '$routeParams', 'AdminService',
-    function($scope, $location, $window, $routeParams, AdminService){
+musicApp.controller('InfoCtrl', ['$scope', '$location', '$window', '$routeParams', 'AdminService', 'UserService',
+    function($scope, $location, $window, $routeParams, AdminService, UserService){
 
         var areas = [];
         $scope.userInfo = JSON.parse($window.sessionStorage.userInfo);
@@ -84,7 +85,7 @@ musicApp.controller('InfoCtrl', ['$scope', '$location', '$window', '$routeParams
             var birth = $scope.userInfo.birth;
             $scope.userInfo.birth = $func.formatDate(birth);
 
-            AdminService.updateUserInfo({userInfo: $scope.userInfo}).success(function(data) {
+            UserService.updateUserInfo({userInfo: $scope.userInfo}).success(function(data) {
 
                 if(data.success) {
                     $window.sessionStorage.userInfo = JSON.stringify($scope.userInfo);
