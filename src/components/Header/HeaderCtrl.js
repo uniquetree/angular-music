@@ -6,8 +6,8 @@ require('./HeaderDirectives');
 
 var $config = require('../Common/config');
 
-$config.musicApp.controller('HeaderCtrl', ['$scope', '$location', '$window', 'AuthenticationService',
-    function($scope, $location, $window, AuthenticationService){
+$config.musicApp.controller('HeaderCtrl', ['$scope', '$location', '$window', '$state', 'AuthenticationService',
+    function($scope, $location, $window, $state, AuthenticationService){
 
         // 导航栏选项
         $scope.items = [
@@ -17,23 +17,20 @@ $config.musicApp.controller('HeaderCtrl', ['$scope', '$location', '$window', 'Au
         ];
         $scope.subNavbarItems = [
             //{name: '最新音乐', state: '#/discover'},
-            {name: '排行榜', state: 'toplists'},
-            {name: '歌单', state: 'playlists'},
-            {name: '歌手', state: 'singers'}
+            {name: '排行榜', state: 'home.topList'},
+            {name: '歌单', state: 'home.playlist'},
+            {name: '歌手', state: 'home.singer'}
         ];
-        $scope.isActive = function(currUrl) {
-            var href = '#' + $location.url();
-            var patt = new RegExp(currUrl);
-            if(href !== '#/' && currUrl ==='#/') {
-                return false;
+        $scope.isHome = true;
+        $scope.isActive = function(state) {
+            if($state.includes(state)) {
+                var reg = /^home/;
+                if(!reg.test(state)) {
+                    $scope.isHome = false;
+                }
+                return true;
             }
-            return patt.test(href);
-        };
-        // 判断是否首页
-        $scope.isHome = function(){
-            var reg = new RegExp('/discover');
-            var path = $location.url();
-            return path === '/' || reg.test(path);
+            return false;
         };
 
         // 判断是否登录

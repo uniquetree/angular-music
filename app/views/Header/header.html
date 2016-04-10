@@ -30,8 +30,9 @@
         </nav>
     </div>
     <nav class="sub-navbar">
-        <ul class="nav nav-pills clearfix home-sub-nav" ng-if="isHome()">
-            <li ng-repeat="item in subNavbarItems" ui-sref-active="active">
+        <ul class="nav nav-pills clearfix home-sub-nav" ng-if="isHome">
+            <li ng-repeat="item in subNavbarItems" ui-sref-active="active"
+                ng-class="{'active': item.state === 'home.topList' && isHome}">
                 <a ui-sref="{{item.state}}">{{item.name}}</a>
             </li>
         </ul>

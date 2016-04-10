@@ -1,13 +1,8 @@
 <!-- home view -->
 <header ng-include="'app/views/Header/header.html'" class="g-header" ng-controller="HeaderCtrl"></header>
-
 <div class="g-body">
-    <div class="container g-container">
-        <div>基于AngularJS的在线音乐网站</div>
-        <p>Welcome to 基于AngularJS的在线音乐网站</p>
-
+    <div class="container g-container" ui-view>
     </div>
     <div class="gotop" id="j-top" style=""></div>
 </div>
-
 <footer ng-include="'app/views/Templates/footer.html'" class="g-footer"></footer>

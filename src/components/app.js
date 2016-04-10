@@ -68,26 +68,38 @@ musicApp.config(function ($httpProvider) {
 
 musicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
 
+    $urlRouterProvider.when('/admin', '/admin/userInfo');
+    $urlRouterProvider.when('/admin/singers', '/admin/singers/singerList');
+    $urlRouterProvider.when('/admin/albums', '/admin/albums/albumList');
     $urlRouterProvider.otherwise("/");
-    $urlRouterProvider.when('/admin', "/admin/userInfo");
-    $urlRouterProvider.when('/admin/singers', "/admin/singers/singerList");
-    $urlRouterProvider.when('/admin/albums', "/admin/albums/albumList");
 
     $stateProvider
         .state('home', {
-            url: '/',
+            url: '',
             templateUrl: 'app/views/Home/home.html',
             controller: 'UserCtrl',
             access: { requiredLogin: false },
             ignoreLoadingBar: true
         })
-        //.state('home.discover', {
-        //    url: '/discover',
-        //    templateUrl: 'app/views/Home/home.html',
-        //    controller: 'UserCtrl',
-        //    access: { requiredLogin: false },
-        //    ignoreLoadingBar: true
-        //})
+        .state('home.topList', {
+            url: '/',
+            templateUrl: 'app/views/Home/views/home.topList.html',
+            access: { requiredLogin: false },
+            ignoreLoadingBar: true
+        })
+        .state('home.playlist', {
+            url: '/playlist',
+            templateUrl: 'app/views/Home/views/home.playlist.html',
+            access: { requiredLogin: false },
+            ignoreLoadingBar: true
+        })
+        .state('home.singer', {
+            url: '/singer',
+            templateUrl: 'app/views/Home/views/home.singer.html',
+            access: { requiredLogin: false },
+            ignoreLoadingBar: true
+        })
+
         .state('register', {
             url: '/register',
             templateUrl: 'app/views/User/register.html',
@@ -102,6 +114,7 @@ musicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvider
             access: { requiredLogin: false },
             ignoreLoadingBar: true
         })
+
         .state('myMusic', {
             url: '/myMusic',
             templateUrl: 'app/views/MyMusic/myMusic.html',
@@ -119,6 +132,7 @@ musicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvider
             access: { requiredLogin: true },
             ignoreLoadingBar: true
         })
+
         .state('admin.userInfo', {
             url: '/userInfo',
             templateUrl: 'app/views/Admin/views/admin.userInfo.html',
@@ -129,6 +143,7 @@ musicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvider
             templateUrl: 'app/views/Admin/views/admin.editInfo.html',
             access: { requiredLogin: true }
         })
+
         .state('admin.singers', {
             url: '/singers',
             templateUrl: 'app/views/Admin/views/admin.singers.html',
