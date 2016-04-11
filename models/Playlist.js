@@ -11,13 +11,50 @@ var playlist_tb = config.tableName.playlist_tb;
 var playlist_user_tb = config.tableName.playlist_user_tb;
 var playlist_song_tb = config.tableName.playlist_song_tb;
 var song_tb = config.tableName.song_tb;
+var user_tb = config.tableName.user_tb;
 
-var Playlist = function (playlistInfo) {
+var Playlist = function (playlistInfo, pagination, keyword) {
     if(typeof playlistInfo !== 'undefined') {
         this.id = playlistInfo.id;
         this.playlist_name = playlistInfo.playlist_name;
         this.playlist_info = playlistInfo.playlist_info;
     }
+
+    if(typeof pagination !== 'undefined') {
+        this.currPage = (pagination.currPage-1) || 0;
+        this.pageSize = pagination.pageSize || 10;
+    }
+
+    if(typeof keyword !== 'undefined' && keyword !== '') {
+        this.keyword = '%' + keyword + '%';
+    }
+};
+
+/**
+ * 分页获取歌单,此方法还可以实现关键字查询
+ * @param orderBy [Boolean] 判断排序方式，true:按照添加时间排序,false:按照点赞数和播放数排序
+ */
+Playlist.prototype.filterPlayListsByPage = function(orderByWhich, callback) {
+
+    var orderBy = '';
+    if(orderByWhich) {
+        orderBy = 'p.create_time';
+    } else {
+        orderBy = 'p.like_count and p.play_count';
+    }
+
+    var filters = '';
+    if(typeof this.keyword !== 'undefined') {
+        filters = 'and p.playlist_name like ' + this.keyword;
+    }
+
+    var sql = 'select p.id, p.playlist_name, p.playlist_info, p.like_count, p.play_count, p.create_time, u.username from ' +
+        playlist_tb + ' as p left join ' + playlist_user_tb + ' as pu on p.id=pu.playlist_id left join ' +
+        user_tb + ' as u on pu.user_id=u.pid where p.id >= (select id from ' + playlist_tb +
+        ' order by id limit ?,1) ' + filters + ' order by ' + orderBy + ' limit ?;';
+    var count_sql = 'select count(*) as totalItems from ' + playlist_tb;
+    var params = [this.pageSize*this.currPage, this.pageSize];
+    db.query(sql+count_sql, params, callback);
 };
 
 /**

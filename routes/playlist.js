@@ -19,7 +19,28 @@ var Playlist = require('../models/Playlist');
 // 分页获取所有歌单
 router.get('/filterPlayListsByPage', function(req, res) {
 
-    var playlist = new Playlist();
+    var orderByWhich = Boolean(req.query.orderByWhich);
+    var pagination = {
+        currPage: Number(req.query.currPage),
+        pageSize: Number(req.query.pageSize)
+    };
+    var keyword = req.query.keyword;
+    var playlist = new Playlist({}, pagination, keyword);
+    playlist.filterPlayListsByPage(orderByWhich, function(isError, results) {
+
+        if(isError) {
+            res.sendStatus(500);
+            console.log(results.message);
+        } else {
+            res.json({
+                success: true,
+                playlists: results[0],
+                totalItems: results[1][0].totalItems,
+                currPage: pagination.currPage,
+                pageSize: pagination.pageSize
+            });
+        }
+    });
 
 });
 // 获取用户创建的歌单
