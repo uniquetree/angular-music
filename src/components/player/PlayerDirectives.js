@@ -12,7 +12,6 @@ musicApp.directive('musicPlayer', function(){
     return {
         restrict:'EA',
         replace: true,
-        templateUrl: 'app/views/Player/player.html',
-        controller: 'PlayerCtrl'
+        templateUrl: 'app/views/Player/player.html'
     };
 });

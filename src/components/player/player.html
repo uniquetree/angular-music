@@ -1,7 +1,7 @@
-<div id="g-player" class="navbar-fixed-bottom g-player" ng-init="plaer.listShow=false">
+<div id="g-player" class="navbar-fixed-bottom g-player" ng-controller="PlayerCtrl" ng-init="listShow=false">
     <div id="m-player" class="container clearfix g-container m-player">
         <!-- 播放控制按钮 -->
-        <div class="pull-left player-btns" ng-init="player.playing=false">
+        <div class="pull-left player-btns">
             <span class="prev" title="上一首" ng-click="player.prev()"><i class="fa fa-step-backward"></i></span>
             <span class="play" title="播放" ng-click="player.play()" ng-show="!player.playing"><i class="fa fa-play"></i></span>
             <span class="stop" title="暂停" ng-click="player.stop()" ng-show="player.playing"><i class="fa fa-stop"></i></span>
@@ -9,24 +9,26 @@
         </div><!-- 播放控制按钮 end -->
         <!-- 音乐图片 -->
         <div class="pull-left player-img">
-            <img ng-src="{{defaultSongImg}}">
+            <img ng-src="{{playingMusic.song_img || defaultSongImg}}">
         </div><!-- 音乐图片 end -->
         <!-- 播放器滚动条 -->
         <div class="pull-left player-bar">
             <div class="music-info">
-
+                {{playingMusic.song_name}}
             </div>
             <div class="m-progress">
-                <div class="progress pull-left">
-                    <div class="progress-bar progress-bar-played" style="width: 35%"></div>
-                    <div class="progress-bar progress-bar-loaded" style="width: 20%"></div>
+                <div id="music-progress" class="progress pull-left" ng-click="adjustPorgress($event)">
+                    <div class="progress-bar progress-bar-loaded" style="{{bufferWidth}}"></div>
+                    <div class="progress-bar progress-bar-played" style="{{surplusWidth}}"></div>
                 </div>
-                <span class="music-time"><em>01:13</em> / 04:34</span>
+                <span class="music-time"><em>{{currentTime}}</em> / {{duration}}</span>
             </div>
         </div><!-- 播放器滚动条 end -->
         <!-- 播放器音量、列表控制 -->
         <div class="pull-left player-ctrl">
-
+            <div class="player-mode"></div>
+            <div class="player-volume"></div>
+            <div class="player-list"></div>
         </div><!-- 播放器音量、列表控制 end -->
     </div>
     <div id="m-list" class="container g-container m-list" ng-show="player.listShow"></div>

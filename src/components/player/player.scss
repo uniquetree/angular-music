@@ -2,6 +2,9 @@
  * 音乐播放器样式
  * Created by 郑树聪 on 2016/2/18.
  */
+$progressWidth: 700px;
+$progressHeight: 10px;
+
 .g-player {
     height: 50px;
     background-color: #303030;
@@ -78,13 +81,14 @@
             }
 
             .m-progress {
-                height: 10px;
-                line-height: 10px;
+                height: $progressHeight;
+                line-height: $progressHeight;
                 font-size: 10px;
 
                 .progress {
-                    width: 700px;
-                    height: 10px;
+                    position: relative;
+                    width: $progressWidth;
+                    height: $progressHeight;
                     margin-right: 16px;
                     margin-bottom: 0;
                     border-radius: 5px;
@@ -92,15 +96,18 @@
                     cursor: pointer;
 
                     .progress-bar {
+                        position: absolute;
+                        height: $progressHeight;
                         border-bottom-right-radius: 5px;
                         border-top-right-radius: 5px;
                     }
-
                     .progress-bar-played {
                         background-color: #C70C0C;
+                        z-index: 100;
                     }
                     .progress-bar-loaded {
                         background-color: #535353;
+                        z-index: 99;
                     }
                 }
                 .music-time {

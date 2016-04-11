@@ -167,88 +167,6 @@
 
 @charset "UTF-8";
 /**
- * Created by 郑树聪 on 2016/3/1.
- */
-html,
-body,
-.wrap {
-  width: 100%;
-  height: 100%;
-  background-color: #F5F5F5;
-  font-family: Arial, Helvetica, sans-serif; }
-
-.g-body .g-container {
-  width: 1170px;
-  min-height: 700px;
-  _height: 700px;
-  padding: 0;
-  border: 1px solid #e7e7e7;
-  margin: 0 auto;
-  border-radius: 4px;
-  background-color: #F8F8F8; }
-  .g-body .g-container .g-menu {
-    width: 240px;
-    padding: 0; }
-  .g-body .g-container .g-content {
-    width: 928px;
-    min-height: 700px;
-    _height: 700px;
-    padding: 20px 24px;
-    border-left: 1px solid #e7e7e7; }
-
-.g-body label {
-  width: 84px;
-  font-weight: normal; }
-
-.g-body textarea {
-  overflow-x: hidden;
-  overflow-y: auto;
-  resize: none; }
-
-.g-body .form-group {
-  margin-right: 0;
-  margin-left: 0; }
-
-.g-body .table th,
-.g-body .table td {
-  text-align: center; }
-
-.g-body .table .fa {
-  padding: 0 10px;
-  vertical-align: middle;
-  font-size: 18px;
-  cursor: pointer; }
-
-.g-body .table .fa-edit {
-  color: #31b0d5; }
-
-.g-body .table .fa-trash {
-  color: #c9302c; }
-
-.require {
-  color: red; }
-
-.m-search .form-group {
-  border-radius: 17px;
-  overflow: hidden;
-  background-color: #EAEAEA; }
-  .m-search .form-group .glyphicon-search {
-    top: 0;
-    margin-left: 14px;
-    vertical-align: middle; }
-  .m-search .form-group input {
-    padding-left: 32px;
-    border: none;
-    margin-left: -32px;
-    background-color: #EAEAEA; }
-
-.uib-datepicker-popup {
-  padding: 0 16px; }
-  .uib-datepicker-popup button {
-    border: none; }
-
-@charset "UTF-8";
-/**
  * Created by 郑树聪 on 2016/2/29.
  */
 /**
@@ -423,25 +341,6 @@ body,
 
 @charset "UTF-8";
 /**
- * 我的音乐和管理中心左侧菜单栏样式
- * Created by 郑树聪 on 2016/3/15.
- */
-.menus i.fa {
-  height: 20px;
-  line-height: 20px;
-  font-size: 14px; }
-  .menus i.fa:not(.fa-chevron-right):not(.fa-chevron-down) {
-    width: 20px; }
-
-.menus .menu {
-  border-bottom: 1px solid #e7e7e7;
-  margin-top: 0 !important; }
-
-.menus .sub-menus a {
-  padding-left: 34px; }
-
-@charset "UTF-8";
-/**
  * Created by 郑树聪 on 2016/4/7.
  */
 #g-myMusic .menu .menu-title > .fa {
@@ -527,6 +426,25 @@ body,
 
 @charset "UTF-8";
 /**
+ * 我的音乐和管理中心左侧菜单栏样式
+ * Created by 郑树聪 on 2016/3/15.
+ */
+.menus i.fa {
+  height: 20px;
+  line-height: 20px;
+  font-size: 14px; }
+  .menus i.fa:not(.fa-chevron-right):not(.fa-chevron-down) {
+    width: 20px; }
+
+.menus .menu {
+  border-bottom: 1px solid #e7e7e7;
+  margin-top: 0 !important; }
+
+.menus .sub-menus a {
+  padding-left: 34px; }
+
+@charset "UTF-8";
+/**
  * 音乐播放器样式
  * Created by 郑树聪 on 2016/2/18.
  */
@@ -590,6 +508,7 @@ body,
       line-height: 10px;
       font-size: 10px; }
       .g-player .m-player .player-bar .m-progress .progress {
+        position: relative;
         width: 700px;
         height: 10px;
         margin-right: 16px;
@@ -598,12 +517,16 @@ body,
         background-color: #171717;
         cursor: pointer; }
         .g-player .m-player .player-bar .m-progress .progress .progress-bar {
+          position: absolute;
+          height: 10px;
           border-bottom-right-radius: 5px;
           border-top-right-radius: 5px; }
         .g-player .m-player .player-bar .m-progress .progress .progress-bar-played {
-          background-color: #C70C0C; }
+          background-color: #C70C0C;
+          z-index: 100; }
         .g-player .m-player .player-bar .m-progress .progress .progress-bar-loaded {
-          background-color: #535353; }
+          background-color: #535353;
+          z-index: 99; }
       .g-player .m-player .player-bar .m-progress .music-time {
         width: 30px;
         height: 10px;
@@ -691,3 +614,85 @@ body,
   .form-bottom .register,
   .form-bottom .login {
     margin: 0; }
+
+@charset "UTF-8";
+/**
+ * Created by 郑树聪 on 2016/3/1.
+ */
+html,
+body,
+.wrap {
+  width: 100%;
+  height: 100%;
+  background-color: #F5F5F5;
+  font-family: Arial, Helvetica, sans-serif; }
+
+.g-body .g-container {
+  width: 1170px;
+  min-height: 700px;
+  _height: 700px;
+  padding: 0;
+  border: 1px solid #e7e7e7;
+  margin: 0 auto;
+  border-radius: 4px;
+  background-color: #F8F8F8; }
+  .g-body .g-container .g-menu {
+    width: 240px;
+    padding: 0; }
+  .g-body .g-container .g-content {
+    width: 928px;
+    min-height: 700px;
+    _height: 700px;
+    padding: 20px 24px;
+    border-left: 1px solid #e7e7e7; }
+
+.g-body label {
+  width: 84px;
+  font-weight: normal; }
+
+.g-body textarea {
+  overflow-x: hidden;
+  overflow-y: auto;
+  resize: none; }
+
+.g-body .form-group {
+  margin-right: 0;
+  margin-left: 0; }
+
+.g-body .table th,
+.g-body .table td {
+  text-align: center; }
+
+.g-body .table .fa {
+  padding: 0 10px;
+  vertical-align: middle;
+  font-size: 18px;
+  cursor: pointer; }
+
+.g-body .table .fa-edit {
+  color: #31b0d5; }
+
+.g-body .table .fa-trash {
+  color: #c9302c; }
+
+.require {
+  color: red; }
+
+.m-search .form-group {
+  border-radius: 17px;
+  overflow: hidden;
+  background-color: #EAEAEA; }
+  .m-search .form-group .glyphicon-search {
+    top: 0;
+    margin-left: 14px;
+    vertical-align: middle; }
+  .m-search .form-group input {
+    padding-left: 32px;
+    border: none;
+    margin-left: -32px;
+    background-color: #EAEAEA; }
+
+.uib-datepicker-popup {
+  padding: 0 16px; }
+  .uib-datepicker-popup button {
+    border: none; }
