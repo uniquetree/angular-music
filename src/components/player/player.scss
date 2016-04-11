@@ -2,7 +2,7 @@
  * 音乐播放器样式
  * Created by 郑树聪 on 2016/2/18.
  */
-$progressWidth: 700px;
+$progressWidth: 680px;
 $progressHeight: 10px;
 
 .g-player {
@@ -20,7 +20,7 @@ $progressHeight: 10px;
     .m-player {
 
         .player-btns {
-            width: 180px;
+            width: 172px;
             margin-top: 8px;
             text-align: center;
 
@@ -72,10 +72,10 @@ $progressHeight: 10px;
             }
         }
         .player-bar {
-            width: 800px;
+            width: 780px;
 
             .music-info {
-                max-width: 800px;
+                max-width: 780px;
                 height: 32px;
                 line-height: 32px;
             }
@@ -124,13 +124,206 @@ $progressHeight: 10px;
             }
         }
         .player-ctrl {
-            width: 120px;
+            width: 140px;
             height: 50px;
             line-height: 50px;
+
+            .fa {
+                vertical-align: middle;
+                font-size: 22px;
+                color: #969696;
+            }
+
+            .player-mode {
+                width: 36px;
+                height: 50px;
+                cursor: pointer;
+                background-size: 22px;
+
+                &.loop {
+                    background: url('../images/loop.png') center center no-repeat;
+                }
+                &.random {
+                    background: url('../images/random.png') center center no-repeat;
+                }
+                &.repeat {
+                    background: url('../images/repeat.png') center center no-repeat;
+                }
+            }
+
+            .player-volume {
+                position: relative;
+                width: 32px;
+                text-align: center;
+
+                .m-volume {
+                    position: absolute;
+                    bottom: 50px;
+                    width: 32px;
+                    height: 112px;
+                    background-color: #040303;
+                    z-index: 120;
+
+                    .progress {
+                        width: 8px;
+                        height: 100px;
+                        margin: 6px auto;
+                        border-radius: 4px;
+                        background-color: #171717;
+                        transform: rotate(180deg);
+                        cursor: pointer;
+
+                        .progress-bar {
+                            width: 8px;
+                            border-radius: 4px;
+                            background-color: #C70C0C;
+                        }
+                    }
+                }
+            }
+
+            .player-list {
+                width: 60px;
+                height: 50px;
+                margin-left: 8px;
+                background: url('../images/playlist.png') no-repeat center left;
+                cursor: pointer;
+
+                .lists-len {
+                    display: block;
+                    width: 36px;
+                    height: 20px;
+                    padding: 0 6px;
+                    margin-top: 16px;
+                    margin-left: 23px;
+                    border-top-right-radius: 10px;
+                    border-bottom-right-radius: 10px;
+                    line-height: 20px;
+                    text-align: center;
+                    text-shadow: 0 1px 0 #080707;
+                    text-indent: 0;
+                    text-decoration: none;
+                    color: #666;
+                    background-color: #171717;
+                }
+            }
         }
     }
     // 播放列表样式
-    .m-list {
+    .m-list-panel {
+        position: absolute;
+        bottom: 50px;
+        left: 50%;
+        width: 558px;
+        height: 260px;
+        border-bottom: none;
+        margin-bottom: 0;
+        margin-left: -279px;
+        border-bottom-right-radius: 0;
+        border-bottom-left-radius: 0;
+        background-color: #121212;
 
+        .panel-heading {
+            border-bottom-color: #000;
+            background-color: #121212;
+            font-size: 14px;
+            font-weight: bold;
+            color: #e2e2e2;
+
+            .lists-action {
+
+                span {
+                    padding: 0 6px;
+                    font-weight: normal;
+                    font-size: 12px;
+                    color: #e2e2e2;
+
+                    &:first-child {
+                        border-right: 1px solid #000;
+                    }
+                    .fa {
+                        padding-right: 6px;
+                    }
+                }
+            }
+        }
+        .panel-body {
+            height: 219px;
+            padding: 0;
+            margin-left: 0;
+            overflow-x: hidden;
+            overflow-y: auto;
+            font-size: 12px;
+
+            .music-lists {
+                margin: 0;
+                padding: 0;
+
+                .music-list {
+                    height: 28px;
+                    line-height: 28px;
+                    list-style: none;
+                    color: #e2e2e2;
+
+                    &:hover,
+                    &.active {
+                        background-color: #000;
+                        color: #fff;
+                    }
+                    &:hover {
+                        .list-col-3 {
+                            visibility: visible;
+                        }
+                    }
+                    &.active {
+                        background-color: #000;
+                        font-weight: bold;
+
+                        .list-col-1 {
+                            visibility: visible;
+                        }
+                    }
+
+                    .list-col {
+                        height: 100%;
+                        line-height: 28px;
+                    }
+                    .list-col-1 {
+                        width: 36px;
+                        visibility: hidden;
+                        text-align: center;
+
+                        .fa {
+                            padding: 0 8px;
+                            font-size: 14px;
+                            color: #C70C0C;
+                        }
+                    }
+                    .list-col-2 {
+                        width: 266px;
+                    }
+                    .list-col-3 {
+                        width: 64px;
+                        visibility: hidden;
+
+                        .fa {
+                            padding: 0 8px;
+                            font-size: 14px;
+                            color: #e2e2e2;
+                            cursor: pointer;
+                        }
+                    }
+                    .list-col-4 {
+                        width: 80px;
+                    }
+                    .list-col-5 {
+                        width: 50px;
+                    }
+                    .list-col-6 {
+                        width: 40px;
+                    }
+                }
+            }
+        }
     }
 }

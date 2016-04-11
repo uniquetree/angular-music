@@ -1,10 +1,10 @@
-<div id="g-player" class="navbar-fixed-bottom g-player" ng-controller="PlayerCtrl" ng-init="listShow=false">
+<div id="g-player" class="navbar-fixed-bottom g-player" ng-controller="PlayerCtrl" ng-init="volumeBox=false;listShow=false">
     <div id="m-player" class="container clearfix g-container m-player">
         <!-- 播放控制按钮 -->
         <div class="pull-left player-btns">
             <span class="prev" title="上一首" ng-click="player.prev()"><i class="fa fa-step-backward"></i></span>
             <span class="play" title="播放" ng-click="player.play()" ng-show="!player.playing"><i class="fa fa-play"></i></span>
-            <span class="stop" title="暂停" ng-click="player.stop()" ng-show="player.playing"><i class="fa fa-stop"></i></span>
+            <span class="stop" title="暂停" ng-click="player.stop()" ng-show="player.playing"><i class="fa fa-pause"></i></span>
             <span class="next" title="下一首" ng-click="player.next()"><i class="fa fa-step-forward"></i></span>
         </div><!-- 播放控制按钮 end -->
         <!-- 音乐图片 -->
@@ -26,10 +26,48 @@
         </div><!-- 播放器滚动条 end -->
         <!-- 播放器音量、列表控制 -->
         <div class="pull-left player-ctrl">
-            <div class="player-mode"></div>
-            <div class="player-volume"></div>
-            <div class="player-list"></div>
+            <div class="pull-left player-mode" ng-class="{loop: 'loop', random: 'random', repeat: 'repeat'}[playMode]"
+                ng-click="changePlayMode(playMode)"></div>
+            <div class="pull-left player-volume">
+                <div id="m-volume" class="m-volume" ng-show="volumeBox">
+                    <div id="play-vol" class="progress" ng-click="adjustVolume($event)">
+                        <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0"
+                             aria-valuemax="100" style="{{volStyle}}"></div>
+                    </div>
+                </div>
+                <a href="javascript:void(0);"><span class="fa" ng-class="{true: 'fa-volume-up', false: 'fa-volume-off'}[muted]"
+                                                    ng-click="volumeBox=!volumeBox"></span></a>
+            </div>
+            <div class="pull-left player-list" ng-click="listShow=!listShow">
+                <a href="javascript:void(0);" title="播放列表" hidefocus="true" class="lists-len">{{MusicData.lists.length}}</a>
+            </div>
         </div><!-- 播放器音量、列表控制 end -->
     </div>
-    <div id="m-list" class="container g-container m-list" ng-show="player.listShow"></div>
+    <div id="m-list-panel" class="panel panel-default m-list-panel" ng-show="listShow">
+        <div class="panel-heading">
+            <span>播放列表</span>
+            <div class="pull-right lists-action">
+                <span><i class="fa fa-file"></i>收藏全部</span>
+                <span><i class="fa fa-trash-o"></i>清除</span>
+            </div>
+        </div>
+        <div class="panel-body">
+            <ul class="music-lists">
+                <li class="clearfix music-list" ng-repeat="list in MusicData.lists" ng-dblclick="isSelected()"
+                    ng-class="{active: list.id===playingMusic.id}">
+                    <div class="pull-left list-col list-col-1">
+                        <i class="fa fa-play"></i>
+                    </div>
+                    <div class="pull-left list-col list-col-2">{{list.song_name}}</div>
+                    <div class="pull-left list-col list-col-3">
+                        <span class="fa fa-file" title="收藏"></span>
+                        <span class="fa fa-trash-o" title="清除"></span>
+                    </div>
+                    <div class="pull-left list-col list-col-4">{{list.singer_name}}</div>
+                    <div class="pull-left list-col list-col-5"></div>
+                    <div class="pull-left list-col list-col-6"></div>
+                </li>
+            </ul>
+        </div>
+    </div>
 </div>

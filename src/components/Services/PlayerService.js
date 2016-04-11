@@ -46,14 +46,15 @@ musicApp.factory('MusicData', function() {
         ],
         // 正在播放的歌曲的下标位置，默认0
         index: 0,
-        // 播放器当前播放模式,列表循环:'list',随机播放:'random',单曲循环:'repeat',默认'list'
-        playMode: 'list'
+        // 播放器当前播放模式,列表循环:'loop',随机播放:'random',单曲循环:'repeat',默认'list'
+        playMode: 'loop'
     };
 });
 // 播放器
 musicApp.factory('Player', ['$rootScope', 'MusicData', 'Audio', function($rootScope, MusicData, Audio) {
 
     // 正在播放的歌曲信息
+    $rootScope.MusicData = MusicData;
     $rootScope.playingMusic = {};
 
     var Player = function(playing){
@@ -71,8 +72,7 @@ musicApp.factory('Player', ['$rootScope', 'MusicData', 'Audio', function($rootSc
     };
     // 设置播放器audio标签的src
     Player.prototype.setAudioSrc = function(index){
-        var src = MusicData.lists[index].url;
-        Audio.src = src;
+        Audio.src = MusicData.lists[index].url;
     };
     // 播放
     Player.prototype.play = function() {

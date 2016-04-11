@@ -167,6 +167,88 @@
 
 @charset "UTF-8";
 /**
+ * Created by 郑树聪 on 2016/3/1.
+ */
+html,
+body,
+.wrap {
+  width: 100%;
+  height: 100%;
+  background-color: #F5F5F5;
+  font-family: Arial, Helvetica, sans-serif; }
+
+.g-body .g-container {
+  width: 1170px;
+  min-height: 700px;
+  _height: 700px;
+  padding: 0;
+  border: 1px solid #e7e7e7;
+  margin: 0 auto;
+  border-radius: 4px;
+  background-color: #F8F8F8; }
+  .g-body .g-container .g-menu {
+    width: 240px;
+    padding: 0; }
+  .g-body .g-container .g-content {
+    width: 928px;
+    min-height: 700px;
+    _height: 700px;
+    padding: 20px 24px;
+    border-left: 1px solid #e7e7e7; }
+
+.g-body label {
+  width: 84px;
+  font-weight: normal; }
+
+.g-body textarea {
+  overflow-x: hidden;
+  overflow-y: auto;
+  resize: none; }
+
+.g-body .form-group {
+  margin-right: 0;
+  margin-left: 0; }
+
+.g-body .table th,
+.g-body .table td {
+  text-align: center; }
+
+.g-body .table .fa {
+  padding: 0 10px;
+  vertical-align: middle;
+  font-size: 18px;
+  cursor: pointer; }
+
+.g-body .table .fa-edit {
+  color: #31b0d5; }
+
+.g-body .table .fa-trash {
+  color: #c9302c; }
+
+.require {
+  color: red; }
+
+.m-search .form-group {
+  border-radius: 17px;
+  overflow: hidden;
+  background-color: #EAEAEA; }
+  .m-search .form-group .glyphicon-search {
+    top: 0;
+    margin-left: 14px;
+    vertical-align: middle; }
+  .m-search .form-group input {
+    padding-left: 32px;
+    border: none;
+    margin-left: -32px;
+    background-color: #EAEAEA; }
+
+.uib-datepicker-popup {
+  padding: 0 16px; }
+  .uib-datepicker-popup button {
+    border: none; }
+
+@charset "UTF-8";
+/**
  * Created by 郑树聪 on 2016/2/29.
  */
 /**
@@ -341,6 +423,25 @@ body,
 
 @charset "UTF-8";
 /**
+ * 我的音乐和管理中心左侧菜单栏样式
+ * Created by 郑树聪 on 2016/3/15.
+ */
+.menus i.fa {
+  height: 20px;
+  line-height: 20px;
+  font-size: 14px; }
+  .menus i.fa:not(.fa-chevron-right):not(.fa-chevron-down) {
+    width: 20px; }
+
+.menus .menu {
+  border-bottom: 1px solid #e7e7e7;
+  margin-top: 0 !important; }
+
+.menus .sub-menus a {
+  padding-left: 34px; }
+
+@charset "UTF-8";
+/**
  * Created by 郑树聪 on 2016/4/7.
  */
 #g-myMusic .menu .menu-title > .fa {
@@ -426,25 +527,6 @@ body,
 
 @charset "UTF-8";
 /**
- * 我的音乐和管理中心左侧菜单栏样式
- * Created by 郑树聪 on 2016/3/15.
- */
-.menus i.fa {
-  height: 20px;
-  line-height: 20px;
-  font-size: 14px; }
-  .menus i.fa:not(.fa-chevron-right):not(.fa-chevron-down) {
-    width: 20px; }
-
-.menus .menu {
-  border-bottom: 1px solid #e7e7e7;
-  margin-top: 0 !important; }
-
-.menus .sub-menus a {
-  padding-left: 34px; }
-
-@charset "UTF-8";
-/**
  * 音乐播放器样式
  * Created by 郑树聪 on 2016/2/18.
  */
@@ -457,7 +539,7 @@ body,
     border-left: 1px solid #000000;
     border-right: 1px solid #000000; }
   .g-player .m-player .player-btns {
-    width: 180px;
+    width: 172px;
     margin-top: 8px;
     text-align: center; }
     .g-player .m-player .player-btns > span {
@@ -498,9 +580,9 @@ body,
       height: 40px;
       margin: 5px; }
   .g-player .m-player .player-bar {
-    width: 800px; }
+    width: 780px; }
     .g-player .m-player .player-bar .music-info {
-      max-width: 800px;
+      max-width: 780px;
       height: 32px;
       line-height: 32px; }
     .g-player .m-player .player-bar .m-progress {
@@ -509,7 +591,7 @@ body,
       font-size: 10px; }
       .g-player .m-player .player-bar .m-progress .progress {
         position: relative;
-        width: 700px;
+        width: 680px;
         height: 10px;
         margin-right: 16px;
         margin-bottom: 0;
@@ -536,9 +618,149 @@ body,
           font-style: normal;
           color: #a1a1a1; }
   .g-player .m-player .player-ctrl {
-    width: 120px;
+    width: 140px;
     height: 50px;
     line-height: 50px; }
+    .g-player .m-player .player-ctrl .fa {
+      vertical-align: middle;
+      font-size: 22px;
+      color: #969696; }
+    .g-player .m-player .player-ctrl .player-mode {
+      width: 36px;
+      height: 50px;
+      cursor: pointer;
+      background-size: 22px; }
+      .g-player .m-player .player-ctrl .player-mode.loop {
+        background: url("../images/loop.png") center center no-repeat; }
+      .g-player .m-player .player-ctrl .player-mode.random {
+        background: url("../images/random.png") center center no-repeat; }
+      .g-player .m-player .player-ctrl .player-mode.repeat {
+        background: url("../images/repeat.png") center center no-repeat; }
+    .g-player .m-player .player-ctrl .player-volume {
+      position: relative;
+      width: 32px;
+      text-align: center; }
+      .g-player .m-player .player-ctrl .player-volume .m-volume {
+        position: absolute;
+        bottom: 50px;
+        width: 32px;
+        height: 112px;
+        background-color: #040303;
+        z-index: 120; }
+        .g-player .m-player .player-ctrl .player-volume .m-volume .progress {
+          width: 8px;
+          height: 100px;
+          margin: 6px auto;
+          border-radius: 4px;
+          background-color: #171717;
+          -webkit-transform: rotate(180deg);
+                  transform: rotate(180deg);
+          cursor: pointer; }
+          .g-player .m-player .player-ctrl .player-volume .m-volume .progress .progress-bar {
+            width: 8px;
+            border-radius: 4px;
+            background-color: #C70C0C; }
+    .g-player .m-player .player-ctrl .player-list {
+      width: 60px;
+      height: 50px;
+      margin-left: 8px;
+      background: url("../images/playlist.png") no-repeat center left;
+      cursor: pointer; }
+      .g-player .m-player .player-ctrl .player-list .lists-len {
+        display: block;
+        width: 36px;
+        height: 20px;
+        padding: 0 6px;
+        margin-top: 16px;
+        margin-left: 23px;
+        border-top-right-radius: 10px;
+        border-bottom-right-radius: 10px;
+        line-height: 20px;
+        text-align: center;
+        text-shadow: 0 1px 0 #080707;
+        text-indent: 0;
+        text-decoration: none;
+        color: #666;
+        background-color: #171717; }
+  .g-player .m-list-panel {
+    position: absolute;
+    bottom: 50px;
+    left: 50%;
+    width: 558px;
+    height: 260px;
+    border-bottom: none;
+    margin-bottom: 0;
+    margin-left: -279px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+    background-color: #121212; }
+    .g-player .m-list-panel .panel-heading {
+      border-bottom-color: #000;
+      background-color: #121212;
+      font-size: 14px;
+      font-weight: bold;
+      color: #e2e2e2; }
+      .g-player .m-list-panel .panel-heading .lists-action span {
+        padding: 0 6px;
+        font-weight: normal;
+        font-size: 12px;
+        color: #e2e2e2; }
+        .g-player .m-list-panel .panel-heading .lists-action span:first-child {
+          border-right: 1px solid #000; }
+        .g-player .m-list-panel .panel-heading .lists-action span .fa {
+          padding-right: 6px; }
+    .g-player .m-list-panel .panel-body {
+      height: 219px;
+      padding: 0;
+      margin-left: 0;
+      overflow-x: hidden;
+      overflow-y: auto;
+      font-size: 12px; }
+      .g-player .m-list-panel .panel-body .music-lists {
+        margin: 0;
+        padding: 0; }
+        .g-player .m-list-panel .panel-body .music-lists .music-list {
+          height: 28px;
+          line-height: 28px;
+          list-style: none;
+          color: #e2e2e2; }
+          .g-player .m-list-panel .panel-body .music-lists .music-list:hover, .g-player .m-list-panel .panel-body .music-lists .music-list.active {
+            background-color: #000;
+            color: #fff; }
+          .g-player .m-list-panel .panel-body .music-lists .music-list:hover .list-col-3 {
+            visibility: visible; }
+          .g-player .m-list-panel .panel-body .music-lists .music-list.active {
+            background-color: #000;
+            font-weight: bold; }
+            .g-player .m-list-panel .panel-body .music-lists .music-list.active .list-col-1 {
+              visibility: visible; }
+          .g-player .m-list-panel .panel-body .music-lists .music-list .list-col {
+            height: 100%;
+            line-height: 28px; }
+          .g-player .m-list-panel .panel-body .music-lists .music-list .list-col-1 {
+            width: 36px;
+            visibility: hidden;
+            text-align: center; }
+            .g-player .m-list-panel .panel-body .music-lists .music-list .list-col-1 .fa {
+              padding: 0 8px;
+              font-size: 14px;
+              color: #C70C0C; }
+          .g-player .m-list-panel .panel-body .music-lists .music-list .list-col-2 {
+            width: 266px; }
+          .g-player .m-list-panel .panel-body .music-lists .music-list .list-col-3 {
+            width: 64px;
+            visibility: hidden; }
+            .g-player .m-list-panel .panel-body .music-lists .music-list .list-col-3 .fa {
+              padding: 0 8px;
+              font-size: 14px;
+              color: #e2e2e2;
+              cursor: pointer; }
+          .g-player .m-list-panel .panel-body .music-lists .music-list .list-col-4 {
+            width: 80px; }
+          .g-player .m-list-panel .panel-body .music-lists .music-list .list-col-5 {
+            width: 50px; }
+          .g-player .m-list-panel .panel-body .music-lists .music-list .list-col-6 {
+            width: 40px; }
 
 @charset "UTF-8";
 /**
@@ -614,85 +836,3 @@ body,
   .form-bottom .register,
   .form-bottom .login {
     margin: 0; }
-
-@charset "UTF-8";
-/**
- * Created by 郑树聪 on 2016/3/1.
- */
-html,
-body,
-.wrap {
-  width: 100%;
-  height: 100%;
-  background-color: #F5F5F5;
-  font-family: Arial, Helvetica, sans-serif; }
-
-.g-body .g-container {
-  width: 1170px;
-  min-height: 700px;
-  _height: 700px;
-  padding: 0;
-  border: 1px solid #e7e7e7;
-  margin: 0 auto;
-  border-radius: 4px;
-  background-color: #F8F8F8; }
-  .g-body .g-container .g-menu {
-    width: 240px;
-    padding: 0; }
-  .g-body .g-container .g-content {
-    width: 928px;
-    min-height: 700px;
-    _height: 700px;
-    padding: 20px 24px;
-    border-left: 1px solid #e7e7e7; }
-
-.g-body label {
-  width: 84px;
-  font-weight: normal; }
-
-.g-body textarea {
-  overflow-x: hidden;
-  overflow-y: auto;
-  resize: none; }
-
-.g-body .form-group {
-  margin-right: 0;
-  margin-left: 0; }
-
-.g-body .table th,
-.g-body .table td {
-  text-align: center; }
-
-.g-body .table .fa {
-  padding: 0 10px;
-  vertical-align: middle;
-  font-size: 18px;
-  cursor: pointer; }
-
-.g-body .table .fa-edit {
-  color: #31b0d5; }
-
-.g-body .table .fa-trash {
-  color: #c9302c; }
-
-.require {
-  color: red; }
-
-.m-search .form-group {
-  border-radius: 17px;
-  overflow: hidden;
-  background-color: #EAEAEA; }
-  .m-search .form-group .glyphicon-search {
-    top: 0;
-    margin-left: 14px;
-    vertical-align: middle; }
-  .m-search .form-group input {
-    padding-left: 32px;
-    border: none;
-    margin-left: -32px;
-    background-color: #EAEAEA; }
-
-.uib-datepicker-popup {
-  padding: 0 16px; }
-  .uib-datepicker-popup button {
-    border: none; }
