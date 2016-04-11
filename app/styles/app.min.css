@@ -527,8 +527,95 @@ body,
 
 @charset "UTF-8";
 /**
+ * 音乐播放器样式
  * Created by 郑树聪 on 2016/2/18.
  */
+.g-player {
+  height: 50px;
+  background-color: #303030;
+  color: #fff; }
+  .g-player .g-container {
+    padding: 0 10px;
+    border-left: 1px solid #000000;
+    border-right: 1px solid #000000; }
+  .g-player .m-player .player-btns {
+    width: 180px;
+    margin-top: 8px;
+    text-align: center; }
+    .g-player .m-player .player-btns > span {
+      display: inline-block;
+      border: 1px solid #fff;
+      vertical-align: middle;
+      cursor: pointer; }
+    .g-player .m-player .player-btns .prev,
+    .g-player .m-player .player-btns .next {
+      width: 28px;
+      height: 28px;
+      border-radius: 16px;
+      line-height: 28px;
+      font-size: 16px; }
+      .g-player .m-player .player-btns .prev .fa,
+      .g-player .m-player .player-btns .next .fa {
+        width: 16px;
+        height: 16px; }
+    .g-player .m-player .player-btns .play,
+    .g-player .m-player .player-btns .stop {
+      width: 36px;
+      height: 36px;
+      margin-right: 10px;
+      margin-left: 10px;
+      border-radius: 22px;
+      line-height: 36px;
+      font-size: 20px; }
+      .g-player .m-player .player-btns .play .fa,
+      .g-player .m-player .player-btns .stop .fa {
+        width: 20px;
+        height: 20px;
+        text-align: right; }
+  .g-player .m-player .player-img {
+    width: 50px;
+    height: 50px; }
+    .g-player .m-player .player-img img {
+      width: 40px;
+      height: 40px;
+      margin: 5px; }
+  .g-player .m-player .player-bar {
+    width: 800px; }
+    .g-player .m-player .player-bar .music-info {
+      max-width: 800px;
+      height: 32px;
+      line-height: 32px; }
+    .g-player .m-player .player-bar .m-progress {
+      height: 10px;
+      line-height: 10px;
+      font-size: 10px; }
+      .g-player .m-player .player-bar .m-progress .progress {
+        width: 700px;
+        height: 10px;
+        margin-right: 16px;
+        margin-bottom: 0;
+        border-radius: 5px;
+        background-color: #171717;
+        cursor: pointer; }
+        .g-player .m-player .player-bar .m-progress .progress .progress-bar {
+          border-bottom-right-radius: 5px;
+          border-top-right-radius: 5px; }
+        .g-player .m-player .player-bar .m-progress .progress .progress-bar-played {
+          background-color: #C70C0C; }
+        .g-player .m-player .player-bar .m-progress .progress .progress-bar-loaded {
+          background-color: #535353; }
+      .g-player .m-player .player-bar .m-progress .music-time {
+        width: 30px;
+        height: 10px;
+        text-shadow: 0 1px 0 #121212;
+        color: #797979; }
+        .g-player .m-player .player-bar .m-progress .music-time em {
+          font-style: normal;
+          color: #a1a1a1; }
+  .g-player .m-player .player-ctrl {
+    width: 120px;
+    height: 50px;
+    line-height: 50px; }
 
 @charset "UTF-8";
 /**
@@ -537,11 +624,12 @@ body,
  */
 .g-footer {
   width: 100%;
+  margin-bottom: 50px;
   color: #777;
   line-height: 1;
   text-align: center; }
   .g-footer .copyright {
-    padding: 20px 0;
+    padding: 18px 0;
     background-color: #2F3030; }
     .g-footer .copyright p {
       margin: 0; }

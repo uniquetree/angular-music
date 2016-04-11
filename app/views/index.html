@@ -13,7 +13,7 @@
 </head>
 <body>
     <div class="wrap" ui-view></div>
-
+    <music-player ng-if="!$state.is('login') && !$state.is('register')"></music-player>
     <script src="./app/scripts/app.bundle.min.js"></script>
 </body>
 </html>

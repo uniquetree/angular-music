@@ -212,6 +212,7 @@ musicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvider
 
 musicApp.run(function($rootScope, $state, $location, $window, AuthenticationService) {
 
+    $rootScope.$state = $state;
     $rootScope.defaultSongImg = $config.default_song_img;
 
     // 监听路由变化，进行相应处理
@@ -234,3 +235,4 @@ require('./Header/HeaderCtrl');
 require('./User/UserCtrl');
 require('./MyMusic/MyMusicCtrl');
 require('./Admin/AdminCtrl');
+require('./Player/PlayerCtrl');

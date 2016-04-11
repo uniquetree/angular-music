@@ -1,3 +1,129 @@
 /**
+ * 音乐播放器样式
  * Created by 郑树聪 on 2016/2/18.
  */
+.g-player {
+    height: 50px;
+    background-color: #303030;
+    color: #fff;
+
+    .g-container {
+        padding: 0 10px;
+        border-left: 1px solid #000000;
+        border-right: 1px solid #000000;
+    }
+
+    // 播放器栏样式
+    .m-player {
+
+        .player-btns {
+            width: 180px;
+            margin-top: 8px;
+            text-align: center;
+
+            &>span {
+                display: inline-block;
+                border: 1px solid #fff;
+                vertical-align: middle;
+                cursor: pointer;
+            }
+
+            .prev,
+            .next {
+                width: 28px;
+                height: 28px;
+                border-radius: 16px;
+                line-height: 28px;
+                font-size: 16px;
+
+                .fa {
+                    width: 16px;
+                    height: 16px;
+                }
+            }
+            .play,
+            .stop {
+                width: 36px;
+                height: 36px;
+                margin-right: 10px;
+                margin-left: 10px;
+                border-radius: 22px;
+                line-height: 36px;
+                font-size: 20px;
+
+                .fa {
+                    width: 20px;
+                    height: 20px;
+                    text-align: right;
+                }
+            }
+        }
+        .player-img {
+            width: 50px;
+            height: 50px;
+
+            img {
+                width: 40px;
+                height: 40px;
+                margin: 5px;
+            }
+        }
+        .player-bar {
+            width: 800px;
+
+            .music-info {
+                max-width: 800px;
+                height: 32px;
+                line-height: 32px;
+            }
+
+            .m-progress {
+                height: 10px;
+                line-height: 10px;
+                font-size: 10px;
+
+                .progress {
+                    width: 700px;
+                    height: 10px;
+                    margin-right: 16px;
+                    margin-bottom: 0;
+                    border-radius: 5px;
+                    background-color: #171717;
+                    cursor: pointer;
+
+                    .progress-bar {
+                        border-bottom-right-radius: 5px;
+                        border-top-right-radius: 5px;
+                    }
+
+                    .progress-bar-played {
+                        background-color: #C70C0C;
+                    }
+                    .progress-bar-loaded {
+                        background-color: #535353;
+                    }
+                }
+                .music-time {
+                    width: 30px;
+                    height: 10px;
+                    text-shadow: 0 1px 0 #121212;
+                    color: #797979;
+
+                    em {
+                        font-style: normal;
+                        color: #a1a1a1;
+                    }
+                }
+            }
+        }
+        .player-ctrl {
+            width: 120px;
+            height: 50px;
+            line-height: 50px;
+        }
+    }
+    // 播放列表样式
+    .m-list {
+
+    }
+}
