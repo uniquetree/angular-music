@@ -7,6 +7,7 @@ var Db = require('../utils/Db');
 var db = new Db();
 
 var singer_tb = config.tableName.singer_tb;
+var song_tb = config.tableName.song_tb;
 
 var Singer = function (singerInfo, pagination, keyword) {
     if(typeof singerInfo !== 'undefined') {
@@ -68,14 +69,17 @@ Singer.prototype.findSingers = function(callback){
         params;
 
     if(typeof this.keyword !== 'undefined') {
-        sql = 'select id, singer_name, singer_type, language, singer_info from ' + singer_tb + ' where id >= (' +
-            'select id from ' + singer_tb + ' where singer_name like ? order by id limit ?, 1)' +
-            ' and singer_name like ? order by create_time limit ?;';
+        sql = 'select s.id, s.singer_name, s.singer_type, s.language, s.singer_info,' +
+            ' (select so.song_img from ' + song_tb + ' as so where so.singer_id=s.id limit 1) as first_mp3_img' +
+            ' from ' + singer_tb + ' as s where id >= (select id from ' + singer_tb + ' where singer_name like ? order by' +
+            ' id limit ?, 1) and singer_name like ? order by create_time limit ?;';
         count_sql = 'select count(*) as totalItems from ' + singer_tb + ' where singer_name like ?';
         params = [this.keyword, this.currPage*this.pageSize, this.keyword, this.pageSize, this.keyword];
     } else {
-        sql = 'select id, singer_name, singer_type, language, singer_info from ' + singer_tb + ' where id >= (' +
-            'select id from ' + singer_tb + ' order by id limit ?, 1) order by create_time limit ?;';
+        sql = 'select s.id, s.singer_name, s.singer_type, s.language, s.singer_info,' +
+            ' (select so.song_img from ' + song_tb + ' as so where so.singer_id=s.id limit 1) as first_mp3_img' +
+            ' from ' + singer_tb + ' as s where id >= (select id from ' + singer_tb + ' order by id limit ?, 1)' +
+            ' order by create_time limit ?;';
         count_sql = 'select count(*) as totalItems from ' + singer_tb;
         params = [this.currPage*this.pageSize, this.pageSize];
     }

@@ -9,6 +9,7 @@ var db = new Db();
 
 var album_tb = config.tableName.album_tb;
 var singer_tb = config.tableName.singer_tb;
+var song_tb = config.tableName.song_tb;
 
 var Album = function (albumInfo, pagination, keyword) {
     if(typeof albumInfo !== 'undefined') {
@@ -44,14 +45,16 @@ Album.prototype.findAlbums = function(callback){
         params;
 
     if(typeof this.keyword !== 'undefined') {
-        sql = 'select a.id, a.album_name, a.album_info, a.publish_date, a.singer_id, s.singer_name from ' + album_tb +
-            ' as a left join ' + singer_tb +' as s on a.singer_id=s.id where a.id >= (select id from ' + album_tb +
+        sql = 'select a.id, a.album_name, a.album_info, a.publish_date, a.singer_id, s.singer_name,' +
+            ' (select so.song_img from ' + song_tb + ' as so where so.id=a.singer_id limit 1) as first_mp3_img from ' +
+            album_tb + ' as a left join ' + singer_tb +' as s on a.singer_id=s.id where a.id >= (select id from ' + album_tb +
             ' where album_name like ? order by id limit ?, 1) and a.album_name like ? order by a.create_time desc limit ?;';
         count_sql = 'select count(*) as totalItems from ' + album_tb + ' where album_name like ?';
         params = [this.keyword, this.currPage*this.pageSize, this.keyword, this.pageSize, this.keyword];
     } else {
-        sql = 'select a.id, a.album_name, a.album_info, a.publish_date, a.singer_id, s.singer_name from ' + album_tb +
-            ' as a left join ' + singer_tb +' as s on a.singer_id=s.id where a.id >= (' +
+        sql = 'select a.id, a.album_name, a.album_info, a.publish_date, a.singer_id, s.singer_name,' +
+            ' (select so.song_img from ' + song_tb + ' as so where so.id=a.singer_id limit 1) as first_mp3_img from ' +
+            album_tb + ' as a left join ' + singer_tb +' as s on a.singer_id=s.id where a.id >= (' +
             'select id from ' + album_tb + ' order by id limit ?, 1) order by a.create_time desc limit ?;';
         count_sql = 'select count(*) as totalItems from ' + album_tb;
         params = [this.currPage*this.pageSize, this.pageSize];

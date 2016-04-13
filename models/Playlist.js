@@ -51,6 +51,8 @@ Playlist.prototype.filterPlayListsByPage = function(orderByWhich, callback) {
     }
 
     var sql = 'select p.id, p.playlist_name, p.playlist_info, p.like_count, p.play_count, p.create_time, u.username,' +
+        ' (select s.song_img from ' + song_tb + ' as s right join ' + playlist_song_tb + ' as ps on s.id=ps.song_id' +
+        ' where ps.playlist_id=p.id order by s.create_time desc limit 1) as first_mp3_img,' +
         ' u.pid as user_id from ' + playlist_tb + ' as p left join ' + playlist_user_tb + ' as pu on p.id=pu.playlist_id' +
         ' left join ' + user_tb + ' as u on pu.user_id=u.pid where p.id >= (select id from ' + playlist_tb + subFilters
         +' order by id limit ?,1) ' + filters + ' order by ' + orderBy + ' limit ?;';
