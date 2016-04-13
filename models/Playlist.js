@@ -32,27 +32,29 @@ var Playlist = function (playlistInfo, pagination, keyword) {
 
 /**
  * 分页获取歌单,此方法还可以实现关键字查询
- * @param orderBy [Boolean] 判断排序方式，true:按照添加时间排序,false:按照点赞数和播放数排序
+ * @param orderBy [Boolean] 判断排序方式，true:按照点赞数和播放数排序,false:按照添加时间排序
  */
 Playlist.prototype.filterPlayListsByPage = function(orderByWhich, callback) {
 
     var orderBy = '';
     if(orderByWhich) {
-        orderBy = 'p.create_time';
-    } else {
         orderBy = 'p.like_count and p.play_count';
+    } else {
+        orderBy = 'p.create_time';
     }
 
     var filters = '';
+    var subFilters = '';
     if(typeof this.keyword !== 'undefined') {
-        filters = 'and p.playlist_name like ' + this.keyword;
+        subFilters = ' where playlist_name like "' + this.keyword + '"';
+        filters = 'and p.playlist_name like "' + this.keyword + '"';
     }
 
-    var sql = 'select p.id, p.playlist_name, p.playlist_info, p.like_count, p.play_count, p.create_time, u.username from ' +
-        playlist_tb + ' as p left join ' + playlist_user_tb + ' as pu on p.id=pu.playlist_id left join ' +
-        user_tb + ' as u on pu.user_id=u.pid where p.id >= (select id from ' + playlist_tb +
-        ' order by id limit ?,1) ' + filters + ' order by ' + orderBy + ' limit ?;';
-    var count_sql = 'select count(*) as totalItems from ' + playlist_tb;
+    var sql = 'select p.id, p.playlist_name, p.playlist_info, p.like_count, p.play_count, p.create_time, u.username,' +
+        ' u.pid as user_id from ' + playlist_tb + ' as p left join ' + playlist_user_tb + ' as pu on p.id=pu.playlist_id' +
+        ' left join ' + user_tb + ' as u on pu.user_id=u.pid where p.id >= (select id from ' + playlist_tb + subFilters
+        +' order by id limit ?,1) ' + filters + ' order by ' + orderBy + ' limit ?;';
+    var count_sql = 'select count(*) as totalItems from ' + playlist_tb + subFilters;
     var params = [this.pageSize*this.currPage, this.pageSize];
     db.query(sql+count_sql, params, callback);
 };

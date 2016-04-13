@@ -31,7 +31,7 @@ router.get('/getAllSingers', function(req, res) {
         }
     });
 });
-// 分页获取歌手列表，关键字查找
+// 分页获取歌手列表,可关键字搜索（模糊匹配歌手名）
 router.get('/getSingers', function(req, res, next) {
 
     var pagination = {

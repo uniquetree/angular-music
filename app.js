@@ -28,7 +28,7 @@ var routes = require('./routes/index'),
     routesSinger = require('./routes/singer'),
     routesAlbum = require('./routes/album'),
     routesSong = require('./routes/song'),
-    routesPlaylist = require('./routes/Playlist');
+    routesPlaylist = require('./routes/playlist');
 app.use('/', routes);
 app.use('/api/user', routesUser);
 app.use('/api/admin', routesAdmin);

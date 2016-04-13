@@ -16,7 +16,7 @@ var common = require('../utils/Common');
 
 var Playlist = require('../models/Playlist');
 
-// 分页获取所有歌单
+// 分页获取所有歌单,可关键字搜索（模糊匹配专辑名）
 router.get('/filterPlayListsByPage', function(req, res) {
 
     var orderByWhich = Boolean(req.query.orderByWhich);
@@ -41,7 +41,6 @@ router.get('/filterPlayListsByPage', function(req, res) {
             });
         }
     });
-
 });
 // 获取用户创建的歌单
 router.get('/getPlayListsByUserCreate', expressJwt({secret: secretToken}), tokenManager.verifyToken, function(req, res) {

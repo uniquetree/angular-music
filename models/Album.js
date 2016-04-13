@@ -36,13 +36,6 @@ Album.prototype.getAllAlbums = function(callback) {
     db.query(sql, [], callback);
 };
 
-// 根据专辑名和歌手id查找
-Album.prototype.findAlbumIdByFilters = function(callback) {
-
-    var sql = 'select id from ' + album_tb + ' where album_name=? and singer_id=? limit 1';
-    db.query(sql, [this.album_name, this.singer_id], callback);
-};
-
 // 分页查找专辑
 Album.prototype.findAlbums = function(callback){
 
@@ -52,9 +45,8 @@ Album.prototype.findAlbums = function(callback){
 
     if(typeof this.keyword !== 'undefined') {
         sql = 'select a.id, a.album_name, a.album_info, a.publish_date, a.singer_id, s.singer_name from ' + album_tb +
-            ' as a left join ' + singer_tb +' as s on a.singer_id=s.id where a.id >= (' +
-            'select id from ' + album_tb + ' where album_name like ? order by id limit ?, 1) and ' +
-            'a.album_name like ? order by a.create_time desc limit ?;';
+            ' as a left join ' + singer_tb +' as s on a.singer_id=s.id where a.id >= (select id from ' + album_tb +
+            ' where album_name like ? order by id limit ?, 1) and a.album_name like ? order by a.create_time desc limit ?;';
         count_sql = 'select count(*) as totalItems from ' + album_tb + ' where album_name like ?';
         params = [this.keyword, this.currPage*this.pageSize, this.keyword, this.pageSize, this.keyword];
     } else {

@@ -31,7 +31,7 @@ router.get('/getAllAlbums', function(req, res) {
         }
     });
 });
-// 分页获取专辑列表，关键字查找
+// 分页获取专辑列表,可关键字搜索（模糊匹配专辑名）
 router.get('/getAlbums', function(req, res) {
 
     var pagination = {

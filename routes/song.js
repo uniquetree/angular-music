@@ -19,7 +19,7 @@ var Singer = require('../models/Singer');
 var Album = require('../models/Album');
 var Song = require('../models/Song');
 
-// 根据条件筛选分页查找歌曲
+// 根据条件筛选分页查找歌曲,可关键字搜索（模糊匹配歌曲名）
 router.get('/getSongsByPage', function(req, res) {
 
     var songInfo = {
