@@ -167,88 +167,6 @@
 
 @charset "UTF-8";
 /**
- * Created by 郑树聪 on 2016/3/1.
- */
-html,
-body,
-.wrap {
-  width: 100%;
-  height: 100%;
-  background-color: #F5F5F5;
-  font-family: Arial, Helvetica, sans-serif; }
-
-.g-body .g-container {
-  width: 1170px;
-  min-height: 700px;
-  _height: 700px;
-  padding: 0;
-  border: 1px solid #e7e7e7;
-  margin: 0 auto;
-  border-radius: 4px;
-  background-color: #F8F8F8; }
-  .g-body .g-container .g-menu {
-    width: 240px;
-    padding: 0; }
-  .g-body .g-container .g-content {
-    width: 928px;
-    min-height: 700px;
-    _height: 700px;
-    padding: 20px 24px;
-    border-left: 1px solid #e7e7e7; }
-
-.g-body label {
-  width: 84px;
-  font-weight: normal; }
-
-.g-body textarea {
-  overflow-x: hidden;
-  overflow-y: auto;
-  resize: none; }
-
-.g-body .form-group {
-  margin-right: 0;
-  margin-left: 0; }
-
-.g-body .table th,
-.g-body .table td {
-  text-align: center; }
-
-.g-body .table .fa {
-  padding: 0 10px;
-  vertical-align: middle;
-  font-size: 18px;
-  cursor: pointer; }
-
-.g-body .table .fa-edit {
-  color: #31b0d5; }
-
-.g-body .table .fa-trash {
-  color: #c9302c; }
-
-.require {
-  color: red; }
-
-.m-search .form-group {
-  border-radius: 17px;
-  overflow: hidden;
-  background-color: #EAEAEA; }
-  .m-search .form-group .glyphicon-search {
-    top: 0;
-    margin-left: 14px;
-    vertical-align: middle; }
-  .m-search .form-group input {
-    padding-left: 32px;
-    border: none;
-    margin-left: -32px;
-    background-color: #EAEAEA; }
-
-.uib-datepicker-popup {
-  padding: 0 16px; }
-  .uib-datepicker-popup button {
-    border: none; }
-
-@charset "UTF-8";
-/**
  * Created by 郑树聪 on 2016/2/29.
  */
 /**
@@ -442,88 +360,85 @@ body,
 
 @charset "UTF-8";
 /**
- * Created by 郑树聪 on 2016/4/7.
+ * Created by 郑树聪 on 2016/3/1.
  */
-#g-myMusic .menu .menu-title > .fa {
-  width: 20px;
-  height: 20px; }
+html,
+body,
+.wrap {
+  width: 100%;
+  height: 100%;
+  background-color: #F5F5F5;
+  font-family: Arial, Helvetica, sans-serif; }
 
-#g-myMusic .menu .menu-title button {
-  height: 22px;
-  line-height: 16px; }
-  #g-myMusic .menu .menu-title button .fa {
-    vertical-align: middle;
-    font-size: 14px;
-    color: #AE0A0A; }
-
-#g-myMusic .menu .sub-menu {
-  position: relative;
-  padding: 6px 0 6px 20px;
-  cursor: pointer; }
-  #g-myMusic .menu .sub-menu.active {
-    background-color: rgba(51, 51, 51, 0.1); }
-  #g-myMusic .menu .sub-menu:hover {
-    background-color: rgba(51, 51, 51, 0.1); }
-    #g-myMusic .menu .sub-menu:hover > .oper {
-      display: block !important; }
-      #g-myMusic .menu .sub-menu:hover > .oper .fa:hover {
-        opacity: 1; }
-  #g-myMusic .menu .sub-menu a {
+.g-body .g-container {
+  width: 1170px;
+  min-height: 700px;
+  _height: 700px;
+  padding: 0;
+  border: 1px solid #e7e7e7;
+  margin: 0 auto;
+  border-radius: 4px;
+  background-color: #F8F8F8; }
+  .g-body .g-container .g-menu {
+    width: 240px;
     padding: 0; }
-  #g-myMusic .menu .sub-menu p {
-    margin-bottom: 0; }
-    #g-myMusic .menu .sub-menu p.num {
-      color: #333; }
-  #g-myMusic .menu .sub-menu .avatar {
-    width: 40px;
-    height: 40px;
-    margin-right: 10px; }
-  #g-myMusic .menu .sub-menu .oper {
-    position: absolute;
-    right: 5px;
-    bottom: 5px;
-    color: #222; }
-    #g-myMusic .menu .sub-menu .oper .fa {
-      font-size: 16px;
-      opacity: .6; }
+  .g-body .g-container .g-content {
+    width: 928px;
+    min-height: 700px;
+    _height: 700px;
+    padding: 20px 24px;
+    border-left: 1px solid #e7e7e7; }
 
-#g-myMusic .g-content {
-  padding: 20px 0; }
-  #g-myMusic .g-content .media {
-    padding: 0 20px;
-    margin-bottom: 20px; }
-    #g-myMusic .g-content .media .media-object {
-      width: 120px;
-      height: 120px; }
-    #g-myMusic .g-content .media .media-body .media-heading {
-      height: 32px;
-      line-height: 32px;
-      font-size: 16px; }
-    #g-myMusic .g-content .media .media-body .btns .fa {
-      margin-right: 5px; }
-  #g-myMusic .g-content .playlist-songs .title {
-    height: 32px;
-    border-bottom: 2px solid #AE0A0A;
-    line-height: 32px;
-    text-indent: 20px;
-    font-size: 18px;
-    font-weight: bold; }
-    #g-myMusic .g-content .playlist-songs .title span {
-      padding-left: 10px;
-      padding-right: 10px;
-      vertical-align: middle;
-      font-size: 14px;
-      font-weight: normal;
-      color: #c0c0c0; }
-    #g-myMusic .g-content .playlist-songs .title .play-count .count {
-      color: #AE0A0A; }
-  #g-myMusic .g-content .playlist-songs .table th:first-child,
-  #g-myMusic .g-content .playlist-songs .table td:first-child {
-    width: 80px; }
-  #g-myMusic .g-content .playlist-songs .table th:not(:last-child) {
-    border-right: 1px solid #ddd; }
-  #g-myMusic .g-content .playlist-songs .table tr:last-child {
-    border-bottom: 1px solid #ddd; }
+.g-body label {
+  width: 84px;
+  font-weight: normal; }
+
+.g-body textarea {
+  overflow-x: hidden;
+  overflow-y: auto;
+  resize: none; }
+
+.g-body .form-group {
+  margin-right: 0;
+  margin-left: 0; }
+
+.g-body .table th,
+.g-body .table td {
+  text-align: center; }
+
+.g-body .table .fa {
+  padding: 0 10px;
+  vertical-align: middle;
+  font-size: 18px;
+  cursor: pointer; }
+
+.g-body .table .fa-edit {
+  color: #31b0d5; }
+
+.g-body .table .fa-trash {
+  color: #c9302c; }
+
+.require {
+  color: red; }
+
+.m-search .form-group {
+  border-radius: 17px;
+  overflow: hidden;
+  background-color: #EAEAEA; }
+  .m-search .form-group .glyphicon-search {
+    top: 0;
+    margin-left: 14px;
+    vertical-align: middle; }
+  .m-search .form-group input {
+    padding-left: 32px;
+    border: none;
+    margin-left: -32px;
+    background-color: #EAEAEA; }
+
+.uib-datepicker-popup {
+  padding: 0 16px; }
+  .uib-datepicker-popup button {
+    border: none; }
 
 @charset "UTF-8";
 /**
@@ -761,6 +676,91 @@ body,
             width: 50px; }
           .g-player .m-list-panel .panel-body .music-lists .music-list .list-col-6 {
             width: 40px; }
+
+@charset "UTF-8";
+/**
+ * Created by 郑树聪 on 2016/4/7.
+ */
+#g-myMusic .menu .menu-title > .fa {
+  width: 20px;
+  height: 20px; }
+
+#g-myMusic .menu .menu-title button {
+  height: 22px;
+  line-height: 16px; }
+  #g-myMusic .menu .menu-title button .fa {
+    vertical-align: middle;
+    font-size: 14px;
+    color: #AE0A0A; }
+
+#g-myMusic .menu .sub-menu {
+  position: relative;
+  padding: 6px 0 6px 20px;
+  cursor: pointer; }
+  #g-myMusic .menu .sub-menu.active {
+    background-color: rgba(51, 51, 51, 0.1); }
+  #g-myMusic .menu .sub-menu:hover {
+    background-color: rgba(51, 51, 51, 0.1); }
+    #g-myMusic .menu .sub-menu:hover > .oper {
+      display: block !important; }
+      #g-myMusic .menu .sub-menu:hover > .oper .fa:hover {
+        opacity: 1; }
+  #g-myMusic .menu .sub-menu a {
+    padding: 0; }
+  #g-myMusic .menu .sub-menu p {
+    margin-bottom: 0; }
+    #g-myMusic .menu .sub-menu p.num {
+      color: #333; }
+  #g-myMusic .menu .sub-menu .avatar {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px; }
+  #g-myMusic .menu .sub-menu .oper {
+    position: absolute;
+    right: 5px;
+    bottom: 5px;
+    color: #222; }
+    #g-myMusic .menu .sub-menu .oper .fa {
+      font-size: 16px;
+      opacity: .6; }
+
+#g-myMusic .g-content {
+  padding: 20px 0; }
+  #g-myMusic .g-content .media {
+    padding: 0 20px;
+    margin-bottom: 20px; }
+    #g-myMusic .g-content .media .media-object {
+      width: 120px;
+      height: 120px; }
+    #g-myMusic .g-content .media .media-body .media-heading {
+      height: 32px;
+      line-height: 32px;
+      font-size: 16px; }
+    #g-myMusic .g-content .media .media-body .btns .fa {
+      margin-right: 5px; }
+  #g-myMusic .g-content .playlist-songs .title {
+    height: 32px;
+    border-bottom: 2px solid #AE0A0A;
+    line-height: 32px;
+    text-indent: 20px;
+    font-size: 18px;
+    font-weight: bold; }
+    #g-myMusic .g-content .playlist-songs .title span {
+      padding-left: 10px;
+      padding-right: 10px;
+      vertical-align: middle;
+      font-size: 14px;
+      font-weight: normal;
+      color: #c0c0c0; }
+    #g-myMusic .g-content .playlist-songs .title .play-count .count {
+      color: #AE0A0A; }
+  #g-myMusic .g-content .playlist-songs .table th:first-child,
+  #g-myMusic .g-content .playlist-songs .table td:first-child {
+    width: 80px; }
+  #g-myMusic .g-content .playlist-songs .table th:not(:last-child) {
+    border-right: 1px solid #ddd; }
+  #g-myMusic .g-content .playlist-songs .table tr:last-child {
+    border-bottom: 1px solid #ddd; }
 
 @charset "UTF-8";
 /**

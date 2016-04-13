@@ -21,12 +21,12 @@ $config.musicApp.controller('HeaderCtrl', ['$scope', '$location', '$window', '$s
             {name: '歌单', state: 'home.playlist'},
             {name: '歌手', state: 'home.singer'}
         ];
-        $scope.isHome = true;
+        $scope.isHome = false;
         $scope.isActive = function(state) {
             if($state.includes(state)) {
                 var reg = /^home/;
-                if(!reg.test(state)) {
-                    $scope.isHome = false;
+                if(reg.test(state)) {
+                    $scope.isHome = true;
                 }
                 return true;
             }

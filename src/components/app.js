@@ -68,10 +68,11 @@ musicApp.config(function ($httpProvider) {
 
 musicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
 
+    $urlRouterProvider.when('', '/');
     $urlRouterProvider.when('/admin', '/admin/userInfo');
     $urlRouterProvider.when('/admin/singers', '/admin/singers/singerList');
     $urlRouterProvider.when('/admin/albums', '/admin/albums/albumList');
-    $urlRouterProvider.otherwise("/");
+    $urlRouterProvider.otherwise('/');
 
     $stateProvider
         .state('home', {
@@ -96,6 +97,13 @@ musicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvider
         .state('home.singer', {
             url: '/singer',
             templateUrl: 'app/views/Home/views/home.singer.html',
+            access: { requiredLogin: false },
+            ignoreLoadingBar: true
+        })
+
+        .state('search', {
+            url: '/search',
+            templateUrl: 'app/views/Search/search.html',
             access: { requiredLogin: false },
             ignoreLoadingBar: true
         })
