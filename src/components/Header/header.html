@@ -24,7 +24,8 @@
             <form class="navbar-form pull-right m-search" role="search">
                 <div class="form-group">
                     <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-                    <input type="text" class="form-control" placeholder="单曲/歌手/专辑/歌单">
+                    <input type="text" class="form-control" placeholder="单曲/歌手/专辑/歌单"
+                           ng-model="keyword" ng-keyup="goSearch($event)">
                 </div>
             </form>
         </nav>

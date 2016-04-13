@@ -10,6 +10,18 @@ var musicApp = $config.musicApp;
 musicApp.factory('PlaylistService', ['$http', function($http) {
 
     return {
+        filterPlayListsByPage: function(pagination) {
+
+            return $http({
+                method: 'GET',
+                url: $config.api.filterPlayListsByPage,
+                params: {
+                    currPage: pagination.currPage,
+                    pageSize: pagination.pageSize,
+                    keyword: pagination.keyword
+                }
+            });
+        },
         // 获取用户创建的歌单
         getPlayListsByUserCreate: function(){
 

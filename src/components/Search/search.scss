@@ -1,0 +1,118 @@
+/**
+ * Created by 郑树聪 on 2016/4/13.
+ */
+.g-body {
+
+    .g-search {
+        padding: 40px;
+
+        .row {
+            margin: 0;
+        }
+
+        .m-search {
+            margin-bottom: 20px;
+
+            input,
+            button {
+                height: 40px;
+            }
+        }
+        .result-overview {
+            font-size: 12px;
+            font-style: normal;
+            color: #999;
+
+            em {
+                font-style: normal;
+                color: #c20c0c;
+            }
+        }
+        .search-results {
+            margin-top: 20px;
+
+            .nav-tabs {
+                border: 1px solid #ddd;
+                border-top: none;
+                margin-bottom: 24px;
+                background-color: #F7F7F7;
+
+                .active {
+
+                    &>a {
+                        border: 1px solid #ddd;
+                        border-top: 2px solid #c20c0c;
+                        border-bottom: 0;
+                        background-color: #fff;
+                    }
+                }
+
+                li {
+
+                    &:first-child {
+
+                        a {
+                            border-left: none !important;
+                        }
+                    }
+                    &:last-child {
+
+                        a {
+                            border-right: none !important;
+                        }
+                    }
+
+                    &>a {
+                        border: none;
+                        border-top: 2px solid #ccc;
+                        border-radius: 0;
+
+                        &:hover {
+                            border-top-color: #c20c0c;
+                            background-color: #fff;
+                        }
+                    }
+                }
+            }
+
+            .list-row {
+                height: 40px;
+                padding: 0;
+                border: 1px solid transparent;
+                margin: 0 60px;
+                line-height: 38px;
+                text-align: center;
+                font-size: 12px;
+                background-color: transparent;
+
+                &:nth-child(odd) {
+                    background-color: #f8f8f8;
+                }
+                &:hover {
+                    border: 1px solid #ddd;
+                    background-color: #ddd;
+                }
+
+                .fa {
+                    padding: 0 6px;
+                    vertical-align: middle;
+                    font-size: 20px;
+                    color: #999;
+                    cursor: pointer;
+
+                    &:hover {
+                        color: #666;
+                    }
+                }
+
+                .list-col {
+
+                    &:nth-child(2) {
+                        text-align: left;
+                    }
+                }
+            }
+        }
+    }
+}
+

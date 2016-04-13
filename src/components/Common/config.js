@@ -49,6 +49,7 @@ module.exports.api = {
     collectSong: base_url + song_url  + 'collectSong',
     cancelCollectSong: base_url + song_url  + 'cancelCollectSong',
     // 歌单
+    filterPlayListsByPage: base_url + playlist_url  + 'filterPlayListsByPage',
     getPlayListsByUserCreate: base_url + playlist_url  + 'getPlayListsByUserCreate',
     getPlayListsByUserCollect: base_url + playlist_url  + 'getPlayListsByUserCollect',
     addPlaylist: base_url + playlist_url  + 'addPlaylist',

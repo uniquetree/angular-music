@@ -102,9 +102,10 @@ musicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvider
         })
 
         .state('search', {
-            url: '/search',
+            url: '/search?keyword&type',
             templateUrl: 'app/views/Search/search.html',
             access: { requiredLogin: false },
+            reloadOnSearch: false,
             ignoreLoadingBar: true
         })
 
@@ -244,3 +245,4 @@ require('./User/UserCtrl');
 require('./MyMusic/MyMusicCtrl');
 require('./Admin/AdminCtrl');
 require('./Player/PlayerCtrl');
+require('./Search/SearchCtrl');

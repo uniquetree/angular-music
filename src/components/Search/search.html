@@ -1,8 +1,45 @@
 <!-- search view -->
 <header ng-include="'app/views/Header/header.html'" class="g-header" ng-controller="HeaderCtrl"></header>
 <div class="g-body">
-    <div class="container g-container">
-        <div class="search">搜索</div>
+    <div class="container g-container g-search" ng-controller="SearchCtrl">
+        <div class="row m-search">
+            <div class="col-md-4 col-md-offset-4">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="单曲/歌手/专辑/歌单"
+                           ng-model="keyword" ng-keyup="search($event)">
+                <span class="input-group-btn">
+                    <button class="btn btn-default" type="button" ng-click="search($event)">
+                        <i class="fa fa-search"></i>
+                    </button>
+                </span>
+                </div>
+            </div>
+        </div>
+        <div class="row result-overview" ng-show="totalItems>0">
+            搜索“{{keyword}}”，找到&nbsp;<em>{{totalItems}}</em>&nbsp;{{totalItemsTips}}
+        </div>
+        <div class="row search-results">
+            <uib-tabset active="active" justified="true">
+                <uib-tab index="0" heading="单曲" select="changeSearchType(0)">
+                    <div class="row clearfix list-row" ng-repeat="list in results">
+                        <div class="col-md-1 list-col" ng-click="isSelected()">
+                            <i class="fa fa-play-circle-o" title="播放"></i>
+                        </div>
+                        <div class="col-md-4 list-col">{{list.song_name}}</div>
+                        <div class="col-md-2 list-col">
+                            <span class="fa fa-plus" title="添加到播放列表"></span>
+                            <span class="fa fa-plus-square-o" title="收藏"></span>
+                        </div>
+                        <div class="col-md-2 list-col">{{list.singer_name}}</div>
+                        <div class="col-md-2 list-col">{{list.album_name}}</div>
+                        <div class="col-md-1 list-col">{{list.time}}</div>
+                    </div>
+                </uib-tab>
+                <uib-tab index="1" heading="歌手" select="changeSearchType(1)">歌手</uib-tab>
+                <uib-tab index="2" heading="专辑" select="changeSearchType(2)">专辑</uib-tab>
+                <uib-tab index="3" heading="歌单" select="changeSearchType(3)">歌单</uib-tab>
+            </uib-tabset>
+        </div>
     </div>
     <div class="gotop" id="j-top" style=""></div>
 </div>

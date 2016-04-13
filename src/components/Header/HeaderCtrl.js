@@ -41,5 +41,15 @@ $config.musicApp.controller('HeaderCtrl', ['$scope', '$location', '$window', '$s
         if($scope.isLogin && $window.sessionStorage.getItem('userInfo')) {
             $scope.userInfo = JSON.parse($window.sessionStorage.getItem('userInfo'));
         }
+
+        $scope.goSearch = function($event) {
+
+            var keyword = $event.target.value;
+
+            var keyCode = $event.which || $event.keyCode;
+            if (keyCode === 13 && keyword !== '') {
+                $state.go('search', {keyword: keyword, type: 0});
+            }
+        };
     }
 ]);
