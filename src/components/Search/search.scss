@@ -1,6 +1,8 @@
 /**
  * Created by 郑树聪 on 2016/4/13.
  */
+$title-border-bottom: 2px solid #AE0A0A;
+
 .g-body {
 
     .g-search {
@@ -30,6 +32,7 @@
         }
         .search-results {
             margin-top: 20px;
+            text-align: center;
 
             .nav-tabs {
                 border: 1px solid #ddd;
@@ -76,11 +79,24 @@
             }
 
             .tab-content {
+                padding: 0 84px;
+
+                .fa {
+                    padding: 0 6px;
+                    vertical-align: middle;
+                    font-size: 20px;
+                    color: #999;
+                    cursor: pointer;
+
+                    &:hover {
+                        color: #666;
+                    }
+                }
+
                 .list-row {
                     height: 40px;
                     padding: 0;
                     border: 1px solid transparent;
-                    margin: 0 60px;
                     line-height: 38px;
                     text-align: center;
                     font-size: 12px;
@@ -94,18 +110,6 @@
                         background-color: #ddd;
                     }
 
-                    .fa {
-                        padding: 0 6px;
-                        vertical-align: middle;
-                        font-size: 20px;
-                        color: #999;
-                        cursor: pointer;
-
-                        &:hover {
-                            color: #666;
-                        }
-                    }
-
                     .list-col {
 
                         &:nth-child(2) {
@@ -113,8 +117,83 @@
                         }
                     }
                 }
+
+                .g-grid {
+                    .title {
+                        height: 32px;
+                        border-bottom: $title-border-bottom;
+                        margin-bottom: 10px;
+                        line-height: 32px;
+                        text-indent: 10px;
+                        font-size: 18px;
+                        font-weight: bold;
+                    }
+
+                    .items {
+
+                        .item {
+                            width: 184px;
+                            padding: 0 10px;
+                            cursor: pointer;
+
+                            .thumbnail {
+                                position: relative;
+
+                                img {
+                                    width: 164px;
+                                    height: 154px;
+                                }
+
+                                .caption {
+                                    width: 154px;
+                                    padding: 5px 5px 0;
+                                    text-align: center;
+                                }
+                            }
+                        }
+                    }
+
+                    table {
+                        margin-bottom: 0;
+
+                        td {
+                            width: 142px;
+                            border: none;
+                            line-height: 40px;
+                            text-align: left;
+
+                            &:first-child,
+                            &:nth-child(2) {
+                                width: 60px;
+                                text-align: center;
+                            }
+                            &:nth-child(3) {
+                                width: 230px;
+                            }
+                            &:nth-child(4) {
+                                text-align: center;
+                            }
+                            &:nth-child(5) {
+                                width: 160px;
+                            }
+
+                            a.img {
+                                display: block;
+                                margin: 0;
+
+                                img {
+                                    width: 40px;
+                                    height: 40px;
+                                }
+                            }
+                        }
+                    }
+                }
             }
 
+            .pagination {
+                float: none !important;
+            }
         }
     }
 }

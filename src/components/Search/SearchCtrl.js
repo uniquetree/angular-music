@@ -56,6 +56,7 @@ musicApp.controller('SearchCtrl', ['$scope', '$state', '$stateParams', 'PageTabl
             };
             if($scope.keyword !== '') {
                 params.keyword = $scope.keyword;
+                $state.go('search', {keyword: $scope.keyword, type: type});
             } else {
                 return;
             }

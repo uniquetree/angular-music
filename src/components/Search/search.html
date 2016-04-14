@@ -53,49 +53,61 @@
 </script>
 
 <script type="text/ng-template" id="search.singer.html">
-    <div class="row clearfix list-row" ng-repeat="list in results">
-        <div class="col-md-1 list-col" ng-click="isSelected()">
-            <i class="fa fa-play-circle-o" title="播放"></i>
+    <div class="g-grid">
+        <div class="clearfix items">
+            <div class="item pull-left" ng-repeat="item in results" ng-click="goSinger(item.id)">
+                <div class="thumbnail">
+                    <img ng-src="{{item.first_mp3_img || defaultSongImg}}">
+                    <div class="caption"><span>{{item.singer_name}}</span></div>
+                </div>
+            </div>
         </div>
-        <div class="col-md-4 list-col">{{list.song_name}}</div>
-        <div class="col-md-2 list-col">
-            <span class="fa fa-plus" title="添加到播放列表"></span>
-            <span class="fa fa-plus-square-o" title="收藏"></span>
-        </div>
-        <div class="col-md-2 list-col">{{list.singer_name}}</div>
-        <div class="col-md-2 list-col">{{list.album_name}}</div>
-        <div class="col-md-1 list-col">{{list.time}}</div>
     </div>
 </script>
 
 <script type="text/ng-template" id="search.album.html">
-    <div class="row clearfix list-row" ng-repeat="list in results">
-        <div class="col-md-1 list-col" ng-click="isSelected()">
-            <i class="fa fa-play-circle-o" title="播放"></i>
+    <div class="g-grid">
+        <div class="clearfix items">
+            <div class="item pull-left" ng-repeat="item in results" ng-click="goAlbum(item.id)">
+                <div class="thumbnail">
+                    <img ng-src="{{item.first_mp3_img || defaultSongImg}}">
+                    <div class="caption"><span>{{item.album_name}}</span></div>
+                </div>
+            </div>
         </div>
-        <div class="col-md-4 list-col">{{list.song_name}}</div>
-        <div class="col-md-2 list-col">
-            <span class="fa fa-plus" title="添加到播放列表"></span>
-            <span class="fa fa-plus-square-o" title="收藏"></span>
-        </div>
-        <div class="col-md-2 list-col">{{list.singer_name}}</div>
-        <div class="col-md-2 list-col">{{list.album_name}}</div>
-        <div class="col-md-1 list-col">{{list.time}}</div>
     </div>
 </script>
 
 <script type="text/ng-template" id="search.playlist.html">
-    <div class="row clearfix list-row" ng-repeat="list in results">
-        <div class="col-md-1 list-col" ng-click="isSelected()">
-            <i class="fa fa-play-circle-o" title="播放"></i>
-        </div>
-        <div class="col-md-4 list-col">{{list.song_name}}</div>
-        <div class="col-md-2 list-col">
-            <span class="fa fa-plus" title="添加到播放列表"></span>
-            <span class="fa fa-plus-square-o" title="收藏"></span>
-        </div>
-        <div class="col-md-2 list-col">{{list.singer_name}}</div>
-        <div class="col-md-2 list-col">{{list.album_name}}</div>
-        <div class="col-md-1 list-col">{{list.time}}</div>
+    <div class="g-grid">
+        <table class="table table-condensed table-striped table-hover">
+            <tbody>
+                <tr ng-repeat="playlist in results">
+                    <td>
+                        <i class="fa fa-play-circle-o" title="播放"></i>
+                    </td>
+                    <td>
+                        <a class="img" href="">
+                            <img ng-src="{{playlist.first_mp3_img || defaultSongImg}}" class="img-rounded">
+                        </a>
+                    </td>
+                    <td class="name">
+                        <a href="">{{playlist.playlist_name}}</a>
+                    </td>
+                    <td>
+                        <span class="fa fa-plus" title="添加到播放列表"></span>
+                        <span class="fa fa-plus-square-o" title="收藏"></span>
+                    </td>
+                    <td>
+                        <div class="text">
+                            <span class="s-fc3">by</span>&nbsp;&nbsp;
+                            <a class="s-fc3" href="/user/home?id=73591747" title="{{playlist.playlist_info}}">{{playlist.playlist_info}}</a>
+                        </div>
+                    </td>
+                    <td>收藏：<span>{{playlist.like_count}}</span></td>
+                    <td>收听：<span>{{playlist.play_count}}</span></td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </script>
