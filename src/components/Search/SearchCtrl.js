@@ -5,69 +5,75 @@ var $config = require('../Common/config');
 
 var musicApp = $config.musicApp;
 
-musicApp.controller('SearchCtrl', ['$scope', '$state', '$stateParams', 'SongService', 'SingerService', 'AlbumService',
-    'PlaylistService',
-    function($scope, $state, $stateParams, SongService, SingerService, AlbumService, PlaylistService){
+musicApp.controller('SearchCtrl', ['$scope', '$state', '$stateParams', 'PageTableData', 'SongService', 'SingerService',
+    'AlbumService', 'PlaylistService',
+    function($scope, $state, $stateParams, PageTableData, SongService, SingerService, AlbumService, PlaylistService){
 
-        var filters = {
-            currPage: 1,
-            pageSize: 20
-        };
+        // 搜索选项tab页签
+        $scope.tabs = [
+            {type: 0, name: '单曲', content: 'search.song.html'},
+            {type: 1, name: '歌手', content: 'search.singer.html'},
+            {type: 2, name: '专辑', content: 'search.album.html'},
+            {type: 3, name: '歌单', content: 'search.playlist.html'}
+        ];
+
+        var type = Number($stateParams.type) || 0;
+        $scope.activeTab = $scope.tabs[type];
+        $scope.activeTab.type = type;
 
         $scope.keyword = $stateParams.keyword || '';
-        $scope.active = Number($stateParams.type) || 0;
-        $scope.$watch('active', function(value) {
 
-            if(value) {
-                if($scope.keyword !== '') {
-                    filters.keyword = $scope.keyword;
-                    switch(value) {
-                        case 1:
-                            searchSingers(filters);
-                            break;
-                        case 2:
-                            searchAlbums(filters);
-                            break;
-                        case 3:
-                            searchPlaylists(filters);
-                            break;
-                        default:
-                            searchSongs(filters);
-                            break;
-                    }
-                }
-            }
-        });
+        $scope.changeTab = function(type) {
+            $scope.activeTab = $scope.tabs[type];
+            $scope.activeTab.type = type;
+            $state.go('search', {keyword: $scope.keyword, type: type});
+        };
 
         $scope.search = function($event) {
 
             var keyCode = $event.which || $event.keyCode;
-            if (keyCode === 13 && keyword !== '') {
-                switch($scope.active) {
-                    case 1:
-                        searchSingers(filters);
-                        break;
-                    case 2:
-                        searchAlbums(filters);
-                        break;
-                    case 3:
-                        searchPlaylists(filters);
-                        break;
-                    default:
-                        searchSongs(filters);
-                        break;
-                }
+            if (keyCode === 13 || $event.type === 'click') {
+                $scope.doSearch(PageTableData.pagination.currPage, PageTableData.pagination.itemsPerPage,
+                    $scope.activeTab.type);
             }
         };
 
-        $scope.changeSearchType = function(newType) {
-            //if(Number($stateParams.type) !== 0) {
-            //    newType = Number($stateParams.type);
-            //}
-            $scope.active = newType;
-            $state.go('search', {keyword: $scope.keyword, type: newType});
-        };
+        $scope.$watch('activeTab.type', function(value) {
 
+            if(!angular.isUndefined(value)) {
+                // 每页显示的条目数
+                PageTableData.pagination.itemsPerPage = 20;
+                $scope.doSearch(PageTableData.pagination.currPage, PageTableData.pagination.itemsPerPage,
+                    value);
+            }
+        });
+
+        // 按照选择筛选
+        $scope.doSearch = function (nextPage, pageSize, type) {
+            var params = {
+                currPage: nextPage || 1,
+                pageSize: pageSize || 20
+            };
+            if($scope.keyword !== '') {
+                params.keyword = $scope.keyword;
+            } else {
+                return;
+            }
+            switch(type) {
+                case 0:
+                    searchSongs(params);
+                    break;
+                case 1:
+                    searchSingers(params);
+                    break;
+                case 2:
+                    searchAlbums(params);
+                    break;
+                case 3:
+                    searchPlaylists(params);
+                    break;
+            }
+        };
         // 关键词搜索歌曲
         function searchSongs(filters) {
 
@@ -75,11 +81,12 @@ musicApp.controller('SearchCtrl', ['$scope', '$state', '$stateParams', 'SongServ
 
                 if(data.success) {
                     $scope.results = data.songs;
-                    $scope.totalItems = data.totalItems;
-                    $scope.currPage = data.currPage;
                     $scope.pageSize = data.pageSize;
 
                     $scope.totalItemsTips = '首单曲';
+
+                    PageTableData.pagination.totalItems = data.totalItems;
+                    PageTableData.pagination.currPage = data.currPage;
                 }
             });
         }
@@ -90,11 +97,12 @@ musicApp.controller('SearchCtrl', ['$scope', '$state', '$stateParams', 'SongServ
 
                 if(data.success) {
                     $scope.results = data.singers;
-                    $scope.totalItems = data.totalItems;
-                    $scope.currPage = data.currPage;
                     $scope.pageSize = data.pageSize;
 
                     $scope.totalItemsTips = '个歌手';
+
+                    PageTableData.pagination.totalItems = data.totalItems;
+                    PageTableData.pagination.currPage = data.currPage;
                 }
             });
         }
@@ -105,11 +113,12 @@ musicApp.controller('SearchCtrl', ['$scope', '$state', '$stateParams', 'SongServ
 
                 if(data.success) {
                     $scope.results = data.albums;
-                    $scope.totalItems = data.totalItems;
-                    $scope.currPage = data.currPage;
                     $scope.pageSize = data.pageSize;
 
                     $scope.totalItemsTips = '张专辑';
+
+                    PageTableData.pagination.totalItems = data.totalItems;
+                    PageTableData.pagination.currPage = data.currPage;
                 }
             });
         }
@@ -120,11 +129,12 @@ musicApp.controller('SearchCtrl', ['$scope', '$state', '$stateParams', 'SongServ
 
                 if(data.success) {
                     $scope.results = data.playlists;
-                    $scope.totalItems = data.totalItems;
-                    $scope.currPage = data.currPage;
                     $scope.pageSize = data.pageSize;
 
                     $scope.totalItemsTips = '张歌单';
+
+                    PageTableData.pagination.totalItems = data.totalItems;
+                    PageTableData.pagination.currPage = data.currPage;
                 }
             });
         }

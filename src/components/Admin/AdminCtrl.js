@@ -159,9 +159,9 @@ musicApp.controller('PageTableCtrl', ['$scope', 'PageTableData', function($scope
      * @param getItems {Function} 页码改变时调用的方法
      * @param $scope.keyword {String} 父控制器参数，搜索关键字
      */
-    $scope.pageChanged = function(getItems) {
+    $scope.pageChanged = function(getItems, params) {
 
-        getItems($scope.pagination.currPage, 10, $scope.keyword);
+        getItems($scope.pagination.currPage, $scope.pagination.itemsPerPage, params);
     };
 
 }]);

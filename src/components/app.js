@@ -104,7 +104,6 @@ musicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvider
         .state('search', {
             url: '/search?keyword&type',
             templateUrl: 'app/views/Search/search.html',
-            access: { requiredLogin: false },
             reloadOnSearch: false,
             ignoreLoadingBar: true
         })

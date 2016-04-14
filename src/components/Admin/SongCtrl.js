@@ -16,28 +16,28 @@ musicApp.controller('SongCtrl', ['$scope', '$location', '$routeParams', '$log', 
         $scope.singerTypes = $config.singerTypes;
         $scope.languages = $config.languages;
 
-        $scope.getSongsByPage = function(nextPage, pageSize, filters, keyword) {
+        $scope.getSongsByPage = function(nextPage, pageSize, params) {
 
-            var params = {
+            var apiParams = {
                 currPage: nextPage || 1,
                 pageSize: pageSize || 10
             };
-            if(!angular.isUndefined(filters)) {
-                if(!angular.isUndefined(filters.language)) {
-                    params.language = filters.language;
+            if(!angular.isUndefined(params)) {
+                if(!angular.isUndefined(params.language)) {
+                    apiParams.language = params.language;
                 }
-                if(!angular.isUndefined(filters.singer_id)) {
-                    params.singer_id = filters.singer_id;
+                if(!angular.isUndefined(params.singer_id)) {
+                    apiParams.singer_id = params.singer_id;
                 }
-                if(!angular.isUndefined(filters.album_id)) {
-                    params.album_id = filters.album_id;
+                if(!angular.isUndefined(params.album_id)) {
+                    apiParams.album_id = params.album_id;
                 }
             }
-            if(keyword) {
-                params.keyword = keyword;
+            if($scope.keyword) {
+                apiParams.keyword = $scope.keyword;
             }
 
-            SongService.getSongsByPage(params).success(function(data) {
+            SongService.getSongsByPage(apiParams).success(function(data) {
 
                 if(data.success) {
 

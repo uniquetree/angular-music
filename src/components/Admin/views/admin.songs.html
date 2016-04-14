@@ -50,7 +50,8 @@
             <uib-pagination ng-if="pagination.totalItems>0" total-items="pagination.totalItems" ng-model="pagination.currPage"
                             max-size="pagination.maxSize" items-per-page="pagination.itemsPerPage" class="pagination-sm pull-right"
                             previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"
-                            boundary-links="true" force-ellipses="true" ng-change="pageChanged(getAlbums)"></uib-pagination>
+                            boundary-links="true" force-ellipses="true"
+                            ng-change="pageChanged(getSongsByPage, {language: language})"></uib-pagination>
         </div>
     </div>
 </div>

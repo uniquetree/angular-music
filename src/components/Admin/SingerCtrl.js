@@ -66,7 +66,8 @@ musicApp.controller('SingerCtrl', ['$rootScope', '$scope', '$location', '$state'
 
             var keyCode = $event.which || $event.keyCode;
             if (keyCode === 13) {
-                $scope.getSingers(1, 10, $event.target.value);
+                var params = $event.target.value;
+                $scope.getSingers(1, 10, params);
             }
         };
 

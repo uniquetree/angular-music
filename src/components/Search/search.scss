@@ -75,43 +75,46 @@
                 }
             }
 
-            .list-row {
-                height: 40px;
-                padding: 0;
-                border: 1px solid transparent;
-                margin: 0 60px;
-                line-height: 38px;
-                text-align: center;
-                font-size: 12px;
-                background-color: transparent;
+            .tab-content {
+                .list-row {
+                    height: 40px;
+                    padding: 0;
+                    border: 1px solid transparent;
+                    margin: 0 60px;
+                    line-height: 38px;
+                    text-align: center;
+                    font-size: 12px;
+                    background-color: transparent;
 
-                &:nth-child(odd) {
-                    background-color: #f8f8f8;
-                }
-                &:hover {
-                    border: 1px solid #ddd;
-                    background-color: #ddd;
-                }
-
-                .fa {
-                    padding: 0 6px;
-                    vertical-align: middle;
-                    font-size: 20px;
-                    color: #999;
-                    cursor: pointer;
-
-                    &:hover {
-                        color: #666;
+                    &:nth-child(odd) {
+                        background-color: #eee;
                     }
-                }
+                    &:hover {
+                        border: 1px solid #ddd;
+                        background-color: #ddd;
+                    }
 
-                .list-col {
+                    .fa {
+                        padding: 0 6px;
+                        vertical-align: middle;
+                        font-size: 20px;
+                        color: #999;
+                        cursor: pointer;
 
-                    &:nth-child(2) {
-                        text-align: left;
+                        &:hover {
+                            color: #666;
+                        }
+                    }
+
+                    .list-col {
+
+                        &:nth-child(2) {
+                            text-align: left;
+                        }
                     }
                 }
             }
+
         }
     }
 }

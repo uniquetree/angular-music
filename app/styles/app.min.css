@@ -442,6 +442,91 @@ body,
 
 @charset "UTF-8";
 /**
+ * Created by 郑树聪 on 2016/4/7.
+ */
+#g-myMusic .menu .menu-title > .fa {
+  width: 20px;
+  height: 20px; }
+
+#g-myMusic .menu .menu-title button {
+  height: 22px;
+  line-height: 16px; }
+  #g-myMusic .menu .menu-title button .fa {
+    vertical-align: middle;
+    font-size: 14px;
+    color: #AE0A0A; }
+
+#g-myMusic .menu .sub-menu {
+  position: relative;
+  padding: 6px 0 6px 20px;
+  cursor: pointer; }
+  #g-myMusic .menu .sub-menu.active {
+    background-color: rgba(51, 51, 51, 0.1); }
+  #g-myMusic .menu .sub-menu:hover {
+    background-color: rgba(51, 51, 51, 0.1); }
+    #g-myMusic .menu .sub-menu:hover > .oper {
+      display: block !important; }
+      #g-myMusic .menu .sub-menu:hover > .oper .fa:hover {
+        opacity: 1; }
+  #g-myMusic .menu .sub-menu a {
+    padding: 0; }
+  #g-myMusic .menu .sub-menu p {
+    margin-bottom: 0; }
+    #g-myMusic .menu .sub-menu p.num {
+      color: #333; }
+  #g-myMusic .menu .sub-menu .avatar {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px; }
+  #g-myMusic .menu .sub-menu .oper {
+    position: absolute;
+    right: 5px;
+    bottom: 5px;
+    color: #222; }
+    #g-myMusic .menu .sub-menu .oper .fa {
+      font-size: 16px;
+      opacity: .6; }
+
+#g-myMusic .g-content {
+  padding: 20px 0; }
+  #g-myMusic .g-content .media {
+    padding: 0 20px;
+    margin-bottom: 20px; }
+    #g-myMusic .g-content .media .media-object {
+      width: 120px;
+      height: 120px; }
+    #g-myMusic .g-content .media .media-body .media-heading {
+      height: 32px;
+      line-height: 32px;
+      font-size: 16px; }
+    #g-myMusic .g-content .media .media-body .btns .fa {
+      margin-right: 5px; }
+  #g-myMusic .g-content .playlist-songs .title {
+    height: 32px;
+    border-bottom: 2px solid #AE0A0A;
+    line-height: 32px;
+    text-indent: 20px;
+    font-size: 18px;
+    font-weight: bold; }
+    #g-myMusic .g-content .playlist-songs .title span {
+      padding-left: 10px;
+      padding-right: 10px;
+      vertical-align: middle;
+      font-size: 14px;
+      font-weight: normal;
+      color: #c0c0c0; }
+    #g-myMusic .g-content .playlist-songs .title .play-count .count {
+      color: #AE0A0A; }
+  #g-myMusic .g-content .playlist-songs .table th:first-child,
+  #g-myMusic .g-content .playlist-songs .table td:first-child {
+    width: 80px; }
+  #g-myMusic .g-content .playlist-songs .table th:not(:last-child) {
+    border-right: 1px solid #ddd; }
+  #g-myMusic .g-content .playlist-songs .table tr:last-child {
+    border-bottom: 1px solid #ddd; }
+
+@charset "UTF-8";
+/**
  * 音乐播放器样式
  * Created by 郑树聪 on 2016/2/18.
  */
@@ -679,159 +764,6 @@ body,
 
 @charset "UTF-8";
 /**
- * Created by 郑树聪 on 2016/4/7.
- */
-#g-myMusic .menu .menu-title > .fa {
-  width: 20px;
-  height: 20px; }
-
-#g-myMusic .menu .menu-title button {
-  height: 22px;
-  line-height: 16px; }
-  #g-myMusic .menu .menu-title button .fa {
-    vertical-align: middle;
-    font-size: 14px;
-    color: #AE0A0A; }
-
-#g-myMusic .menu .sub-menu {
-  position: relative;
-  padding: 6px 0 6px 20px;
-  cursor: pointer; }
-  #g-myMusic .menu .sub-menu.active {
-    background-color: rgba(51, 51, 51, 0.1); }
-  #g-myMusic .menu .sub-menu:hover {
-    background-color: rgba(51, 51, 51, 0.1); }
-    #g-myMusic .menu .sub-menu:hover > .oper {
-      display: block !important; }
-      #g-myMusic .menu .sub-menu:hover > .oper .fa:hover {
-        opacity: 1; }
-  #g-myMusic .menu .sub-menu a {
-    padding: 0; }
-  #g-myMusic .menu .sub-menu p {
-    margin-bottom: 0; }
-    #g-myMusic .menu .sub-menu p.num {
-      color: #333; }
-  #g-myMusic .menu .sub-menu .avatar {
-    width: 40px;
-    height: 40px;
-    margin-right: 10px; }
-  #g-myMusic .menu .sub-menu .oper {
-    position: absolute;
-    right: 5px;
-    bottom: 5px;
-    color: #222; }
-    #g-myMusic .menu .sub-menu .oper .fa {
-      font-size: 16px;
-      opacity: .6; }
-
-#g-myMusic .g-content {
-  padding: 20px 0; }
-  #g-myMusic .g-content .media {
-    padding: 0 20px;
-    margin-bottom: 20px; }
-    #g-myMusic .g-content .media .media-object {
-      width: 120px;
-      height: 120px; }
-    #g-myMusic .g-content .media .media-body .media-heading {
-      height: 32px;
-      line-height: 32px;
-      font-size: 16px; }
-    #g-myMusic .g-content .media .media-body .btns .fa {
-      margin-right: 5px; }
-  #g-myMusic .g-content .playlist-songs .title {
-    height: 32px;
-    border-bottom: 2px solid #AE0A0A;
-    line-height: 32px;
-    text-indent: 20px;
-    font-size: 18px;
-    font-weight: bold; }
-    #g-myMusic .g-content .playlist-songs .title span {
-      padding-left: 10px;
-      padding-right: 10px;
-      vertical-align: middle;
-      font-size: 14px;
-      font-weight: normal;
-      color: #c0c0c0; }
-    #g-myMusic .g-content .playlist-songs .title .play-count .count {
-      color: #AE0A0A; }
-  #g-myMusic .g-content .playlist-songs .table th:first-child,
-  #g-myMusic .g-content .playlist-songs .table td:first-child {
-    width: 80px; }
-  #g-myMusic .g-content .playlist-songs .table th:not(:last-child) {
-    border-right: 1px solid #ddd; }
-  #g-myMusic .g-content .playlist-songs .table tr:last-child {
-    border-bottom: 1px solid #ddd; }
-
-@charset "UTF-8";
-/**
- * Created by 郑树聪 on 2016/4/13.
- */
-.g-body .g-search {
-  padding: 40px; }
-  .g-body .g-search .row {
-    margin: 0; }
-  .g-body .g-search .m-search {
-    margin-bottom: 20px; }
-    .g-body .g-search .m-search input,
-    .g-body .g-search .m-search button {
-      height: 40px; }
-  .g-body .g-search .result-overview {
-    font-size: 12px;
-    font-style: normal;
-    color: #999; }
-    .g-body .g-search .result-overview em {
-      font-style: normal;
-      color: #c20c0c; }
-  .g-body .g-search .search-results {
-    margin-top: 20px; }
-    .g-body .g-search .search-results .nav-tabs {
-      border: 1px solid #ddd;
-      border-top: none;
-      margin-bottom: 24px;
-      background-color: #F7F7F7; }
-      .g-body .g-search .search-results .nav-tabs .active > a {
-        border: 1px solid #ddd;
-        border-top: 2px solid #c20c0c;
-        border-bottom: 0;
-        background-color: #fff; }
-      .g-body .g-search .search-results .nav-tabs li:first-child a {
-        border-left: none !important; }
-      .g-body .g-search .search-results .nav-tabs li:last-child a {
-        border-right: none !important; }
-      .g-body .g-search .search-results .nav-tabs li > a {
-        border: none;
-        border-top: 2px solid #ccc;
-        border-radius: 0; }
-        .g-body .g-search .search-results .nav-tabs li > a:hover {
-          border-top-color: #c20c0c;
-          background-color: #fff; }
-    .g-body .g-search .search-results .list-row {
-      height: 40px;
-      padding: 0;
-      border: 1px solid transparent;
-      margin: 0 60px;
-      line-height: 38px;
-      text-align: center;
-      font-size: 12px;
-      background-color: transparent; }
-      .g-body .g-search .search-results .list-row:nth-child(odd) {
-        background-color: #f8f8f8; }
-      .g-body .g-search .search-results .list-row:hover {
-        border: 1px solid #ddd;
-        background-color: #ddd; }
-      .g-body .g-search .search-results .list-row .fa {
-        padding: 0 6px;
-        vertical-align: middle;
-        font-size: 20px;
-        color: #999;
-        cursor: pointer; }
-        .g-body .g-search .search-results .list-row .fa:hover {
-          color: #666; }
-      .g-body .g-search .search-results .list-row .list-col:nth-child(2) {
-        text-align: left; }
-
-@charset "UTF-8";
-/**
  * 页面底部样式
  * Created by 郑树聪 on 2016/3/4.
  */
@@ -904,3 +836,71 @@ body,
   .form-bottom .register,
   .form-bottom .login {
     margin: 0; }
+
+@charset "UTF-8";
+/**
+ * Created by 郑树聪 on 2016/4/13.
+ */
+.g-body .g-search {
+  padding: 40px; }
+  .g-body .g-search .row {
+    margin: 0; }
+  .g-body .g-search .m-search {
+    margin-bottom: 20px; }
+    .g-body .g-search .m-search input,
+    .g-body .g-search .m-search button {
+      height: 40px; }
+  .g-body .g-search .result-overview {
+    font-size: 12px;
+    font-style: normal;
+    color: #999; }
+    .g-body .g-search .result-overview em {
+      font-style: normal;
+      color: #c20c0c; }
+  .g-body .g-search .search-results {
+    margin-top: 20px; }
+    .g-body .g-search .search-results .nav-tabs {
+      border: 1px solid #ddd;
+      border-top: none;
+      margin-bottom: 24px;
+      background-color: #F7F7F7; }
+      .g-body .g-search .search-results .nav-tabs .active > a {
+        border: 1px solid #ddd;
+        border-top: 2px solid #c20c0c;
+        border-bottom: 0;
+        background-color: #fff; }
+      .g-body .g-search .search-results .nav-tabs li:first-child a {
+        border-left: none !important; }
+      .g-body .g-search .search-results .nav-tabs li:last-child a {
+        border-right: none !important; }
+      .g-body .g-search .search-results .nav-tabs li > a {
+        border: none;
+        border-top: 2px solid #ccc;
+        border-radius: 0; }
+        .g-body .g-search .search-results .nav-tabs li > a:hover {
+          border-top-color: #c20c0c;
+          background-color: #fff; }
+    .g-body .g-search .search-results .tab-content .list-row {
+      height: 40px;
+      padding: 0;
+      border: 1px solid transparent;
+      margin: 0 60px;
+      line-height: 38px;
+      text-align: center;
+      font-size: 12px;
+      background-color: transparent; }
+      .g-body .g-search .search-results .tab-content .list-row:nth-child(odd) {
+        background-color: #eee; }
+      .g-body .g-search .search-results .tab-content .list-row:hover {
+        border: 1px solid #ddd;
+        background-color: #ddd; }
+      .g-body .g-search .search-results .tab-content .list-row .fa {
+        padding: 0 6px;
+        vertical-align: middle;
+        font-size: 20px;
+        color: #999;
+        cursor: pointer; }
+        .g-body .g-search .search-results .tab-content .list-row .fa:hover {
+          color: #666; }
+      .g-body .g-search .search-results .tab-content .list-row .list-col:nth-child(2) {
+        text-align: left; }

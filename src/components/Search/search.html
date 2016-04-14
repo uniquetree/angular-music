@@ -18,29 +18,84 @@
         <div class="row result-overview" ng-show="totalItems>0">
             搜索“{{keyword}}”，找到&nbsp;<em>{{totalItems}}</em>&nbsp;{{totalItemsTips}}
         </div>
-        <div class="row search-results">
-            <uib-tabset active="active" justified="true">
-                <uib-tab index="0" heading="单曲" select="changeSearchType(0)">
-                    <div class="row clearfix list-row" ng-repeat="list in results">
-                        <div class="col-md-1 list-col" ng-click="isSelected()">
-                            <i class="fa fa-play-circle-o" title="播放"></i>
-                        </div>
-                        <div class="col-md-4 list-col">{{list.song_name}}</div>
-                        <div class="col-md-2 list-col">
-                            <span class="fa fa-plus" title="添加到播放列表"></span>
-                            <span class="fa fa-plus-square-o" title="收藏"></span>
-                        </div>
-                        <div class="col-md-2 list-col">{{list.singer_name}}</div>
-                        <div class="col-md-2 list-col">{{list.album_name}}</div>
-                        <div class="col-md-1 list-col">{{list.time}}</div>
-                    </div>
-                </uib-tab>
-                <uib-tab index="1" heading="歌手" select="changeSearchType(1)">歌手</uib-tab>
-                <uib-tab index="2" heading="专辑" select="changeSearchType(2)">专辑</uib-tab>
-                <uib-tab index="3" heading="歌单" select="changeSearchType(3)">歌单</uib-tab>
-            </uib-tabset>
+        <div class="row search-results" ng-controller="PageTableCtrl">
+            <ul class="nav nav-tabs nav-justified">
+                <li ng-repeat="tab in tabs" ng-class="{true: 'active'}[tab.type === activeTab.type]">
+                    <a href="javascript:void(0);" ng-click="changeTab(tab.type)">{{tab.name}}</a>
+                </li>
+            </ul>
+            <div class="tab-content" ng-include="activeTab.content"></div>
+            <uib-pagination ng-if="pagination.totalItems>0" total-items="pagination.totalItems" ng-model="pagination.currPage"
+                            max-size="pagination.maxSize" items-per-page="pagination.itemsPerPage"
+                            class="pagination-sm pull-right" previous-text="&lsaquo;" next-text="&rsaquo;"
+                            first-text="&laquo;" last-text="&raquo;" boundary-links="true" force-ellipses="true"
+                            ng-change="pageChanged(doSearch, activeTab.type)"></uib-pagination>
         </div>
     </div>
     <div class="gotop" id="j-top" style=""></div>
 </div>
 <footer ng-include="'app/views/Templates/footer.html'" class="g-footer"></footer>
+
+<script type="text/ng-template" id="search.song.html">
+    <div class="row clearfix list-row" ng-repeat="list in results">
+        <div class="col-md-1 list-col" ng-click="isSelected()">
+            <i class="fa fa-play-circle-o" title="播放"></i>
+        </div>
+        <div class="col-md-4 list-col">{{list.song_name}}</div>
+        <div class="col-md-2 list-col">
+            <span class="fa fa-plus" title="添加到播放列表"></span>
+            <span class="fa fa-plus-square-o" title="收藏"></span>
+        </div>
+        <div class="col-md-2 list-col">{{list.singer_name}}</div>
+        <div class="col-md-2 list-col">{{list.album_name}}</div>
+        <div class="col-md-1 list-col">{{list.time}}</div>
+    </div>
+</script>
+
+<script type="text/ng-template" id="search.singer.html">
+    <div class="row clearfix list-row" ng-repeat="list in results">
+        <div class="col-md-1 list-col" ng-click="isSelected()">
+            <i class="fa fa-play-circle-o" title="播放"></i>
+        </div>
+        <div class="col-md-4 list-col">{{list.song_name}}</div>
+        <div class="col-md-2 list-col">
+            <span class="fa fa-plus" title="添加到播放列表"></span>
+            <span class="fa fa-plus-square-o" title="收藏"></span>
+        </div>
+        <div class="col-md-2 list-col">{{list.singer_name}}</div>
+        <div class="col-md-2 list-col">{{list.album_name}}</div>
+        <div class="col-md-1 list-col">{{list.time}}</div>
+    </div>
+</script>
+
+<script type="text/ng-template" id="search.album.html">
+    <div class="row clearfix list-row" ng-repeat="list in results">
+        <div class="col-md-1 list-col" ng-click="isSelected()">
+            <i class="fa fa-play-circle-o" title="播放"></i>
+        </div>
+        <div class="col-md-4 list-col">{{list.song_name}}</div>
+        <div class="col-md-2 list-col">
+            <span class="fa fa-plus" title="添加到播放列表"></span>
+            <span class="fa fa-plus-square-o" title="收藏"></span>
+        </div>
+        <div class="col-md-2 list-col">{{list.singer_name}}</div>
+        <div class="col-md-2 list-col">{{list.album_name}}</div>
+        <div class="col-md-1 list-col">{{list.time}}</div>
+    </div>
+</script>
+
+<script type="text/ng-template" id="search.playlist.html">
+    <div class="row clearfix list-row" ng-repeat="list in results">
+        <div class="col-md-1 list-col" ng-click="isSelected()">
+            <i class="fa fa-play-circle-o" title="播放"></i>
+        </div>
+        <div class="col-md-4 list-col">{{list.song_name}}</div>
+        <div class="col-md-2 list-col">
+            <span class="fa fa-plus" title="添加到播放列表"></span>
+            <span class="fa fa-plus-square-o" title="收藏"></span>
+        </div>
+        <div class="col-md-2 list-col">{{list.singer_name}}</div>
+        <div class="col-md-2 list-col">{{list.album_name}}</div>
+        <div class="col-md-1 list-col">{{list.time}}</div>
+    </div>
+</script>
