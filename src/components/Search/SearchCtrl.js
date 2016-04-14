@@ -33,6 +33,10 @@ musicApp.controller('SearchCtrl', ['$scope', '$state', '$stateParams', 'PageTabl
 
             var keyCode = $event.which || $event.keyCode;
             if (keyCode === 13 || $event.type === 'click') {
+                $scope.results = [];
+                $scope.totalItems = 0;
+                PageTableData.pagination.totalItems = 0;
+                PageTableData.pagination.currPage = 1;
                 $scope.doSearch(PageTableData.pagination.currPage, PageTableData.pagination.itemsPerPage,
                     $scope.activeTab.type);
             }
@@ -43,6 +47,10 @@ musicApp.controller('SearchCtrl', ['$scope', '$state', '$stateParams', 'PageTabl
             if(!angular.isUndefined(value)) {
                 // 每页显示的条目数
                 PageTableData.pagination.itemsPerPage = 20;
+                $scope.results = [];
+                $scope.totalItems = 0;
+                PageTableData.pagination.totalItems = 0;
+                PageTableData.pagination.currPage = 1;
                 $scope.doSearch(PageTableData.pagination.currPage, PageTableData.pagination.itemsPerPage,
                     value);
             }
@@ -82,7 +90,7 @@ musicApp.controller('SearchCtrl', ['$scope', '$state', '$stateParams', 'PageTabl
 
                 if(data.success) {
                     $scope.results = data.songs;
-                    $scope.pageSize = data.pageSize;
+                    $scope.totalItems = data.totalItems;
 
                     $scope.totalItemsTips = '首单曲';
 
@@ -98,7 +106,7 @@ musicApp.controller('SearchCtrl', ['$scope', '$state', '$stateParams', 'PageTabl
 
                 if(data.success) {
                     $scope.results = data.singers;
-                    $scope.pageSize = data.pageSize;
+                    $scope.totalItems = data.totalItems;
 
                     $scope.totalItemsTips = '个歌手';
 
@@ -114,7 +122,7 @@ musicApp.controller('SearchCtrl', ['$scope', '$state', '$stateParams', 'PageTabl
 
                 if(data.success) {
                     $scope.results = data.albums;
-                    $scope.pageSize = data.pageSize;
+                    $scope.totalItems = data.totalItems;
 
                     $scope.totalItemsTips = '张专辑';
 
@@ -130,7 +138,7 @@ musicApp.controller('SearchCtrl', ['$scope', '$state', '$stateParams', 'PageTabl
 
                 if(data.success) {
                     $scope.results = data.playlists;
-                    $scope.pageSize = data.pageSize;
+                    $scope.totalItems = data.totalItems;
 
                     $scope.totalItemsTips = '张歌单';
 

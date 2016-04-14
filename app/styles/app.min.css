@@ -532,12 +532,11 @@ body,
  */
 .g-player {
   height: 50px;
+  border-top: 1px solid #676767;
   background-color: #303030;
   color: #fff; }
   .g-player .g-container {
-    padding: 0 10px;
-    border-left: 1px solid #000000;
-    border-right: 1px solid #000000; }
+    padding: 0 10px; }
   .g-player .m-player .player-btns {
     width: 172px;
     margin-top: 8px;
