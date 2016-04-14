@@ -240,6 +240,7 @@ musicApp.run(function($rootScope, $state, $location, $window, AuthenticationServ
 
 // 加载页面angular控制器组件
 require('./Header/HeaderCtrl');
+require('./Home/HomeCtrl');
 require('./User/UserCtrl');
 require('./MyMusic/MyMusicCtrl');
 require('./Admin/AdminCtrl');

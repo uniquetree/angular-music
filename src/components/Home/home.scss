@@ -1,0 +1,43 @@
+/**
+ * Created by 郑树聪 on 2016/4/15.
+ */
+$title-border-bottom: 2px solid #AE0A0A;
+
+.g-home {
+
+    .g-grid {
+        .title {
+            height: 32px;
+            border-bottom: $title-border-bottom;
+            margin-bottom: 10px;
+            line-height: 32px;
+            text-indent: 10px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .items {
+
+            .item {
+                width: 184px;
+                padding: 0 10px;
+                cursor: pointer;
+
+                .thumbnail {
+                    position: relative;
+
+                    img {
+                        width: 164px;
+                        height: 154px;
+                    }
+
+                    .caption {
+                        width: 154px;
+                        padding: 5px 5px 0;
+                        text-align: center;
+                    }
+                }
+            }
+        }
+    }
+}

@@ -423,6 +423,33 @@ body,
 
 @charset "UTF-8";
 /**
+ * Created by 郑树聪 on 2016/4/15.
+ */
+.g-home .g-grid .title {
+  height: 32px;
+  border-bottom: 2px solid #AE0A0A;
+  margin-bottom: 10px;
+  line-height: 32px;
+  text-indent: 10px;
+  font-size: 18px;
+  font-weight: bold; }
+
+.g-home .g-grid .items .item {
+  width: 184px;
+  padding: 0 10px;
+  cursor: pointer; }
+  .g-home .g-grid .items .item .thumbnail {
+    position: relative; }
+    .g-home .g-grid .items .item .thumbnail img {
+      width: 164px;
+      height: 154px; }
+    .g-home .g-grid .items .item .thumbnail .caption {
+      width: 154px;
+      padding: 5px 5px 0;
+      text-align: center; }
+
+@charset "UTF-8";
+/**
  * 我的音乐和管理中心左侧菜单栏样式
  * Created by 郑树聪 on 2016/3/15.
  */
@@ -830,14 +857,6 @@ body,
           background-color: #ddd; }
         .g-body .g-search .search-results .tab-content .list-row .list-col:nth-child(2) {
           text-align: left; }
-      .g-body .g-search .search-results .tab-content .g-grid .title {
-        height: 32px;
-        border-bottom: 2px solid #AE0A0A;
-        margin-bottom: 10px;
-        line-height: 32px;
-        text-indent: 10px;
-        font-size: 18px;
-        font-weight: bold; }
       .g-body .g-search .search-results .tab-content .g-grid .items .item {
         width: 184px;
         padding: 0 10px;

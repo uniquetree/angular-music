@@ -1,4 +1,16 @@
-Content of home.playlist.html1
-
-<div>基于AngularJS的在线音乐网站</div>
-<p>Welcome to 基于AngularJS的在线音乐网站</p>
+<div class="g-grid" ng-controller="PageTableCtrl" ng-init="getPlaylists()">
+    <nav class="title">歌单</nav>
+    <div class="clearfix items">
+        <div class="item pull-left" ng-repeat="item in playlists" ng-click="goPlaylist(item.id)">
+            <div class="thumbnail">
+                <img ng-src="{{item.first_mp3_img || defaultSongImg}}">
+                <div class="caption"><span>{{item.playlist_name}}</span></div>
+            </div>
+        </div>
+    </div>
+    <uib-pagination ng-if="pagination.totalItems>0" total-items="pagination.totalItems" ng-model="pagination.currPage"
+                    max-size="pagination.maxSize" items-per-page="pagination.itemsPerPage"
+                    class="pagination-sm pull-right" previous-text="&lsaquo;" next-text="&rsaquo;"
+                    first-text="&laquo;" last-text="&raquo;" boundary-links="true" force-ellipses="true"
+                    ng-change="pageChanged(doSearch, activeTab.type)"></uib-pagination>
+</div>

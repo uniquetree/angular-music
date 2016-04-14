@@ -7,13 +7,12 @@ $progressHeight: 10px;
 
 .g-player {
     height: 50px;
+    border-top: 1px solid #676767;
     background-color: #303030;
     color: #fff;
 
     .g-container {
         padding: 0 10px;
-        border-left: 1px solid #000000;
-        border-right: 1px solid #000000;
     }
 
     // 播放器栏样式

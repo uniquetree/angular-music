@@ -75,7 +75,7 @@ musicApp.controller('PlayerCtrl', ['$rootScope', '$scope', '$document', '$window
 
         //控制音量
         $scope.volStyle = 'height: 80px';
-        Audio.volume = 0;
+        Audio.volume = 0.8;
         $scope.adjustVolume = function(ev){ //调整音量
             var event = window.event || ev;
             var volumeY = $document[0].querySelector('#play-vol').getBoundingClientRect().bottom - event.clientY;
