@@ -30,7 +30,6 @@ module.exports = {
 
 module.exports.tableName = {
     language_tb: 'language',
-    singer_type_tb: 'singer_type',
     nation_tb: 'nation',
     user_tb: 'user',
     playlist_tb: 'playlist',

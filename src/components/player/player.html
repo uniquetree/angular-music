@@ -26,7 +26,7 @@
         </div><!-- 播放器滚动条 end -->
         <!-- 播放器音量、列表控制 -->
         <div class="pull-left player-ctrl">
-            <div class="pull-left player-mode" ng-class="{loop: 'loop', random: 'random', repeat: 'repeat'}[playMode]"
+            <div class="pull-left player-mode" title="播放模式" ng-class="{loop: 'loop', random: 'random', repeat: 'repeat'}[playMode]"
                 ng-click="changePlayMode(playMode)"></div>
             <div class="pull-left player-volume">
                 <div id="m-volume" class="m-volume" ng-show="volumeBox">
@@ -35,7 +35,7 @@
                              aria-valuemax="100" style="{{volStyle}}"></div>
                     </div>
                 </div>
-                <a href="javascript:void(0);"><span class="fa" ng-class="{true: 'fa-volume-up', false: 'fa-volume-off'}[muted]"
+                <a href="javascript:void(0);" title="音量控制"><span class="fa" ng-class="{true: 'fa-volume-up', false: 'fa-volume-off'}[muted]"
                                                     ng-click="volumeBox=!volumeBox"></span></a>
             </div>
             <div class="pull-left player-list" ng-click="listShow=!listShow">
@@ -64,7 +64,7 @@
                         <span class="fa fa-trash-o" title="清除"></span>
                     </div>
                     <div class="pull-left list-col list-col-4">{{list.singer_name}}</div>
-                    <div class="pull-left list-col list-col-5"></div>
+                    <div class="pull-left list-col list-col-5">{{list.duration}}</div>
                     <div class="pull-left list-col list-col-6"></div>
                 </li>
             </ul>

@@ -6,8 +6,8 @@ require('../Services/UserService');
 
 var $config = require('../Common/config');
 
-$config.musicApp.controller('UserCtrl', ['$rootScope', '$scope', '$location', '$window', 'UserService', 'AuthenticationService',
-    function($rootScope, $scope, $location, $window, UserService, AuthenticationService){
+$config.musicApp.controller('UserCtrl', ['$rootScope', '$scope', '$location', '$window', '$state', 'UserService', 'AuthenticationService',
+    function($rootScope, $scope, $location, $window, $state, UserService, AuthenticationService){
 
         // 注册事件
         $scope.register = function(username, email, password1, password2) {
@@ -86,10 +86,9 @@ $config.musicApp.controller('UserCtrl', ['$rootScope', '$scope', '$location', '$
                     AuthenticationService.isAuthenticated = false;
                     AuthenticationService.isAdmin = false;
                     $window.sessionStorage.clear();
-                    $location.path('/#/');
+                    //$location.path('/#/');
+                    $state.go('home', {}, {reload:true});
                 }
-            }).error(function(status, data){
-
             });
         };
     }

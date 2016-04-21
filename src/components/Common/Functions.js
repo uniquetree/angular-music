@@ -57,3 +57,22 @@ module.exports.formatDate = function(date) {
         (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-' +
         (date.getDate() < 10 ? '0'+date.getDate() : date.getDate());
 };
+
+module.exports.getMusicTime = function($document, lists) {
+
+    var audio = document.createElement('audio');
+    for(var i=0; i<lists.length; i++) {
+        audio.src = lists[i].url;
+        lists[i].duration = formatTime(audio.duration);
+    }
+    return lists;
+};
+
+function formatTime(time) {
+    var timeMin = parseInt(time/60);
+    var timeSecond = parseInt(time%60);
+    if(timeSecond < 10 ) {
+        timeSecond = '0'+timeSecond;
+    }
+    return timeMin + ':' + timeSecond;
+}
