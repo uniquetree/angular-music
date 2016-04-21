@@ -5,6 +5,7 @@ var $config = require('../Common/config');
 
 var musicApp = $config.musicApp;
 
+// 搜索功能控制器
 musicApp.controller('SearchCtrl', ['$scope', '$state', '$stateParams', 'PageTableData', 'SongService', 'SingerService',
     'AlbumService', 'PlaylistService',
     function($scope, $state, $stateParams, PageTableData, SongService, SingerService, AlbumService, PlaylistService){
@@ -87,13 +88,10 @@ musicApp.controller('SearchCtrl', ['$scope', '$state', '$stateParams', 'PageTabl
         function searchSongs(filters) {
 
             SongService.getSongsByPage(filters).success(function(data) {
-
                 if(data.success) {
                     $scope.results = data.songs;
                     $scope.totalItems = data.totalItems;
-
                     $scope.totalItemsTips = '首单曲';
-
                     PageTableData.pagination.totalItems = data.totalItems;
                     PageTableData.pagination.currPage = data.currPage;
                 }
@@ -101,15 +99,11 @@ musicApp.controller('SearchCtrl', ['$scope', '$state', '$stateParams', 'PageTabl
         }
         // 关键词搜索歌曲
         function searchSingers(filters) {
-
             SingerService.getSingers(filters).success(function(data) {
-
                 if(data.success) {
                     $scope.results = data.singers;
                     $scope.totalItems = data.totalItems;
-
                     $scope.totalItemsTips = '个歌手';
-
                     PageTableData.pagination.totalItems = data.totalItems;
                     PageTableData.pagination.currPage = data.currPage;
                 }
@@ -117,15 +111,11 @@ musicApp.controller('SearchCtrl', ['$scope', '$state', '$stateParams', 'PageTabl
         }
         // 关键词搜索专辑
         function searchAlbums(filters) {
-
             AlbumService.getAlbums(filters).success(function(data) {
-
                 if(data.success) {
                     $scope.results = data.albums;
                     $scope.totalItems = data.totalItems;
-
                     $scope.totalItemsTips = '张专辑';
-
                     PageTableData.pagination.totalItems = data.totalItems;
                     PageTableData.pagination.currPage = data.currPage;
                 }
@@ -133,15 +123,11 @@ musicApp.controller('SearchCtrl', ['$scope', '$state', '$stateParams', 'PageTabl
         }
         // 关键词搜索歌单
         function searchPlaylists(filters) {
-
             PlaylistService.filterPlayListsByPage(filters).success(function(data) {
-
                 if(data.success) {
                     $scope.results = data.playlists;
                     $scope.totalItems = data.totalItems;
-
                     $scope.totalItemsTips = '张歌单';
-
                     PageTableData.pagination.totalItems = data.totalItems;
                     PageTableData.pagination.currPage = data.currPage;
                 }

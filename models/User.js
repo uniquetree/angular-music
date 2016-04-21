@@ -20,7 +20,6 @@ var user_tb = config.tableName.user_tb;
  * userInfo.sex [Number] 性别,默认0
  * userInfo.status [Number] 用户类型,默认2
  * userInfo.info [String] 简介
- * userInfo.img [String] 头像路径
  */
 var User = function(userInfo) {
     this.username = userInfo.username || '';
@@ -31,7 +30,6 @@ var User = function(userInfo) {
     this.sex = userInfo.sex || 0;
     this.role = (typeof userInfo.role !== 'undefined')? userInfo.role : 2;
     this.info = userInfo.info || '';
-    this.img = userInfo.img || null;
 };
 
 /**
@@ -62,9 +60,9 @@ User.prototype.create = function(callback){
  */
 User.prototype.update = function(oldEmail, callback){
 
-    var sql = 'update ' + user_tb + ' set username=?, email=?, password=?, img=?, code=?, birth=?, sex=?, ' +
+    var sql = 'update ' + user_tb + ' set username=?, email=?, password=?, code=?, birth=?, sex=?, ' +
         'role=?, info=? where email=?';
-    db.query(sql, [this.username, this.email, this.password, this.img, this.code, this.birth,
+    db.query(sql, [this.username, this.email, this.password, this.code, this.birth,
         this.sex, this.role, this.info, oldEmail], callback);
 };
 

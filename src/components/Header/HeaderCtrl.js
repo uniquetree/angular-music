@@ -17,7 +17,7 @@ $config.musicApp.controller('HeaderCtrl', ['$scope', '$location', '$window', '$s
         ];
         $scope.subNavbarItems = [
             //{name: '最新音乐', state: '#/discover'},
-            {name: '排行榜', state: 'home.topList'},
+            //{name: '排行榜', state: 'home.topList'},
             {name: '歌单', state: 'home.playlist'},
             {name: '歌手', state: 'home.singer'}
         ];

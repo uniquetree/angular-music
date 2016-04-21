@@ -14,24 +14,18 @@ musicApp.controller('PlayerCtrl', ['$rootScope', '$scope', '$document', '$window
     function($rootScope, $scope, $document, $window, $interval, $state, MusicData, Audio, Player){
 
         var progressWidth = 680;
-
         $scope.playMode = MusicData.playMode;
-
         $scope.player = new Player();
-        if(MusicData.lists.length > 0) {
-            $scope.player.controllPlay(MusicData.index);
-        }
+        if(MusicData.lists.length > 0) $scope.player.controllPlay(MusicData.index);
         // 双击播放列表某首音乐播放
         $scope.isSelected = function(){
             $scope.player.controllPlay(this.$index);
         };
-
         $scope.duration = '00:00';
         $scope.currentTime = '00:00';
         //音乐剩余时间
         $scope.surplusBar = function() {
             if(!isNaN(Audio.duration)) {
-
                 $scope.duration = formatTime(Audio.duration);
                 $scope.currentTime = formatTime(Audio.currentTime);
                 //播放进度条
@@ -72,7 +66,6 @@ musicApp.controller('PlayerCtrl', ['$rootScope', '$scope', '$document', '$window
             MusicData.playMode = playModes[index];
             $scope.playMode = MusicData.playMode;
         };
-
         //控制音量
         $scope.volStyle = 'height: 80px';
         Audio.volume = 0.8;

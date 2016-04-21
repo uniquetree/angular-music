@@ -114,4 +114,12 @@ Album.prototype.deleteAlbumsBySingerId = function(ids, callback) {
     db.query(sql, params, callback);
 };
 
+// 根据专辑名和歌手id查找
+Album.prototype.findAlbumIdByFilters = function(callback) {
+
+    var sql = 'select id from ' + album_tb + ' where album_name=? and singer_id=? limit 1';
+    db.query(sql, [this.album_name, this.singer_id], callback);
+};
+
+
 module.exports = Album;

@@ -82,14 +82,14 @@ musicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvider
             access: { requiredLogin: false },
             ignoreLoadingBar: true
         })
-        .state('home.topList', {
-            url: '/',
-            templateUrl: 'app/views/Home/views/home.topList.html',
-            access: { requiredLogin: false },
-            ignoreLoadingBar: true
-        })
+        //.state('home.topList', {
+        //    url: '/',
+        //    templateUrl: 'app/views/Home/views/home.topList.html',
+        //    access: { requiredLogin: false },
+        //    ignoreLoadingBar: true
+        //})
         .state('home.playlist', {
-            url: '/playlist',
+            url: '/',
             templateUrl: 'app/views/Home/views/home.playlist.html',
             access: { requiredLogin: false },
             ignoreLoadingBar: true
