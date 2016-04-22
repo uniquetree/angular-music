@@ -49,8 +49,8 @@ User.prototype.findOne = function(callback) {
 User.prototype.create = function(callback){
 
     var registered_time = common.getCurrentTime();
-    var sql = 'insert into ' + user_tb + '(username, email, password, type, registered_time) values (?, ?, ?, ?, ?)';
-    db.query(sql, [this.username, this.email, this.password, this.type, registered_time], callback);
+    var sql = 'insert into ' + user_tb + '(username, email, password, role, registered_time) values (?, ?, ?, ?, ?)';
+    db.query(sql, [this.username, this.email, this.password, this.role, registered_time], callback);
 };
 
 /**

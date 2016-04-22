@@ -22,10 +22,10 @@ $config.musicApp.controller('UserCtrl', ['$rootScope', '$scope', '$location', '$
             } else{
                 $scope.disabled = true;   //防止表单重复提交
                 $scope.message = false;
-                var password = CryptoJS.SHA256(password1).toString();
+                //var password = CryptoJS.SHA256(password1).toString();
                 //password = CryptoJS.HmacSHA256(password,'ustc').toString();
-                password = password1;
-                UserService.register(username, email, password).success(function(data, status, headers, config){
+                var password = password1;
+                UserService.register(username, email, password).success(function(data){
                     if(data.success) {
                         $scope.disabled = false;
                         $location.path('/login');
@@ -34,7 +34,7 @@ $config.musicApp.controller('UserCtrl', ['$rootScope', '$scope', '$location', '$
                         $scope.message = data.msg;
                     }
                 })
-                .error(function(data, status, headers, config){
+                .error(function(data){
                     $scope.message = "加载失败，请重新再试";
                     $scope.disabled = false;
                 });

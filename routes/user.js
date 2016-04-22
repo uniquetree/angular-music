@@ -25,7 +25,7 @@ router.post('/register', function(req, res, next){
     var user = new User(userInfo);
     user.findOne(function(isError, results){
         if(isError){
-            res.send(500);
+            res.sendStatus(500);
         } else if(results.length > 0){
             res.json({
                 success: false,
@@ -33,9 +33,10 @@ router.post('/register', function(req, res, next){
             });
         } else {
             // 邮箱未被注册
-            user.create(function(isError){
+            user.create(function(isError, results){
                 if(isError){
-                    res.send(500);
+                    res.sendStatus(500);
+                    console.log(results.message);
                 } else {
                     res.json({
                         success: true
@@ -57,9 +58,9 @@ router.post('/login', function(req, res, next) {
 
     user.findOne(function(isError, results){   //通过此model以用户名的条件 查询数据库中的匹配信息
         if(isError){                                         //错误就返回给原post处（login.html) 状态码为500的错误
-            res.send(500);
+            res.sendStatus(500);
         }else if(!results){                                 //查询不到用户名匹配信息，则用户名不存在
-            res.send(404);
+            res.sendStatus(404);
         } else {
             if(req.body.password !== results[0].password){     //查询到匹配用户名的信息，但密码错误
                 res.json({
@@ -94,9 +95,9 @@ router.post('/logout', expressJwt({secret: secretToken}), tokenManager.verifyTok
     if (req.body.email) {
         tokenManager.expireToken(req.headers);
 
-        return res.send(200);
+        return res.sendStatus(200);
     } else {
-        return res.send(401);
+        return res.sendStatus(401);
     }
 });
 
@@ -121,7 +122,7 @@ router.post('/updateUserInfo', expressJwt({secret: secretToken}), tokenManager.v
     var oldEmail = userInfo.email;
     user.update(userInfo.email, function(isError, results) {
         if(isError){
-            res.send(500);
+            res.sendStatus(500);
         } else {
             res.json({
                 success: true

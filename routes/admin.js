@@ -51,7 +51,7 @@ router.get('/getMenuByRole', expressJwt({secret: secretToken}), tokenManager.ver
 });
 
 // 获取省份、城市、地区数据
-router.get('/getAreas', function(req, res, next) {
+router.get('/getAreas', function(req, res) {
 
     var sql = 'select * from nation';
     db.query(sql, [], function(isError, results){
