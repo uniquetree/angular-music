@@ -45,7 +45,7 @@ Singer.prototype.findSingerIdByFilters = function(callback) {
 // 根据条件筛选歌手
 Singer.prototype.findAllSingersByFilters = function(callback) {
 
-    var filters = ' where ',
+    var filters = '',
         params = [];
 
     if(typeof this.singer_type !== 'undefined') {
@@ -55,6 +55,10 @@ Singer.prototype.findAllSingersByFilters = function(callback) {
     if(typeof this.language !== 'undefined') {
         filters += 'language=?';
         params.push(this.language)
+    }
+
+    if(filters !== '') {
+        filters = ' where ' + filters;
     }
 
     var sql = 'select id, singer_name from ' + singer_tb + filters;

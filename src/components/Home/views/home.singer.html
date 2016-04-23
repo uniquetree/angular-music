@@ -1,5 +1,5 @@
 <div class="g-grid" ng-controller="PageTableCtrl" ng-init="getSingers()">
-    <nav class="title">歌单</nav>
+    <nav class="title">歌手</nav>
     <div class="clearfix items">
         <div class="item pull-left" ng-repeat="item in singers" ng-click="goSinger(item.id)">
             <div class="thumbnail">
@@ -12,5 +12,5 @@
                     max-size="pagination.maxSize" items-per-page="pagination.itemsPerPage"
                     class="pagination-sm pull-right" previous-text="&lsaquo;" next-text="&rsaquo;"
                     first-text="&laquo;" last-text="&raquo;" boundary-links="true" force-ellipses="true"
-                    ng-change="pageChanged(doSearch, activeTab.type)"></uib-pagination>
+                    ng-change="pageChanged(getSingers)"></uib-pagination>
 </div>

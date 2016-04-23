@@ -88,7 +88,7 @@
             <div class="playlist-songs">
                 <nav class="title">歌曲列表
                     <span class="song-num">{{currPlaylistSongs.length}}首</span>
-                    <span class="pull-right play-count">播放：<b class="count">{{currPlaylistSongs.length}}</b>次</span>
+                    <span class="pull-right play-count">播放：<b class="count">{{currPlaylistSongs.listen_count || 0}}</b>次</span>
                 </nav>
                 <table id="playlist-song-table" class="table table-condensed table-striped table-hover">
                     <thead>

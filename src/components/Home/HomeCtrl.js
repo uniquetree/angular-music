@@ -5,17 +5,46 @@ var $config = require('../Common/config');
 
 var musicApp = $config.musicApp;
 
-musicApp.controller('HomeCtrl', ['$scope', '$state', '$stateParams', 'PageTableData', 'SongService', 'SingerService',
+musicApp.controller('HomeCtrl', ['$scope', '$state', 'PageTableData', 'SingerService',
     'AlbumService', 'PlaylistService',
-    function($scope, $state, $stateParams, PageTableData, SongService, SingerService, AlbumService, PlaylistService){
+    function($scope, $state, PageTableData, SingerService, AlbumService, PlaylistService){
 
+        var PAGE_SIZE = 20;
 
-        $scope.getPlaylists = function() {
+        $scope.playlists = [];
+        $scope.getPlaylists = function(nextPage, pageSize) {
 
+            PageTableData.pagination.itemsPerPage = PAGE_SIZE;
+            var params = {
+                currPage: nextPage || 1,
+                pageSize: pageSize || PAGE_SIZE
+            };
+            PlaylistService.filterPlayListsByPage(params).success(function(data) {
+
+                if(data.success) {
+                    $scope.playlists = data.playlists;
+                    PageTableData.pagination.totalItems = data.totalItems;
+                    PageTableData.pagination.currPage = data.currPage;
+                }
+            });
         };
 
-        $scope.getSingers = function() {
+        $scope.singers = [];
+        $scope.getSingers = function(nextPage, pageSize) {
 
+            PageTableData.pagination.itemsPerPage = PAGE_SIZE;
+            var params = {
+                currPage: nextPage || 1,
+                pageSize: pageSize || PAGE_SIZE
+            };
+            SingerService.getSingers(params).success(function(data) {
+
+                if(data.success) {
+                    $scope.singers = data.singers;
+                    PageTableData.pagination.totalItems = data.totalItems;
+                    PageTableData.pagination.currPage = data.currPage;
+                }
+            });
         };
     }
 ]);

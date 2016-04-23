@@ -14,12 +14,13 @@ $userBarHeight: 120px;
     .sub-navbar {
         width: 100%;
         min-height: 5px;
+        text-align: center;
+        font-size: 0;
         background-color: #c20c0c;
         //box-shadow: inset 0 0 6px 2px rgba(50,50,50,.4);
 
         .home-sub-nav {
-            width: 448px;
-            margin: 0 auto;
+            display: inline-block;
             text-align: center;
 
             li {
