@@ -13,10 +13,33 @@ var musicApp = $config.musicApp;
 musicApp.controller('PlayerCtrl', ['$rootScope', '$scope', '$document', '$window', '$interval', '$state', 'MusicData', 'Audio', 'Player',
     function($rootScope, $scope, $document, $window, $interval, $state, MusicData, Audio, Player){
 
-        var progressWidth = 680;
+        $scope.MusicData = MusicData;
         $scope.playMode = MusicData.playMode;
         $scope.player = new Player();
         if(MusicData.lists.length > 0) $scope.player.controllPlay(MusicData.index);
+        $scope.playingMusic = MusicData.playingMusic;
+
+        // 从播放列表删除某首歌曲歌曲
+        $scope.delFormMusicLists = function(index) {
+
+            MusicData.lists.splice(index, 1);
+        };
+        // 清空播放列表
+        $scope.clearMusicLists = function() {
+
+            MusicData.lists = [];
+        };
+
+        $rootScope.$on('updateMusicList', function() {
+            $scope.MusicData = MusicData;
+            $scope.player = new Player();
+            if(MusicData.lists.length > 0) $scope.player.controllPlay(MusicData.index);
+        });
+        $rootScope.$on('updatePlayingMusic', function() {
+            $scope.playingMusic = MusicData.playingMusic;
+        });
+
+        var progressWidth = 680;
         // 双击播放列表某首音乐播放
         $scope.isSelected = function(){
             $scope.player.controllPlay(this.$index);
@@ -67,9 +90,11 @@ musicApp.controller('PlayerCtrl', ['$rootScope', '$scope', '$document', '$window
             $scope.playMode = MusicData.playMode;
         };
         //控制音量
-        $scope.volStyle = 'height: 80px';
-        Audio.volume = 0.8;
-        $scope.adjustVolume = function(ev){ //调整音量
+        $scope.volStyle = 'height: 50px';
+        Audio.volume = 0.5;
+        $scope.muted = true;    //声音是否播放
+        //调整音量
+        $scope.adjustVolume = function(ev){
             var event = window.event || ev;
             var volumeY = $document[0].querySelector('#play-vol').getBoundingClientRect().bottom - event.clientY;
             Audio.volume = (volumeY/100).toFixed(2);
@@ -82,32 +107,21 @@ musicApp.controller('PlayerCtrl', ['$rootScope', '$scope', '$document', '$window
                 $scope.muted = true;
             }
         };
-        //声音是否播放
-        $scope.muted = true;
-        //$scope.audioMuted = function() {
-        //    $scope.volumeBox=!$scope.volumeBox;
-        //    if(!Audio.muted) {
-        //        Audio.muted = true;
-        //        $scope.muted = false;
-        //    } else {
-        //        Audio.muted = false;
-        //        $scope.muted = true;
-        //    }
-        //};
 
-        //播放时间
+        // 监听播放时间更新事件
         Audio.addEventListener('timeupdate', function(){
             $scope.$apply($scope.surplusBar());
         });
-        //缓冲时间
+        // 缓冲时间
         Audio.addEventListener('canplay', function(){
             $scope.$apply($scope.bufferBar());
         });
-
+        // 监听播放结束事件，播放下一首
         Audio.addEventListener('ended', function() {
             $scope.player.next();
         });
 
+        // 格式化歌曲时间
         function formatTime(time) {
             var timeMin = parseInt(time/60);
             var timeSecond = parseInt(time%60);

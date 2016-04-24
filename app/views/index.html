@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="./app/styles/app.min.css">
     <script src="./app/scripts/vendor.bundle.min.js"></script>
 </head>
-<body>
+<body ng-controller="MainCtrl">
     <div class="wrap" ui-view></div>
     <music-player ng-if="!$state.is('login') && !$state.is('register')"></music-player>
     <script src="./app/scripts/app.bundle.min.js"></script>

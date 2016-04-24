@@ -9,9 +9,11 @@ musicApp.controller('HomeCtrl', ['$scope', '$state', 'PageTableData', 'SingerSer
     'AlbumService', 'PlaylistService',
     function($scope, $state, PageTableData, SingerService, AlbumService, PlaylistService){
 
-        var PAGE_SIZE = 20;
+        var PAGE_SIZE = 30;
 
         $scope.playlists = [];
+        $scope.singers = [];
+        // 分页获取所有歌单
         $scope.getPlaylists = function(nextPage, pageSize) {
 
             PageTableData.pagination.itemsPerPage = PAGE_SIZE;
@@ -28,8 +30,7 @@ musicApp.controller('HomeCtrl', ['$scope', '$state', 'PageTableData', 'SingerSer
                 }
             });
         };
-
-        $scope.singers = [];
+        // 分页获取所有歌手
         $scope.getSingers = function(nextPage, pageSize) {
 
             PageTableData.pagination.itemsPerPage = PAGE_SIZE;

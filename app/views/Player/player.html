@@ -47,8 +47,8 @@
         <div class="panel-heading">
             <span>播放列表</span>
             <div class="pull-right lists-action">
-                <span><i class="fa fa-file"></i>收藏全部</span>
-                <span><i class="fa fa-trash-o"></i>清除</span>
+                <span><i class="fa fa-file" ng-click="collectMusic(MusicData.lists)"></i>收藏全部</span>
+                <span><i class="fa fa-trash-o" ng-click="clearMusicLists()"></i>清空</span>
             </div>
         </div>
         <div class="panel-body">
@@ -60,8 +60,8 @@
                     </div>
                     <div class="pull-left list-col list-col-2">{{list.song_name}}</div>
                     <div class="pull-left list-col list-col-3">
-                        <span class="fa fa-file" title="收藏"></span>
-                        <span class="fa fa-trash-o" title="清除"></span>
+                        <span class="fa fa-file" title="收藏" ng-click="collectMusic(list)"></span>
+                        <span class="fa fa-trash-o" title="清除" ng-click="delFormMusicLists($index)"></span>
                     </div>
                     <div class="pull-left list-col list-col-4">{{list.singer_name}}</div>
                     <div class="pull-left list-col list-col-5">{{list.duration}}</div>

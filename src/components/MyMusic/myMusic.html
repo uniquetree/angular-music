@@ -78,7 +78,7 @@
                         介绍：{{currPlaylistInfo.playlist_info}}
                     </p>
                     <div class="btns">
-                        <button type="button" class="btn btn-primary btn-sm">
+                        <button type="button" class="btn btn-primary btn-sm" ng-click="updateMusicLists(currPlaylistSongs)">
                             <i class="fa fa-play-circle"></i>播放
                         </button>
                         <!--<button type="button" class="btn btn-default btn-sm">收藏</button>-->
@@ -97,7 +97,6 @@
                             <th>歌曲名</th>
                             <th>所属歌手</th>
                             <th>所属专辑</th>
-                            <!--<th>出版日期</th>-->
                             <th>操作</th>
                         </tr>
                     </thead>
@@ -107,7 +106,6 @@
                             <td class="name-td" ng-click="goToSingerPage(currPlaylistSong.id)">{{currPlaylistSong.song_name}}</td>
                             <td>{{currPlaylistSong.singer_name}}</td>
                             <td>{{currPlaylistSong.album_name}}</td>
-                            <!--<td>{{currPlaylistSong.publish_date}}</td>-->
                             <td>
                                 <i class="fa fa-play-circle" ng-click="play(currPlaylistSong.url)"></i>
                                 <i class="fa fa-trash" ng-if="isOwner"

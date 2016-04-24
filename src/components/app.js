@@ -65,7 +65,7 @@ musicApp.factory('TokenInterceptor', function ($rootScope, $q, $window, $locatio
 musicApp.config(function ($httpProvider) {
     $httpProvider.interceptors.push('TokenInterceptor');
 });
-
+// 页面路由控制
 musicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
 
     $urlRouterProvider.when('', '/');
@@ -239,6 +239,7 @@ musicApp.run(function($rootScope, $state, $location, $window, AuthenticationServ
 });
 
 // 加载页面angular控制器组件
+require('./Controllers/MainCtrl');
 require('./Header/HeaderCtrl');
 require('./Home/HomeCtrl');
 require('./User/UserCtrl');
