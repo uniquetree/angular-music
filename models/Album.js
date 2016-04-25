@@ -12,6 +12,7 @@ var singer_tb = config.tableName.singer_tb;
 var song_tb = config.tableName.song_tb;
 
 var Album = function (albumInfo, pagination, keyword) {
+    // 专辑信息
     if(typeof albumInfo !== 'undefined') {
         this.id = albumInfo.id;
         this.album_name = albumInfo.album_name;
@@ -19,12 +20,12 @@ var Album = function (albumInfo, pagination, keyword) {
         this.publish_date = albumInfo.publish_date;
         this.singer_id = albumInfo.singer_id;
     }
-
+    // 分页信息
     if(typeof pagination !== 'undefined') {
         this.currPage = (pagination.currPage-1) || 0;
         this.pageSize = pagination.pageSize || 10;
     }
-
+    // 搜索所用关键词
     if(typeof keyword !== 'undefined' && keyword !== '') {
         this.keyword = '%' + keyword + '%';
     }

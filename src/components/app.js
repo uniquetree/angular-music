@@ -68,7 +68,6 @@ musicApp.config(function ($httpProvider) {
 // 页面路由控制
 musicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
 
-    $urlRouterProvider.when('', '/');
     $urlRouterProvider.when('/admin', '/admin/userInfo');
     $urlRouterProvider.when('/admin/singers', '/admin/singers/singerList');
     $urlRouterProvider.when('/admin/albums', '/admin/albums/albumList');

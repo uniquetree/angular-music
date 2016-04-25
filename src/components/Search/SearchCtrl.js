@@ -52,8 +52,7 @@ musicApp.controller('SearchCtrl', ['$scope', '$state', '$stateParams', 'PageTabl
                 $scope.totalItems = 0;
                 PageTableData.pagination.totalItems = 0;
                 PageTableData.pagination.currPage = 1;
-                $scope.doSearch(PageTableData.pagination.currPage, PageTableData.pagination.itemsPerPage,
-                    value);
+                $scope.doSearch(PageTableData.pagination.currPage, PageTableData.pagination.itemsPerPage, value);
             }
         });
 
@@ -66,9 +65,7 @@ musicApp.controller('SearchCtrl', ['$scope', '$state', '$stateParams', 'PageTabl
             if($scope.keyword !== '') {
                 params.keyword = $scope.keyword;
                 $state.go('search', {keyword: $scope.keyword, type: type});
-            } else {
-                return;
-            }
+            } else return;
             switch(type) {
                 case 0:
                     searchSongs(params);

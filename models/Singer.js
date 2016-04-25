@@ -10,6 +10,7 @@ var singer_tb = config.tableName.singer_tb;
 var song_tb = config.tableName.song_tb;
 
 var Singer = function (singerInfo, pagination, keyword) {
+    // 歌手信息
     if(typeof singerInfo !== 'undefined') {
         this.id = singerInfo.id;
         this.singer_name = singerInfo.singer_name;
@@ -17,12 +18,12 @@ var Singer = function (singerInfo, pagination, keyword) {
         this.language = singerInfo.language;
         this.singer_info = singerInfo.singer_info;
     }
-
+    // 分页信息
     if(typeof pagination !== 'undefined') {
         this.currPage = (pagination.currPage-1) || 0;
         this.pageSize = pagination.pageSize || 10;
     }
-
+    // 搜索所用关键词
     if(typeof keyword !== 'undefined' && keyword !== '') {
         this.keyword = '%' + keyword + '%';
     }

@@ -55,7 +55,7 @@ Playlist.prototype.filterPlayListsByPage = function(orderByWhich, callback) {
         ' where ps.playlist_id=p.id order by s.create_time desc limit 1) as first_mp3_img,' +
         ' u.pid as user_id from ' + playlist_tb + ' as p left join ' + playlist_user_tb + ' as pu on p.id=pu.playlist_id' +
         ' left join ' + user_tb + ' as u on pu.user_id=u.pid where p.id >= (select id from ' + playlist_tb + subFilters
-        +' order by id limit ?,1) ' + filters + ' order by ' + orderBy + ' limit ?;';
+        +' order by id limit ?,1) ' + filters + ' and pu.is_owner=1 order by ' + orderBy + ' limit ?;';
     var count_sql = 'select count(*) as totalItems from ' + playlist_tb + subFilters;
     var params = [this.pageSize*this.currPage, this.pageSize];
     db.query(sql+count_sql, params, callback);

@@ -56,8 +56,6 @@ musicApp.factory('MusicData', function() {
 // 播放器
 musicApp.factory('Player', ['$rootScope', 'MusicData', 'Audio', function($rootScope, MusicData, Audio) {
     // 正在播放的歌曲信息
-    //$rootScope.MusicData = MusicData;
-    //$rootScope.playingMusic = {};
     var Player = function(playing){
         this.playing = playing || false;
     };

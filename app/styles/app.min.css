@@ -249,38 +249,6 @@ body,
 
 @charset "UTF-8";
 /**
- * Created by 郑树聪 on 2016/4/15.
- */
-.g-home .g-grid {
-  padding: 16px 32px;
-  text-align: center; }
-  .g-home .g-grid .title {
-    height: 32px;
-    border-bottom: 2px solid #AE0A0A;
-    margin-bottom: 10px;
-    line-height: 32px;
-    text-align: left;
-    text-indent: 10px;
-    font-size: 18px;
-    font-weight: bold; }
-  .g-home .g-grid .items .item {
-    width: 184px;
-    padding: 0 10px;
-    cursor: pointer; }
-    .g-home .g-grid .items .item .thumbnail {
-      position: relative; }
-      .g-home .g-grid .items .item .thumbnail img {
-        width: 164px;
-        height: 154px; }
-      .g-home .g-grid .items .item .thumbnail .caption {
-        width: 154px;
-        padding: 5px 5px 0;
-        text-align: center; }
-  .g-home .g-grid .pagination {
-    float: none !important; }
-
-@charset "UTF-8";
-/**
  * Created by 郑树聪 on 2016/2/29.
  */
 /**
@@ -453,6 +421,38 @@ body,
     background-color: #2F3030; }
     .g-header .user-bar .user-info .dropdown .dropdown-menu i.fa {
       padding-right: 6px; }
+
+@charset "UTF-8";
+/**
+ * Created by 郑树聪 on 2016/4/15.
+ */
+.g-home .g-grid {
+  padding: 16px 32px;
+  text-align: center; }
+  .g-home .g-grid .title {
+    height: 32px;
+    border-bottom: 2px solid #AE0A0A;
+    margin-bottom: 10px;
+    line-height: 32px;
+    text-align: left;
+    text-indent: 10px;
+    font-size: 18px;
+    font-weight: bold; }
+  .g-home .g-grid .items .item {
+    width: 184px;
+    padding: 0 10px;
+    cursor: pointer; }
+    .g-home .g-grid .items .item .thumbnail {
+      position: relative; }
+      .g-home .g-grid .items .item .thumbnail img {
+        width: 164px;
+        height: 154px; }
+      .g-home .g-grid .items .item .thumbnail .caption {
+        width: 154px;
+        padding: 5px 5px 0;
+        text-align: center; }
+  .g-home .g-grid .pagination {
+    float: none !important; }
 
 @charset "UTF-8";
 /**
@@ -903,23 +903,6 @@ body,
 
 @charset "UTF-8";
 /**
- * 页面底部样式
- * Created by 郑树聪 on 2016/3/4.
- */
-.g-footer {
-  width: 100%;
-  margin-bottom: 50px;
-  color: #777;
-  line-height: 1;
-  text-align: center; }
-  .g-footer .copyright {
-    padding: 18px 0;
-    background-color: #2F3030; }
-    .g-footer .copyright p {
-      margin: 0; }
-
-@charset "UTF-8";
-/**
  * Created by 郑树聪 on 2016/2/18.
  */
 .user-container {
@@ -975,3 +958,20 @@ body,
   .form-bottom .register,
   .form-bottom .login {
     margin: 0; }
+
+@charset "UTF-8";
+/**
+ * 页面底部样式
+ * Created by 郑树聪 on 2016/3/4.
+ */
+.g-footer {
+  width: 100%;
+  margin-bottom: 50px;
+  color: #777;
+  line-height: 1;
+  text-align: center; }
+  .g-footer .copyright {
+    padding: 18px 0;
+    background-color: #2F3030; }
+    .g-footer .copyright p {
+      margin: 0; }

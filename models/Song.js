@@ -12,7 +12,7 @@ var album_tb = config.tableName.album_tb;
 var playlist_song_tb = config.tableName.playlist_song_tb;
 
 var Song = function (songInfo, pagination, keyword) {
-    if(typeof songInfo !== 'undefined') {
+    if(typeof songInfo !== 'undefined') {       // 歌曲信息
         this.id = songInfo.id;
         this.song_name = songInfo.song_name;
         this.url = songInfo.url;
@@ -24,8 +24,6 @@ var Song = function (songInfo, pagination, keyword) {
         this.album_id = songInfo.album_id || 0;
         this.owner_pid = songInfo.owner_pid;
         this.song_img = songInfo.song_img;
-        //this.tag_singer_name = songInfo.tag_singer_name;
-        //this.tag_album_name = songInfo.tag_album_name;
     }
 
     if(typeof pagination !== 'undefined') {
